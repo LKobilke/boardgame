@@ -191,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>know how to install R and R Studio</li>
 <li>know how to update R and R Studio</li>
-<li>understand the main set-up of R Studio</li>
+<li>understand the layout of R Studio</li>
 </ul>
 <div id="installing-r" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Installing R</h2>
@@ -235,15 +235,14 @@ First, install the installr package if you don’t have it. Use the following co
 </div>
 <div id="how-does-r-work" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> How does R work?</h2>
-<p>First things first: R is an object- and function-oriented programming language. Chambers <a href="https://arxiv.org/pdf/1409.3531.pdf">(2014, p. 4)</a> has nicely summarized what this means:</p>
+<p>R is an object- and function-oriented programming language. Chambers <a href="https://arxiv.org/pdf/1409.3531.pdf">(2014, p. 4)</a> explains “object- and function-oriented” like this:</p>
 <ul>
 <li>Everything that exists is an object.</li>
 <li>Everything that happens is a function call.</li>
 </ul>
-<p>We assign values (for instance, single numbers/letters, several numbers/letters, or whole data sets) to objects in R to work with them/do computations. For instance, the following command in R would assign the word “hello” to the object <em>word</em> by using the <em>&lt;-</em> sign (a function used for assigning values to objects):</p>
+<p>IN R, you will assign values (for instance, single numbers/letters, several numbers/letters, or whole data files) to objects in R to work with them. For example, this command will assign the letters “hello” to an object caled <em>word</em> by using the <em>assign operator</em> <em>&lt;-</em> (a function used to assign values to objects):</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tutorial-installing-understanding-rr-studio.html#cb4-1" aria-hidden="true" tabindex="-1"></a>word <span class="ot">&lt;-</span> <span class="st">&quot;hello&quot;</span></span></code></pre></div>
-<p>Objects have specific properties that determine which types of calculations can be done with them (and which cannot). For instance, the object <em>word</em> is characterized by the fact that it consists of characters (i.e., a word) - which may, for instance, prohibit you to calculate the mean of this object (which is something only possible for objects consisting of numeric data).</p>
-<p>This already hints towards the second, important aspect of R: It is influenced by functional programming, meaning that everything we <em>do</em> in R is a function call. R uses functions to assign specific values (for instance, a single number or word, several numbers or words, whole data sets) to objects.</p>
+<p>The type of each object will dictate what sorts of computations you may be done with this object. The object <em>word</em>, for example, is distinguished by the fact that it is made up of characters (i.e., it is a word) - which may make it impossible to compute the object’s mean value, for example (which is possible only for objects consisting of numerical data).</p>
 </div>
 <div id="why-should-i-use-r" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Why should I use R?</h2>
@@ -261,8 +260,7 @@ First, install the installr package if you don’t have it. Use the following co
 </iframe>
 <p>As mentioned, R studio is a graphical interface which facilitates programming with R. It contains up to four main windows, which allow for different things:</p>
 <ul>
-<li>Writing your own code (Window 1: Source).
-<strong>Important</strong>: When first installing R/R Studio and opening R studio, you may not see this window right away. In this case, simply open it by clicking on <em>File/New File/R Script</em>.</li>
+<li>Writing your own code (Window 1: Source). <em>Important</em>: When first installing R/R Studio and opening R studio, you may not see this window right away. In this case, simply open it by clicking on <em>File/New File/R Script</em>.</li>
 <li>Executing your own code (Window 2: Console)</li>
 <li>Inspecting objects (Window 3: Environment)</li>
 <li>Visualizing data, searching for help, updating packages etc. (Window 4: Files/Plots/Packages etc.)</li>
