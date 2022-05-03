@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 1 Tutorial: Installing &amp; Understanding R/R Studio | R for digital media analysis</title>
-  <meta name="description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <title> 1 Tutorial: Installing &amp; Understanding R/R Studio | R for PR evaluation</title>
+  <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 1 Tutorial: Installing &amp; Understanding R/R Studio | R for digital media analysis" />
+  <meta property="og:title" content=" 1 Tutorial: Installing &amp; Understanding R/R Studio | R for PR evaluation" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 1 Tutorial: Installing &amp; Understanding R/R Studio | R for digital media analysis" />
+  <meta name="twitter:title" content=" 1 Tutorial: Installing &amp; Understanding R/R Studio | R for PR evaluation" />
   
-  <meta name="twitter:description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-05-01" />
+<meta name="date" content="2022-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="solutions.html"/>
+<link rel="next" href="tutorial-using-r-as-a-calculator.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -134,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Digital Media</a></li>
+<li><a href="./">Evaluation</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>General information on the course</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-do-you-learn-from-this-tutorial"><i class="fa fa-check"></i>What do you learn from this tutorial?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-should-you-do-if-you-have-an-urgent-question"><i class="fa fa-check"></i>What should you do if you have an urgent question?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-learn-from-this-tutorial"><i class="fa fa-check"></i>What can I learn from this tutorial?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-a-question"><i class="fa fa-check"></i>What can I do if I have a question?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-problems-with-my-r-code"><i class="fa fa-check"></i>What can I do if I have problems with my R code?</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html"><i class="fa fa-check"></i><b>1</b> Tutorial: Installing &amp; Understanding R/R Studio</a>
@@ -161,12 +161,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#environment-overview-of-objects"><i class="fa fa-check"></i><b>1.6.3</b> Environment: Overview of objects</a></li>
 <li class="chapter" data-level="1.6.4" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#plotshelppackages-do-everything-else"><i class="fa fa-check"></i><b>1.6.4</b> Plots/Help/Packages: Do everything else</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#take-aways"><i class="fa fa-check"></i><b>1.7</b> Take-Aways</a></li>
-<li class="chapter" data-level="1.8" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#more-tutorials-on-this"><i class="fa fa-check"></i><b>1.8</b> More tutorials on this</a></li>
+<li class="chapter" data-level="1.7" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#packages"><i class="fa fa-check"></i><b>1.7</b> Packages</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#installing-packages"><i class="fa fa-check"></i><b>1.7.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.7.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#activating-packages"><i class="fa fa-check"></i><b>1.7.2</b> Activating packages</a></li>
+<li class="chapter" data-level="1.7.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#getting-information-about-packages"><i class="fa fa-check"></i><b>1.7.3</b> Getting information about packages</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a></li>
+<li class="chapter" data-level="1.8" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#take-aways"><i class="fa fa-check"></i><b>1.8</b> Take-Aways</a></li>
+<li class="chapter" data-level="1.9" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#more-tutorials-on-this"><i class="fa fa-check"></i><b>1.9</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html"><i class="fa fa-check"></i><b>2</b> Tutorial: Using R as a calculator</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-variables-for-calculation"><i class="fa fa-check"></i><b>2.1</b> Using variables for calculation</a></li>
+<li class="chapter" data-level="2.2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-vectors-for-calculation"><i class="fa fa-check"></i><b>2.2</b> Using vectors for calculation</a></li>
+<li class="chapter" data-level="2.3" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#selecting-values-from-a-vector"><i class="fa fa-check"></i><b>2.3</b> Selecting values from a vector</a></li>
+<li class="chapter" data-level="2.4" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#take-aways-1"><i class="fa fa-check"></i><b>2.4</b> Take-Aways</a></li>
+<li class="chapter" data-level="2.5" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#more-tutorials-on-this-1"><i class="fa fa-check"></i><b>2.5</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html"><i class="fa fa-check"></i><b>3</b> Tutorial: Working with data (files)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#defining-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Defining your working directory</a></li>
+<li class="chapter" data-level="3.2" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory"><i class="fa fa-check"></i><b>3.2</b> Import data from your working directory</a></li>
+<li class="chapter" data-level="3.3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-variables-columns-in-data-frames"><i class="fa fa-check"></i><b>3.3</b> Subsetting variables / columns in data frames</a></li>
+<li class="chapter" data-level="3.4" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames"><i class="fa fa-check"></i><b>3.4</b> Subsetting observations / rows in data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-values-cells-in-data-frames"><i class="fa fa-check"></i><b>3.5</b> Subsetting values / cells in data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions"><i class="fa fa-check"></i><b>3.6</b> Subsetting data with conditions</a></li>
+<li class="chapter" data-level="3.7" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#take-aways-2"><i class="fa fa-check"></i><b>3.7</b> Take-Aways</a></li>
+<li class="chapter" data-level="3.8" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#more-tutorials-on-this-2"><i class="fa fa-check"></i><b>3.8</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i>Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-1"><i class="fa fa-check"></i>Solutions for Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/LKobilke/Digitalbranche" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/LKobilke/PR-Erfolgskontrolle" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -177,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for digital media analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for PR evaluation</a>
           </h1>
         </div>
 
@@ -342,6 +381,28 @@ First, install the installr package if you don’t have it. Use the following co
 </tbody>
 </table>
 </div>
+<div id="saving-code" class="section level4" number="1.6.1.4">
+<h4><span class="header-section-number">1.6.1.4</span> Saving Code</h4>
+<p>A great feature of R is that it makes analyses easily reproducible - given that you save your code. When reopening R Studio and you script, you can simply “rerun” the code with one click and your analysis will be reproduced.</p>
+<p>To save code, you have two options:</p>
+<ul>
+<li>Choose the menu option <em>File/Save as</em>. <strong>Important</strong>: Code needs to be saved with the ending <strong>“.R”</strong>.</li>
+<li>Chose the <em>Save</em>-button in the <em>source</em> window and save your code in the correct format, for instance as “MyCode.R”.</li>
+</ul>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><em>Image: Saving code</em></td>
+</tr>
+<tr class="even">
+<td align="left"><img src="images/Tut2_save.JPG" /></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="console-printing-results" class="section level3" number="1.6.2">
 <h3><span class="header-section-number">1.6.2</span> Console: Printing results</h3>
@@ -415,8 +476,47 @@ First, install the installr package if you don’t have it. Use the following co
 </table>
 </div>
 </div>
-<div id="take-aways" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Take-Aways</h2>
+<div id="packages" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Packages</h2>
+<p>While <code>Base R</code>, i.e., the standard version of R, already includes many helpful functions, you may at times need other, additional functions. For instance, if we want to perform text analysis in R we’ll need to use specific packages including additional functions.</p>
+<p><strong>Packages are collections of topic-specific functions that extend the functions implemented in Base R</strong>.</p>
+<p>In the spirit of “open science”, anyone can write and publish these additional functions and related packages and anyone can also access the code used to do so.</p>
+<p>You’ll find a list of all of R packages <a href="https://cran.r-project.org/web/packages/">here</a>. In this seminar, we’ll for instance use packages like <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a> for advanced data management.</p>
+<div id="installing-packages" class="section level3" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Installing packages</h3>
+<p>To use a package, you have to install it first. Let’s say you’re interested in using the package <a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>. Using the command <em>install.packages()</em>, you can install the package on your computer. You’ll have to give the function the name of the package you are interested in installing.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tutorial-installing-understanding-rr-studio.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<p>Now the package has been installed on your computer and is accessible locally. We only have to use <em>install.packages()</em> for any package <strong>once</strong>. Afterwards, the only thing you’ll have to do after open R is to activate the already installed package - which we’ll learn next.</p>
+</div>
+<div id="activating-packages" class="section level3" number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> Activating packages</h3>
+<p>Before we are able to use a package, we need to activate it <strong>in each session</strong>. Thus, you should not only define a working directory at the beginning of each session but also activate the packages you want to use via the <em>library</em>()_ command. Again, you’ll have to give R the name of the package you want to activate:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorial-installing-understanding-rr-studio.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<p>You can also use the name of the package followed by two colons <em>::</em> to activate a package directly before calling one of its function. For instance, I do not need use to activate the <code>dplyr</code> package (by using the <em>library()</em> function) to use the function <code>summarize()</code> if I use the following code:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorial-installing-understanding-rr-studio.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarize</span>()</span></code></pre></div>
+</div>
+<div id="getting-information-about-packages" class="section level3" number="1.7.3">
+<h3><span class="header-section-number">1.7.3</span> Getting information about packages</h3>
+<p>The package is installed and activated - but how can we use it? To get an overview of functions included in a given package, you can consult its corresponding “reference manual” (overview document containing all of a package’s functions) or, if available, its “vignette” (tutorials on how to use selected functions for the corresponding package) provided by a package’s author on a website called “CRAN”.</p>
+<p>The easiest way to finding these manuals/vignettes is Google: Simply google <em>CRAN ProcessR</em>, for instance, and you’ll be guided to the following <a href="https://cran.r-project.org/web/packages/dplyr/index.html">website</a>:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><em>Image: Cran Overview dplyr package</em></td>
+</tr>
+<tr class="even">
+<td align="left"><img src="images/Tut2_packages.JPG" /></td>
+</tr>
+</tbody>
+</table>
+<p>The first paragraph (circled in red) gives you an overview of aspects for which this package may be useful. The second red-circled area links to the reference manual and the vignette. You can, for instance, check out the reference manual to get an idea of the many functions the <code>dplyr</code> package contains.</p>
+</div>
+</div>
+<div id="take-aways" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Take-Aways</h2>
 <ul>
 <li><strong>Window “Source”</strong>: used to write/execute code in R</li>
 <li><strong>Window “Console”</strong>: used to return results of executed code</li>
@@ -424,8 +524,8 @@ First, install the installr package if you don’t have it. Use the following co
 <li><strong>Window “Files/Plots/Packages etc.”</strong>: used for additional functions, for instance visualizations/searching for help/activating or updating packages</li>
 </ul>
 </div>
-<div id="more-tutorials-on-this" class="section level2" number="1.8">
-<h2><span class="header-section-number">1.8</span> More tutorials on this</h2>
+<div id="more-tutorials-on-this" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> More tutorials on this</h2>
 <p>You still have questions? The following tutorials &amp; papers can help you with that:</p>
 <ul>
 <li><a href="https://bookdown.org/ndphillips/YaRrr/started.html">YaRrr! The Pirate’s Guide to R by N.D.Phillips, Tutorial 2</a></li>
@@ -434,6 +534,7 @@ First, install the installr package if you don’t have it. Use the following co
 <li><a href="https://youtu.be/p6f4oq08z48">wegweisR by M. Haim, Video 1</a></li>
 <li><a href="https://rc2e.com/gettingstarted#recipe-id001">R Cookbook by Long et al., Tutorial 1</a></li>
 </ul>
+<p>Now that you know the layout of R, we can get started with some real action: <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a></p>
 </div>
 </div>
 <div class="footnotes">
@@ -448,7 +549,7 @@ First, install the installr package if you don’t have it. Use the following co
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-using-r-as-a-calculator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -479,7 +580,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/LKobilke/Digitalbranche/edit/main/index.Rmd",
+"link": "https://github.com/LKobilke/PR-Erfolgskontrolle/edit/main/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -490,7 +591,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Digital Media.pdf"],
+"download": ["PR-Erfolgskontrolle.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

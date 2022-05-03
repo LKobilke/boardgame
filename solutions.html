@@ -4,34 +4,34 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Solutions | R for digital media analysis</title>
-  <meta name="description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <title>Solutions | R for PR evaluation</title>
+  <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Solutions | R for digital media analysis" />
+  <meta property="og:title" content="Solutions | R for PR evaluation" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Solutions | R for digital media analysis" />
+  <meta name="twitter:title" content="Solutions | R for PR evaluation" />
   
-  <meta name="twitter:description" content="Digital industry: Current developments and challenges - B.A. Seminar at the IfKW, SS 2022" />
+  <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-05-01" />
+<meta name="date" content="2022-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-installing-understanding-rr-studio.html"/>
+<link rel="prev" href="exercise-1.html"/>
 
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -134,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Digital Media</a></li>
+<li><a href="./">Evaluation</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>General information on the course</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-do-you-learn-from-this-tutorial"><i class="fa fa-check"></i>What do you learn from this tutorial?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-should-you-do-if-you-have-an-urgent-question"><i class="fa fa-check"></i>What should you do if you have an urgent question?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-learn-from-this-tutorial"><i class="fa fa-check"></i>What can I learn from this tutorial?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-a-question"><i class="fa fa-check"></i>What can I do if I have a question?</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-problems-with-my-r-code"><i class="fa fa-check"></i>What can I do if I have problems with my R code?</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html"><i class="fa fa-check"></i><b>1</b> Tutorial: Installing &amp; Understanding R/R Studio</a>
@@ -161,12 +161,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.6.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#environment-overview-of-objects"><i class="fa fa-check"></i><b>1.6.3</b> Environment: Overview of objects</a></li>
 <li class="chapter" data-level="1.6.4" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#plotshelppackages-do-everything-else"><i class="fa fa-check"></i><b>1.6.4</b> Plots/Help/Packages: Do everything else</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#take-aways"><i class="fa fa-check"></i><b>1.7</b> Take-Aways</a></li>
-<li class="chapter" data-level="1.8" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#more-tutorials-on-this"><i class="fa fa-check"></i><b>1.8</b> More tutorials on this</a></li>
+<li class="chapter" data-level="1.7" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#packages"><i class="fa fa-check"></i><b>1.7</b> Packages</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#installing-packages"><i class="fa fa-check"></i><b>1.7.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.7.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#activating-packages"><i class="fa fa-check"></i><b>1.7.2</b> Activating packages</a></li>
+<li class="chapter" data-level="1.7.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#getting-information-about-packages"><i class="fa fa-check"></i><b>1.7.3</b> Getting information about packages</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a></li>
+<li class="chapter" data-level="1.8" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#take-aways"><i class="fa fa-check"></i><b>1.8</b> Take-Aways</a></li>
+<li class="chapter" data-level="1.9" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#more-tutorials-on-this"><i class="fa fa-check"></i><b>1.9</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html"><i class="fa fa-check"></i><b>2</b> Tutorial: Using R as a calculator</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-variables-for-calculation"><i class="fa fa-check"></i><b>2.1</b> Using variables for calculation</a></li>
+<li class="chapter" data-level="2.2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-vectors-for-calculation"><i class="fa fa-check"></i><b>2.2</b> Using vectors for calculation</a></li>
+<li class="chapter" data-level="2.3" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#selecting-values-from-a-vector"><i class="fa fa-check"></i><b>2.3</b> Selecting values from a vector</a></li>
+<li class="chapter" data-level="2.4" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#take-aways-1"><i class="fa fa-check"></i><b>2.4</b> Take-Aways</a></li>
+<li class="chapter" data-level="2.5" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#more-tutorials-on-this-1"><i class="fa fa-check"></i><b>2.5</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html"><i class="fa fa-check"></i><b>3</b> Tutorial: Working with data (files)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#defining-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Defining your working directory</a></li>
+<li class="chapter" data-level="3.2" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory"><i class="fa fa-check"></i><b>3.2</b> Import data from your working directory</a></li>
+<li class="chapter" data-level="3.3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-variables-columns-in-data-frames"><i class="fa fa-check"></i><b>3.3</b> Subsetting variables / columns in data frames</a></li>
+<li class="chapter" data-level="3.4" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames"><i class="fa fa-check"></i><b>3.4</b> Subsetting observations / rows in data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-values-cells-in-data-frames"><i class="fa fa-check"></i><b>3.5</b> Subsetting values / cells in data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions"><i class="fa fa-check"></i><b>3.6</b> Subsetting data with conditions</a></li>
+<li class="chapter" data-level="3.7" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#take-aways-2"><i class="fa fa-check"></i><b>3.7</b> Take-Aways</a></li>
+<li class="chapter" data-level="3.8" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#more-tutorials-on-this-2"><i class="fa fa-check"></i><b>3.8</b> More tutorials on this</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i>Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-1"><i class="fa fa-check"></i>Solutions for Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/LKobilke/Digitalbranche" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/LKobilke/PR-Erfolgskontrolle" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -177,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for digital media analysis</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for PR evaluation</a>
           </h1>
         </div>
 
@@ -187,8 +226,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="solutions" class="section level1 unnumbered">
 <h1>Solutions</h1>
-<p>This is where you’ll find solutions for all of the exercises.</p>
+<p>This is where you’ll find solutions for all of the tutorials.</p>
+<div id="solutions-for-exercise-1" class="section level2 unnumbered">
+<h2>Solutions for Exercise 1</h2>
+<div id="task-1-1" class="section level3 unnumbered">
+<h3>Task 1</h3>
+<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
+<p><strong>1. What panels are part of RStudio?</strong></p>
+<p><em>Solution:</em></p>
+<ul>
+<li>source (x)</li>
+<li>console (x)</li>
+<li>packages, files &amp; plots (x)</li>
+</ul>
+<p><strong>2. How do you activate R packages after you have installed them?</strong></p>
+<p><em>Solution:</em></p>
+<ul>
+<li>library() (x)</li>
+</ul>
+<p><strong>3. How do you create a vector in R with elements 1, 2, 3?</strong></p>
+<p><em>Solution:</em></p>
+<ul>
+<li>c(1,2,3) (x)</li>
+</ul>
+<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements. How do you retrieve the 8th element?</strong></p>
+<p><em>Solution:</em></p>
+<ul>
+<li>vector[8] (x)</li>
+</ul>
+<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown, black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
+<p><em>Solution:</em></p>
+<ul>
+<li>hair[4] (x)</li>
+</ul>
+</div>
+<div id="task-2-1" class="section level3 unnumbered">
+<h3>Task 2</h3>
+<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the vector. First, display all elements of the vector. Then print only the 5th element. After that, display all elements except the 5th. Finally, display the elements at the positions 6 to 8.</p>
+<p><em>Solution:</em></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="solutions.html#cb73-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">73</span>,<span class="dv">71</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">68</span>,<span class="dv">87</span>)</span>
+<span id="cb73-2"><a href="solutions.html#cb73-2" aria-hidden="true" tabindex="-1"></a>age</span></code></pre></div>
+<pre><code>## [1] 65 52 73 71 80 62 68 87</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="solutions.html#cb75-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] 80</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="solutions.html#cb77-1" aria-hidden="true" tabindex="-1"></a>age[<span class="sc">-</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## [1] 65 52 73 71 62 68 87</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="solutions.html#cb79-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>]</span></code></pre></div>
+<pre><code>## [1] 62 68 87</code></pre>
+</div>
+<div id="task-3-1" class="section level3 unnumbered">
+<h3>Task 3</h3>
+<p>Create a non-numeric, i.e. character, vector with 4 elements and assign the name <em>eye_color</em> to the vector. First, print all elements of this vector to the console. Then have only the value in the 2nd element displayed, then all values except the 2nd element. At the end, display the elements at the positions 2 to 4.</p>
+<p><em>Solution:</em></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="solutions.html#cb81-1" aria-hidden="true" tabindex="-1"></a>eye_color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;other&quot;</span>)</span>
+<span id="cb81-2"><a href="solutions.html#cb81-2" aria-hidden="true" tabindex="-1"></a>eye_color</span></code></pre></div>
+<pre><code>## [1] &quot;blue&quot;  &quot;green&quot; &quot;brown&quot; &quot;other&quot;</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="solutions.html#cb83-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;green&quot;</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="solutions.html#cb85-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="sc">-</span><span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;blue&quot;  &quot;brown&quot; &quot;other&quot;</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="solutions.html#cb87-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;green&quot; &quot;brown&quot; &quot;other&quot;</code></pre>
 
+</div>
+</div>
 </div>
 
 
@@ -201,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="tutorial-installing-understanding-rr-studio.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -233,7 +334,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/LKobilke/Digitalbranche/edit/main/index.Rmd",
+"link": "https://github.com/LKobilke/PR-Erfolgskontrolle/edit/main/index.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -244,7 +345,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Digital Media.pdf"],
+"download": ["PR-Erfolgskontrolle.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
