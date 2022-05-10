@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>R for PR evaluation</title>
+  <title>Exercise 2: Test your knowledge | R for PR evaluation</title>
   <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="R for PR evaluation" />
+  <meta property="og:title" content="Exercise 2: Test your knowledge | R for PR evaluation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="R for PR evaluation" />
+  <meta name="twitter:title" content="Exercise 2: Test your knowledge | R for PR evaluation" />
   
   <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="tutorial-installing-understanding-rr-studio.html"/>
+<link rel="prev" href="tutorial-data-management-with-tidyverse.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,68 +261,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">R for PR evaluation</h1>
-<p class="author"><em>Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München</em></p>
-<p class="date"><em>2022-05-10</em></p>
-</div>
-<div id="general-information-on-the-course" class="section level1 unnumbered hasAnchor">
-<h1>General information on the course<a href="index.html#general-information-on-the-course" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This online tutorial will accompany the seminar <strong>“Theories, models, methods and objects of controlling”</strong>, an M.A. Seminar at the IfKW (Ludwig-Maximilians-Universität München, SS2022).</p>
-<p>The course takes place in Oettingenstraße 67, Room 067 (<strong>Wednesday 12:15-13.45 am</strong>). You can access all necessary information on the seminar’s syllabus, important dates and assignments via <a href="https://moodle.lmu.de/">Moodle, “SoSe 22 Theorien, Modelle, Methoden und Gegenstände der PR-Wirkungs- und Erfolgskontrolle”</a>. There, additional resources (e.g. Powerpoint slides, helpful book resources) are uploaded to the material folders of the respective week.</p>
-<div id="what-can-i-learn-from-this-tutorial" class="section level2 unnumbered hasAnchor">
-<h2>What can I learn from this tutorial?<a href="index.html#what-can-i-learn-from-this-tutorial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>After completing the entire tutorial, you will have acquired two important skills:</strong></p>
-<ol style="list-style-type: decimal">
-<li><em>Know how to use R and R studio to complete your data management.</em></li>
-<li><em>Know how to use R and R studio to do digital media analysis.</em></li>
-</ol>
-<p>In the seminar, our sessions will consist of two parts. In the first part, we will learn about evaluation techniques and discuss your own experiences. In the second part, you will work through this tutorial and solve exercises together with fellow students. The tutorial is designed to provide the R skills that you need to put media resonance analysis and automated clipping into real-world practice. The goal is to make the individual seminar sessions diverse and to advance your programming skills with as much ease and fun as possible.</p>
-<p><strong>Each tutorial consists of: </strong></p>
+<div id="exercise-2-test-your-knowledge" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 2: Test your knowledge<a href="exercise-2-test-your-knowledge.html#exercise-2-test-your-knowledge" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 2, you’ll…</strong></p>
 <ul>
-<li>an introduction to new functions/analysis methods in R, including corresponding R code</li>
-<li>main take-aways that you should remember</li>
-<li>information on additional tutorials / sources</li>
-<li>exercises to practice your new skills (you’ll often work through these with your peers)</li>
+<li>have assessed how well you know <code>dplyr</code></li>
+<li>know what <code>dplyr</code> functions and concepts you might want to repeat again</li>
+<li>have managed to apply the <code>dplyr</code> concepts to data</li>
+</ul>
+<div id="task-1-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-2-test-your-knowledge.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
+<p><strong>1. What are the main characteristics of tidy data?</strong></p>
+<ul>
+<li>Every cell contains values.</li>
+<li>Every cell contains a variable.</li>
+<li>Every observation is a column.</li>
+<li>Every observation is a row.</li>
+</ul>
+<p><strong>2. What are <code>dplyr</code> functions?</strong></p>
+<ul>
+<li><code>summary()</code></li>
+<li><code>describe()</code></li>
+<li><code>mutate()</code></li>
+<li><code>manage()</code></li>
+</ul>
+<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to A?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
+<li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
+<li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
+<li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
+</ul>
+<p><strong>4. Imagine you want to recode the height of the these characters. You want to have three categories from small and medium to tall. What is a valid approach?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
+</ul>
+<p><strong>5. Imagine you want to provide a systematic overview over all hair colors and what species wear these hair colors frequently (not accounting for the skewed sampling of species)? What is a valid approach?</strong></p>
+<ul>
+<li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color &amp; species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color + species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
 </ul>
 </div>
-<div id="what-can-i-do-if-i-have-a-question" class="section level2 unnumbered hasAnchor">
-<h2>What can I do if I have a question?<a href="index.html#what-can-i-do-if-i-have-a-question" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><strong>Questions are welcome!</strong></p>
-<p>It’s natural to have a lot of questions because you’ll be learning a lot of new stuff.
-Please <em>do</em> ask if you don’t understand something in this tutorial, have questions concerning exercises, or simply need to talk through some of the new stuff. It’s quite natural to get lost at times when learning a new programming language. Don’t worry; it’s extremely probable that everyone else is experiencing the same thing.</p>
-<p>Therefore, it’s key that you ask questions:</p>
-<ol style="list-style-type: decimal">
-<li><strong>In our live sessions</strong>: Wednesday, 12:15-13:45.</li>
-<li><strong>In the Moodle forum</strong>: Please, post all your questions to the <a href="https://moodle.lmu.de/">Moodle forum</a>. Every participant will be able to see your questions, submit replies, and view my responses in this manner. As a result, everyone will have access to the same information. To stay updated about current debates, I propose that you <strong>turn on</strong> alerts about new entries in the forum.</li>
-<li><strong>Email</strong>: Send me an email at <em><a href="mailto:lara.kobilke@ifkw.lmu.de" class="email">lara.kobilke@ifkw.lmu.de</a></em> if you have any private questions that you don’t want to address in front of the rest of the class.</li>
-</ol>
+<div id="task-2-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-2-test-your-knowledge.html#task-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s you turn now. Load the starwars data like this:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="exercise-2-test-your-knowledge.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
+<span id="cb143-2"><a href="exercise-2-test-your-knowledge.html#cb143-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
+<p>How many humans are contained in the starwars data overall? (Hint: use <code>summarize(count = n())</code> or <code>count()</code>)</p>
 </div>
-<div id="what-can-i-do-if-i-have-problems-with-my-r-code" class="section level2 unnumbered hasAnchor">
-<h2>What can I do if I have problems with my R code?<a href="index.html#what-can-i-do-if-i-have-problems-with-my-r-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Besides asking a question during the seminar (see <a href="index.html#what-can-i-do-if-i-have-a-question">What can I do if I have a question?</a>), there are some great places to have a look at when you encounter problems. To give you a head start, here’s a quick rundown of the three best places to look if you have a problem with your code:</p>
-<ol style="list-style-type: decimal">
-<li><strong>R’s integrated help function:</strong> Use the ?-function whenever possible. Let’s assume you struggle with creating a histogram for your data (<code>hist</code> function in R). You can open the R documentation of the <code>hist</code> function in R by writing:</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>?hist</span></code></pre></div>
-<table>
-<colgroup>
-<col width="100%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><em>Preview of ?hist in R:</em></td>
-</tr>
-<tr class="even">
-<td align="left"><img src="images/Tut0_Documentation.JPG" /></td>
-</tr>
-</tbody>
-</table>
-<ol start="2" style="list-style-type: decimal">
-<li><p><strong>Search engines:</strong> Like Bing or Google. Yup, programmers and data scientists google all the time! Nobody knows all the code and errors by heart. Often you can find perfect answers to your questions on <a href="https://stackoverflow.com/">Stackoverflow</a>, <a href="https://stats.stackexchange.com/?tags=r">StatsExchange</a>, or <a href="https://rseek.org/">Rseek</a> because other people had exactly the same problems. And more importantly, the communities on these websites are very friendly and helpful.</p></li>
-<li><p><strong>Packages’ reference manuals:</strong> Finally, problems with R packages (we’ll get to packages later, see: <a href="tutorial-installing-understanding-rr-studio.html#packages">Packages</a>) can often be solved by looking at their reference manuals (an overview document containing all of a package’s functions). For example, you can learn more about <code>dplyr</code> (a data management package that we are going to use later in this tutorial) by visiting its reference manual on a website called “CRAN”: <a href="https://cran.r-project.org/web/packages/dplyr/dplyr.pdf" class="uri">https://cran.r-project.org/web/packages/dplyr/dplyr.pdf</a>.</p></li>
-</ol>
-<p>That is all there is to it. Let’s begin with our first tutorial: <a href="tutorial-installing-understanding-rr-studio.html#tutorial-installing-understanding-rr-studio">Tutorial: Installing &amp; Understanding R/R Studio</a></p>
+<div id="task-3-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-2-test-your-knowledge.html#task-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How many humans are contained in starwars by gender?</p>
+</div>
+<div id="task-4" class="section level2 unnumbered hasAnchor">
+<h2>Task 4<a href="exercise-2-test-your-knowledge.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the most common eye_color among Star Wars characters? (Hint: use <code>arrange()</code>)</p>
+</div>
+<div id="task-5" class="section level2 unnumbered hasAnchor">
+<h2>Task 5<a href="exercise-2-test-your-knowledge.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the average mass of Star Wars characters that are not human and have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 6<a href="exercise-2-test-your-knowledge.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Compare the mean, median, and standard deviation of mass for all humans and droids. (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-7" class="section level2 unnumbered hasAnchor">
+<h2>Task 7<a href="exercise-2-test-your-knowledge.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create a new variable in which you store the mass in gram (gr_mass). Add it to the data frame. Test whether your solution works by printing your data to the console, but only show the name, species, mass, and your new variable gr_mass.</p>
+<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
 </div>
 </div>
             </section>
@@ -330,8 +342,8 @@ Please <em>do</em> ask if you don’t understand something in this tutorial, hav
           </div>
         </div>
       </div>
-
-<a href="tutorial-installing-understanding-rr-studio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-data-management-with-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

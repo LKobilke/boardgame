@@ -36,3 +36,17 @@ subsetting-values-cells-in-data-frames
 subsetting-data-with-conditions
 take-aways-2
 additional-tutorials-2
+tutorial-data-management-with-tidyverse
+why-not-stick-with-base-r
+tidyverse-packages
+tidy-data
+the-pipe-operator
+data-transformation-with-dplyr
+select
+filter
+arrange
+mutate
+simmarize-group_by
+chaining-functions-in-a-pipe
+take-aways-3
+additional-tutorials-3
