@@ -179,7 +179,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html"><i class="fa fa-check"></i><b>3</b> Tutorial: Working with data (files)</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#defining-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Defining your working directory</a></li>
+<li class="chapter" data-level="3.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#defining-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Defining your working directory</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#optional-setting-the-working-directory-on-a-remote-desktop"><i class="fa fa-check"></i><b>3.1.1</b> Optional: Setting the working directory on a remote desktop</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory"><i class="fa fa-check"></i><b>3.2</b> Import data from your working directory</a></li>
 <li class="chapter" data-level="3.3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-variables-columns-in-data-frames"><i class="fa fa-check"></i><b>3.3</b> Subsetting variables / columns in data frames</a></li>
 <li class="chapter" data-level="3.4" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames"><i class="fa fa-check"></i><b>3.4</b> Subsetting observations / rows in data frames</a></li>
@@ -349,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td><em>Image: The tidy data principle <a href="https://r4ds.had.co.nz/tidy-data.html">(Source: R for Data Science)</a></em></td>
 </tr>
 <tr class="even">
-<td><img src="C:/Users/LaraK/Desktop/To-Do/Digitale%20Praxis/LaraKobilke/images/Tut7_tidy_data.png" /></td>
+<td><img src="images/Tut7_tidydata.png" /></td>
 </tr>
 </tbody>
 </table>
@@ -417,21 +420,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-3"><a href="tutorial-data-management-with-tidyverse.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-4"><a href="tutorial-data-management-with-tidyverse.html#cb81-4" aria-hidden="true" tabindex="-1"></a>starwars_data             <span class="co"># print the content of the data frame to the console</span></span></code></pre></div>
 <pre><code>## # A tibble: 87 x 14
-##    name     height  mass hair_color skin_color eye_color birth_year
-##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
-##  1 Luke Sk~    172    77 blond      fair       blue            19  
-##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112  
-##  3 R2-D2        96    32 &lt;NA&gt;       white, bl~ red             33  
-##  4 Darth V~    202   136 none       white      yellow          41.9
-##  5 Leia Or~    150    49 brown      light      brown           19  
-##  6 Owen La~    178   120 brown, gr~ light      blue            52  
-##  7 Beru Wh~    165    75 brown      light      blue            47  
-##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA  
-##  9 Biggs D~    183    84 black      light      brown           24  
-## 10 Obi-Wan~    182    77 auburn, w~ fair       blue-gray       57  
-## # ... with 77 more rows, and 7 more variables: sex &lt;chr&gt;,
-## #   gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
-## #   vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
+##    name               height  mass hair_color    skin_color  eye_color birth_year sex    gender    homeworld species films     vehicles  starships
+##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   
+##  1 Luke Skywalker        172    77 blond         fair        blue            19   male   masculine Tatooine  Human   &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;
+##  2 C-3PO                 167    75 &lt;NA&gt;          gold        yellow         112   none   masculine Tatooine  Droid   &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
+##  3 R2-D2                  96    32 &lt;NA&gt;          white, blue red             33   none   masculine Naboo     Droid   &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
+##  4 Darth Vader           202   136 none          white       yellow          41.9 male   masculine Tatooine  Human   &lt;chr [4]&gt; &lt;chr [0]&gt; &lt;chr [1]&gt;
+##  5 Leia Organa           150    49 brown         light       brown           19   female feminine  Alderaan  Human   &lt;chr [5]&gt; &lt;chr [1]&gt; &lt;chr [0]&gt;
+##  6 Owen Lars             178   120 brown, grey   light       blue            52   male   masculine Tatooine  Human   &lt;chr [3]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
+##  7 Beru Whitesun lars    165    75 brown         light       blue            47   female feminine  Tatooine  Human   &lt;chr [3]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
+##  8 R5-D4                  97    32 &lt;NA&gt;          white, red  red             NA   none   masculine Tatooine  Droid   &lt;chr [1]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
+##  9 Biggs Darklighter     183    84 black         light       brown           24   male   masculine Tatooine  Human   &lt;chr [1]&gt; &lt;chr [0]&gt; &lt;chr [1]&gt;
+## 10 Obi-Wan Kenobi        182    77 auburn, white fair        blue-gray       57   male   masculine Stewjon   Human   &lt;chr [6]&gt; &lt;chr [1]&gt; &lt;chr [5]&gt;
+## # ... with 77 more rows</code></pre>
 <p>For the sake of practice, let’s say we only want to analyze the <em>species</em>, <em>birth_year</em>, <em>mass</em>, and <em>height</em> of these characters. To simplify data handling, we want to keep only the respective columns.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="tutorial-data-management-with-tidyverse.html#cb83-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span>                                 <span class="co"># define the source object</span></span>
 <span id="cb83-2"><a href="tutorial-data-management-with-tidyverse.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, birth_year, mass, height) <span class="co"># keep only the name, species, birth_year, mass and height column</span></span></code></pre></div>
@@ -573,7 +574,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Besides the <em>&amp;</em> operator, there are many more logical operators that you can choose from to optimize your filter choices. Here is an overview:</p>
 <hr />
 <p><em>Image: Logical, i.e. boolean, operators (Source: <a href="https://r4ds.had.co.nz/transform.html?q=filter#logical-operators">R for Data Science</a></em>)</p>
-<p>[]!(C:/Users/LaraK/Desktop/To-Do/Digitale Praxis/LaraKobilke/images/Tut7_logical_operators.PNG)</p>
+<p>[]!(C:/Users/LaraK/Desktop/To-Do/PR-Erfolgskontrolle/LaraKobilke/images/Tut7_logical_operators.PNG)</p>
 <hr />
 <p><strong>Tip for advanced users 1:</strong> You can negate filters. This means that you keep all observations except the one that you have specified with the <em>!=</em> operator (read <em>!=</em> as: <em>is not</em> or <em>is unequal to</em>). For example, you can choose to include only non-human Star Wars characters.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tutorial-data-management-with-tidyverse.html#cb102-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
@@ -754,18 +755,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb122-3"><a href="tutorial-data-management-with-tidyverse.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb122-4"><a href="tutorial-data-management-with-tidyverse.html#cb122-4" aria-hidden="true" tabindex="-1"></a>starwars_short                           <span class="co"># print the data to your console to inspect the new column</span></span></code></pre></div>
 <pre><code>## # A tibble: 87 x 7
-##    name              species birth_year  mass height m_height   BMI
-##    &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;
-##  1 Luke Skywalker    Human         19      77    172     1.72  26.0
-##  2 C-3PO             Droid        112      75    167     1.67  26.9
-##  3 R2-D2             Droid         33      32     96     0.96  34.7
-##  4 Darth Vader       Human         41.9   136    202     2.02  33.3
-##  5 Leia Organa       Human         19      49    150     1.5   21.8
-##  6 Owen Lars         Human         52     120    178     1.78  37.9
-##  7 Beru Whitesun la~ Human         47      75    165     1.65  27.5
-##  8 R5-D4             Droid         NA      32     97     0.97  34.0
-##  9 Biggs Darklighter Human         24      84    183     1.83  25.1
-## 10 Obi-Wan Kenobi    Human         57      77    182     1.82  23.2
+##    name               species birth_year  mass height m_height   BMI
+##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1 Luke Skywalker     Human         19      77    172     1.72  26.0
+##  2 C-3PO              Droid        112      75    167     1.67  26.9
+##  3 R2-D2              Droid         33      32     96     0.96  34.7
+##  4 Darth Vader        Human         41.9   136    202     2.02  33.3
+##  5 Leia Organa        Human         19      49    150     1.5   21.8
+##  6 Owen Lars          Human         52     120    178     1.78  37.9
+##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5
+##  8 R5-D4              Droid         NA      32     97     0.97  34.0
+##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1
+## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2
 ## # ... with 77 more rows</code></pre>
 <p><code>mutate()</code> does not merely work with mathematical operators. You can also categorize numeric variables with the <code>case_when</code> function, which is part of the <code>mutate()</code> function.</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="tutorial-data-management-with-tidyverse.html#cb124-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="ot">&lt;-</span> starwars_short <span class="sc">%&gt;%</span></span>
@@ -779,18 +780,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb124-9"><a href="tutorial-data-management-with-tidyverse.html#cb124-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb124-10"><a href="tutorial-data-management-with-tidyverse.html#cb124-10" aria-hidden="true" tabindex="-1"></a>starwars_short</span></code></pre></div>
 <pre><code>## # A tibble: 87 x 8
-##    name      species birth_year  mass height m_height   BMI age_cat
-##    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 Luke Sky~ Human         19      77    172     1.72  26.0 very y~
-##  2 C-3PO     Droid        112      75    167     1.67  26.9 very o~
-##  3 R2-D2     Droid         33      32     96     0.96  34.7 young  
-##  4 Darth Va~ Human         41.9   136    202     2.02  33.3 mid-ag~
-##  5 Leia Org~ Human         19      49    150     1.5   21.8 very y~
-##  6 Owen Lars Human         52     120    178     1.78  37.9 mid-ag~
-##  7 Beru Whi~ Human         47      75    165     1.65  27.5 mid-ag~
-##  8 R5-D4     Droid         NA      32     97     0.97  34.0 &lt;NA&gt;   
-##  9 Biggs Da~ Human         24      84    183     1.83  25.1 young  
-## 10 Obi-Wan ~ Human         57      77    182     1.82  23.2 mid-ag~
+##    name               species birth_year  mass height m_height   BMI age_cat   
+##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
+##  1 Luke Skywalker     Human         19      77    172     1.72  26.0 very young
+##  2 C-3PO              Droid        112      75    167     1.67  26.9 very old  
+##  3 R2-D2              Droid         33      32     96     0.96  34.7 young     
+##  4 Darth Vader        Human         41.9   136    202     2.02  33.3 mid-aged  
+##  5 Leia Organa        Human         19      49    150     1.5   21.8 very young
+##  6 Owen Lars          Human         52     120    178     1.78  37.9 mid-aged  
+##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5 mid-aged  
+##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;      
+##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young     
+## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged  
 ## # ... with 77 more rows</code></pre>
 <p>Finally, you can recode variables by using the <code>recode()</code> function, which is part of the <code>mutate()</code> function. Let’s be crazy and recode all droids as robots<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> and save the result in a new variable called <em>crazy_species</em>! Please note that <code>recode()</code> has an unusual syntax because it follows the order of <code>old_var = new_var</code> instead of the usual order: <code>new_var = old_var</code>. Therefore, <code>recode()</code> is likely to be retired in the future (use <code>case_when</code> instead).</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="tutorial-data-management-with-tidyverse.html#cb126-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="ot">&lt;-</span> starwars_short <span class="sc">%&gt;%</span> </span>
@@ -799,37 +800,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb126-4"><a href="tutorial-data-management-with-tidyverse.html#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb126-5"><a href="tutorial-data-management-with-tidyverse.html#cb126-5" aria-hidden="true" tabindex="-1"></a>starwars_short</span></code></pre></div>
 <pre><code>## # A tibble: 87 x 9
-##    name      species birth_year  mass height m_height   BMI age_cat
-##    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 Luke Sky~ Human         19      77    172     1.72  26.0 very y~
-##  2 C-3PO     Droid        112      75    167     1.67  26.9 very o~
-##  3 R2-D2     Droid         33      32     96     0.96  34.7 young  
-##  4 Darth Va~ Human         41.9   136    202     2.02  33.3 mid-ag~
-##  5 Leia Org~ Human         19      49    150     1.5   21.8 very y~
-##  6 Owen Lars Human         52     120    178     1.78  37.9 mid-ag~
-##  7 Beru Whi~ Human         47      75    165     1.65  27.5 mid-ag~
-##  8 R5-D4     Droid         NA      32     97     0.97  34.0 &lt;NA&gt;   
-##  9 Biggs Da~ Human         24      84    183     1.83  25.1 young  
-## 10 Obi-Wan ~ Human         57      77    182     1.82  23.2 mid-ag~
-## # ... with 77 more rows, and 1 more variable: crazy_species &lt;chr&gt;</code></pre>
+##    name               species birth_year  mass height m_height   BMI age_cat    crazy_species
+##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        
+##  1 Luke Skywalker     Human         19      77    172     1.72  26.0 very young Human        
+##  2 C-3PO              Droid        112      75    167     1.67  26.9 very old   Robot        
+##  3 R2-D2              Droid         33      32     96     0.96  34.7 young      Robot        
+##  4 Darth Vader        Human         41.9   136    202     2.02  33.3 mid-aged   Human        
+##  5 Leia Organa        Human         19      49    150     1.5   21.8 very young Human        
+##  6 Owen Lars          Human         52     120    178     1.78  37.9 mid-aged   Human        
+##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5 mid-aged   Human        
+##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;       Robot        
+##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young      Human        
+## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged   Human        
+## # ... with 77 more rows</code></pre>
 <p><strong>Tip for advanced users 1:</strong> There is a special case of recoding: Sometimes you will receive data (e.g. through an import from SPSS) in which missings are not marked as NA, but with -9 (or any other number). Unfortunately, you will have to tell R that these are missing values and should be set to NA. In this case, use the <code>na_if()</code> function, which is also part of the <code>mutate()</code> function.</p>
 <p>Luke Skywalker, the first observation in our data frame, is 172cm tall. For the sake of practice, let’s set all heights that are equal to 172cm to NA. This time, we won’t save this transformation for later use (by reassigning the source object back to itself) since this transformation does not make a lot of sense.</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="tutorial-data-management-with-tidyverse.html#cb128-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb128-2"><a href="tutorial-data-management-with-tidyverse.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height=</span> <span class="fu">na_if</span>(height, <span class="dv">172</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 87 x 9
-##    name      species birth_year  mass height m_height   BMI age_cat
-##    &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-##  1 Luke Sky~ Human         19      77     NA     1.72  26.0 very y~
-##  2 C-3PO     Droid        112      75    167     1.67  26.9 very o~
-##  3 R2-D2     Droid         33      32     96     0.96  34.7 young  
-##  4 Darth Va~ Human         41.9   136    202     2.02  33.3 mid-ag~
-##  5 Leia Org~ Human         19      49    150     1.5   21.8 very y~
-##  6 Owen Lars Human         52     120    178     1.78  37.9 mid-ag~
-##  7 Beru Whi~ Human         47      75    165     1.65  27.5 mid-ag~
-##  8 R5-D4     Droid         NA      32     97     0.97  34.0 &lt;NA&gt;   
-##  9 Biggs Da~ Human         24      84    183     1.83  25.1 young  
-## 10 Obi-Wan ~ Human         57      77    182     1.82  23.2 mid-ag~
-## # ... with 77 more rows, and 1 more variable: crazy_species &lt;chr&gt;</code></pre>
+##    name               species birth_year  mass height m_height   BMI age_cat    crazy_species
+##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        
+##  1 Luke Skywalker     Human         19      77     NA     1.72  26.0 very young Human        
+##  2 C-3PO              Droid        112      75    167     1.67  26.9 very old   Robot        
+##  3 R2-D2              Droid         33      32     96     0.96  34.7 young      Robot        
+##  4 Darth Vader        Human         41.9   136    202     2.02  33.3 mid-aged   Human        
+##  5 Leia Organa        Human         19      49    150     1.5   21.8 very young Human        
+##  6 Owen Lars          Human         52     120    178     1.78  37.9 mid-aged   Human        
+##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5 mid-aged   Human        
+##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;       Robot        
+##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young      Human        
+## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged   Human        
+## # ... with 77 more rows</code></pre>
 </div>
 <div id="simmarize-group_by" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> simmarize() [+ group_by()]<a href="tutorial-data-management-with-tidyverse.html#simmarize-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
