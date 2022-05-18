@@ -420,19 +420,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb81-3"><a href="tutorial-data-management-with-tidyverse.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-4"><a href="tutorial-data-management-with-tidyverse.html#cb81-4" aria-hidden="true" tabindex="-1"></a>starwars_data             <span class="co"># print the content of the data frame to the console</span></span></code></pre></div>
 <pre><code>## # A tibble: 87 x 14
-##    name               height  mass hair_color    skin_color  eye_color birth_year sex    gender    homeworld species films     vehicles  starships
-##    &lt;chr&gt;               &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;   &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   
-##  1 Luke Skywalker        172    77 blond         fair        blue            19   male   masculine Tatooine  Human   &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;
-##  2 C-3PO                 167    75 &lt;NA&gt;          gold        yellow         112   none   masculine Tatooine  Droid   &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-##  3 R2-D2                  96    32 &lt;NA&gt;          white, blue red             33   none   masculine Naboo     Droid   &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-##  4 Darth Vader           202   136 none          white       yellow          41.9 male   masculine Tatooine  Human   &lt;chr [4]&gt; &lt;chr [0]&gt; &lt;chr [1]&gt;
-##  5 Leia Organa           150    49 brown         light       brown           19   female feminine  Alderaan  Human   &lt;chr [5]&gt; &lt;chr [1]&gt; &lt;chr [0]&gt;
-##  6 Owen Lars             178   120 brown, grey   light       blue            52   male   masculine Tatooine  Human   &lt;chr [3]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-##  7 Beru Whitesun lars    165    75 brown         light       blue            47   female feminine  Tatooine  Human   &lt;chr [3]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-##  8 R5-D4                  97    32 &lt;NA&gt;          white, red  red             NA   none   masculine Tatooine  Droid   &lt;chr [1]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-##  9 Biggs Darklighter     183    84 black         light       brown           24   male   masculine Tatooine  Human   &lt;chr [1]&gt; &lt;chr [0]&gt; &lt;chr [1]&gt;
-## 10 Obi-Wan Kenobi        182    77 auburn, white fair        blue-gray       57   male   masculine Stewjon   Human   &lt;chr [6]&gt; &lt;chr [1]&gt; &lt;chr [5]&gt;
-## # ... with 77 more rows</code></pre>
+##    name    height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;  
+##  1 Luke S~    172    77 blond      fair       blue            19   male  mascu~ Tatooine  Human  
+##  2 C-3PO      167    75 &lt;NA&gt;       gold       yellow         112   none  mascu~ Tatooine  Droid  
+##  3 R2-D2       96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~ Naboo     Droid  
+##  4 Darth ~    202   136 none       white      yellow          41.9 male  mascu~ Tatooine  Human  
+##  5 Leia O~    150    49 brown      light      brown           19   fema~ femin~ Alderaan  Human  
+##  6 Owen L~    178   120 brown, gr~ light      blue            52   male  mascu~ Tatooine  Human  
+##  7 Beru W~    165    75 brown      light      blue            47   fema~ femin~ Tatooine  Human  
+##  8 R5-D4       97    32 &lt;NA&gt;       white, red red             NA   none  mascu~ Tatooine  Droid  
+##  9 Biggs ~    183    84 black      light      brown           24   male  mascu~ Tatooine  Human  
+## 10 Obi-Wa~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~ Stewjon   Human  
+## # ... with 77 more rows, and 3 more variables: films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>For the sake of practice, let’s say we only want to analyze the <em>species</em>, <em>birth_year</em>, <em>mass</em>, and <em>height</em> of these characters. To simplify data handling, we want to keep only the respective columns.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="tutorial-data-management-with-tidyverse.html#cb83-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span>                                 <span class="co"># define the source object</span></span>
 <span id="cb83-2"><a href="tutorial-data-management-with-tidyverse.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, birth_year, mass, height) <span class="co"># keep only the name, species, birth_year, mass and height column</span></span></code></pre></div>
@@ -572,10 +572,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 C-3PO Droid          112    75    167
 ## 2 R2-D2 Droid           33    32     96</code></pre>
 <p>Besides the <em>&amp;</em> operator, there are many more logical operators that you can choose from to optimize your filter choices. Here is an overview:</p>
-<hr />
-<p><em>Image: Logical, i.e. boolean, operators (Source: <a href="https://r4ds.had.co.nz/transform.html?q=filter#logical-operators">R for Data Science</a></em>)</p>
-<p>[]!(C:/Users/LaraK/Desktop/To-Do/PR-Erfolgskontrolle/LaraKobilke/images/Tut7_logical_operators.PNG)</p>
-<hr />
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>Image: Logical, i.e. boolean, operators (Source: <a href="https://r4ds.had.co.nz/transform.html?q=filter#logical-operators">R for Data Science</a></em>)</td>
+</tr>
+<tr class="even">
+<td><img src="images/Tut4_logical_operators.jpg" /></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Tip for advanced users 1:</strong> You can negate filters. This means that you keep all observations except the one that you have specified with the <em>!=</em> operator (read <em>!=</em> as: <em>is not</em> or <em>is unequal to</em>). For example, you can choose to include only non-human Star Wars characters.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tutorial-data-management-with-tidyverse.html#cb102-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb102-2"><a href="tutorial-data-management-with-tidyverse.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">!=</span><span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
