@@ -47,7 +47,7 @@ select
 filter
 arrange
 mutate
-simmarize-group_by
+summarize-group_by
 chaining-functions-in-a-pipe
 take-aways-3
 additional-tutorials-3
