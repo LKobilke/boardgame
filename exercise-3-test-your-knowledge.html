@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-07" />
+<meta name="date" content="2022-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -346,14 +346,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb169-5"><a href="exercise-3-test-your-knowledge.html#cb169-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load processR</span></span>
 <span id="cb169-6"><a href="exercise-3-test-your-knowledge.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb169-7"><a href="exercise-3-test-your-knowledge.html#cb169-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> processR<span class="sc">::</span>glbwarm</span></code></pre></div>
-<p>If you can’t install <code>processR</code> (it can be a bit buggy with newer versions of R) then just download the <em>glbwarm.csv</em> from Moodle (material folders). Load the data into R by following our tutorial: <a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory">Import data from your working directory</a>.</p>
-<p>Familiarize yourself with the data set (<strong>Hint:</strong> use the <code>help()</code> / <code>?</code> function) and then try to reproduce this plot with <code>dplyr</code> and <code>ggplot2</code>. (<strong>Hint:</strong> You can hide the legend by adding <code>theme(legend.position = "none")</code> to your plot.)</p>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-100-1.png" width="60%" /></p>
+<p>If you can’t install <code>processR</code> (it can be a bit buggy with newer versions of <code>R</code>) then just download the <em>glbwarm.csv</em> from Moodle and don’t use the code above (material folders). Load the data into R by following our tutorial: <a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory">Import data from your working directory</a>, but remember the difference between <code>read_csv2</code> (simcolon-separated) and <code>read_csv</code> (comma-separated) and use the appropriate command.</p>
+<p>Familiarize yourself with the data set (<strong>Hint:</strong> use the <code>help()</code> / <code>?</code> function or visit this <a href="https://rdrr.io/cran/processR/man/glbwarm.html">Google page of the help function</a>) and then try to reproduce this plot with <code>dplyr</code> and <code>ggplot2</code>. (<strong>Hint:</strong> You can hide the legend by adding <code>theme(legend.position = "none")</code> to your plot.)</p>
+<p>You will need to do some data management with <code>dplyr</code> to create the correct labels for your <code>ggplot2</code> graph.</p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-99-1.png" width="60%" /></p>
 </div>
 <div id="task-2-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 2<a href="exercise-3-test-your-knowledge.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Now, try to reproduce this graph. (<strong>Hint:</strong> You will need to recode the <em>ideology</em> variable in a way that higher values represent stronger attitudes, <em>independent of partisanship</em>.)</p>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-102-1.png" width="60%" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-101-1.png" width="60%" /></p>
 </div>
 <div id="task-3-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-3-test-your-knowledge.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-07" />
+<meta name="date" content="2022-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -406,7 +406,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You can even use the <code>[ ]</code> selector on vectors that consist of words instead of numbers. These vectors are called <em>“character vectors”</em>, while vectors that contain numbers are called <em>“numeric vectors”</em>. Let’s create a character vector that contains the BMIs of the six individuals as words. We’ll need to put quotation marks around your entries so that R knows that those values are words not numbers.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="tutorial-using-r-as-a-calculator.html#cb36-1" aria-hidden="true" tabindex="-1"></a>BMI_word <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;nineteen&quot;</span>, <span class="st">&quot;twenty-two&quot;</span>, <span class="st">&quot;twenty&quot;</span>, <span class="st">&quot;twenty-four&quot;</span>, <span class="st">&quot;thirty-one&quot;</span>, <span class="st">&quot;nineteen&quot;</span>)</span>
 <span id="cb36-2"><a href="tutorial-using-r-as-a-calculator.html#cb36-2" aria-hidden="true" tabindex="-1"></a>BMI_word</span></code></pre></div>
-<pre><code>## [1] &quot;nineteen&quot;    &quot;twenty-two&quot;  &quot;twenty&quot;      &quot;twenty-four&quot; &quot;thirty-one&quot;  &quot;nineteen&quot;</code></pre>
+<pre><code>## [1] &quot;nineteen&quot;    &quot;twenty-two&quot;  &quot;twenty&quot;      &quot;twenty-four&quot; &quot;thirty-one&quot; 
+## [6] &quot;nineteen&quot;</code></pre>
 <p>We’ll now select only the first value of of this BMI_word character vector:</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="tutorial-using-r-as-a-calculator.html#cb38-1" aria-hidden="true" tabindex="-1"></a>BMI_word[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;nineteen&quot;</code></pre>

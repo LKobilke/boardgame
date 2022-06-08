@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-07" />
+<meta name="date" content="2022-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -644,7 +644,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb217-6"><a href="solutions.html#cb217-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, </span><span class="sc">\n</span><span class="st"> and ideological extremity&quot;</span>,</span>
 <span id="cb217-7"><a href="solutions.html#cb217-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
 <span id="cb217-8"><a href="solutions.html#cb217-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p><em>Solution 2:</em></p>
 <p>Alternatively, you might enjoy this look that you can create with <code>facet_grid()</code>:</p>
 <div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="solutions.html#cb218-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
@@ -655,7 +655,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb218-6"><a href="solutions.html#cb218-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
 <span id="cb218-7"><a href="solutions.html#cb218-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
 <span id="cb218-8"><a href="solutions.html#cb218-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(sex), <span class="fu">vars</span>(Party))</span></code></pre></div>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p><em>Solution 3:</em></p>
 <p>Or even this look, also done with <code>facet_grid()</code>:</p>
 <div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="solutions.html#cb219-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
@@ -666,7 +666,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb219-6"><a href="solutions.html#cb219-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
 <span id="cb219-7"><a href="solutions.html#cb219-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
 <span id="cb219-8"><a href="solutions.html#cb219-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex <span class="sc">+</span> Party)</span></code></pre></div>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 </div>
 </div>
 <div id="solutions-for-exercise-4" class="section level2 unnumbered hasAnchor">
@@ -775,7 +775,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb234-7"><a href="solutions.html#cb234-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
 <span id="cb234-8"><a href="solutions.html#cb234-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and </span><span class="sc">\n</span><span class="st">achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
 <span id="cb234-9"><a href="solutions.html#cb234-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
 <div id="task-8-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 8<a href="solutions.html#task-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -791,7 +791,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb235-8"><a href="solutions.html#cb235-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
 <span id="cb235-9"><a href="solutions.html#cb235-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and </span><span class="sc">\n</span><span class="st">achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
 <span id="cb235-10"><a href="solutions.html#cb235-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
-<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 
 </div>
 </div>
