@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-10" />
+<meta name="date" content="2022-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -639,7 +639,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="solutions.html#cb217-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
 <span id="cb217-2"><a href="solutions.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
 <span id="cb217-3"><a href="solutions.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb217-4"><a href="solutions.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb217-4"><a href="solutions.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span>  <span class="co"># You can&#39;t guess the exact value that I&#39;ve used here. Just use whatever looks good for you and comes close to the solution.</span></span>
 <span id="cb217-5"><a href="solutions.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb217-6"><a href="solutions.html#cb217-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, </span><span class="sc">\n</span><span class="st"> and ideological extremity&quot;</span>,</span>
 <span id="cb217-7"><a href="solutions.html#cb217-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
@@ -771,9 +771,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb234-3"><a href="solutions.html#cb234-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
 <span id="cb234-4"><a href="solutions.html#cb234-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb234-5"><a href="solutions.html#cb234-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb234-6"><a href="solutions.html#cb234-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span>  <span class="co"># optional, choose your own beautiful colors for the graph</span></span>
+<span id="cb234-6"><a href="solutions.html#cb234-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span>  <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
 <span id="cb234-7"><a href="solutions.html#cb234-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb234-8"><a href="solutions.html#cb234-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and </span><span class="sc">\n</span><span class="st">achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb234-8"><a href="solutions.html#cb234-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
 <span id="cb234-9"><a href="solutions.html#cb234-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
 <p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
@@ -787,11 +787,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb235-4"><a href="solutions.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
 <span id="cb235-5"><a href="solutions.html#cb235-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb235-6"><a href="solutions.html#cb235-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb235-7"><a href="solutions.html#cb235-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb235-7"><a href="solutions.html#cb235-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span> <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
 <span id="cb235-8"><a href="solutions.html#cb235-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb235-9"><a href="solutions.html#cb235-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and </span><span class="sc">\n</span><span class="st">achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb235-9"><a href="solutions.html#cb235-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
 <span id="cb235-10"><a href="solutions.html#cb235-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
 <p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p><strong>Why would we use <code>data %&gt;% filter(wt &lt; 1.4613636 | wt &gt; 1.5636364)</code> instead of <code>data %&gt;% filter(wt &gt; 1.4613636 | wt &lt; 1.5636364)</code>?</strong></p>
+<p>Let’s look at the resulting data sets when you apply those filters to compare them:</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="solutions.html#cb236-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb236-2"><a href="solutions.html#cb236-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb236-3"><a href="solutions.html#cb236-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&lt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&gt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
+<pre><code>##                            wt
+## Mazda RX4           1.1909091
+## Mazda RX4 Wag       1.3068182
+## Valiant             1.5727273
+## Duster 360          1.6227273
+## Merc 240D           1.4500000
+## Merc 450SL          1.6954545
+## Merc 450SLC         1.7181818
+## Cadillac Fleetwood  2.3863636
+## Lincoln Continental 2.4654545
+## Chrysler Imperial   2.4295455
+## Fiat 128            1.0000000
+## Honda Civic         0.7340909
+## Toyota Corolla      0.8340909
+## Toyota Corona       1.1204545
+## Dodge Challenger    1.6000000
+## Camaro Z28          1.7454545
+## Pontiac Firebird    1.7477273
+## Fiat X1-9           0.8795455
+## Porsche 914-2       0.9727273
+## Lotus Europa        0.6877273
+## Ford Pantera L      1.4409091
+## Ferrari Dino        1.2590909
+## Maserati Bora       1.6227273
+## Volvo 142E          1.2636364</code></pre>
+<p>The resulting table does not include any cars that weigh between 1.4613636 and 1.5636364. But if you use <code>data %&gt;% filter(wt &gt; 1.4613636 | wt &lt; 1.5636364)</code>…</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="solutions.html#cb238-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb238-2"><a href="solutions.html#cb238-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb238-3"><a href="solutions.html#cb238-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&gt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&lt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
+<pre><code>##                            wt
+## Mazda RX4           1.1909091
+## Mazda RX4 Wag       1.3068182
+## Hornet 4 Drive      1.4613636
+## Hornet Sportabout   1.5636364
+## Valiant             1.5727273
+## Duster 360          1.6227273
+## Merc 240D           1.4500000
+## Merc 280            1.5636364
+## Merc 280C           1.5636364
+## Merc 450SL          1.6954545
+## Merc 450SLC         1.7181818
+## Cadillac Fleetwood  2.3863636
+## Lincoln Continental 2.4654545
+## Chrysler Imperial   2.4295455
+## Fiat 128            1.0000000
+## Honda Civic         0.7340909
+## Toyota Corolla      0.8340909
+## Toyota Corona       1.1204545
+## Dodge Challenger    1.6000000
+## AMC Javelin         1.5613636
+## Camaro Z28          1.7454545
+## Pontiac Firebird    1.7477273
+## Fiat X1-9           0.8795455
+## Porsche 914-2       0.9727273
+## Lotus Europa        0.6877273
+## Ford Pantera L      1.4409091
+## Ferrari Dino        1.2590909
+## Maserati Bora       1.6227273
+## Volvo 142E          1.2636364</code></pre>
+<p>… cars that weigh between 1.4613636 and 1.5636364 are still included!</p>
+<p><strong>But why?</strong>
+The <code>filter()</code>function always <em>keeps</em> cases based on the criteria that you provide.</p>
+<p>In plain English, my solution code says the following: Take my dataset “data” and keep only those cases where the weight variable <em>wt</em> is less than 1.4613636 OR larger than 1.5636364. Put differently, the solution code says: Delete all cases that are greater than 1.4613636 but are also less than 1.5636364.</p>
+<p>The wrong code, on the other hand, says: Take my dataset “data” and keep only those cases where the weight variable <em>wt</em> is greater than 1.4613636 OR smaller than 1.5636364. This is ALL the data because all your cases will be greater than 1.4613636 OR smaller than 1.5636364. You are not excluding any cars.</p>
 
 </div>
 </div>

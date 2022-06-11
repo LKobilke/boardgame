@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-10" />
+<meta name="date" content="2022-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -482,9 +482,8 @@ You may need to add a “/” at the beginning like so:</p>
 <span id="cb49-4"><a href="tutorial-working-with-data-files.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># finally, you call the variable by name</span></span></code></pre></div>
 <p>For instance, we could retrieve the variable “name” in our <em>survey</em> data frame by simply using its variable name: We specify the object we want to access, the data frame <em>survey</em> and then retrieve the column <em>name</em> via the operator <em>$</em>:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tutorial-working-with-data-files.html#cb50-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>name</span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;    
-##  [7] &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;    
-## [13] &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;      
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot; 
+## [10] &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;      
 ## [19] &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
 <p>You know that the name variable is the <em>fourth</em> column of you data frame. Therefore, you can also access this column / variable by calling it by its index number (<em>column index</em>, here: 4). Just like you’ve learned in <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a>, you can access sub-elements of a greater object with square brackets <code>[ ]</code>:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tutorial-working-with-data-files.html#cb52-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">4</span>]</span></code></pre></div>
@@ -511,9 +510,8 @@ You may need to add a “/” at the beginning like so:</p>
 ## 20    Florian</code></pre>
 <p><strong>Note:</strong> While the first command gives you the names as a vector, the second one gives you the name as a data frame object with only one column. This keeps the column header “<em>name</em>” intact. However, if you want to retrieve a vector using the <em>column index</em>, you need to provide two indices: one for the row that you want to select, followed by a comma, and one for the column. Since we want to select all rows, but only column No. 4, we need leave the row No. blank:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tutorial-working-with-data-files.html#cb54-1" aria-hidden="true" tabindex="-1"></a>survey[,<span class="dv">4</span>] <span class="co"># column index = 4</span></span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;    
-##  [7] &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;    
-## [13] &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;      
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot; 
+## [10] &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;      
 ## [19] &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
 </div>
 <div id="subsetting-observations-rows-in-data-frames" class="section level2 hasAnchor" number="3.4">
@@ -550,8 +548,8 @@ You may need to add a “/” at the beginning like so:</p>
 <h2><span class="header-section-number">3.6</span> Subsetting data with conditions<a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s say we want to select all names of students who are older than 25. This time, we’ll need to use a <em>condition</em> to select our rows:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tutorial-working-with-data-files.html#cb64-1" aria-hidden="true" tabindex="-1"></a>survey[survey<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">25</span>,<span class="dv">4</span>] </span></code></pre></div>
-<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;        &quot;Alex&quot;      
-##  [7] &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;  
+## [10] &quot;Tristan&quot;    &quot;Florian&quot;</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="tutorial-working-with-data-files.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read: I want to select column 4 (name) from the survey data frame</span></span>
 <span id="cb66-2"><a href="tutorial-working-with-data-files.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and display all rows in which the age column of the survey data frame has a value &gt; 25</span></span></code></pre></div>
 <p>Alternatively, if you want to show <em>all</em> columns that belong to students who are older than 25, you would do it like that:</p>
