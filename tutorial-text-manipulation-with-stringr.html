@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 2: Test your knowledge | R for PR evaluation</title>
+  <title> 6 Tutorial: Text manipulation with stringr | R for PR evaluation</title>
   <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 2: Test your knowledge | R for PR evaluation" />
+  <meta property="og:title" content=" 6 Tutorial: Text manipulation with stringr | R for PR evaluation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 2: Test your knowledge | R for PR evaluation" />
+  <meta name="twitter:title" content=" 6 Tutorial: Text manipulation with stringr | R for PR evaluation" />
   
   <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-data-management-with-tidyverse.html"/>
-<link rel="next" href="tutorial-data-visualization-with-ggplot.html"/>
+<link rel="prev" href="exercise-4-test-your-knowledge.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -337,81 +337,118 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-2-test-your-knowledge" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 2: Test your knowledge<a href="exercise-2-test-your-knowledge.html#exercise-2-test-your-knowledge" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 2, you’ll…</strong></p>
+<div id="tutorial-text-manipulation-with-stringr" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number"> 6</span> Tutorial: Text manipulation with stringr<a href="tutorial-text-manipulation-with-stringr.html#tutorial-text-manipulation-with-stringr" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Tutorial 6, you’ll…</strong></p>
 <ul>
-<li>have assessed how well you know <code>dplyr</code></li>
-<li>know what <code>dplyr</code> functions and concepts you might want to repeat again</li>
-<li>have managed to apply the <code>dplyr</code> concepts to data</li>
+<li>understand the concept of string patterns and regular expressions</li>
+<li>know how to search for string patterns</li>
 </ul>
-<div id="task-1-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-2-test-your-knowledge.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
-<p><strong>1. What are the main characteristics of tidy data?</strong></p>
+<div id="whats-stringr" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> What’s stringr?<a href="tutorial-text-manipulation-with-stringr.html#whats-stringr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <code>stringr</code> package is another package of the <code>tidyverse</code> family, i.e., it comes pre-installed with the tidyverse. The package offers a neat set of functions that makes working with strings really simple for beginners. Therefore, <code>stringr</code> is a good place to start getting into text data management. A string is <em>a data type that is used to represent text rather than numbers</em>.</p>
+</div>
+<div id="working-with-strings" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Working with strings<a href="tutorial-text-manipulation-with-stringr.html#working-with-strings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>First, let’s create a vector that contains some strings and print the vector to the console!</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="tutorial-text-manipulation-with-stringr.html#cb172-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>)</span>
+<span id="cb172-2"><a href="tutorial-text-manipulation-with-stringr.html#cb172-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-3"><a href="tutorial-text-manipulation-with-stringr.html#cb172-3" aria-hidden="true" tabindex="-1"></a>fruits</span></code></pre></div>
+<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot;  &quot;kiwi&quot;</code></pre>
+<p>First, we want to know how long each of these strings is, i.e., how many characters the elements of the fruits vector contain. We will use the <code>str_length()</code> function.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="tutorial-text-manipulation-with-stringr.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(fruits)</span></code></pre></div>
+<pre><code>## [1]  6  5  4 10  9  4</code></pre>
+<p>That was easy. Next, we want to join multiple strings into a single string. We will use the <code>str_c</code> function.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="tutorial-text-manipulation-with-stringr.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(fruits, <span class="at">collapse =</span> <span class="st">&quot; and &quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;banana and apple and pear and strawberry and raspberry and kiwi&quot;</code></pre>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tutorial-text-manipulation-with-stringr.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If collapse is not NULL, it will be inserted between elements of the result, here: and</span></span></code></pre></div>
+<p>You can also change the order of the <code>str_c</code> function:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="tutorial-text-manipulation-with-stringr.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;My favourite fruit is: &quot;</span>, fruits, <span class="at">collapse =</span> <span class="cn">NULL</span>) </span></code></pre></div>
+<pre><code>## [1] &quot;My favourite fruit is: banana&quot;     &quot;My favourite fruit is: apple&quot;      &quot;My favourite fruit is: pear&quot;      
+## [4] &quot;My favourite fruit is: strawberry&quot; &quot;My favourite fruit is: raspberry&quot;  &quot;My favourite fruit is: kiwi&quot;</code></pre>
+<p>Let’s say, we want to extract substrings from a character vector. For example, we only want to keep the second to fourth letter of each string. We can use the <code>str_sub</code> function to achieve that.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="tutorial-text-manipulation-with-stringr.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(fruits, <span class="at">start =</span> <span class="dv">2</span>, <span class="at">end =</span> <span class="dv">4</span>) </span></code></pre></div>
+<pre><code>## [1] &quot;ana&quot; &quot;ppl&quot; &quot;ear&quot; &quot;tra&quot; &quot;asp&quot; &quot;iwi&quot;</code></pre>
+</div>
+<div id="working-with-string-patterns" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Working with string patterns<a href="tutorial-text-manipulation-with-stringr.html#working-with-string-patterns" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often we want to search for certain string patterns in a text document. <strong>String patterns</strong> are character sequences (for instance, letter, numbers, or special characters). Let’s assume for a second that we have misspelled one of our fruits (<em>banana</em>, we have switched the <em>na</em> letters to <em>an</em>).</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="tutorial-text-manipulation-with-stringr.html#cb183-1" aria-hidden="true" tabindex="-1"></a>misspelled_fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;baanan&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>)</span></code></pre></div>
+<p>It would be really great if we could search for the string pattern “<em>an</em>” and replace it with the string pattern “<em>na</em>” automatically, wouldn’t it? Well, <code>stringr</code>offers some functions to do just that. For example, <code>str_detect()</code> tells you if there’s any match to the pattern.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="tutorial-text-manipulation-with-stringr.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(misspelled_fruits, <span class="st">&quot;an&quot;</span>)</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Now we know that there is one word that contain letters that match the <em>“an”</em> pattern. We have a misspelling! What is that word? <code>str_subset()</code> extracts the matching strings, so that we can find out.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="tutorial-text-manipulation-with-stringr.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(misspelled_fruits, <span class="st">&quot;an&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;baanan&quot;</code></pre>
+<p>Of course, it’s <em>banana</em>. But how many times has “<em>an</em>” been misspelled in <em>banana</em>? Just once? Let’s find out with <code>str_count(</code>, which counts the number of patterns in each string.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="tutorial-text-manipulation-with-stringr.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(misspelled_fruits, <span class="st">&quot;an&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 2 0 0 0 0 0</code></pre>
+<p>Two times! Let’s fix that with the <code>str_replace</code> function.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tutorial-text-manipulation-with-stringr.html#cb190-1" aria-hidden="true" tabindex="-1"></a>misspelled_fruits <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(misspelled_fruits, <span class="st">&quot;anan&quot;</span>, <span class="st">&quot;nana&quot;</span>)</span>
+<span id="cb190-2"><a href="tutorial-text-manipulation-with-stringr.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb190-3"><a href="tutorial-text-manipulation-with-stringr.html#cb190-3" aria-hidden="true" tabindex="-1"></a>misspelled_fruits</span></code></pre></div>
+<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot;  &quot;kiwi&quot;</code></pre>
+<p>Perfect! We have fixed our misspelled fruits. However, keep in mind that pattern correction can mess up your string pretty badly if you are not cautious. Therefore, you should always explore your strings very thoroughly before replacing any string patterns. For example, let’s see what our pattern detection will uncover if our misspelled fruits would contain an additional <em>orange</em>, which has been spelled correctly:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="tutorial-text-manipulation-with-stringr.html#cb192-1" aria-hidden="true" tabindex="-1"></a>misspelled_fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;baanan&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;orange&quot;</span>)</span>
+<span id="cb192-2"><a href="tutorial-text-manipulation-with-stringr.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-3"><a href="tutorial-text-manipulation-with-stringr.html#cb192-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(misspelled_fruits, <span class="st">&quot;an&quot;</span>)</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<p>Now, <code>str_detect()</code> matches two words with the “<em>an</em>” pattern, but the latter is not a misspelling! So always be careful!</p>
+<p>As a final lesson, you can also split a string into multiple strings based on certain string patterns using the <code>str_split()</code>function:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="tutorial-text-manipulation-with-stringr.html#cb194-1" aria-hidden="true" tabindex="-1"></a>csv_fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana, apple, pear, strawberry, raspberry, kiwi, orange&quot;</span>)</span>
+<span id="cb194-2"><a href="tutorial-text-manipulation-with-stringr.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(csv_fruits, <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;banana&quot;      &quot; apple&quot;      &quot; pear&quot;       &quot; strawberry&quot; &quot; raspberry&quot;  &quot; kiwi&quot;       &quot; orange&quot;</code></pre>
+</div>
+<div id="working-with-regular-expressions" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Working with regular expressions<a href="tutorial-text-manipulation-with-stringr.html#working-with-regular-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often, we want to match more complicated string patterns than a simple “<em>an</em>”. For example, we might wish to detect all strings in our text document that do not start with “<em>RT </em>”, because “<em>RT</em>” at the beginning of a string implies a retweet rather than an original tweet when analyzing Twitter data. Arguably, we are often not really interested in analyzing retweets (but sometimes we are, it depends on the research question).</p>
+<p>To search and match complex string patterns, we need regular expressions. <strong>Regular expressions</strong> (short: <em>regex</em>) are a concise language for describing patterns of text. Regex should not be taken literally, but have a non-literal meaning.</p>
+<p>Let’s keep working with our (non-misspelled) fruits vector to display what regex can do. First, let’s look for all strings that start with the letter b using the <code>^</code> (start of string) regex.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="tutorial-text-manipulation-with-stringr.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;^b&quot;</span>) <span class="co"># ^ stands for &quot;start of string&quot;, i.e. we are matching for string that start with the letter b</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>That’s on point because only our first entry, <em>banana</em>, starts with b and <code>str_detect()</code> macthed that correctly! Please, note the difference to not matching the regex, but the simple string pattern “<em>b</em>”.</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="tutorial-text-manipulation-with-stringr.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;b&quot;</span>) <span class="co"># matches all strings that contain the letter b at any place</span></span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE</code></pre>
+<p>This has matched banana, strawberry and raspberry, because all of these fruits contain a letter <em>b</em> at some place. Finally, you should also not confuse “<em>^b</em>” with “<em>[^b]</em>”, because <code>[^]</code> stands for “anything but” in regex language.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="tutorial-text-manipulation-with-stringr.html#cb200-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;bbb&quot;</span>)</span>
+<span id="cb200-2"><a href="tutorial-text-manipulation-with-stringr.html#cb200-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-3"><a href="tutorial-text-manipulation-with-stringr.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;[^b]&quot;</span>) <span class="co"># matches all strings that contain any letters different from b(s)</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
+<p>Next, let’s say that it doesn’t really matter to use whether our fruits contains the letter <em>b</em> or the letter <em>e</em> at any position of the string. There is a <strong>very</strong> powerful regex to match this string pattern: the “match any one of” operator <code>[]</code>.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="tutorial-text-manipulation-with-stringr.html#cb202-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>)</span>
+<span id="cb202-2"><a href="tutorial-text-manipulation-with-stringr.html#cb202-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb202-3"><a href="tutorial-text-manipulation-with-stringr.html#cb202-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;[be]&quot;</span>) <span class="co"># matches all strings that contain either the letter b or the letter e</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>Our regex has managed to match all strings that contain either the letter b or the letter e, which leaves only kiwi to be FALSE. Next, we can match all fruits that contain letters that range between <em>s</em> to <em>w</em> in the ABC. We will need to use the <em>range</em> operator <code>[-]</code>:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="tutorial-text-manipulation-with-stringr.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;[s-w]&quot;</span>) <span class="co"># matches all strings that contain either the letter s, t, u, v, or, w</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Again, we have a perfect match! The <code>str_detect</code> has successfully matched “strawberry”, “raspberry”, and “kiwi”. Next, we might want to match all fruits that contain more than one <em>r</em>, i.e., we want to match <em>strawberry</em> and <em>raspberry</em>, but not <em>pear</em>. This is where the <code>?</code> operator (zero or one) <code>*</code> operator (zero or more), the <code>+</code> operator (one or more), and the <code>{n}</code> operator (exactly n) come in handy.</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="tutorial-text-manipulation-with-stringr.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;r?&quot;</span>) <span class="co"># matches all strings that contain zero or one rs</span></span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="tutorial-text-manipulation-with-stringr.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;r*&quot;</span>) <span class="co"># matches all strings that contain zero or more rs</span></span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="tutorial-text-manipulation-with-stringr.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;r+&quot;</span>) <span class="co"># matches all strings that contain one or more rs --&gt; this grabs pear as well, not there yet!</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="tutorial-text-manipulation-with-stringr.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(fruits, <span class="st">&quot;r{2}&quot;</span>) <span class="co"># matches all strings that contain exactly two rs --&gt; this grabs only the berries, yeah!</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE FALSE</code></pre>
+<p>This looks great! We now know the most important regular expressions! If you feel like you need even more advanced regular expressions, you can look them up in this awesome <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">stringr cheat sheet</a>.</p>
+</div>
+<div id="take-aways-5" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Take-Aways<a href="tutorial-text-manipulation-with-stringr.html#take-aways-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li>Every cell contains values.</li>
-<li>Every cell contains a variable.</li>
-<li>Every observation is a column.</li>
-<li>Every observation is a row.</li>
-</ul>
-<p><strong>2. What are <code>dplyr</code> functions?</strong></p>
-<ul>
-<li><code>summary()</code></li>
-<li><code>describe()</code></li>
-<li><code>mutate()</code></li>
-<li><code>manage()</code></li>
-</ul>
-<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to A?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
-<li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
-<li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
-<li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
-</ul>
-<p><strong>4. Imagine you want to recode the height of the these characters. You want to have three categories from small and medium to tall. What is a valid approach?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
-<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
-<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
-<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
-</ul>
-<p><strong>5. Imagine you want to provide a systematic overview over all hair colors and what species wear these hair colors frequently (not accounting for the skewed sampling of species)? What is a valid approach?</strong></p>
-<ul>
-<li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color &amp; species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
-<li><code>starwars_data %&gt;% group_by(hair_color + species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><strong>String patterns &amp; RegEx</strong>: String patterns are sequences of characters; regular expressions are a type of string patterna used to match or detect other string patterns in texts.</li>
+<li><strong>Important regular expressions</strong>: The best overview of all regex options can be found on the <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf">stringr cheat sheet</a>.</li>
 </ul>
 </div>
-<div id="task-2-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-2-test-your-knowledge.html#task-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>It’s you turn now. Load the starwars data like this:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="exercise-2-test-your-knowledge.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
-<span id="cb143-2"><a href="exercise-2-test-your-knowledge.html#cb143-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
-<p>How many humans are contained in the starwars data overall? (Hint: use <code>summarize(count = n())</code> or <code>count()</code>)</p>
-</div>
-<div id="task-3-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-2-test-your-knowledge.html#task-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>How many humans are contained in starwars by gender?</p>
-</div>
-<div id="task-4-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 4<a href="exercise-2-test-your-knowledge.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the most common eye_color among Star Wars characters? (Hint: use <code>arrange()</code>)</p>
-</div>
-<div id="task-5-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 5<a href="exercise-2-test-your-knowledge.html#task-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the average mass of Star Wars characters that are not human and have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
-</div>
-<div id="task-6-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 6<a href="exercise-2-test-your-knowledge.html#task-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Compare the mean, median, and standard deviation of mass for all humans and droids. (Hint: remove all <code>NAs</code>)</p>
-</div>
-<div id="task-7" class="section level2 unnumbered hasAnchor">
-<h2>Task 7<a href="exercise-2-test-your-knowledge.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a new variable in which you store the mass in gram (gr_mass). Add it to the data frame. Test whether your solution works by printing your data to the console, but only show the name, species, mass, and your new variable gr_mass.</p>
-<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
-<p>Are you ready for some beautiful graphs? Then check out the next <a href="tutorial-data-visualization-with-ggplot.html#tutorial-data-visualization-with-ggplot">Tutorial: Data visualization with ggplot</a>.</p>
+<div id="additional-tutorials-5" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Additional tutorials<a href="tutorial-text-manipulation-with-stringr.html#additional-tutorials-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You still have questions? The following tutorials, books, &amp; tools may help you:</p>
+<ul>
+<li><a href="https://sicss.io/2019/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Stringr Cheat Sheet</a></li>
+<li><a href="https://regexr.com/">Regexr - Learn, build, and test RegEx</a></li>
+<li><a href="https://bookdown.org/valerie_hase/TextasData_HS2021/tutorial-9-searching-manipulating-string-patterns.html">Text as Data by V. Hase, Tutorial 9</a></li>
+</ul>
 </div>
 </div>
             </section>
@@ -419,8 +456,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="tutorial-data-management-with-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-data-visualization-with-ggplot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exercise-4-test-your-knowledge.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
