@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 1 | R for PR evaluation</title>
+  <title> 7 Exercise 5 | R for PR evaluation</title>
   <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 1 | R for PR evaluation" />
+  <meta property="og:title" content=" 7 Exercise 5 | R for PR evaluation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 1 | R for PR evaluation" />
+  <meta name="twitter:title" content=" 7 Exercise 5 | R for PR evaluation" />
   
   <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-working-with-data-files.html"/>
-<link rel="next" href="tutorial-data-management-with-tidyverse.html"/>
+<link rel="prev" href="tutorial-text-manipulation-with-stringr.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -343,74 +343,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-1" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 1<a href="exercise-1.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 1, you’ll…</strong></p>
-<ul>
-<li>have assessed how well you know R and RStudio</li>
-<li>know what chapters and concepts you might want to repeat again</li>
-<li>have managed to apply the basic concepts of R to data</li>
-</ul>
-<div id="task-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
-<p><strong>1. What panels are part of RStudio?</strong></p>
-<ul>
-<li>source</li>
-<li>console</li>
-<li>input</li>
-<li>packages, files &amp; plots</li>
-</ul>
-<p><strong>2. How do you activate R packages after you have installed them?</strong></p>
-<ul>
-<li>import.packages()</li>
-<li>install.packages()</li>
-<li>package()</li>
-<li>library()</li>
-</ul>
-<p><strong>3. How do you create a vector in R with elements 1, 2, 3?</strong></p>
-<ul>
-<li>cbind(1,2,3)</li>
-<li>cb(1,2,3)</li>
-<li>c(1,2,3)</li>
-<li>cmb(1,2,3)</li>
-</ul>
-<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements. How do you retrieve the 8th element?</strong></p>
-<ul>
-<li>vector[-2]</li>
-<li>vector[„-2“]</li>
-<li>vector[8]</li>
-<li>vector[„8“]</li>
-</ul>
-<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown, black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
-<ul>
-<li>hair[4]</li>
-<li>hair[„4“]</li>
-<li>hair[blond]</li>
-<li>hair[„blond“]</li>
-</ul>
+<div id="exercise-5" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number"> 7</span> Exercise 5<a href="exercise-5.html#exercise-5" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>First, load the library <code>stringr</code> and create a new car vector:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="exercise-5.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb214-2"><a href="exercise-5.html#cb214-2" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;VW&quot;</span>, <span class="st">&quot;Mercedes-Benz&quot;</span>, <span class="st">&quot;BMW&quot;</span>, <span class="st">&quot;Audi&quot;</span>, <span class="st">&quot;Opel&quot;</span>, <span class="st">&quot;Skoda&quot;</span>, <span class="st">&quot;Ford&quot;</span>, <span class="st">&quot;Seat&quot;</span>, <span class="st">&quot;Cupra&quot;</span>, <span class="st">&quot;Hyundai&quot;</span>, <span class="st">&quot;Renault&quot;</span>, <span class="st">&quot;Fiat&quot;</span>, <span class="st">&quot;Toyota&quot;</span>, <span class="st">&quot;Peugeot&quot;</span>, <span class="st">&quot;Volvo&quot;</span>)</span></code></pre></div>
+<div id="task-1-4" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Task 1<a href="exercise-5.html#task-1-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the <em>cars</em> vector, create three tasks (and their solutions, of course) that do not use regular expressions (regex) for solving.</p>
 </div>
-<div id="task-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the vector. First, display all elements of the vector. Then print only the 5th element. After that, display all elements except the 5th. Finally, display the elements at the positions 6 to 8.</p>
+<div id="task-2-4" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Task 2<a href="exercise-5.html#task-2-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Using the <em>cars</em> vector, create three tasks (and their solutions, of course) that make use of regex.</p>
 </div>
-<div id="task-3" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a non-numeric, i.e. character, vector with 4 elements and assign the name <em>eye_color</em> to the vector. First, print all elements of this vector to the console. Then have only the value in the 2nd element displayed, then all values except the 2nd element. At the end, display the elements at the positions 2 to 4.</p>
-</div>
-<div id="task-4" class="section level2 unnumbered hasAnchor">
-<h2>Task 4<a href="exercise-1.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Get the <em>“data_tutorial2.csv”</em> from Moodle ( <em>4. Mai material folder</em> ) and put it into the folder that you want to use as working directory.</p>
-<p>Set your working directory and load the data into R by saving it into a source object called <em>data</em>. <strong>Note:</strong> This time, it’s a csv that is actually separated by commas, not by semicolons.</p>
-</div>
-<div id="task-5" class="section level2 unnumbered hasAnchor">
-<h2>Task 5<a href="exercise-1.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, print only the age column to the console. Use the <code>$</code> operator first. Then try to achieve the same result using the subsetting operators, i.e. <code>[]</code>.</p>
-</div>
-<div id="task-6" class="section level2 unnumbered hasAnchor">
-<h2>Task 6<a href="exercise-1.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Print only the first 6 age numbers to the console. Use the <code>$</code> operator first. Then try to achieve the same result using the subsetting operators, i.e. <code>[]</code>.</p>
-<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-1">Solutions for Exercise 1</a>.</p>
+<div id="task-3-4" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Task 3<a href="exercise-5.html#task-3-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When you are ready drop off your R file with the tasks and solutions to Moodle. I’ll make a Medley of your best tasks and upload it for you in the next few days.</p>
 </div>
 </div>
             </section>
@@ -418,8 +366,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="tutorial-working-with-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-data-management-with-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-text-manipulation-with-stringr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
