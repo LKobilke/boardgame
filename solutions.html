@@ -962,13 +962,14 @@ Replace all acronyms with the real brand name, i.e., VW = Volkswagen and BMW = B
 </div>
 <div id="task-7-5" class="section level3 unnumbered hasAnchor">
 <h3>Task 7<a href="solutions.html#task-7-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let’s correct those cacophonic brand names by replacing all cacophonic sounds with a liquid sound. Let’s replace all inner cacophonic sounds with /l/ and all cacophonic sounds that start a brand name with /R/.</p>
+<p>Let’s correct those cacophonic brand names by replacing all cacophonic sounds with a liquid sound. Let’s replace all inner cacophonic sounds with /l/ and all cacophonic sounds that start a brand name with /R/. <strong>Hint:</strong> To keep things simple, use the command to replace inner cacophonic sounds 2 times.</p>
 <p><em>Solution:</em></p>
 <div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="solutions.html#cb304-1" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;[fvszh]+&quot;</span>, <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb304-2"><a href="solutions.html#cb304-2" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;[FVSZH]+&quot;</span>, <span class="st">&quot;R&quot;</span>)</span>
-<span id="cb304-3"><a href="solutions.html#cb304-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-4"><a href="solutions.html#cb304-4" aria-hidden="true" tabindex="-1"></a>cars</span></code></pre></div>
-<pre><code>##  [1] &quot;Rolklwagen&quot;               &quot;Mercedel-Benz&quot;            &quot;Bayerilche Motoren Werke&quot; &quot;Audi&quot;                    
+<span id="cb304-2"><a href="solutions.html#cb304-2" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;[fvszh]+&quot;</span>, <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb304-3"><a href="solutions.html#cb304-3" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;[FVSZH]+&quot;</span>, <span class="st">&quot;R&quot;</span>)</span>
+<span id="cb304-4"><a href="solutions.html#cb304-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb304-5"><a href="solutions.html#cb304-5" aria-hidden="true" tabindex="-1"></a>cars</span></code></pre></div>
+<pre><code>##  [1] &quot;Rolklwagen&quot;               &quot;Mercedel-Benl&quot;            &quot;Bayerilcle Motoren Werke&quot; &quot;Audi&quot;                    
 ##  [5] &quot;Opel&quot;                     &quot;Rkoda&quot;                    &quot;Rord&quot;                     &quot;Reat&quot;                    
 ##  [9] &quot;Cupra&quot;                    &quot;Ryundai&quot;                  &quot;Renault&quot;                  &quot;Riat&quot;                    
 ## [13] &quot;Toyota&quot;                   &quot;Peugeot&quot;                  &quot;Rollo&quot;</code></pre>
