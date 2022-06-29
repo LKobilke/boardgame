@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 7 Tidy text analysis | R for PR evaluation</title>
+  <meta name="description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 7 Tidy text analysis | R for PR evaluation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 7 Tidy text analysis | R for PR evaluation" />
+  
+  <meta name="twitter:description" content="Theories, models, methods and objects of controlling - M.A. Seminar at the IfKW, SS 2022" />
+  
+
+<meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
+
+
+<meta name="date" content="2022-06-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exercise-5-test-your-knowledge.html"/>
+<link rel="next" href="solutions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Evaluation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>General information on the course</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-learn-from-this-tutorial"><i class="fa fa-check"></i>What can I learn from this tutorial?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-a-question"><i class="fa fa-check"></i>What can I do if I have a question?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-can-i-do-if-i-have-problems-with-my-r-code"><i class="fa fa-check"></i>What can I do if I have problems with my R code?</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html"><i class="fa fa-check"></i><b>1</b> Tutorial: Installing &amp; Understanding R/R Studio</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#installing-r"><i class="fa fa-check"></i><b>1.1</b> Installing R</a></li>
+<li class="chapter" data-level="1.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#installing-r-studio"><i class="fa fa-check"></i><b>1.2</b> Installing R Studio</a></li>
+<li class="chapter" data-level="1.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#updating-r-and-r-studio"><i class="fa fa-check"></i><b>1.3</b> Updating R and R Studio</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#on-windows"><i class="fa fa-check"></i><b>1.3.1</b> On Windows</a></li>
+<li class="chapter" data-level="1.3.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#on-mac"><i class="fa fa-check"></i><b>1.3.2</b> On MAC</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#how-does-r-work"><i class="fa fa-check"></i><b>1.4</b> How does R work?</a></li>
+<li class="chapter" data-level="1.5" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#why-should-i-use-r"><i class="fa fa-check"></i><b>1.5</b> Why should I use R?</a></li>
+<li class="chapter" data-level="1.6" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#how-does-r-studio-work"><i class="fa fa-check"></i><b>1.6</b> How does R Studio work?</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#source-writing-your-own-code"><i class="fa fa-check"></i><b>1.6.1</b> Source: Writing your own code</a></li>
+<li class="chapter" data-level="1.6.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#console-printing-results"><i class="fa fa-check"></i><b>1.6.2</b> Console: Printing results</a></li>
+<li class="chapter" data-level="1.6.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#environment-overview-of-objects"><i class="fa fa-check"></i><b>1.6.3</b> Environment: Overview of objects</a></li>
+<li class="chapter" data-level="1.6.4" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#plotshelppackages-do-everything-else"><i class="fa fa-check"></i><b>1.6.4</b> Plots/Help/Packages: Do everything else</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#packages"><i class="fa fa-check"></i><b>1.7</b> Packages</a>
+<ul>
+<li class="chapter" data-level="1.7.1" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#installing-packages"><i class="fa fa-check"></i><b>1.7.1</b> Installing packages</a></li>
+<li class="chapter" data-level="1.7.2" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#activating-packages"><i class="fa fa-check"></i><b>1.7.2</b> Activating packages</a></li>
+<li class="chapter" data-level="1.7.3" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#getting-information-about-packages"><i class="fa fa-check"></i><b>1.7.3</b> Getting information about packages</a></li>
+</ul></li>
+<li class="chapter" data-level="1.8" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#take-aways"><i class="fa fa-check"></i><b>1.8</b> Take-Aways</a></li>
+<li class="chapter" data-level="1.9" data-path="tutorial-installing-understanding-rr-studio.html"><a href="tutorial-installing-understanding-rr-studio.html#additional-tutorials"><i class="fa fa-check"></i><b>1.9</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html"><i class="fa fa-check"></i><b>2</b> Tutorial: Using R as a calculator</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-variables-for-calculation"><i class="fa fa-check"></i><b>2.1</b> Using variables for calculation</a></li>
+<li class="chapter" data-level="2.2" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#using-vectors-for-calculation"><i class="fa fa-check"></i><b>2.2</b> Using vectors for calculation</a></li>
+<li class="chapter" data-level="2.3" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#selecting-values-from-a-vector"><i class="fa fa-check"></i><b>2.3</b> Selecting values from a vector</a></li>
+<li class="chapter" data-level="2.4" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#take-aways-1"><i class="fa fa-check"></i><b>2.4</b> Take-Aways</a></li>
+<li class="chapter" data-level="2.5" data-path="tutorial-using-r-as-a-calculator.html"><a href="tutorial-using-r-as-a-calculator.html#additional-tutorials-1"><i class="fa fa-check"></i><b>2.5</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html"><i class="fa fa-check"></i><b>3</b> Tutorial: Working with data (files)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#defining-your-working-directory"><i class="fa fa-check"></i><b>3.1</b> Defining your working directory</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#optional-setting-the-working-directory-on-a-remote-desktop"><i class="fa fa-check"></i><b>3.1.1</b> Optional: Setting the working directory on a remote desktop</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory"><i class="fa fa-check"></i><b>3.2</b> Import data from your working directory</a></li>
+<li class="chapter" data-level="3.3" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-variables-columns-in-data-frames"><i class="fa fa-check"></i><b>3.3</b> Subsetting variables / columns in data frames</a></li>
+<li class="chapter" data-level="3.4" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames"><i class="fa fa-check"></i><b>3.4</b> Subsetting observations / rows in data frames</a></li>
+<li class="chapter" data-level="3.5" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-values-cells-in-data-frames"><i class="fa fa-check"></i><b>3.5</b> Subsetting values / cells in data frames</a></li>
+<li class="chapter" data-level="3.6" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions"><i class="fa fa-check"></i><b>3.6</b> Subsetting data with conditions</a></li>
+<li class="chapter" data-level="3.7" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#take-aways-2"><i class="fa fa-check"></i><b>3.7</b> Take-Aways</a></li>
+<li class="chapter" data-level="3.8" data-path="tutorial-working-with-data-files.html"><a href="tutorial-working-with-data-files.html#additional-tutorials-2"><i class="fa fa-check"></i><b>3.8</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html"><i class="fa fa-check"></i>Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-1.html"><a href="exercise-1.html#task-6"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html"><i class="fa fa-check"></i><b>4</b> Tutorial: Data management with tidyverse</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#why-not-stick-with-base-r"><i class="fa fa-check"></i><b>4.1</b> Why not stick with Base R?</a></li>
+<li class="chapter" data-level="4.2" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#tidyverse-packages"><i class="fa fa-check"></i><b>4.2</b> Tidyverse packages</a></li>
+<li class="chapter" data-level="4.3" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#tidy-data"><i class="fa fa-check"></i><b>4.3</b> Tidy data</a></li>
+<li class="chapter" data-level="4.4" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#the-pipe-operator"><i class="fa fa-check"></i><b>4.4</b> The pipe operator</a></li>
+<li class="chapter" data-level="4.5" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#data-transformation-with-dplyr"><i class="fa fa-check"></i><b>4.5</b> Data transformation with dplyr</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#select"><i class="fa fa-check"></i><b>4.5.1</b> select()</a></li>
+<li class="chapter" data-level="4.5.2" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#filter"><i class="fa fa-check"></i><b>4.5.2</b> filter()</a></li>
+<li class="chapter" data-level="4.5.3" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#arrange"><i class="fa fa-check"></i><b>4.5.3</b> arrange()</a></li>
+<li class="chapter" data-level="4.5.4" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#mutate"><i class="fa fa-check"></i><b>4.5.4</b> mutate()</a></li>
+<li class="chapter" data-level="4.5.5" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#summarize-group_by"><i class="fa fa-check"></i><b>4.5.5</b> summarize() [+ group_by()]</a></li>
+<li class="chapter" data-level="4.5.6" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#chaining-functions-in-a-pipe"><i class="fa fa-check"></i><b>4.5.6</b> Chaining functions in a pipe</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#take-aways-3"><i class="fa fa-check"></i><b>4.6</b> Take-Aways</a></li>
+<li class="chapter" data-level="4.7" data-path="tutorial-data-management-with-tidyverse.html"><a href="tutorial-data-management-with-tidyverse.html#additional-tutorials-3"><i class="fa fa-check"></i><b>4.7</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html"><i class="fa fa-check"></i>Exercise 2: Test your knowledge</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-1-1"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-2-1"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-3-1"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-4-1"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-5-1"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-6-1"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-2-test-your-knowledge.html"><a href="exercise-2-test-your-knowledge.html#task-7"><i class="fa fa-check"></i>Task 7</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html"><i class="fa fa-check"></i><b>5</b> Tutorial: Data visualization with ggplot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#why-not-stick-with-base-r-1"><i class="fa fa-check"></i><b>5.1</b> Why not stick with Base R?</a></li>
+<li class="chapter" data-level="5.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#components-of-a-ggplot-graph"><i class="fa fa-check"></i><b>5.2</b> Components of a ggplot graph</a></li>
+<li class="chapter" data-level="5.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#installing-activating-ggplot"><i class="fa fa-check"></i><b>5.3</b> Installing &amp; activating ggplot</a></li>
+<li class="chapter" data-level="5.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#building-your-first-plot"><i class="fa fa-check"></i><b>5.4</b> Building your first plot</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#data"><i class="fa fa-check"></i><b>5.4.1</b> Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#aesthetics"><i class="fa fa-check"></i><b>5.4.2</b> Aesthetics</a></li>
+<li class="chapter" data-level="5.4.3" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#geometrics"><i class="fa fa-check"></i><b>5.4.3</b> Geometrics</a></li>
+<li class="chapter" data-level="5.4.4" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#scales"><i class="fa fa-check"></i><b>5.4.4</b> Scales</a></li>
+<li class="chapter" data-level="5.4.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#themes"><i class="fa fa-check"></i><b>5.4.5</b> Themes</a></li>
+<li class="chapter" data-level="5.4.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#labs"><i class="fa fa-check"></i><b>5.4.6</b> Labs</a></li>
+<li class="chapter" data-level="5.4.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#facets"><i class="fa fa-check"></i><b>5.4.7</b> Facets</a></li>
+<li class="chapter" data-level="5.4.8" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#saving-graphs"><i class="fa fa-check"></i><b>5.4.8</b> Saving graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#other-common-plot-types"><i class="fa fa-check"></i><b>5.5</b> Other common plot types</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#bar-plots"><i class="fa fa-check"></i><b>5.5.1</b> bar plots</a></li>
+<li class="chapter" data-level="5.5.2" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#box-plots"><i class="fa fa-check"></i><b>5.5.2</b> box plots</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#take-aways-4"><i class="fa fa-check"></i><b>5.6</b> Take Aways</a></li>
+<li class="chapter" data-level="5.7" data-path="tutorial-data-visualization-with-ggplot.html"><a href="tutorial-data-visualization-with-ggplot.html#additional-tutorials-4"><i class="fa fa-check"></i><b>5.7</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-3-test-your-knowledge.html"><a href="exercise-3-test-your-knowledge.html"><i class="fa fa-check"></i>Exercise 3: Test your knowledge</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-3-test-your-knowledge.html"><a href="exercise-3-test-your-knowledge.html#task-1-2"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-3-test-your-knowledge.html"><a href="exercise-3-test-your-knowledge.html#task-2-2"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-3-test-your-knowledge.html"><a href="exercise-3-test-your-knowledge.html#task-3-2"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html"><i class="fa fa-check"></i>Exercise 4: Test your knowledge</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-1-3"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-2-3"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-3-3"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-4-2"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-5-2"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-6-2"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-7-1"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="exercise-4-test-your-knowledge.html"><a href="exercise-4-test-your-knowledge.html#task-8"><i class="fa fa-check"></i>Task 8</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html"><i class="fa fa-check"></i><b>6</b> Tutorial: Text manipulation with stringr</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#whats-stringr"><i class="fa fa-check"></i><b>6.1</b> What’s stringr?</a></li>
+<li class="chapter" data-level="6.2" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#working-with-strings"><i class="fa fa-check"></i><b>6.2</b> Working with strings</a></li>
+<li class="chapter" data-level="6.3" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#working-with-string-patterns"><i class="fa fa-check"></i><b>6.3</b> Working with string patterns</a></li>
+<li class="chapter" data-level="6.4" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#working-with-regular-expressions"><i class="fa fa-check"></i><b>6.4</b> Working with regular expressions</a></li>
+<li class="chapter" data-level="6.5" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#take-aways-5"><i class="fa fa-check"></i><b>6.5</b> Take-Aways</a></li>
+<li class="chapter" data-level="6.6" data-path="tutorial-text-manipulation-with-stringr.html"><a href="tutorial-text-manipulation-with-stringr.html#additional-tutorials-5"><i class="fa fa-check"></i><b>6.6</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html"><i class="fa fa-check"></i>Exercise 5: Test your knowledge</a>
+<ul>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-1-4"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-2-4"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-3-4"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-4-3"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-5-3"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html"><i class="fa fa-check"></i><b>7</b> Tidy text analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#what-is-tidy-text"><i class="fa fa-check"></i><b>7.1</b> What is tidy text?</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#example"><i class="fa fa-check"></i><b>7.2</b> Example</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.2.1</b> First steps</a></li>
+<li class="chapter" data-level="7.2.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#preprocessing-real-world-data"><i class="fa fa-check"></i><b>7.2.2</b> Preprocessing real-world data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#relative-word-frequencies"><i class="fa fa-check"></i><b>7.2.3</b> (Relative) word frequencies</a></li>
+<li class="chapter" data-level="7.2.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#word-log-odds"><i class="fa fa-check"></i><b>7.2.4</b> Word log odds</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#topic-modeling"><i class="fa fa-check"></i><b>7.3</b> Topic modeling</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-1"><i class="fa fa-check"></i><b>7.3.1</b> First steps</a></li>
+<li class="chapter" data-level="7.3.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.3.2</b> Model estimation: Number of topics</a></li>
+<li class="chapter" data-level="7.3.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.3.3</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.3.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.3.4</b> STMs</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.4</b> Take-Aways</a></li>
+<li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.5</b> Additional tutorials</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-1"><i class="fa fa-check"></i>Solutions for Exercise 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-5"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-5"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-5"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-4"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-4"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-4"><i class="fa fa-check"></i>Task 6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-2"><i class="fa fa-check"></i>Solutions for Exercise 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-6"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-6"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-6"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-5"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-5"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-5"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-3"><i class="fa fa-check"></i>Task 7</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-3"><i class="fa fa-check"></i>Solutions for Exercise 3</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-7"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-7"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-7"><i class="fa fa-check"></i>Task 3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-4"><i class="fa fa-check"></i>Solutions for Exercise 4</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-8"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-8"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-8"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-6"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-6"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-6"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-4"><i class="fa fa-check"></i>Task 7</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-8-1"><i class="fa fa-check"></i>Task 8</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-5"><i class="fa fa-check"></i>Solutions for Exercise 5</a>
+<ul>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-9"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-9"><i class="fa fa-check"></i>Task 2</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-9"><i class="fa fa-check"></i>Task 3</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-7"><i class="fa fa-check"></i>Task 4</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-7"><i class="fa fa-check"></i>Task 5</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-7"><i class="fa fa-check"></i>Task 6</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-5"><i class="fa fa-check"></i>Task 7</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/LKobilke/PR-Erfolgskontrolle" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for PR evaluation</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tidy-text-analysis" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number"> 7</span> Tidy text analysis<a href="tidy-text-analysis.html#tidy-text-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>After working through Tutorial 7, you’ll…</p>
+<ul>
+<li>understand the concept of tidy text</li>
+<li>know how to combine tidy text management approaches with regular expressions</li>
+<li>be able to produce first analyses, e.g., word frequencies</li>
+</ul>
+<div id="what-is-tidy-text" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> What is tidy text?<a href="tidy-text-analysis.html#what-is-tidy-text" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Since you’ve already learnt what tidy data is (see <a href="tutorial-data-management-with-tidyverse.html#tidy-data">Tidy data</a>), you can make an educated guess about the meaning of “tidy text”! In contrast to the ways text is commonly stored in existing text analysis approaches (e.g., as strings or document-term matrices), <strong><em>the tidy text format is a table with one single token per row</em></strong> (token = the unit of analysis). A token is a meaningful unit of text, i.e., a word, a sentence, or a paragraph that we are interested in using for further analysis. Splitting text into tokens is what we call the process of <em>tokenization</em>.</p>
+<p>Julia Silge and David Robinson’s <a href="https://cran.r-project.org/web/packages/tidytext/vignettes/tidytext.html">tidytext package</a> makes tokenizing into the tidy text format simple! Moreover, the <code>tidytext</code> package builds upon <code>tidyverse</code> and <code>ggplot2</code>, which makes it easy to use for you, since you already know these packages (see <a href="tutorial-data-management-with-tidyverse.html#tutorial-data-management-with-tidyverse">Tutorial: Data management with tidyverse</a> and <a href="tutorial-data-visualization-with-ggplot.html#tutorial-data-visualization-with-ggplot">Tutorial: Data visualization with ggplot</a> for a recap). That’s why we’ll focus on the <code>tidytext</code> in this breakout session.</p>
+<p>This tutorial is based on Julia Silge and David Robinson’s open-access book <a href="https://www.tidytextmining.com/">“Text Mining in R. A Tidy Approach”</a> and a lot of the following code was actually written by Julia Silge. If you want to dig deeper into tidy text analysis, you should check the book out. Both authors have also created an informative flowchart of the tidy text analysis workflow:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><em>Image: Tidy Text Analysis Workflow</em></td>
+</tr>
+<tr class="even">
+<td align="left"><img src="images/Tut_tidytext_principles.JPG" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Example<a href="tidy-text-analysis.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="first-steps" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> First steps<a href="tidy-text-analysis.html#first-steps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To give you an example of what the <code>tidytext</code> package is capable of, let’s create some toy data first. Look at this tweet about the Russian aggression against Ukraine and the Eurovision Song Contest:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>Image: Tweet about the Russian Aggression Against Ukraine and the Eurovision Song Contest</em></td>
+</tr>
+<tr class="even">
+<td><img src="images/Tut_Tweet_Eurovision.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s save the text of this tweet into a variable called <em>tweet</em>, which will consist of 8 separate strings for each individual clause of the tweet.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="tidy-text-analysis.html#cb217-1" aria-hidden="true" tabindex="-1"></a>tweet <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;To the ppl not getting it &quot;</span>, </span>
+<span id="cb217-2"><a href="tidy-text-analysis.html#cb217-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;it&#39;s about showing solidarity.&quot;</span>,</span>
+<span id="cb217-3"><a href="tidy-text-analysis.html#cb217-3" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;That&#39;s why the majority voted for Ukraine.&quot;</span>,</span>
+<span id="cb217-4"><a href="tidy-text-analysis.html#cb217-4" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;It&#39;s not going to stop the war &quot;</span>,</span>
+<span id="cb217-5"><a href="tidy-text-analysis.html#cb217-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;but it&#39;s another gesture to show Europe stands with them.&quot;</span>,</span>
+<span id="cb217-6"><a href="tidy-text-analysis.html#cb217-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;Some of these men might not be here next year.&quot;</span>,</span>
+<span id="cb217-7"><a href="tidy-text-analysis.html#cb217-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;#Eurovision&quot;</span>,</span>
+<span id="cb217-8"><a href="tidy-text-analysis.html#cb217-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">&quot;#esc2022&quot;</span>)</span>
+<span id="cb217-9"><a href="tidy-text-analysis.html#cb217-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-10"><a href="tidy-text-analysis.html#cb217-10" aria-hidden="true" tabindex="-1"></a>tweet</span></code></pre></div>
+<pre><code>## [1] &quot;To the ppl not getting it &quot;                                &quot;it&#39;s about showing solidarity.&quot;                            &quot;That&#39;s why the majority voted for Ukraine.&quot;               
+## [4] &quot;It&#39;s not going to stop the war &quot;                           &quot;but it&#39;s another gesture to show Europe stands with them.&quot; &quot;Some of these men might not be here next year.&quot;           
+## [7] &quot;#Eurovision&quot;                                               &quot;#esc2022&quot;</code></pre>
+<p>Next, install and load the <code>tidytext</code> package, the <code>tidyverse</code> package &amp; the <code>lubridate</code> package. <code>lubridate</code> will convert dates to a standard format, making it easier to create graphs using time data.</p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="tidy-text-analysis.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
+<span id="cb219-2"><a href="tidy-text-analysis.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tidytext)) {</span>
+<span id="cb219-3"><a href="tidy-text-analysis.html#cb219-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidytext&quot;</span>); </span>
+<span id="cb219-4"><a href="tidy-text-analysis.html#cb219-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(tidytext)</span>
+<span id="cb219-5"><a href="tidy-text-analysis.html#cb219-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load tidytext</span></span>
+<span id="cb219-6"><a href="tidy-text-analysis.html#cb219-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-7"><a href="tidy-text-analysis.html#cb219-7" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading lubridate:</span></span>
+<span id="cb219-8"><a href="tidy-text-analysis.html#cb219-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(lubridate)) {</span>
+<span id="cb219-9"><a href="tidy-text-analysis.html#cb219-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;lubridate&quot;</span>); </span>
+<span id="cb219-10"><a href="tidy-text-analysis.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(lubridate)</span>
+<span id="cb219-11"><a href="tidy-text-analysis.html#cb219-11" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load lubridate</span></span>
+<span id="cb219-12"><a href="tidy-text-analysis.html#cb219-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb219-13"><a href="tidy-text-analysis.html#cb219-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb219-14"><a href="tidy-text-analysis.html#cb219-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb219-15"><a href="tidy-text-analysis.html#cb219-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<p>Now, we need to turn our <em>tweet</em> variable into a table using the <code>tibble()</code> function, which is part of the <code>tibble</code> package that comes pre-installed with <code>tidyverse</code>.</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="tidy-text-analysis.html#cb220-1" aria-hidden="true" tabindex="-1"></a>tweet_df <span class="ot">&lt;-</span> </span>
+<span id="cb220-2"><a href="tidy-text-analysis.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">line =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(tweet),   <span class="co"># this line creates a column called &#39;line&#39; that contains the row number, starting with 1 and ending with the last row</span></span>
+<span id="cb220-3"><a href="tidy-text-analysis.html#cb220-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">text =</span> tweet)             <span class="co"># this line will create a column called &#39;text&#39; that contains all text information from our tweet variable</span></span>
+<span id="cb220-4"><a href="tidy-text-analysis.html#cb220-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-5"><a href="tidy-text-analysis.html#cb220-5" aria-hidden="true" tabindex="-1"></a>tweet_df</span></code></pre></div>
+<pre><code>## # A tibble: 8 x 2
+##    line text                                                       
+##   &lt;int&gt; &lt;chr&gt;                                                      
+## 1     1 &quot;To the ppl not getting it &quot;                               
+## 2     2 &quot;it&#39;s about showing solidarity.&quot;                           
+## 3     3 &quot;That&#39;s why the majority voted for Ukraine.&quot;               
+## 4     4 &quot;It&#39;s not going to stop the war &quot;                          
+## 5     5 &quot;but it&#39;s another gesture to show Europe stands with them.&quot;
+## 6     6 &quot;Some of these men might not be here next year.&quot;           
+## 7     7 &quot;#Eurovision&quot;                                              
+## 8     8 &quot;#esc2022&quot;</code></pre>
+<p>Our tweet is now displayed as a table with 8 rows and one variable that contains the actual text information. If our unit of analysis, i.e. token, is a single word, then this data frame cannot be considered “tidy” because it does not follow the one-token-per-row logic. Breaking the text into separate tokens (<em>tokenization</em>) and transforming it into a clean data structure is required. We are in luck: The <code>tidytext</code> package provides the <code>unnest tokens()</code> function to do just that.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="tidy-text-analysis.html#cb222-1" aria-hidden="true" tabindex="-1"></a>tweet_df_tknzd <span class="ot">&lt;-</span> tweet_df <span class="sc">%&gt;%</span></span>
+<span id="cb222-2"><a href="tidy-text-analysis.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="co"># this line takes the column called &#39;text&#39; from the tweet_df and tokenizes (unit of analysis: word) its content into a new column called &#39;word&#39;</span></span>
+<span id="cb222-3"><a href="tidy-text-analysis.html#cb222-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb222-4"><a href="tidy-text-analysis.html#cb222-4" aria-hidden="true" tabindex="-1"></a>tweet_df_tknzd</span></code></pre></div>
+<pre><code>## # A tibble: 46 x 2
+##     line word      
+##    &lt;int&gt; &lt;chr&gt;     
+##  1     1 to        
+##  2     1 the       
+##  3     1 ppl       
+##  4     1 not       
+##  5     1 getting   
+##  6     1 it        
+##  7     2 it&#39;s      
+##  8     2 about     
+##  9     2 showing   
+## 10     2 solidarity
+## # ... with 36 more rows</code></pre>
+<p><strong>Note:</strong> <code>unnest tokens()</code> comes with a few handy preprocessing features, i.e., it already turns the text into a standardized format for further analysis:
+1. Line numbers from which each word originated are kept in the data frame (column: <em>line</em>).
+2. All punctuation has already been taken care of, i.e., dots, questions marks, etc. have been removed.
+3. All uppercase letters have been taken care of, i.e., words have been transformed to lowercase.<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+</div>
+<div id="preprocessing-real-world-data" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Preprocessing real-world data<a href="tidy-text-analysis.html#preprocessing-real-world-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that you have seen what the <code>tidytext</code> package is capable of, let’s try it on some real-world data. I’ve provided you with a data file that contains data collected with the Twitter API about the Russian aggression against Ukraine. You can download this file on my Github page: <a href="">Download here</a>.</p>
+<p>Let’s import the data into RStudio and inspect it using the <code>View()</code> function.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="tidy-text-analysis.html#cb224-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;ukraine_tweets2.csv&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="co"># Use UTF-8 encoding to keep the smilies</span></span>
+<span id="cb224-2"><a href="tidy-text-analysis.html#cb224-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-3"><a href="tidy-text-analysis.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">TZ=</span><span class="st">&quot;UTC&quot;</span>) <span class="co"># Twitter gives a UTC timestamp, so we&#39;ll need to set our own environment to UTC, too</span></span>
+<span id="cb224-4"><a href="tidy-text-analysis.html#cb224-4" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb224-5"><a href="tidy-text-analysis.html#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(time)) <span class="sc">%&gt;%</span>  <span class="co"># turn the data column into a proper format with the lubridate package (this helps to create time series graphs!)</span></span>
+<span id="cb224-6"><a href="tidy-text-analysis.html#cb224-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 53,097 x 18
+##    time                user  user.id user.location user.description user.followers_~ hashtag0 hastag1 mention0.at_name mention0.screen~ mention0.id reply_to reply_to_id full_text  id_str
+##    &lt;dttm&gt;              &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;                       &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;            &lt;chr&gt;                  &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+##  1 2022-02-25 18:10:59 peek~ 6.34e 7 &quot;&quot;            &quot;&quot;                             30 &lt;NA&gt;     &lt;NA&gt;    vonderleyen      &quot;Ursula von der~     1.15e18 vonderl~     1.15e18 &quot;@vonder~ 1.50e18
+##  2 2022-02-25 18:10:59 Soci~ 2.34e 8 &quot;Britain&quot;     &quot;Twitter accoun~            17583 &lt;NA&gt;     &lt;NA&gt;    Luca_Bo_         &quot;Luca_Bo&quot;            1.14e 9 &lt;NA&gt;        NA       &quot;RT @Luc~ 1.50e18
+##  3 2022-02-25 18:10:59 Terr~ 1.07e18 &quot;&quot;            &quot;&quot;                              6 &lt;NA&gt;     &lt;NA&gt;    Tom_Fowdy        &quot;Tom Fowdy&quot;          9.58e17 &lt;NA&gt;        NA       &quot;RT @Tom~ 1.50e18
+##  4 2022-02-25 18:10:59 sodr~ 1.19e 8 &quot;Bergen, Nor~ &quot;science-policy~              727 war      Ukraine KurakinEgor      &quot;Georgy Kurakin&quot;     2.33e 9 &lt;NA&gt;        NA       &quot;RT @Kur~ 1.50e18
+##  5 2022-02-25 18:10:59 jab6~ 1.95e 9 &quot;&quot;            &quot;&quot;                             10 &lt;NA&gt;     &lt;NA&gt;    DiamondandSilk   &quot;Diamond and Si~     2.91e 9 &lt;NA&gt;        NA       &quot;RT @Dia~ 1.50e18
+##  6 2022-02-25 18:10:59 Phil~ 5.42e 7 &quot;St Albans o~ &quot;Dad x2, husban~              629 &lt;NA&gt;     &lt;NA&gt;    andersostlund    &quot;Anders Östlund&quot;     2.16e 7 &lt;NA&gt;        NA       &quot;RT @and~ 1.50e18
+##  7 2022-02-25 18:10:59 JAMB~ 1.04e18 &quot;Wolverhampt~ &quot;\U0001f3f4\U00~              791 &lt;NA&gt;     &lt;NA&gt;    Krupa            &quot;Daniel \U0001f~     2.07e 7 &lt;NA&gt;        NA       &quot;RT @Kru~ 1.50e18
+##  8 2022-02-25 18:10:59 Sara~ 7.50e17 &quot;SoCal &quot;      &quot;| Mom | Wife |~            39808 &lt;NA&gt;     &lt;NA&gt;    NotHoodlum       &quot;Hoodlum \U0001~     1.11e18 &lt;NA&gt;        NA       &quot;RT @Not~ 1.50e18
+##  9 2022-02-25 18:10:59 halo~ 1.28e18 &quot;&quot;            &quot;Hope 2022 is o~                4 peace    Ukraine thichnhathanh    &quot;Thich Nhat Han~     1.76e 7 &lt;NA&gt;        NA       &quot;RT @thi~ 1.50e18
+## 10 2022-02-25 18:10:59 zabi~ 1.16e 8 &quot;Lahore, Pak~ &quot;Digital Journa~              101 &lt;NA&gt;     &lt;NA&gt;    Non_graata       &quot;SocialPariah&quot;       8.48e 7 &lt;NA&gt;        NA       &quot;RT @Non~ 1.50e18
+## # ... with 53,087 more rows, and 3 more variables: is_quote_status &lt;lgl&gt;, favorite_count &lt;int&gt;, retweet_count &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="tidy-text-analysis.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(data)</span></code></pre></div>
+<p>This data set contains a lot of information! We get to know who wrote the tweet (<em>user</em> and the unique <em>user.id</em>) and where this person lives (<em>user.location</em>). But most importantly, we can find the text of the tweet in the column <em>full_text</em>.</p>
+<p>First of all, let’s reduce some of these columns that we don’t need for our text analysis.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="tidy-text-analysis.html#cb227-1" aria-hidden="true" tabindex="-1"></a>data_short <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb227-2"><a href="tidy-text-analysis.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time, user, full_text) <span class="co"># keeps time, user, and full_text</span></span>
+<span id="cb227-3"><a href="tidy-text-analysis.html#cb227-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-4"><a href="tidy-text-analysis.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(data_short)</span></code></pre></div>
+<p>Now, to get an overview, let’s create a visualization of the user’s who posted at least 18 tweets.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="tidy-text-analysis.html#cb228-1" aria-hidden="true" tabindex="-1"></a>data_short <span class="sc">%&gt;%</span></span>
+<span id="cb228-2"><a href="tidy-text-analysis.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(user) <span class="sc">%&gt;%</span></span>
+<span id="cb228-3"><a href="tidy-text-analysis.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb228-4"><a href="tidy-text-analysis.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb228-5"><a href="tidy-text-analysis.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> user, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb228-6"><a href="tidy-text-analysis.html#cb228-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>) <span class="sc">+</span></span>
+<span id="cb228-7"><a href="tidy-text-analysis.html#cb228-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb228-8"><a href="tidy-text-analysis.html#cb228-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.00</span>, <span class="at">hjust =</span> <span class="fl">0.00</span>)) <span class="sc">+</span></span>
+<span id="cb228-9"><a href="tidy-text-analysis.html#cb228-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Users who posted the most tweets about the Russian</span><span class="sc">\n</span><span class="st">aggression against Ukraine&quot;</span>,</span>
+<span id="cb228-10"><a href="tidy-text-analysis.html#cb228-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;User name&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Number of Tweets&quot;</span>)</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>Now that we have had our overview, we will start with a process called <em>text normalization</em>. Text normalization is the endeavor to minimize the variability of a text by bringing it closer to a specified “standard” by reducing the quantity of divergent data that the computer has to deal with. Therefore, text normalization boots efficiency. Some techniques of text normalization will be covered in the next few section, for example, tokenization, stop word removal, and stemming/lemmatization.</p>
+<div id="tokenization" class="section level4 hasAnchor" number="7.2.2.1">
+<h4><span class="header-section-number">7.2.2.1</span> Tokenization<a href="tidy-text-analysis.html#tokenization" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>I think we are ready to tokenize the data with the <code>unnest tokens()</code> function. <em>Tokenization</em> is the process of breaking text into words (and punctuation marks). Since scientists are almost never interested in the punctuation marks and will delete them from the data set later anyway, <code>unnest tokens()</code> comes with the nice bonus of deleting the punctuation marks directly, leaving only words as tokens.</p>
+<p>We will use the highly specialized <code>token = "tweets"</code> option of the <code>tidytext package</code> (by <a href="https://cran.r-project.org/web/packages/tokenizers/index.html">Mullen 2016</a>), which preserves hashtags and mentions of users with the @ sign from the direct punctuation removal process performed by <code>unnest tokens()</code>.</p>
+<p>Another common practice is to remove all tokens that contain numbers. Depending on the research question, it can also be helpful to remove URLs. For illustrative purposes, we will do both. But keep in mind that removing all URLs will take the option from you to compare what accounts have shared certain URLs more frequently than others.</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="tidy-text-analysis.html#cb229-1" aria-hidden="true" tabindex="-1"></a>remove_reg <span class="ot">&lt;-</span> <span class="st">&quot;&amp;amp;|&amp;lt;|&amp;gt;&quot;</span> <span class="co"># &amp;amp; = &amp; in HTML,  &amp;lt; = &lt; in HTML,   &amp;gt; = &gt; in HTML</span></span>
+<span id="cb229-2"><a href="tidy-text-analysis.html#cb229-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb229-3"><a href="tidy-text-analysis.html#cb229-3" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_short <span class="sc">%&gt;%</span></span>
+<span id="cb229-4"><a href="tidy-text-analysis.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweet =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb229-5"><a href="tidy-text-analysis.html#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(full_text, <span class="st">&quot;^RT&quot;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># removes all retweets, i.e., tweets that are not unique but a reposts</span></span>
+<span id="cb229-6"><a href="tidy-text-analysis.html#cb229-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(full_text, remove_reg)) <span class="sc">%&gt;%</span>  <span class="co"># remove special HTML characters (&amp;, &lt;, &gt;)</span></span>
+<span id="cb229-7"><a href="tidy-text-analysis.html#cb229-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, full_text, <span class="at">token =</span> <span class="st">&quot;tweets&quot;</span>) <span class="sc">%&gt;%</span>   <span class="co"># using `to_lower = TRUE` with `token = &#39;tweets&#39;` can break URLs, so be sure that you don&#39;t need them</span></span>
+<span id="cb229-8"><a href="tidy-text-analysis.html#cb229-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^[:digit:]+$&quot;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># remove all words that are numbers, e.g. &quot;2020&quot;</span></span>
+<span id="cb229-9"><a href="tidy-text-analysis.html#cb229-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^http&quot;</span>))  <span class="co"># remove all words that are a URL, e.g., (https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)</span></span>
+<span id="cb229-10"><a href="tidy-text-analysis.html#cb229-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb229-11"><a href="tidy-text-analysis.html#cb229-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_tknzd)</span></code></pre></div>
+<pre><code>##                  time     user tweet
+## 1 2022-02-25 18:10:59 peekay14     1
+## 2 2022-02-25 18:10:59 peekay14     1
+## 3 2022-02-25 18:10:59 peekay14     1
+## 4 2022-02-25 18:10:59 peekay14     1
+## 5 2022-02-25 18:10:59 peekay14     1
+## 6 2022-02-25 18:10:59 peekay14     1
+##                                                                                                                                                                                                                                                                                                              text
+## 1 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 2 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 3 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 4 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 5 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 6 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+##            word
+## 1  @vonderleyen
+## 2 @eucommission
+## 3       rubbish
+## 4          your
+## 5         words
+## 6           and</code></pre>
+<p>As you can see, <code>unnest tokens()</code> in combination with the <code>token = "tweets"</code> option has kept all mentions as tokens. Add <code>%&gt;% filter(!str_detect(word, "^@"))</code> at the end of the above presented code if you want to remove these, too.</p>
+<p>Now, let’s check the total number of unique words in our tweet data:</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="tidy-text-analysis.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(data_tknzd)[<span class="dv">1</span>], <span class="st">&quot; non-unique features / words and &quot;</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data_tknzd<span class="sc">$</span>word)), <span class="st">&quot; unique features / words.&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;We are investigating  250371  non-unique features / words and  23614  unique features / words.&quot;</code></pre>
+</div>
+<div id="removing-stop-words" class="section level4 hasAnchor" number="7.2.2.2">
+<h4><span class="header-section-number">7.2.2.2</span> Removing stop words<a href="tidy-text-analysis.html#removing-stop-words" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Next, we should get rid of stop words. Stop words are a group of words that are regularly used in a language. In English, stop words such as “the,” “is,” and “and” would qualify. Because stop words are so common, they don’t really tell us anything about the content of a tweet and what differentiates this tweet from other tweets. The <code>tidytext</code> package comes with a pre-installed stop word data set. Let’s save that data set to a source object called <em>stop_word_data</em>. This way, we can use it later.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="tidy-text-analysis.html#cb233-1" aria-hidden="true" tabindex="-1"></a>stop_word_data <span class="ot">&lt;-</span> tidytext<span class="sc">::</span>stop_words</span>
+<span id="cb233-2"><a href="tidy-text-analysis.html#cb233-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb233-3"><a href="tidy-text-analysis.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(stop_word_data, <span class="dv">20</span>) <span class="co"># prints the first 20 stop words to the console</span></span></code></pre></div>
+<pre><code>## # A tibble: 20 x 2
+##    word        lexicon
+##    &lt;chr&gt;       &lt;chr&gt;  
+##  1 a           SMART  
+##  2 a&#39;s         SMART  
+##  3 able        SMART  
+##  4 about       SMART  
+##  5 above       SMART  
+##  6 according   SMART  
+##  7 accordingly SMART  
+##  8 across      SMART  
+##  9 actually    SMART  
+## 10 after       SMART  
+## 11 afterwards  SMART  
+## 12 again       SMART  
+## 13 against     SMART  
+## 14 ain&#39;t       SMART  
+## 15 all         SMART  
+## 16 allow       SMART  
+## 17 allows      SMART  
+## 18 almost      SMART  
+## 19 alone       SMART  
+## 20 along       SMART</code></pre>
+<p>Now, let’s use these stop words to remove all tokens that are stop words from our tweet data.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="tidy-text-analysis.html#cb235-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb235-2"><a href="tidy-text-analysis.html#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_word_data<span class="sc">$</span>word) <span class="sc">%&gt;%</span>  <span class="co"># removes all of our tokens that are stop words</span></span>
+<span id="cb235-3"><a href="tidy-text-analysis.html#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> <span class="fu">str_remove_all</span>(stop_word_data<span class="sc">$</span>word, <span class="st">&quot;&#39;&quot;</span>)) <span class="co"># first removes all &#39; from the stop words (e.g., ain&#39;t -&gt; aint) and then removes all of our tokens that resemble these stop words without punctuation</span></span></code></pre></div>
+</div>
+<div id="lemmatizing-stemming" class="section level4 hasAnchor" number="7.2.2.3">
+<h4><span class="header-section-number">7.2.2.3</span> Lemmatizing &amp; stemming<a href="tidy-text-analysis.html#lemmatizing-stemming" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Minimizing words to their basic form (<em>lemmatizing</em>) or root (<em>stemming</em>) is a typical strategy of reducing the number of words in a text.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Stemming:</strong> A stem is the root form of a word without any suffixes. A stemming algorithm (= <em>stemmer</em>) removes the suffixes and returns the stem of the word. <em>Example1:</em> vengeance –&gt; vengeanc, or, if you use a very aggressive stemmer, vengeance –&gt; veng || <em>Example2</em>: legions –&gt; legion, or, if you use a very aggressive stemmer, legions –&gt; leg (this one is problematic!) || <em>Example3</em>: murdered –&gt; murder</p></li>
+<li><p><strong>Lemmatization:</strong> A lemma is a lexicon headword or, i.e., the dictionary-matched basic form of a word (as opposed to a stem created by eliminating or changing suffixes). Because a lemmatizing algorithm (= <em>lemmatizer</em>) performs dictionary matching, lemmatization is more computationally demanding than stemming. vengeance –&gt; vengeance || <em>Example2</em>: legions –&gt; legion || <em>Example3</em>: murdered –&gt; murdered (this one is problematic!)</p></li>
+</ol>
+<p>Most of the time, stemmers will make a lot of mistakes (e.g., legions –&gt; leg) and lemmatizers will make fewer mistakes. However, lemmatizers summarize fewer words (murdered –&gt; murdered) and therefore reduce the word count less efficiently than stemmers. Which technique of text normalization is preferred is always determined by the research question and the available data.</p>
+<p>For the ease of teaching, we will use stemming on our tweet data. However, you could also use lemmatization with the <a href="https://spacyr.quanteda.io/">spacyr package</a>.</p>
+<p>We’ll use Porter’s (1980) stemming algorthm, which is the most extensively used stemmer for the English language. Porter made the stemmer open-source, and you may use it with R using the <code>SnowballC</code> package (Bouchet-Valat 2020).</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="tidy-text-analysis.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading SnowballC:</span></span>
+<span id="cb236-2"><a href="tidy-text-analysis.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(SnowballC)) {</span>
+<span id="cb236-3"><a href="tidy-text-analysis.html#cb236-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;SnowballC&quot;</span>); </span>
+<span id="cb236-4"><a href="tidy-text-analysis.html#cb236-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(SnowballC)</span>
+<span id="cb236-5"><a href="tidy-text-analysis.html#cb236-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load SnowballC</span></span>
+<span id="cb236-6"><a href="tidy-text-analysis.html#cb236-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb236-7"><a href="tidy-text-analysis.html#cb236-7" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb236-8"><a href="tidy-text-analysis.html#cb236-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">wordStem</span>(word))</span>
+<span id="cb236-9"><a href="tidy-text-analysis.html#cb236-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb236-10"><a href="tidy-text-analysis.html#cb236-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_tknzd)</span></code></pre></div>
+<pre><code>##                  time     user tweet
+## 1 2022-02-25 18:10:59 peekay14     1
+## 2 2022-02-25 18:10:59 peekay14     1
+## 3 2022-02-25 18:10:59 peekay14     1
+## 4 2022-02-25 18:10:59 peekay14     1
+## 5 2022-02-25 18:10:59 peekay14     1
+## 6 2022-02-25 18:10:59 peekay14     1
+##                                                                                                                                                                                                                                                                                                              text
+## 1 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 2 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 3 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 4 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 5 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+## 6 @vonderleyen @EU_Commission rubbish! Your words and those of your fellow EU politicians are baseless and useless to the people of Ukraine! Do something to help them, more severe sanctions against Russia or send in troops, but stop talking and do something, innocent people are being attacked in Europe!!
+##           word
+## 1 @vonderleyen
+## 2   @eucommiss
+## 3      rubbish
+## 4         word
+## 5       fellow
+## 6           eu</code></pre>
+<p>Let’s check how many unique words we have in our tweet data after all of our preprocessing efforts:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="tidy-text-analysis.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(data_tknzd)[<span class="dv">1</span>], <span class="st">&quot; non-unique features / words and &quot;</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data_tknzd<span class="sc">$</span>word)), <span class="st">&quot; unique features / words.&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;We are investigating  120128  non-unique features / words and  18827  unique features / words.&quot;</code></pre>
+</div>
+<div id="removing-very-rarefrequent-words" class="section level4 hasAnchor" number="7.2.2.4">
+<h4><span class="header-section-number">7.2.2.4</span> Removing very rare/frequent words<a href="tidy-text-analysis.html#removing-very-rarefrequent-words" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Finally, words that appear in practically every tweet or words that that appear only once or twice are not very helpful for investigating the “typical” word use of certain Twitter accounts. Since these words do not contribute to capturing similarities and differences in texts, it is a good idea to remove them. This process of <em>relative pruning</em>. You can achieve a very basic version of <em>relative pruning</em> with the <code>tidytext package</code>, i.e. you remove frequent words independent of how characteristic they are for certain tweets. Since this is a very basic approach, you can see the code here, but we will not use the results in the following sections:</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="tidy-text-analysis.html#cb240-1" aria-hidden="true" tabindex="-1"></a>data_tknzd_basic <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb240-2"><a href="tidy-text-analysis.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb240-3"><a href="tidy-text-analysis.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb240-4"><a href="tidy-text-analysis.html#cb240-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> (n <span class="sc">/</span> <span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb240-5"><a href="tidy-text-analysis.html#cb240-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq <span class="sc">&gt;=</span> <span class="fl">0.0009</span>) <span class="sc">%&gt;%</span> <span class="co"># drop the super rare words, i.e. words that make up less than 0.0009% of all word occurrences</span></span>
+<span id="cb240-6"><a href="tidy-text-analysis.html#cb240-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq <span class="sc">&lt;=</span> <span class="fl">1.00</span>) <span class="co"># drop the super frequent words, i.e. words that make up less than 1.000% of all word occurrences</span></span></code></pre></div>
+<p>Instead <em>relative pruning</em> can also be achieved with the <code>quanteda</code> package, allowing for advanced options (i.e., removing frequent words that occur in many tweets and are thus not very helpful for investigating the “typical” word use of certain Twitter accounts). We want to use these options in this tutorial. Unfortunately, you will not be able to understand the code yet, but you will after reading the entire Tutorial, especially after reading the section on <a href="tidy-text-analysis.html#topic-modeling">Topic modeling</a>. For example, after reading that section, you will know what a <em>dfm</em> is. For now, please install &amp; load <code>quanteda</code> and just use this code without really understanding it:</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="tidy-text-analysis.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the quanteda package for topic modeling</span></span>
+<span id="cb241-2"><a href="tidy-text-analysis.html#cb241-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(quanteda)) {</span>
+<span id="cb241-3"><a href="tidy-text-analysis.html#cb241-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>); </span>
+<span id="cb241-4"><a href="tidy-text-analysis.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(quanteda)</span>
+<span id="cb241-5"><a href="tidy-text-analysis.html#cb241-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load quanteda</span></span>
+<span id="cb241-6"><a href="tidy-text-analysis.html#cb241-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb241-7"><a href="tidy-text-analysis.html#cb241-7" aria-hidden="true" tabindex="-1"></a><span class="co"># turn the tidy data frame into a document-feature matrix:</span></span>
+<span id="cb241-8"><a href="tidy-text-analysis.html#cb241-8" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb241-9"><a href="tidy-text-analysis.html#cb241-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word, user) <span class="sc">%&gt;%</span></span>
+<span id="cb241-10"><a href="tidy-text-analysis.html#cb241-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb241-11"><a href="tidy-text-analysis.html#cb241-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_dfm</span>(tweet, word, n)</span>
+<span id="cb241-12"><a href="tidy-text-analysis.html#cb241-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb241-13"><a href="tidy-text-analysis.html#cb241-13" aria-hidden="true" tabindex="-1"></a><span class="co"># perform relative pruning:</span></span>
+<span id="cb241-14"><a href="tidy-text-analysis.html#cb241-14" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> <span class="fu">dfm_trim</span>(dfm, </span>
+<span id="cb241-15"><a href="tidy-text-analysis.html#cb241-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">min_docfreq =</span> <span class="fl">0.005</span>, <span class="co"># remove all words that occur in less than 0.5% of all tweets</span></span>
+<span id="cb241-16"><a href="tidy-text-analysis.html#cb241-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">max_docfreq =</span> <span class="fl">0.90</span>, <span class="co"># remove all words that occur in more than 90% of all tweets</span></span>
+<span id="cb241-17"><a href="tidy-text-analysis.html#cb241-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">docfreq_type =</span> <span class="st">&quot;prop&quot;</span>, <span class="co"># use probabilities</span></span>
+<span id="cb241-18"><a href="tidy-text-analysis.html#cb241-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">verbose =</span> <span class="cn">FALSE</span>)     <span class="co"># don&#39;t tell us what you have achieved with relative pruning</span></span>
+<span id="cb241-19"><a href="tidy-text-analysis.html#cb241-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb241-20"><a href="tidy-text-analysis.html#cb241-20" aria-hidden="true" tabindex="-1"></a><span class="co"># turn the document-feature-matrix back into a tidy data frame:</span></span>
+<span id="cb241-21"><a href="tidy-text-analysis.html#cb241-21" aria-hidden="true" tabindex="-1"></a>data_tknzd2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(dfm) <span class="sc">%&gt;%</span> </span>
+<span id="cb241-22"><a href="tidy-text-analysis.html#cb241-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">word =</span> term) <span class="sc">%&gt;%</span> <span class="co"># rename columns so that their names from data_tknzd and data_tknzd2 match</span></span>
+<span id="cb241-23"><a href="tidy-text-analysis.html#cb241-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">tweet =</span> document) <span class="sc">%&gt;%</span></span>
+<span id="cb241-24"><a href="tidy-text-analysis.html#cb241-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>count) <span class="sc">%&gt;%</span> <span class="co"># remove the count column</span></span>
+<span id="cb241-25"><a href="tidy-text-analysis.html#cb241-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweet =</span> <span class="fu">as.integer</span>(tweet))</span>
+<span id="cb241-26"><a href="tidy-text-analysis.html#cb241-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb241-27"><a href="tidy-text-analysis.html#cb241-27" aria-hidden="true" tabindex="-1"></a><span class="co"># delete the words that quanteda suggested from the original data_tknzd</span></span>
+<span id="cb241-28"><a href="tidy-text-analysis.html#cb241-28" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> <span class="fu">right_join</span>(data_tknzd, data_tknzd2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;tweet&quot;</span>,<span class="st">&quot;word&quot;</span>)) <span class="sc">%&gt;%</span> <span class="co"># keep only the shorter data set without frequent/rare words, but fill in all other columns like user and date</span></span>
+<span id="cb241-29"><a href="tidy-text-analysis.html#cb241-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(tweet,word, <span class="at">.keep_all=</span> <span class="cn">TRUE</span>) <span class="co"># remove duplicate rows that have been created during the merging process</span></span></code></pre></div>
+<p>Finally, now that we have removed very rare and very frequent words, let’s check the number of our unique words again:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="tidy-text-analysis.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(data_tknzd)[<span class="dv">1</span>], <span class="st">&quot; non-unique features / words and &quot;</span>, <span class="fu">length</span>(<span class="fu">unique</span>(data_tknzd<span class="sc">$</span>word)), <span class="st">&quot; unique features / words.&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;We are investigating  55348  non-unique features / words and  346  unique features / words.&quot;</code></pre>
+<p>Great, we have finished the text normalization process! I think we are ready to take a sneak peek at our most common words! What are the 10 most commonly used words in our tweet data? I’m excited!</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="tidy-text-analysis.html#cb244-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb244-2"><a href="tidy-text-analysis.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb244-3"><a href="tidy-text-analysis.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##       word    n
+## 1   ukrain 7555
+## 2   russia 2115
+## 3    putin 1478
+## 4  #ukrain 1364
+## 5  russian 1241
+## 6    peopl 1114
+## 7      war 1092
+## 8     nato  829
+## 9    invas  692
+## 10 countri  656</code></pre>
+<p><strong>Evaluation:</strong> Shortly after Russia’s invasion of Ukraine began, Twitter conversations centered on the countries Ukraine, Russia, Putin, the people, the war, NATO, and the invasion.</p>
+</div>
+</div>
+<div id="relative-word-frequencies" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> (Relative) word frequencies<a href="tidy-text-analysis.html#relative-word-frequencies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What words are used by which Twitter accounts might reveal a lot about their agenda or thought processes. Words have power, especially in times of conflict. Words, for example, might help define who is seen as the attacker and who is seen as the defender. It matters whether I call something an “attack” or a “war”, since an aggression is a unilateral act of invasion, while a war is a reciprocal relationship that has two parties involved.</p>
+<p>Therefore, we want to look at the absolute word frequencies of the 5 most active Twitter accounts in our data set. For this, we need to group our data by the most active Twitter accounts and count how many times each user used each term.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="tidy-text-analysis.html#cb246-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb246-2"><a href="tidy-text-analysis.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(user) <span class="sc">%&gt;%</span></span>
+<span id="cb246-3"><a href="tidy-text-analysis.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb246-4"><a href="tidy-text-analysis.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb246-5"><a href="tidy-text-analysis.html#cb246-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">102</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   user                n
+##   &lt;chr&gt;           &lt;int&gt;
+## 1 DaveClubMember1   390
+## 2 common_sense54    367
+## 3 EdCutter1         251
+## 4 Seyahsm2          209
+## 5 BaloIreen         154
+## 6 LateNighter5      112</code></pre>
+<p><strong>Evaluation:</strong> The five most active Twitter accounts are DaveClubMember1, common_sense54, EdCutter1, Seyahsm2, and BaloIreen, LateNighter5.</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="tidy-text-analysis.html#cb248-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb248-2"><a href="tidy-text-analysis.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
+<span id="cb248-3"><a href="tidy-text-analysis.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>)  <span class="co"># sorts the word, i.e., the most common words are displayed first</span></span>
+<span id="cb248-4"><a href="tidy-text-analysis.html#cb248-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb248-5"><a href="tidy-text-analysis.html#cb248-5" aria-hidden="true" tabindex="-1"></a>frequency</span></code></pre></div>
+<pre><code>##               user           word  n
+## 1  DaveClubMember1 #prayforukrain 30
+## 2  DaveClubMember1     #stopputin 30
+## 3  DaveClubMember1        horribl 30
+## 4  DaveClubMember1           imag 30
+## 5  DaveClubMember1           join 30
+## 6  DaveClubMember1          peopl 30
+## 7  DaveClubMember1         russia 30
+## 8  DaveClubMember1           send 30
+## 9  DaveClubMember1        support 30
+## 10 DaveClubMember1           talk 30
+## 11 DaveClubMember1         ukrain 30
+## 12 DaveClubMember1          video 30
+## 13 DaveClubMember1            war 30
+## 14  common_sense54           alli 26
+## 15  common_sense54          biden 26
+## 16  common_sense54        complet 26
+## 17  common_sense54         defens 26
+## 18  common_sense54       democrat 26
+## 19  common_sense54          invas 26
+## 20  common_sense54        justifi 26
+## 21  common_sense54           leav 26
+## 22  common_sense54          peopl 26
+## 23  common_sense54          putin 26
+## 24  common_sense54        russian 26
+## 25  common_sense54        support 26
+## 26  common_sense54         ukrain 26
+## 27  common_sense54          world 26
+## 28       EdCutter1      administr 19
+## 29       EdCutter1            amp 19
+## 30       EdCutter1          biden 19
+## 31       EdCutter1         border 19
+## 32       EdCutter1           citi 19
+## 33       EdCutter1          crime 19
+## 34       EdCutter1       democrat 19
+## 35       EdCutter1         energi 19
+## 36       EdCutter1          price 19
+## 37       EdCutter1         result 19
+## 38       EdCutter1           rise 19
+## 39       EdCutter1        support 19
+## 40       EdCutter1         ukrain 19
+## 41        Seyahsm2         action 16
+## 42        Seyahsm2        america 16
+## 43        Seyahsm2       american 16
+## 44        Seyahsm2         border 16
+## 45        Seyahsm2           hope 16
+## 46        Seyahsm2          invad 16
+## 47        Seyahsm2       militari 16
+## 48        Seyahsm2           nato 16
+## 49        Seyahsm2         prepar 16
+## 50        Seyahsm2         russia 16
+## 51        Seyahsm2          secur 16
+## 52        Seyahsm2           time 16
+## 53        Seyahsm2         ukrain 16
+## 54       BaloIreen            ban 10
+## 55       BaloIreen          putin 10
+## 56       BaloIreen         russia 10
+## 57       BaloIreen       sanction 10
+## 58       BaloIreen        shelter 10
+## 59       BaloIreen            sky 10
+## 60       BaloIreen          swift 10
+## 61       BaloIreen         target 10
+## 62       BaloIreen         ukrain 10
+## 63       BaloIreen      ukrainian 10
+## 64       BaloIreen           care  9
+## 65       BaloIreen       civilian  9
+## 66       BaloIreen       militari  9
+## 67       BaloIreen        protect  9
+## 68       BaloIreen        russian  9
+## 69       BaloIreen          @potu  8
+## 70    LateNighter5           busi  8
+## 71    LateNighter5           call  8
+## 72    LateNighter5       democrat  8
+## 73    LateNighter5            die  8
+## 74    LateNighter5           fund  8
+## 75    LateNighter5          geniu  8
+## 76    LateNighter5          invas  8
+## 77    LateNighter5     republican  8
+## 78    LateNighter5        russian  8
+## 79    LateNighter5           save  8
+## 80    LateNighter5        support  8
+## 81    LateNighter5          trump  8
+## 82    LateNighter5         ukrain  8
+## 83    LateNighter5      ukrainian  8
+## 84       EdCutter1          @potu  4
+## 85  common_sense54        @foxnew  3
+## 86       BaloIreen      @joebiden  1
+## 87        Seyahsm2          @potu  1</code></pre>
+<p><strong>Evaluation:</strong> This is insightful. As we can see, the <em>PorterStemmer</em> treats <code>ukranian</code> and <code>ukrain</code>, <code>american</code> and <code>america</code>, as well as <code>russian</code> and <code>russia</code> as separate words. Since the part of speech (adjective or noun) is not particularly relevant for our analyses, we should merge the terms to focus on more meaningful TopWords. In addition, treating #ukrain and ukrain as separate words might not be hlpful.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="tidy-text-analysis.html#cb250-1" aria-hidden="true" tabindex="-1"></a>data_tknzd<span class="sc">$</span>word <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(data_tknzd<span class="sc">$</span>word, <span class="fu">c</span>(<span class="st">&quot;russian&quot;</span> <span class="ot">=</span> <span class="st">&quot;russia&quot;</span>, <span class="st">&quot;ukrainian&quot;</span> <span class="ot">=</span> <span class="st">&quot;ukrain&quot;</span>, <span class="st">&quot;american&quot;</span> <span class="ot">=</span> <span class="st">&quot;america&quot;</span>, <span class="st">&quot;#ukrain&quot;</span> <span class="ot">=</span> <span class="st">&quot;ukrain&quot;</span>, <span class="st">&quot;#russia&quot;</span> <span class="ot">=</span> <span class="st">&quot;russia&quot;</span>))</span>
+<span id="cb250-2"><a href="tidy-text-analysis.html#cb250-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-3"><a href="tidy-text-analysis.html#cb250-3" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb250-4"><a href="tidy-text-analysis.html#cb250-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
+<span id="cb250-5"><a href="tidy-text-analysis.html#cb250-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>)  <span class="co"># sorts the word, i.e., the most common words are displayed first</span></span>
+<span id="cb250-6"><a href="tidy-text-analysis.html#cb250-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-7"><a href="tidy-text-analysis.html#cb250-7" aria-hidden="true" tabindex="-1"></a>frequency</span></code></pre></div>
+<pre><code>##               user           word  n
+## 1         Seyahsm2        america 32
+## 2  DaveClubMember1 #prayforukrain 30
+## 3  DaveClubMember1     #stopputin 30
+## 4  DaveClubMember1        horribl 30
+## 5  DaveClubMember1           imag 30
+## 6  DaveClubMember1           join 30
+## 7  DaveClubMember1          peopl 30
+## 8  DaveClubMember1         russia 30
+## 9  DaveClubMember1           send 30
+## 10 DaveClubMember1        support 30
+## 11 DaveClubMember1           talk 30
+## 12 DaveClubMember1         ukrain 30
+## 13 DaveClubMember1          video 30
+## 14 DaveClubMember1            war 30
+## 15  common_sense54           alli 26
+## 16  common_sense54          biden 26
+## 17  common_sense54        complet 26
+## 18  common_sense54         defens 26
+## 19  common_sense54       democrat 26
+## 20  common_sense54          invas 26
+## 21  common_sense54        justifi 26
+## 22  common_sense54           leav 26
+## 23  common_sense54          peopl 26
+## 24  common_sense54          putin 26
+## 25  common_sense54         russia 26
+## 26  common_sense54        support 26
+## 27  common_sense54         ukrain 26
+## 28  common_sense54          world 26
+## 29       BaloIreen         ukrain 20
+## 30       BaloIreen         russia 19
+## 31       EdCutter1      administr 19
+## 32       EdCutter1            amp 19
+## 33       EdCutter1          biden 19
+## 34       EdCutter1         border 19
+## 35       EdCutter1           citi 19
+## 36       EdCutter1          crime 19
+## 37       EdCutter1       democrat 19
+## 38       EdCutter1         energi 19
+## 39       EdCutter1          price 19
+## 40       EdCutter1         result 19
+## 41       EdCutter1           rise 19
+## 42       EdCutter1        support 19
+## 43       EdCutter1         ukrain 19
+## 44    LateNighter5         ukrain 16
+## 45        Seyahsm2         action 16
+## 46        Seyahsm2         border 16
+## 47        Seyahsm2           hope 16
+## 48        Seyahsm2          invad 16
+## 49        Seyahsm2       militari 16
+## 50        Seyahsm2           nato 16
+## 51        Seyahsm2         prepar 16
+## 52        Seyahsm2         russia 16
+## 53        Seyahsm2          secur 16
+## 54        Seyahsm2           time 16
+## 55        Seyahsm2         ukrain 16
+## 56       BaloIreen            ban 10
+## 57       BaloIreen          putin 10
+## 58       BaloIreen       sanction 10
+## 59       BaloIreen        shelter 10
+## 60       BaloIreen            sky 10
+## 61       BaloIreen          swift 10
+## 62       BaloIreen         target 10
+## 63       BaloIreen           care  9
+## 64       BaloIreen       civilian  9
+## 65       BaloIreen       militari  9
+## 66       BaloIreen        protect  9
+## 67       BaloIreen          @potu  8
+## 68    LateNighter5           busi  8
+## 69    LateNighter5           call  8
+## 70    LateNighter5       democrat  8
+## 71    LateNighter5            die  8
+## 72    LateNighter5           fund  8
+## 73    LateNighter5          geniu  8
+## 74    LateNighter5          invas  8
+## 75    LateNighter5     republican  8
+## 76    LateNighter5         russia  8
+## 77    LateNighter5           save  8
+## 78    LateNighter5        support  8
+## 79    LateNighter5          trump  8
+## 80       EdCutter1          @potu  4
+## 81  common_sense54        @foxnew  3
+## 82       BaloIreen      @joebiden  1
+## 83        Seyahsm2          @potu  1</code></pre>
+<p>Next, we would like now the relative word frequencies. Some twitter users might have posted a lot, while others have written little, but used some meaningful words (e.g. “aggression”) excessively. We want to know the share of these meaningful words as compared to the absolute number of words posted by the respective user.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="tidy-text-analysis.html#cb252-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> frequency <span class="sc">%&gt;%</span> </span>
+<span id="cb252-2"><a href="tidy-text-analysis.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb252-3"><a href="tidy-text-analysis.html#cb252-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">count</span>(user, <span class="at">name =</span> <span class="st">&quot;total&quot;</span>)) <span class="sc">%&gt;%</span>  <span class="co"># total = how many words has that particular user used in total?</span></span>
+<span id="cb252-4"><a href="tidy-text-analysis.html#cb252-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> ((n<span class="sc">/</span>total)<span class="sc">*</span><span class="dv">100</span>)) <span class="co"># freq = relative frequency of the respective word compared to the total number of words that the user has used</span></span>
+<span id="cb252-5"><a href="tidy-text-analysis.html#cb252-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb252-6"><a href="tidy-text-analysis.html#cb252-6" aria-hidden="true" tabindex="-1"></a>frequency</span></code></pre></div>
+<pre><code>##               user           word  n total       freq
+## 1         Seyahsm2        america 32   209 15.3110048
+## 2  DaveClubMember1 #prayforukrain 30   390  7.6923077
+## 3  DaveClubMember1     #stopputin 30   390  7.6923077
+## 4  DaveClubMember1        horribl 30   390  7.6923077
+## 5  DaveClubMember1           imag 30   390  7.6923077
+## 6  DaveClubMember1           join 30   390  7.6923077
+## 7  DaveClubMember1          peopl 30   390  7.6923077
+## 8  DaveClubMember1         russia 30   390  7.6923077
+## 9  DaveClubMember1           send 30   390  7.6923077
+## 10 DaveClubMember1        support 30   390  7.6923077
+## 11 DaveClubMember1           talk 30   390  7.6923077
+## 12 DaveClubMember1         ukrain 30   390  7.6923077
+## 13 DaveClubMember1          video 30   390  7.6923077
+## 14 DaveClubMember1            war 30   390  7.6923077
+## 15  common_sense54           alli 26   367  7.0844687
+## 16  common_sense54          biden 26   367  7.0844687
+## 17  common_sense54        complet 26   367  7.0844687
+## 18  common_sense54         defens 26   367  7.0844687
+## 19  common_sense54       democrat 26   367  7.0844687
+## 20  common_sense54          invas 26   367  7.0844687
+## 21  common_sense54        justifi 26   367  7.0844687
+## 22  common_sense54           leav 26   367  7.0844687
+## 23  common_sense54          peopl 26   367  7.0844687
+## 24  common_sense54          putin 26   367  7.0844687
+## 25  common_sense54         russia 26   367  7.0844687
+## 26  common_sense54        support 26   367  7.0844687
+## 27  common_sense54         ukrain 26   367  7.0844687
+## 28  common_sense54          world 26   367  7.0844687
+## 29       BaloIreen         ukrain 20   154 12.9870130
+## 30       BaloIreen         russia 19   154 12.3376623
+## 31       EdCutter1      administr 19   251  7.5697211
+## 32       EdCutter1            amp 19   251  7.5697211
+## 33       EdCutter1          biden 19   251  7.5697211
+## 34       EdCutter1         border 19   251  7.5697211
+## 35       EdCutter1           citi 19   251  7.5697211
+## 36       EdCutter1          crime 19   251  7.5697211
+## 37       EdCutter1       democrat 19   251  7.5697211
+## 38       EdCutter1         energi 19   251  7.5697211
+## 39       EdCutter1          price 19   251  7.5697211
+## 40       EdCutter1         result 19   251  7.5697211
+## 41       EdCutter1           rise 19   251  7.5697211
+## 42       EdCutter1        support 19   251  7.5697211
+## 43       EdCutter1         ukrain 19   251  7.5697211
+## 44    LateNighter5         ukrain 16   112 14.2857143
+## 45        Seyahsm2         action 16   209  7.6555024
+## 46        Seyahsm2         border 16   209  7.6555024
+## 47        Seyahsm2           hope 16   209  7.6555024
+## 48        Seyahsm2          invad 16   209  7.6555024
+## 49        Seyahsm2       militari 16   209  7.6555024
+## 50        Seyahsm2           nato 16   209  7.6555024
+## 51        Seyahsm2         prepar 16   209  7.6555024
+## 52        Seyahsm2         russia 16   209  7.6555024
+## 53        Seyahsm2          secur 16   209  7.6555024
+## 54        Seyahsm2           time 16   209  7.6555024
+## 55        Seyahsm2         ukrain 16   209  7.6555024
+## 56       BaloIreen            ban 10   154  6.4935065
+## 57       BaloIreen          putin 10   154  6.4935065
+## 58       BaloIreen       sanction 10   154  6.4935065
+## 59       BaloIreen        shelter 10   154  6.4935065
+## 60       BaloIreen            sky 10   154  6.4935065
+## 61       BaloIreen          swift 10   154  6.4935065
+## 62       BaloIreen         target 10   154  6.4935065
+## 63       BaloIreen           care  9   154  5.8441558
+## 64       BaloIreen       civilian  9   154  5.8441558
+## 65       BaloIreen       militari  9   154  5.8441558
+## 66       BaloIreen        protect  9   154  5.8441558
+## 67       BaloIreen          @potu  8   154  5.1948052
+## 68    LateNighter5           busi  8   112  7.1428571
+## 69    LateNighter5           call  8   112  7.1428571
+## 70    LateNighter5       democrat  8   112  7.1428571
+## 71    LateNighter5            die  8   112  7.1428571
+## 72    LateNighter5           fund  8   112  7.1428571
+## 73    LateNighter5          geniu  8   112  7.1428571
+## 74    LateNighter5          invas  8   112  7.1428571
+## 75    LateNighter5     republican  8   112  7.1428571
+## 76    LateNighter5         russia  8   112  7.1428571
+## 77    LateNighter5           save  8   112  7.1428571
+## 78    LateNighter5        support  8   112  7.1428571
+## 79    LateNighter5          trump  8   112  7.1428571
+## 80       EdCutter1          @potu  4   251  1.5936255
+## 81  common_sense54        @foxnew  3   367  0.8174387
+## 82       BaloIreen      @joebiden  1   154  0.6493506
+## 83        Seyahsm2          @potu  1   209  0.4784689</code></pre>
+<p>Let’s make the user-specific word lists and their similarities / differences a little easier to interpret:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="tidy-text-analysis.html#cb254-1" aria-hidden="true" tabindex="-1"></a>frequency <span class="sc">%&gt;%</span></span>
+<span id="cb254-2"><a href="tidy-text-analysis.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb254-3"><a href="tidy-text-analysis.html#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(user) <span class="sc">%&gt;%</span></span>
+<span id="cb254-4"><a href="tidy-text-analysis.html#cb254-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb254-5"><a href="tidy-text-analysis.html#cb254-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb254-6"><a href="tidy-text-analysis.html#cb254-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(user, word) <span class="sc">%&gt;%</span></span>
+<span id="cb254-7"><a href="tidy-text-analysis.html#cb254-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">terms =</span> <span class="fu">list</span>(word)) <span class="sc">%&gt;%</span></span>
+<span id="cb254-8"><a href="tidy-text-analysis.html#cb254-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">terms =</span> <span class="fu">map</span>(terms, paste, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb254-9"><a href="tidy-text-analysis.html#cb254-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(terms)) <span class="sc">%&gt;%</span></span>
+<span id="cb254-10"><a href="tidy-text-analysis.html#cb254-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(user)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+## # Groups:   user [6]
+##   user            terms                                                                              
+##   &lt;chr&gt;           &lt;chr&gt;                                                                              
+## 1 BaloIreen       ukrain, russia, ban, putin, sanction, shelter, sky, swift, target, care            
+## 2 common_sense54  alli, biden, complet, defens, democrat, invas, justifi, leav, peopl, putin         
+## 3 DaveClubMember1 #prayforukrain, #stopputin, horribl, imag, join, peopl, russia, send, support, talk
+## 4 EdCutter1       administr, amp, biden, border, citi, crime, democrat, energi, price, result        
+## 5 LateNighter5    ukrain, busi, call, democrat, die, fund, geniu, invas, republican, russia          
+## 6 Seyahsm2        america, action, border, hope, invad, militari, nato, prepar, russia, secur</code></pre>
+<p><strong>Evaluation:</strong> Most of the Twitter accounts seem to be U.S. American. However, they focus on different issues. (1) <em>BaloIreen</em> seems to demand for economic actions against Russia, (2) <em>common_sense54</em> seems to focus on a Presidential / democratic alliance against Russia and to take the perspective of a military defender, (3) <em>DaveClubMember1</em> seems to ask for civic aid and engagement, (4) <em>EdCutter1</em> seems to tweet about a mix of issues covered by the user 4 users (economy, government action, war crimes, etc.), (5) <em>LateNighter5</em> tweets could also be about businesses and Republicans, and <em>Seyahsm2</em> focuses on NATO, its border control, and hope.</p>
+<p>To plot frequencies against each other and get a real good overview, we need to transform the data in a way that every user has his/her own column with her/her word frequencies because we need to use these frequencies on a y- and y-axis. Therefore, we’ll use the <code>pivot_wider</code> function from the <code>tidyr</code> package that comes pre-installed with the <code>tidyverse</code>.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="tidy-text-analysis.html#cb256-1" aria-hidden="true" tabindex="-1"></a>frequency_wide <span class="ot">&lt;-</span> frequency <span class="sc">%&gt;%</span> </span>
+<span id="cb256-2"><a href="tidy-text-analysis.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(user, word, freq) <span class="sc">%&gt;%</span> </span>
+<span id="cb256-3"><a href="tidy-text-analysis.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> user, <span class="at">values_from =</span> freq)</span>
+<span id="cb256-4"><a href="tidy-text-analysis.html#cb256-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-5"><a href="tidy-text-analysis.html#cb256-5" aria-hidden="true" tabindex="-1"></a>frequency_wide</span></code></pre></div>
+<pre><code>## # A tibble: 61 x 7
+##    word           Seyahsm2 DaveClubMember1 common_sense54 BaloIreen EdCutter1 LateNighter5
+##    &lt;chr&gt;             &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+##  1 america           15.3            NA             NA         NA       NA           NA   
+##  2 #prayforukrain    NA               7.69          NA         NA       NA           NA   
+##  3 #stopputin        NA               7.69          NA         NA       NA           NA   
+##  4 horribl           NA               7.69          NA         NA       NA           NA   
+##  5 imag              NA               7.69          NA         NA       NA           NA   
+##  6 join              NA               7.69          NA         NA       NA           NA   
+##  7 peopl             NA               7.69           7.08      NA       NA           NA   
+##  8 russia             7.66            7.69           7.08      12.3     NA            7.14
+##  9 send              NA               7.69          NA         NA       NA           NA   
+## 10 support           NA               7.69           7.08      NA        7.57         7.14
+## # ... with 51 more rows</code></pre>
+<p>Now, let’s investigate which words are typical for <em>DaveClubMember1</em> compared to <em>common_sense54</em>.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="tidy-text-analysis.html#cb258-1" aria-hidden="true" tabindex="-1"></a>frequency_wide <span class="sc">%&gt;%</span></span>
+<span id="cb258-2"><a href="tidy-text-analysis.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(DaveClubMember1)) <span class="sc">%&gt;%</span> <span class="co"># keep only words that are being used by both Twitter accounts</span></span>
+<span id="cb258-3"><a href="tidy-text-analysis.html#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(common_sense54)) <span class="sc">%&gt;%</span> </span>
+<span id="cb258-4"><a href="tidy-text-analysis.html#cb258-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>DaveClubMember1, <span class="at">y=</span>common_sense54, <span class="at">label=</span>word)) <span class="sc">+</span></span>
+<span id="cb258-5"><a href="tidy-text-analysis.html#cb258-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  geom_point(alpha = 0.2, size = 4, position=position_jitter(h=0.15,w=0.15)) +</span></span>
+<span id="cb258-6"><a href="tidy-text-analysis.html#cb258-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust=</span><span class="dv">0</span>, <span class="at">vjust=</span><span class="dv">0</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>, <span class="at">position=</span><span class="fu">position_jitter</span>(<span class="at">h=</span><span class="fl">0.25</span>,<span class="at">w=</span><span class="fl">0.25</span>), <span class="at">size=</span><span class="fl">3.0</span>) <span class="sc">+</span></span>
+<span id="cb258-7"><a href="tidy-text-analysis.html#cb258-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">6.0</span>,<span class="fl">8.5</span>) <span class="sc">+</span></span>
+<span id="cb258-8"><a href="tidy-text-analysis.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fl">6.0</span>,<span class="fl">8.5</span>) <span class="sc">+</span></span>
+<span id="cb258-9"><a href="tidy-text-analysis.html#cb258-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">color =</span> <span class="st">&quot;#67A9B6&quot;</span>, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p><strong>Evaluation:</strong> Both accounts have mentioned all of the words in this plot at least once in their tweets. Words along the blue line are used approximately equally by both accounts, while words further away from the line are used significantly more frequently by one account than the other. Here, all terms are more characteristic of <em>DaveClubMember1</em> than of <em>common_sense54</em> because they are beneath the blue line.</p>
+</div>
+<div id="word-log-odds" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Word log odds<a href="tidy-text-analysis.html#word-log-odds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far, we’ve looked at how often a word is used compared to all the other words an account has posted (<em>absolute &amp; relative frequencies</em>). Next, we’ll look at how probable it is that a word was posted by a certain account (<em>log odds</em>). There is only one problem: measurement error. Probabilities are more accurate for words that are used frequently and less accurate for words that have been measured only a few times. A way to correct this measurement error is to use the <code>tidylo</code> package that creates weighted, i.e. corrected, log odds ratio based on an approach proposed by <a href="https://www.cambridge.org/core/journals/political-analysis/article/fightin-words-lexical-feature-selection-and-evaluation-for-identifying-the-content-of-political-conflict/81B3703230D21620B81EB6E2266C7A66">Monroe, Colaresi, and Quinn (2008)</a>.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="tidy-text-analysis.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the tidy log odds package to create weighted log odds</span></span>
+<span id="cb259-2"><a href="tidy-text-analysis.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tidylo)) {</span>
+<span id="cb259-3"><a href="tidy-text-analysis.html#cb259-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidylo&quot;</span>); </span>
+<span id="cb259-4"><a href="tidy-text-analysis.html#cb259-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(tidylo)</span>
+<span id="cb259-5"><a href="tidy-text-analysis.html#cb259-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load tidylo</span></span>
+<span id="cb259-6"><a href="tidy-text-analysis.html#cb259-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-7"><a href="tidy-text-analysis.html#cb259-7" aria-hidden="true" tabindex="-1"></a>word_lo <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb259-8"><a href="tidy-text-analysis.html#cb259-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;LateNighter5&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
+<span id="cb259-9"><a href="tidy-text-analysis.html#cb259-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb259-10"><a href="tidy-text-analysis.html#cb259-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_log_odds</span>(user, word, n, <span class="at">unweighted =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb259-11"><a href="tidy-text-analysis.html#cb259-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(prblty = (plogis(log_odds)*100)) %&gt;%</span></span>
+<span id="cb259-12"><a href="tidy-text-analysis.html#cb259-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(log_odds_weighted))</span>
+<span id="cb259-13"><a href="tidy-text-analysis.html#cb259-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-14"><a href="tidy-text-analysis.html#cb259-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_lo)</span></code></pre></div>
+<pre><code>##              user           word  n log_odds log_odds_weighted
+## 1        Seyahsm2        america 32 2.045056         11.568584
+## 2 DaveClubMember1 #prayforukrain 30 1.550535          8.492628
+## 3 DaveClubMember1     #stopputin 30 1.550535          8.492628
+## 4 DaveClubMember1        horribl 30 1.550535          8.492628
+## 5 DaveClubMember1           imag 30 1.550535          8.492628
+## 6 DaveClubMember1           join 30 1.550535          8.492628</code></pre>
+<p>Log odds ratio express the likelihood that a word comes from a certain account, compared to all other accounts. As a result, the highest log odds indicate words that are extremely distinctive for an account. Using a table, let’s compare the weighted log odds for some words across accounts.</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="tidy-text-analysis.html#cb261-1" aria-hidden="true" tabindex="-1"></a>word_lo2 <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb261-2"><a href="tidy-text-analysis.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(user <span class="sc">==</span> <span class="st">&quot;DaveClubMember1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;common_sense54&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;EdCutter1&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;Seyahsm2&quot;</span> <span class="sc">|</span> user <span class="sc">==</span> <span class="st">&quot;BaloIreen&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># remove all users that are not the most prominent users</span></span>
+<span id="cb261-3"><a href="tidy-text-analysis.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(user, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-4"><a href="tidy-text-analysis.html#cb261-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_log_odds</span>(user, word, n) <span class="sc">%&gt;%</span></span>
+<span id="cb261-5"><a href="tidy-text-analysis.html#cb261-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb261-6"><a href="tidy-text-analysis.html#cb261-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(user, log_odds_weighted, <span class="at">fill =</span> <span class="dv">0</span>)</span>
+<span id="cb261-7"><a href="tidy-text-analysis.html#cb261-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-8"><a href="tidy-text-analysis.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_lo2)</span></code></pre></div>
+<pre><code>##             word BaloIreen common_sense54 DaveClubMember1 EdCutter1 Seyahsm2
+## 1 #prayforukrain  0.000000       0.000000        7.716397  0.000000 0.000000
+## 2     #stopputin  0.000000       0.000000        7.716397  0.000000 0.000000
+## 3        @foxnew  0.000000       2.335714        0.000000  0.000000 0.000000
+## 4      @joebiden  2.016194       0.000000        0.000000  0.000000 0.000000
+## 5          @potu  4.385952       0.000000        0.000000  2.025966 1.717495
+## 6         action  0.000000       0.000000        0.000000  0.000000 7.457153</code></pre>
+<p>To get a better overview, let’s create a visualization of the 10 most distinctive words per account.</p>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="tidy-text-analysis.html#cb263-1" aria-hidden="true" tabindex="-1"></a>word_lo <span class="sc">%&gt;%</span></span>
+<span id="cb263-2"><a href="tidy-text-analysis.html#cb263-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(user) <span class="sc">%&gt;%</span></span>
+<span id="cb263-3"><a href="tidy-text-analysis.html#cb263-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(log_odds_weighted)) <span class="sc">%&gt;%</span></span>
+<span id="cb263-4"><a href="tidy-text-analysis.html#cb263-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb263-5"><a href="tidy-text-analysis.html#cb263-5" aria-hidden="true" tabindex="-1"></a>  ungroup <span class="sc">%&gt;%</span></span>
+<span id="cb263-6"><a href="tidy-text-analysis.html#cb263-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, log_odds_weighted)) <span class="sc">%&gt;%</span></span>
+<span id="cb263-7"><a href="tidy-text-analysis.html#cb263-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, log_odds_weighted, <span class="at">fill =</span> user)) <span class="sc">+</span></span>
+<span id="cb263-8"><a href="tidy-text-analysis.html#cb263-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb263-9"><a href="tidy-text-analysis.html#cb263-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#89BFC1&quot;</span>,<span class="st">&quot;#67A9B6&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#377099&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb263-10"><a href="tidy-text-analysis.html#cb263-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>user, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb263-11"><a href="tidy-text-analysis.html#cb263-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb263-12"><a href="tidy-text-analysis.html#cb263-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Log Odds Ratio&quot;</span>, <span class="at">x=</span><span class="cn">NULL</span>)</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
+</div>
+</div>
+<div id="topic-modeling" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Topic modeling<a href="tidy-text-analysis.html#topic-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we’ll use a combination of the <code>tidytext</code> package, the <code>quanteda</code> package, and the <code>topicmodels</code> package to create topic models with <em>Latent Dirichlet allocation</em> (<em>LDA</em>), one of the most prevalent topic modeling algorithms. LDA creates <em>mixed-membership models</em>, i.e., LDA assumes that every text contains a mix of different topics, e.g. a tweet can be 60% about TopicA (War crimes) and 40% about TopicB (Housing of refugees). Topics are defined by the mix of words that are associated with them. For example, the most common words in TopicA (War crimes) can be “massacre”, “soldiers”, and “brutal”. The most common words in TopicB (Housing of refugees) can be “volunteers”, “shelter”, and “children”. However, both topics can be mentioned in one single text, e.g., tweets about the brutal war crimes of Russian soldiers that force Ukrainian refugees to take their children and seek shelter in neighboring countries. LDA estimates the most common words in a topic and the most common topics in a text simultaneously.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>Image: Assigning topics to a document (<a href="https://sicss.io/2019/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Screenshot from: Chris Bail)</a>:</em></td>
+</tr>
+<tr class="even">
+<td><img src="images/Tut_topic_modeling.JPG" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important hint:</strong> Both the <code>quanteda</code>and the <code>topicmodels</code> package use machine learning lingo. That is, words are called <em>features</em> and texts/tweets are called <em>documents</em>. The total sum of all documents is called a <em>corpus</em>. In the long run, you should get used to this lingo, so we will keep using it in this tutorial, too.</p>
+<div id="first-steps-1" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> First steps<a href="tidy-text-analysis.html#first-steps-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you haven’t already, please install / load the <code>quanteda</code> and <code>topicmodels</code> packages:</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="tidy-text-analysis.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the quanteda package for data transformation</span></span>
+<span id="cb264-2"><a href="tidy-text-analysis.html#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(quanteda)) {</span>
+<span id="cb264-3"><a href="tidy-text-analysis.html#cb264-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>); </span>
+<span id="cb264-4"><a href="tidy-text-analysis.html#cb264-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(quanteda)</span>
+<span id="cb264-5"><a href="tidy-text-analysis.html#cb264-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load quanteda</span></span>
+<span id="cb264-6"><a href="tidy-text-analysis.html#cb264-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-7"><a href="tidy-text-analysis.html#cb264-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the topicmodels package for topic modeling</span></span>
+<span id="cb264-8"><a href="tidy-text-analysis.html#cb264-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(topicmodels)) {</span>
+<span id="cb264-9"><a href="tidy-text-analysis.html#cb264-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;topicmodels&quot;</span>); </span>
+<span id="cb264-10"><a href="tidy-text-analysis.html#cb264-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(topicmodels)</span>
+<span id="cb264-11"><a href="tidy-text-analysis.html#cb264-11" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load topicmodels</span></span></code></pre></div>
+<p>Next, using the <code>tidytext</code> package, we will convert our tidy text data into a document-feature matrix (<em>dfm</em>) that the <code>topicmodels</code> package can understand and do calculations with. In a dfm…</p>
+<ol style="list-style-type: decimal">
+<li>…rows represent the documents (= texts),</li>
+<li>…columns represent features (= unique words),</li>
+<li>…the cells represent the frequency with which a feature appears in a specific document.</li>
+</ol>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="tidy-text-analysis.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cast the tidy text data into a matrix (dfm) that topicmodels can use for calculation:</span></span>
+<span id="cb265-2"><a href="tidy-text-analysis.html#cb265-2" aria-hidden="true" tabindex="-1"></a>dfm <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb265-3"><a href="tidy-text-analysis.html#cb265-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb265-4"><a href="tidy-text-analysis.html#cb265-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb265-5"><a href="tidy-text-analysis.html#cb265-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_dfm</span>(tweet, word, n)</span>
+<span id="cb265-6"><a href="tidy-text-analysis.html#cb265-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb265-7"><a href="tidy-text-analysis.html#cb265-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dfm)</span></code></pre></div>
+<pre><code>## Document-feature matrix of: 6 documents, 338 features (97.78% sparse) and 0 docvars.
+##       features
+## docs   ukrain russia america russiaukrain attack eu europ innoc peopl sanction
+##   231       3      1       0            0      0  0     0     0     0        0
+##   246       3      0       0            0      0  0     0     0     0        0
+##   614       3      1       0            0      0  0     0     0     0        0
+##   4485      1      3       0            0      0  0     0     0     0        0
+##   4527      2      3       0            0      0  0     0     0     0        0
+##   5431      3      1       0            0      0  0     0     0     0        0
+## [ reached max_nfeat ... 328 more features ]</code></pre>
+<p>Let’s check out the dimensions of this new document-feature matrix:</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="tidy-text-analysis.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;We are investigating &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">1</span>], <span class="st">&quot; documents (tweets) and &quot;</span>, <span class="fu">dim</span>(dfm)[<span class="dv">2</span>], <span class="st">&quot; features (unique words).&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;We are investigating  9589  documents (tweets) and  338  features (unique words).&quot;</code></pre>
+<p>And let’s have a look at our top features:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="tidy-text-analysis.html#cb269-1" aria-hidden="true" tabindex="-1"></a>quanteda<span class="sc">::</span><span class="fu">topfeatures</span>(dfm, <span class="dv">10</span>) <span class="co"># this is a neat function from quanteda to investigate the top features in a dfm</span></span></code></pre></div>
+<pre><code>##  ukrain  russia   putin   peopl     war    nato   invas countri support   world 
+##    9561    3777    1478    1114    1092     829     692     656     623     579</code></pre>
+</div>
+<div id="model-estimation-number-of-topics" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Model estimation: Number of topics<a href="tidy-text-analysis.html#model-estimation-number-of-topics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As a researcher, you must first estimate the number of topics you anticipate to encounter across all documents (= the number of topics <em>K</em> in a corpus) before fitting an LDA model. If you estimate there are approximately 20 topics that Twitter accounts, for example, you’ll set <em>K</em> = 20 to extract 20 separate topics. The 20 topics are then extracted from the corpus based on the distribution of co-occurring words in each document. Choosing a good value for <em>K</em> is extremely important and consequential, since it will impact your results. Usually, small <em>K</em>s produce very distinct, but generalizable topics, while high <em>K</em>s produce overlapping themes, but are also more event- and issue-specific.</p>
+<p>Let’s create a topic model. More specifically, let’s create a six-topic LDA model using <code>topicmodels</code>. In practice, you would often use a higher <em>K</em>, but for our use case, three should suffice.</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="tidy-text-analysis.html#cb271-1" aria-hidden="true" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dfm, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">123</span>)) <span class="co"># the control argument uses a random number (123) to seed the assignment of topics to each word in the corpus (this helps to create reproducability in an otherwise random process!)</span></span></code></pre></div>
+</div>
+<div id="inspect-the-topics" class="section level3 hasAnchor" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> Inspect the topics<a href="tidy-text-analysis.html#inspect-the-topics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="word-topic-probabilities" class="section level4 hasAnchor" number="7.3.3.1">
+<h4><span class="header-section-number">7.3.3.1</span> Word-topic probabilities<a href="tidy-text-analysis.html#word-topic-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To inspect the topics with the <code>tidytext</code> package, we need to tidy up our LDA model first, i.e., bring it back into a data format that works for tidy text analysis.</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="tidy-text-analysis.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co"># turn the lda model back into a tidy data frame:</span></span>
+<span id="cb272-2"><a href="tidy-text-analysis.html#cb272-2" aria-hidden="true" tabindex="-1"></a>tidy_lda <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># matrix = &quot;beta&quot; creates the word-topic probabilities</span></span>
+<span id="cb272-3"><a href="tidy-text-analysis.html#cb272-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">word =</span> term)</span>
+<span id="cb272-4"><a href="tidy-text-analysis.html#cb272-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb272-5"><a href="tidy-text-analysis.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tidy_lda)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   topic word      beta
+##   &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;
+## 1     1 ukrain 0.310  
+## 2     2 ukrain 0.127  
+## 3     3 ukrain 0.0820 
+## 4     1 russia 0.00513
+## 5     2 russia 0.194  
+## 6     3 russia 0.00558</code></pre>
+<p>The new column, β (“beta”), shows the per-topic-per-word probabilities, i.e., the probability that the respective feature / word is being generated from the topic under examination. To put it another way, it’s the <strong>probability that a feature is common in a certain topic</strong>. The <strong>word-topic matrix</strong> is often used to analyze and label topics (i.e., using the features with the highest conditional probability for that topic). In summary, the word-topic matrix aids in the creation of topic-specific word lists.</p>
+<p>Let’s create a visualization of the 10 terms that are most common within each topic.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="tidy-text-analysis.html#cb274-1" aria-hidden="true" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb274-2"><a href="tidy-text-analysis.html#cb274-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb274-3"><a href="tidy-text-analysis.html#cb274-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb274-4"><a href="tidy-text-analysis.html#cb274-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb274-5"><a href="tidy-text-analysis.html#cb274-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb274-6"><a href="tidy-text-analysis.html#cb274-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb274-7"><a href="tidy-text-analysis.html#cb274-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb274-8"><a href="tidy-text-analysis.html#cb274-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb274-9"><a href="tidy-text-analysis.html#cb274-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb274-10"><a href="tidy-text-analysis.html#cb274-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb274-11"><a href="tidy-text-analysis.html#cb274-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
+<span id="cb274-12"><a href="tidy-text-analysis.html#cb274-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p>As we can see, the topics are note really exclusive, i.e., have a lot of overlaps. This is a sign that we (a) need more preprocessing / text normalization and (b) need to adjust the number of <em>K</em> topics. However, topic modeling is usually more difficult for tweets than for news texts, so it’s unclear whether we’ll be able to significantly enhance the results anyway.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Topic 1</strong>: Seems to have the focus on Ukraine as the defender. Ukraine is being invaded by Russia, it is forced into a war, it needs support, etc. Ukraine is the protagonist in this topic.</li>
+<li><strong>Topic 2</strong>: Seems to have the focus on Russia as the aggressor. Russia is invading Ukraine, and it needs to be stopped by U.S. America / the West. Russia is the protagonist of this topic.</li>
+<li><strong>Topic 3</strong>: Seems to focus on the Ukrainian people and how Putin is threatening their lives. The Ukrainian people is the protagonist of this topic.</li>
+</ol>
+<p>Now that we know who the protagonist of each topic is, let’s take a look at the less frequent terms in each topic to check if our interpretation of the topics remains logical. Let’s have a look at the issues without the “top performers” <code>ukrain</code>, <code>russia</code>, and <code>putin</code> and look at the topics again.</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="tidy-text-analysis.html#cb275-1" aria-hidden="true" tabindex="-1"></a>tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb275-2"><a href="tidy-text-analysis.html#cb275-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word<span class="sc">!=</span><span class="st">&quot;putin&quot;</span>, word<span class="sc">!=</span><span class="st">&quot;ukrain&quot;</span>, word<span class="sc">!=</span><span class="st">&quot;russia&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb275-3"><a href="tidy-text-analysis.html#cb275-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb275-4"><a href="tidy-text-analysis.html#cb275-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb275-5"><a href="tidy-text-analysis.html#cb275-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb275-6"><a href="tidy-text-analysis.html#cb275-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb275-7"><a href="tidy-text-analysis.html#cb275-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(word, beta), <span class="at">y=</span>beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb275-8"><a href="tidy-text-analysis.html#cb275-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb275-9"><a href="tidy-text-analysis.html#cb275-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb275-10"><a href="tidy-text-analysis.html#cb275-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.07</span>) <span class="sc">+</span></span>
+<span id="cb275-11"><a href="tidy-text-analysis.html#cb275-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>topic, <span class="at">scales=</span><span class="st">&quot;free&quot;</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 1&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 2&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb275-12"><a href="tidy-text-analysis.html#cb275-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;word&quot;</span>) <span class="sc">+</span></span>
+<span id="cb275-13"><a href="tidy-text-analysis.html#cb275-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p>Despite the fact that the topics are not mutually exclusive, they appear to be a reasonable approximation of a first tweet categorization. The accuracy of this categorization must be confirmed, particularly by extensive / deep reading. Remember that topics are only suggestions that should be complemented with more sophisticated (often: qualitative) techniques.</p>
+<p>The high level of overlap across topics might possibly be attributed to the fact that the dataset includes tweets from extremely comparable situations. All tweets were created on February 25 (the first day following the outbreak of Russian aggression against Ukraine) between 18:00 and 18:10 Paris time, i.e., all Tweets are, thematically speaking, about the Russian invasion of Ukraine. Naturally, the subjects of these tweets are fairly similar, which is to be anticipated in these circumstances.</p>
+<p>Thus, the three emerging topics serve (a little bit!) as frames of the same event since the conditions of their origin are so similar (namely the outbreak of Russian aggression). <strong>When understanding topics as frames, however, one should not go overboard (remember, e.g., that we are investigating multi-membership models)!</strong> See <a href="https://www.tandfonline.com/doi/full/10.1080/10584609.2020.1812777">Nicholls &amp; Culpepper (2020)</a> for a full explanation of why topics and frames are not the same thing, i.e., why topic modeling should not be used for framing analysis.</p>
+</div>
+<div id="document-topic-probabilities" class="section level4 hasAnchor" number="7.3.3.2">
+<h4><span class="header-section-number">7.3.3.2</span> Document-topic probabilities<a href="tidy-text-analysis.html#document-topic-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Now that we know which words are associated with what topics, we also want to know what documents (i.e. tweets) are associated with what topics.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="tidy-text-analysis.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># again, turn the lda model back into a tidy data frame:</span></span>
+<span id="cb276-2"><a href="tidy-text-analysis.html#cb276-2" aria-hidden="true" tabindex="-1"></a>tidy_lda2 <span class="ot">&lt;-</span> <span class="fu">tidy</span>(lda, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>) <span class="co"># matrix = &quot;gamma&quot; creates the document-topic probabilities</span></span>
+<span id="cb276-3"><a href="tidy-text-analysis.html#cb276-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb276-4"><a href="tidy-text-analysis.html#cb276-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tidy_lda2)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   document topic gamma
+##   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+## 1 231          1 0.328
+## 2 246          1 0.346
+## 3 614          1 0.336
+## 4 4485         1 0.326
+## 5 4527         1 0.330
+## 6 5431         1 0.333</code></pre>
+<p>The new column, γ (“gamma”), shows the per-document-per-topic probabilities, i.e., the proportion of words from that document that are generated from the topic under examination. To put it another way, it’s the <strong>probability that a topic is common in a certain document</strong>. The <strong>document-topic matrix</strong> is used to identify the top documents of a topic (i.e., using the documents with the highest probability for that topic) and to assign main topics to documents In summary, the word-topic matrix aids in the creation of document-specific topic lists.</p>
+<p>Let’s investigate which documents have the highest probability for Topic 2, the topic that seems to focus on Russia as the aggressor.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="tidy-text-analysis.html#cb278-1" aria-hidden="true" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb278-2"><a href="tidy-text-analysis.html#cb278-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb278-3"><a href="tidy-text-analysis.html#cb278-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
+<pre><code>## # A tibble: 9,589 x 3
+##    document topic gamma
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1 19634        2 0.361
+##  2 19659        2 0.361
+##  3 18418        2 0.358
+##  4 19362        2 0.357
+##  5 9189         2 0.356
+##  6 41135        2 0.356
+##  7 2589         2 0.355
+##  8 29143        2 0.355
+##  9 6832         2 0.354
+## 10 40393        2 0.354
+## # ... with 9,579 more rows</code></pre>
+<p><strong>Evaluation:</strong> 36.1% of document 19634, i.e. tweet No. 19634, are related to Topic2. This is also true for document 19659.</p>
+<p>Let’s have a look aboth tweets and evaluate their word choice and full tweet text.</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="tidy-text-analysis.html#cb280-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb280-2"><a href="tidy-text-analysis.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb280-3"><a href="tidy-text-analysis.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">19634</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb280-4"><a href="tidy-text-analysis.html#cb280-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##   tweet
+## 1 19634
+##                                                                                                                                                                                                                                                                                                       text
+## 1 @Salem4Congress I wouldn&#39;t considered what happened in Ukraine to be a &quot;violent coup&quot; especially given Russia is now invading the pro Ukraine parts of Ukraine.\n\nI respect you but we simply must be principled and call out Russian imperialism just as we should also call out American imperialism.
+##     word
+## 1 happen</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="tidy-text-analysis.html#cb282-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb282-2"><a href="tidy-text-analysis.html#cb282-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb282-3"><a href="tidy-text-analysis.html#cb282-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">19659</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb282-4"><a href="tidy-text-analysis.html#cb282-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##   tweet
+## 1 19659
+##                                                                                                                                                                                                                                                                   text
+## 1 Russia next target\nFinland and Sweden\n\n#Finland #Sweden\n#Ukraine #Russia #WWIII #worldwar3 #war #WW3 #Putin #PrayForUkraine #RussiaUkraineConflict #RussiaUkraine #Russian #UkraineCrisis #Ukraina #UkraineInvasion #RussiaUkraineWar #NATO  #UkraineUnderAttack
+##     word
+## 1 russia</code></pre>
+<p>Both tweets are about Russian imperialism (that’s a pretty nice title for Topic 2, by the way). Topic 2 seems like an okay fit.</p>
+<p>For comparison, let’s also look at documents that score high on Topic 1.</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="tidy-text-analysis.html#cb284-1" aria-hidden="true" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb284-2"><a href="tidy-text-analysis.html#cb284-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb284-3"><a href="tidy-text-analysis.html#cb284-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
+<pre><code>## # A tibble: 9,589 x 3
+##    document topic gamma
+##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
+##  1 25909        1 0.353
+##  2 37798        1 0.350
+##  3 33712        1 0.350
+##  4 9577         1 0.350
+##  5 2525         1 0.350
+##  6 48632        1 0.349
+##  7 13720        1 0.349
+##  8 12049        1 0.348
+##  9 19055        1 0.348
+## 10 43651        1 0.348
+## # ... with 9,579 more rows</code></pre>
+<p>Both tweet No. 25909 and No. 37798 have a high share of topic 1.</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="tidy-text-analysis.html#cb286-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb286-2"><a href="tidy-text-analysis.html#cb286-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb286-3"><a href="tidy-text-analysis.html#cb286-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">25909</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb286-4"><a href="tidy-text-analysis.html#cb286-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##   tweet
+## 1 25909
+##                                                                                                                                                                                                                                                                       text
+## 1 Students from Ukraine sending distress messages. I am so helpless at the moment. Anyone who knows anyone in India, can you please contact the Indian authorities to know if they can get an escort from east Ukraine to western border? #Ukraine https://t.co/OidzCQg5XI
+##      word
+## 1 student</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="tidy-text-analysis.html#cb288-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb288-2"><a href="tidy-text-analysis.html#cb288-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span> </span>
+<span id="cb288-3"><a href="tidy-text-analysis.html#cb288-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">37798</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb288-4"><a href="tidy-text-analysis.html#cb288-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>##   tweet
+## 1 37798
+##                                                                                                                                                                                                                               text
+## 1 Current tally of Ukrainian victims: 137 reported dead. Over 300 wounded. Please @POTUS! We understand why you do not want to send US troops directly into Ukraine, but is there nothing more we can do? &lt;U+0001F62A&gt;&lt;U+0001F43E&gt;
+##      word
+## 1 current</code></pre>
+<p>These tweets seem to be about Ukrainian victims and war casualties. That comes close to our interpretation of topic 1. This lead us to a final question, which is answered in the next section.</p>
+</div>
+<div id="assessment-of-the-topics-quality" class="section level4 hasAnchor" number="7.3.3.3">
+<h4><span class="header-section-number">7.3.3.3</span> Assessment of the topics’ quality<a href="tidy-text-analysis.html#assessment-of-the-topics-quality" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>How do you assess the quality of proposed topic models?</strong>
+Use the approach recommended by <a href="https://press.princeton.edu/books/hardcover/9780691207544/text-as-data">Grimmer, Roberts &amp; Steward (2022, p. 152)</a> when you want to assess the quality of your topic models.</p>
+<p>Read a random sample of documents allocated to a topic carefully, but keep in mind that documents are partial members of <em>all</em> topics. Therefore, the authors advise looking at documents that have a high proportion of words that are associated with the topic under examination. That is, one should create a small subset of documents where the largest portion of the document is associated with the particular topic of interest. Go over these documents to see what they have in common and whether the proposed topic makes sense from an organizational standpoint.</p>
+<p>Building on code provided by <a href="https://ianadamsresearch.com/post/tidy-stm/tidying-stm-with-tidytext/">Ian T. Adams</a>, we can create a beautiful overview of our extracted topics and the most common words that contribute to each topic:</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="tidy-text-analysis.html#cb290-1" aria-hidden="true" tabindex="-1"></a>top_terms <span class="ot">&lt;-</span> tidy_lda <span class="sc">%&gt;%</span></span>
+<span id="cb290-2"><a href="tidy-text-analysis.html#cb290-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb290-3"><a href="tidy-text-analysis.html#cb290-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb290-4"><a href="tidy-text-analysis.html#cb290-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb290-5"><a href="tidy-text-analysis.html#cb290-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb290-6"><a href="tidy-text-analysis.html#cb290-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(topic, word) <span class="sc">%&gt;%</span></span>
+<span id="cb290-7"><a href="tidy-text-analysis.html#cb290-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">terms =</span> <span class="fu">list</span>(word)) <span class="sc">%&gt;%</span></span>
+<span id="cb290-8"><a href="tidy-text-analysis.html#cb290-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">terms =</span> <span class="fu">map</span>(terms, paste, <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb290-9"><a href="tidy-text-analysis.html#cb290-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(terms))</span>
+<span id="cb290-10"><a href="tidy-text-analysis.html#cb290-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-11"><a href="tidy-text-analysis.html#cb290-11" aria-hidden="true" tabindex="-1"></a>gamma_terms <span class="ot">&lt;-</span> tidy_lda2 <span class="sc">%&gt;%</span></span>
+<span id="cb290-12"><a href="tidy-text-analysis.html#cb290-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb290-13"><a href="tidy-text-analysis.html#cb290-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">gamma =</span> <span class="fu">mean</span>(gamma)) <span class="sc">%&gt;%</span></span>
+<span id="cb290-14"><a href="tidy-text-analysis.html#cb290-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span></span>
+<span id="cb290-15"><a href="tidy-text-analysis.html#cb290-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(top_terms, <span class="at">by =</span> <span class="st">&quot;topic&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb290-16"><a href="tidy-text-analysis.html#cb290-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">paste0</span>(<span class="st">&quot;Topic &quot;</span>, topic),</span>
+<span id="cb290-17"><a href="tidy-text-analysis.html#cb290-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">topic =</span> <span class="fu">reorder</span>(topic, gamma))</span>
+<span id="cb290-18"><a href="tidy-text-analysis.html#cb290-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-19"><a href="tidy-text-analysis.html#cb290-19" aria-hidden="true" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
+<span id="cb290-20"><a href="tidy-text-analysis.html#cb290-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma)) <span class="sc">%&gt;%</span> </span>
+<span id="cb290-21"><a href="tidy-text-analysis.html#cb290-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb290-22"><a href="tidy-text-analysis.html#cb290-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb290-23"><a href="tidy-text-analysis.html#cb290-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(topic, gamma, <span class="at">label =</span> terms, <span class="at">fill =</span> topic)) <span class="sc">+</span></span>
+<span id="cb290-24"><a href="tidy-text-analysis.html#cb290-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb290-25"><a href="tidy-text-analysis.html#cb290-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust =</span> <span class="fl">1.1</span>, <span class="at">nudge_y =</span> <span class="fl">0.0005</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb290-26"><a href="tidy-text-analysis.html#cb290-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#9FC6C0&quot;</span>,<span class="st">&quot;#5495AD&quot;</span>,<span class="st">&quot;#08333F&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb290-27"><a href="tidy-text-analysis.html#cb290-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb290-28"><a href="tidy-text-analysis.html#cb290-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb290-29"><a href="tidy-text-analysis.html#cb290-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb290-30"><a href="tidy-text-analysis.html#cb290-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="fu">expression</span>(gamma),</span>
+<span id="cb290-31"><a href="tidy-text-analysis.html#cb290-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;The Three Topics In The Ukrainian Twitter Data (25.02)&quot;</span>,</span>
+<span id="cb290-32"><a href="tidy-text-analysis.html#cb290-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;With the top words that contribute to each topic&quot;</span>)</span></code></pre></div>
+<p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-169-1.png" width="672" /></p>
+<p>Or in a table format:</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="tidy-text-analysis.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb291-2"><a href="tidy-text-analysis.html#cb291-2" aria-hidden="true" tabindex="-1"></a>gamma_terms <span class="sc">%&gt;%</span></span>
+<span id="cb291-3"><a href="tidy-text-analysis.html#cb291-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Topic 1&quot;</span>,<span class="st">&quot;Topic 2&quot;</span>,<span class="st">&quot;Topic 3&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb291-4"><a href="tidy-text-analysis.html#cb291-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic) <span class="sc">%&gt;%</span> </span>
+<span id="cb291-5"><a href="tidy-text-analysis.html#cb291-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(topic, gamma, terms) <span class="sc">%&gt;%</span></span>
+<span id="cb291-6"><a href="tidy-text-analysis.html#cb291-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>, </span>
+<span id="cb291-7"><a href="tidy-text-analysis.html#cb291-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Topic&quot;</span>, <span class="st">&quot;Expected topic proportion&quot;</span>, <span class="st">&quot;Top 6 terms&quot;</span>))</span></code></pre></div>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="24%" />
+<col width="68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Topic</th>
+<th align="right">Expected topic proportion</th>
+<th align="left">Top 6 terms</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Topic 1</td>
+<td align="right">0.333</td>
+<td align="left">ukrain, war, invas, support, putin, world, send, nato, happen, forc</td>
+</tr>
+<tr class="even">
+<td align="left">Topic 2</td>
+<td align="right">0.333</td>
+<td align="left">russia, ukrain, invad, putin, nato, stop, america, invas, militari, time</td>
+</tr>
+<tr class="odd">
+<td align="left">Topic 3</td>
+<td align="right">0.333</td>
+<td align="left">ukrain, peopl, putin, countri, war, nato, amp, presid, live, sanction</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Final remark.</strong> While the quality of our three topics may appear satisfactory to you (or perhaps not?), we must remember that our choice of <em>K</em> was purely arbitrary. Post-hoc rationalization of this choice is inherently problematic. If possible, you should base your choice of <em>K</em> on previous literature and what other researchers have said about a suitable <em>K</em> for your corpus / your research question. If no such information is available, the <code>searchK</code> function of the <code>stm</code> package is your final resort, but it must always be accompanied by critical re-reading and examination of the topics and documents (e.g., <em>semantic coherence</em> and <em>exclusivity</em> of topics).<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+</div>
+</div>
+<div id="stms" class="section level3 hasAnchor" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> STMs<a href="tidy-text-analysis.html#stms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far, we have only used the text of the tweet to estimate the topics. However, the creation date of a tweet could also be an important indicator of a topic, as some topics are more prevalent at certain points in time (the same applies to the author of a tweet, of course). While LDA has been the most famous topic modeling algorithm, there are currently a variety of similar techniques available, which all advance the field. One very popular technique is <em>Structural Topic Modeling</em> (STM), which is very similar to LDA, but uses meta data about documents (e.g., author name and creation date) to enhance word assignment to latent topics in the corpus.</p>
+<p>You can estimate STMs with the <code>stm</code> package. We will not discuss STMs in this tutorial due to time restrictions. However, the <a href="tidy-text-analysis.html#additional-tutorials-6">Additional tutorials</a> section features two excellent external STM tutorials that you might want to have a look at.</p>
+</div>
+</div>
+<div id="take-aways-6" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Take-Aways<a href="tidy-text-analysis.html#take-aways-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><strong>Text normalization</strong>: You can perform the entire preprocessing of your documents using the <code>tidy text approach</code> (tokenization, stop words, removal, etc.).</li>
+<li><strong>Word freqencies &amp; Log Odds</strong>: The <code>tidy text approach</code> can also be used to calculate word frequencies and log odds to identify the most common word per author, etc.</li>
+<li><strong>Topic modeling</strong>: Topic models are mixed-membership models, i.e., they assume that every text contains a mix of different topics. The best known topic modeling algorithm is LDA.</li>
+<li><strong>K:</strong> Number of topics to be estimated.</li>
+<li><strong>Word-topic matrix</strong>: Aids in the creation of topic-specific word lists.</li>
+<li><strong>Document-topic matrix</strong>: Aids in the creation of document-specific topic lists.</li>
+</ul>
+</div>
+<div id="additional-tutorials-6" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Additional tutorials<a href="tidy-text-analysis.html#additional-tutorials-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You still have questions? The following tutorials, books, &amp; papers may help you:</p>
+<ul>
+<li><a href="https://bookdown.org/valerie_hase/TextasData_HS2021/tutorial-13-topic-modeling.html">Text as Data by V. Hase, Tutorial 13</a></li>
+<li><a href="https://sicss.io/2019/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Topic Modeling by C. Bail</a></li>
+<li><a href="https://www.tidytextmining.com/">Text Mining in R. A Tidy Approach by Silge &amp; Robinson (2017)</a></li>
+</ul>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>To disable this feature, use the to_lower = FALSE option.<a href="tidy-text-analysis.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>This function takes a range of <em>K</em> values, calculates topic models for each value of <em>K</em>, and then generates goodness-of-fit measurements that indicate what value for <em>K</em> fits the data best.<a href="tidy-text-analysis.html#fnref5" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exercise-5-test-your-knowledge.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/LKobilke/PR-Erfolgskontrolle/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["PR-Erfolgskontrolle.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

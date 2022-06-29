@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-06-22" />
+<meta name="date" content="2022-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,6 +288,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-6-3"><i class="fa fa-check"></i>Task 6</a></li>
 <li class="chapter" data-level="" data-path="exercise-5-test-your-knowledge.html"><a href="exercise-5-test-your-knowledge.html#task-7-2"><i class="fa fa-check"></i>Task 7</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html"><i class="fa fa-check"></i><b>7</b> Tidy text analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#what-is-tidy-text"><i class="fa fa-check"></i><b>7.1</b> What is tidy text?</a></li>
+<li class="chapter" data-level="7.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#example"><i class="fa fa-check"></i><b>7.2</b> Example</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.2.1</b> First steps</a></li>
+<li class="chapter" data-level="7.2.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#preprocessing-real-world-data"><i class="fa fa-check"></i><b>7.2.2</b> Preprocessing real-world data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#relative-word-frequencies"><i class="fa fa-check"></i><b>7.2.3</b> (Relative) word frequencies</a></li>
+<li class="chapter" data-level="7.2.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#word-log-odds"><i class="fa fa-check"></i><b>7.2.4</b> Word log odds</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#topic-modeling"><i class="fa fa-check"></i><b>7.3</b> Topic modeling</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-1"><i class="fa fa-check"></i><b>7.3.1</b> First steps</a></li>
+<li class="chapter" data-level="7.3.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.3.2</b> Model estimation: Number of topics</a></li>
+<li class="chapter" data-level="7.3.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.3.3</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.3.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.3.4</b> STMs</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.4</b> Take-Aways</a></li>
+<li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.5</b> Additional tutorials</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#solutions-for-exercise-1"><i class="fa fa-check"></i>Solutions for Exercise 1</a>
@@ -511,8 +531,8 @@ You may need to add a “/” at the beginning like so:</p>
 <span id="cb49-4"><a href="tutorial-working-with-data-files.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># finally, you call the variable by name</span></span></code></pre></div>
 <p>For instance, we could retrieve the variable “name” in our <em>survey</em> data frame by simply using its variable name: We specify the object we want to access, the data frame <em>survey</em> and then retrieve the column <em>name</em> via the operator <em>$</em>:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tutorial-working-with-data-files.html#cb50-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>name</span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;       
-## [11] &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;   
+## [15] &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
 <p>You know that the name variable is the <em>fourth</em> column of you data frame. Therefore, you can also access this column / variable by calling it by its index number (<em>column index</em>, here: 4). Just like you’ve learned in <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a>, you can access sub-elements of a greater object with square brackets <code>[ ]</code>:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tutorial-working-with-data-files.html#cb52-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##          name
@@ -538,8 +558,8 @@ You may need to add a “/” at the beginning like so:</p>
 ## 20    Florian</code></pre>
 <p><strong>Note:</strong> While the first command gives you the names as a vector, the second one gives you the name as a data frame object with only one column. This keeps the column header “<em>name</em>” intact. However, if you want to retrieve a vector using the <em>column index</em>, you need to provide two indices: one for the row that you want to select, followed by a comma, and one for the column. Since we want to select all rows, but only column No. 4, we need leave the row No. blank:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tutorial-working-with-data-files.html#cb54-1" aria-hidden="true" tabindex="-1"></a>survey[,<span class="dv">4</span>] <span class="co"># column index = 4</span></span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;       
-## [11] &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;   
+## [15] &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
 </div>
 <div id="subsetting-observations-rows-in-data-frames" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Subsetting observations / rows in data frames<a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -575,8 +595,7 @@ You may need to add a “/” at the beginning like so:</p>
 <h2><span class="header-section-number">3.6</span> Subsetting data with conditions<a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s say we want to select all names of students who are older than 25. This time, we’ll need to use a <em>condition</em> to select our rows:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tutorial-working-with-data-files.html#cb64-1" aria-hidden="true" tabindex="-1"></a>survey[survey<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">25</span>,<span class="dv">4</span>] </span></code></pre></div>
-<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;   
-## [11] &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Florian&quot;</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="tutorial-working-with-data-files.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read: I want to select column 4 (name) from the survey data frame</span></span>
 <span id="cb66-2"><a href="tutorial-working-with-data-files.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and display all rows in which the age column of the survey data frame has a value &gt; 25</span></span></code></pre></div>
 <p>Alternatively, if you want to show <em>all</em> columns that belong to students who are older than 25, you would do it like that:</p>
