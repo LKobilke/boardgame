@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,13 +311,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
 <li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -375,7 +377,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-tokenization"><i class="fa fa-check"></i>Task 1: Tokenization</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
-<li class="chapter" data-level="7.7.1" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i><b>7.7.1</b> Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -408,9 +412,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="defining-your-working-directory" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Defining your working directory<a href="tutorial-working-with-data-files.html#defining-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In most cases, you do not want to manually enter all your values into R and combine them with the “c()” function. Instead, you want to import data files that you already have on your drive/personal computer. The first step to importing your data into R is to define your <em>working directory</em>.</p>
-<p><strong>Your working directory is the folder from which data can be imported into R or to which you can export and save data created with R</strong>.</p>
-<p>Create a folder that you want to use as your working directory for this tutorial (or use an existing one, that also works). For example, I’ve created a folder called <em>“IPR”</em>. Go to that folder and copy the path to it:</p>
+<p>In most cases, you do not want to manually enter all your values into R
+and combine them with the “c()” function. Instead, you want to import
+data files that you already have on your drive/personal computer. The
+first step to importing your data into R is to define your <em>working
+directory</em>.</p>
+<p><strong>Your working directory is the folder from which data can be imported
+into R or to which you can export and save data created with R</strong>.</p>
+<p>Create a folder that you want to use as your working directory for this
+tutorial (or use an existing one, that also works). For example, I’ve
+created a folder called <em>“IPR”</em>. Go to that folder and copy the path to
+it:</p>
 <table>
 <colgroup>
 <col width="100%" />
@@ -437,7 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>On Mac, you go to your folder and right click on it. An options menu opens and you can copy the folder path:</p>
+<p>On Mac, you go to your folder and right click on it. An options menu
+opens and you can copy the folder path:</p>
 <table>
 <colgroup>
 <col width="100%" />
@@ -451,21 +464,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>Now you know where this working directory is located - but R should know, too! Telling R from which folder to import data or where to export data to is also called <em>setting your working directory</em>. We call a function called <em>setwd()</em> (you guessed right: short for “setting your working directory”) which allows us to do exactly that.</p>
-<p><strong>Important</strong>: The way this working directory is set differs between Windows- and Mac-Operating Systems.</p>
-<p><strong>Windows:</strong>
-The dashes need to be pointing towards the right direction (if you simply copy the path to the folder, you may need to replace these signs “\” with “/”)</p>
+<p>Now you know where this working directory is located - but R should
+know, too! Telling R from which folder to import data or where to export
+data to is also called <em>setting your working directory</em>. We call a
+function called <em>setwd()</em> (you guessed right: short for “setting your
+working directory”) which allows us to do exactly that.</p>
+<p><strong>Important</strong>: The way this working directory is set differs between
+Windows- and Mac-Operating Systems.</p>
+<p><strong>Windows:</strong> The dashes need to be pointing towards the right direction
+(if you simply copy the path to the folder, you may need to replace
+these signs “\” with “/”)</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="tutorial-working-with-data-files.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/LaraK/Documents/IPR&quot;</span>)</span></code></pre></div>
-<p><strong>Mac:</strong>
-You may need to add a “/” at the beginning like so:</p>
+<p><strong>Mac:</strong> You may need to add a “/” at the beginning like so:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="tutorial-working-with-data-files.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;/Users/LaraK/Documents/IPR&quot;</span>)</span></code></pre></div>
-<p>If you have forgotten where you set your working directory, you can also ask R about the path of your current working directory with <em>getwd()</em>:</p>
+<p>If you have forgotten where you set your working directory, you can also
+ask R about the path of your current working directory with <em>getwd()</em>:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="tutorial-working-with-data-files.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;C:/Users/LaraK/Documents/IPR&quot;</code></pre>
 <div id="optional-setting-the-working-directory-on-a-remote-desktop" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Optional: Setting the working directory on a remote desktop<a href="tutorial-working-with-data-files.html#optional-setting-the-working-directory-on-a-remote-desktop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The LMU Munich provides you with remote desktop access to the PCs in the local CIP-Pools. If you want to use your remote desktop to run R &amp; RStudio, you can follow <a href="https://www.it.ifkw.uni-muenchen.de/web/remotedesktop/index.html">this link</a> to log into the remote desktop. This is a great fix if – for whatever reason – you can’t get R(Studio) installed on your machine and need a quick solution!</p>
-<p>Once you have logged in to the remote desktop, you can open RStudio and set the working directory (and import data) just like it is described in this tutorial (see next image).</p>
+<p>The LMU Munich provides you with remote desktop access to the PCs in the
+local CIP-Pools. If you want to use your remote desktop to run R &amp;
+RStudio, you can follow <a href="https://www.it.ifkw.uni-muenchen.de/web/remotedesktop/index.html">this
+link</a>
+to log into the remote desktop. This is a great fix if – for whatever
+reason – you can’t get R(Studio) installed on your machine and need a
+quick solution!</p>
+<p>Once you have logged in to the remote desktop, you can open RStudio and
+set the working directory (and import data) just like it is described in
+this tutorial (see next image).</p>
 <table>
 <colgroup>
 <col width="100%" />
@@ -479,10 +506,15 @@ You may need to add a “/” at the beginning like so:</p>
 </tr>
 </tbody>
 </table>
-<p>The drawback: Since Windows does not allow RStudio to save script files without permission (and the IfKW for some reason has not given the permission), you can’t save script files on the remote desktop. You can solve this with a workaround:</p>
+<p>The drawback: Since Windows does not allow RStudio to save script files
+without permission (and the IfKW for some reason has not given the
+permission), you can’t save script files on the remote desktop. You can
+solve this with a workaround:</p>
 <ol style="list-style-type: decimal">
-<li>Paste your script into a text file before closing RStuio. E.g., WordPad is pre-installed. Save this file as .R.</li>
-<li>When you want to load your script in RStudio, right click on the .R file and choose “open with RStudio”.</li>
+<li>Paste your script into a text file before closing RStuio. E.g.,
+WordPad is pre-installed. Save this file as .R.</li>
+<li>When you want to load your script in RStudio, right click on the .R
+file and choose “open with RStudio”.</li>
 </ol>
 <table>
 <colgroup>
@@ -501,23 +533,41 @@ You may need to add a “/” at the beginning like so:</p>
 </div>
 <div id="import-data-from-your-working-directory" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Import data from your working directory<a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>After setting the working directory, you need to transfer the data file that you want to work with to that folder (here: the “<em>IPR</em>” folder). Download the <em>“data_tutorial3.csv”</em> from Moodle, i.e., the <em>4. Mai material folder</em>. The data set consists of data that is completely made up - a survey with 20 fictional students in a fictional seminar. We only use this data here so you can understand differences between types of data and types of objects.</p>
+<p>After setting the working directory, you need to transfer the data file
+that you want to work with to that folder (here: the “<em>IPR</em>” folder).
+Download the <em>“data_tutorial3.csv”</em> from Moodle, i.e., the <em>4. Mai
+material folder</em>. The data set consists of data that is completely made
+up - a survey with 20 fictional students in a fictional seminar. We only
+use this data here so you can understand differences between types of
+data and types of objects.</p>
 <p>The data file <em>data_tutorial3.csv</em> is structured as follows:</p>
 <ul>
 <li>Each row contains the answer for a single student.</li>
-<li>Each column contains all values given by students for a single variable.</li>
+<li>Each column contains all values given by students for a single
+variable.</li>
 </ul>
 <p>The variables included here are:</p>
 <ul>
 <li><strong>name</strong>: the name of each student</li>
 <li><strong>age</strong>: the age of each student (in years)</li>
-<li><strong>date</strong>: the date on which each student was surveyed (in YYYY-MM-DD)</li>
-<li><strong>outlet</strong>: the type of media outlet each student’s mainly uses to get information</li>
-<li><strong>outlet_use</strong>: the time each student uses this media outlet daily (in hours)</li>
-<li><strong>outlet_trust</strong>: how much each student trusts this media outlet (from 1 = not at all to 5 = very much)</li>
+<li><strong>date</strong>: the date on which each student was surveyed (in
+YYYY-MM-DD)</li>
+<li><strong>outlet</strong>: the type of media outlet each student’s mainly uses to
+get information</li>
+<li><strong>outlet_use</strong>: the time each student uses this media outlet daily
+(in hours)</li>
+<li><strong>outlet_trust</strong>: how much each student trusts this media outlet
+(from 1 = not at all to 5 = very much)</li>
 </ul>
-<p>We’ll read in the file with <em>read.csv()</em>. Here, we specify where to find the data file with the <em>file path in quotation marks</em>, but you don’t need to specify that path if you have already set it as your working directory. In addition, we provide an argument to let R know that the first row contains variable names with the argument <em>header = TRUE</em>. In the end, we assign our data file to a <em>source object</em> that we call <em>survey</em>. The data is now stored in this object.</p>
-<p>While <em>read.csv()</em> reads in comma-separated values, <em>read.csv2()</em> reads in values that are separated by semicolons.</p>
+<p>We’ll read in the file with <em>read.csv()</em>. Here, we specify where to find
+the data file with the <em>file path in quotation marks</em>, but you don’t
+need to specify that path if you have already set it as your working
+directory. In addition, we provide an argument to let R know that the
+first row contains variable names with the argument <em>header = TRUE</em>. In
+the end, we assign our data file to a <em>source object</em> that we call
+<em>survey</em>. The data is now stored in this object.</p>
+<p>While <em>read.csv()</em> reads in comma-separated values, <em>read.csv2()</em> reads
+in values that are separated by semicolons.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="tutorial-working-with-data-files.html#cb46-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;data_tutorial3.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="tutorial-working-with-data-files.html#cb47-1" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div>
 <pre><code>##    X.2 X.1  X       name age       date  outlet outlet_use outlet_trust
@@ -544,17 +594,33 @@ You may need to add a “/” at the beginning like so:</p>
 </div>
 <div id="subsetting-variables-columns-in-data-frames" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Subsetting variables / columns in data frames<a href="tutorial-working-with-data-files.html#subsetting-variables-columns-in-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a> your <em>variables</em> where “floating” in your workspace / environment. They were not kept in a container, so you could call them by simply writing their name in the console. When you import data files to R, all variables in that data set a stored into a “container”, i.e. your <em>source object</em>. These containers for variables are called <em>data frame</em> in R.</p>
-<p>Variables that are part of a <em>data frame</em> can be accessed by their name, but we need to specify the data frame <em>AND</em> the variable name and combine them with the access operator: <em>$</em>. This takes the form of:</p>
+<p>In <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a> your <em>variables</em> where “floating”
+in your workspace / environment. They were not kept in a container, so
+you could call them by simply writing their name in the console. When
+you import data files to R, all variables in that data set a stored into
+a “container”, i.e. your <em>source object</em>. These containers for variables
+are called <em>data frame</em> in R.</p>
+<p>Variables that are part of a <em>data frame</em> can be accessed by their name,
+but we need to specify the data frame <em>AND</em> the variable name and
+combine them with the access operator: <em>$</em>. This takes the form of:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="tutorial-working-with-data-files.html#cb49-1" aria-hidden="true" tabindex="-1"></a>dataframe<span class="sc">$</span>variablename </span>
 <span id="cb49-2"><a href="tutorial-working-with-data-files.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the first part is the container name, i.e. data frame</span></span>
 <span id="cb49-3"><a href="tutorial-working-with-data-files.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is followed by the access operator $</span></span>
 <span id="cb49-4"><a href="tutorial-working-with-data-files.html#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co"># finally, you call the variable by name</span></span></code></pre></div>
-<p>For instance, we could retrieve the variable “name” in our <em>survey</em> data frame by simply using its variable name: We specify the object we want to access, the data frame <em>survey</em> and then retrieve the column <em>name</em> via the operator <em>$</em>:</p>
+<p>For instance, we could retrieve the variable “name” in our <em>survey</em> data
+frame by simply using its variable name: We specify the object we want
+to access, the data frame <em>survey</em> and then retrieve the column <em>name</em>
+via the operator <em>$</em>:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="tutorial-working-with-data-files.html#cb50-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>name</span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;      
-## [12] &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
-<p>You know that the name variable is the <em>fourth</em> column of you data frame. Therefore, you can also access this column / variable by calling it by its index number (<em>column index</em>, here: 4). Just like you’ve learned in <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a>, you can access sub-elements of a greater object with square brackets <code>[ ]</code>:</p>
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;   
+##  [6] &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;       
+## [11] &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;  
+## [16] &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
+<p>You know that the name variable is the <em>fourth</em> column of you data
+frame. Therefore, you can also access this column / variable by calling
+it by its index number (<em>column index</em>, here: 4). Just like you’ve
+learned in <a href="tutorial-using-r-as-a-calculator.html#tutorial-using-r-as-a-calculator">Tutorial: Using R as a calculator</a>, you can access
+sub-elements of a greater object with square brackets <code>[ ]</code>:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="tutorial-working-with-data-files.html#cb52-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>##          name
 ## 1   Alexandra
@@ -577,28 +643,43 @@ You may need to add a “/” at the beginning like so:</p>
 ## 18       Anna
 ## 19    Andreas
 ## 20    Florian</code></pre>
-<p><strong>Note:</strong> While the first command gives you the names as a vector, the second one gives you the name as a data frame object with only one column. This keeps the column header “<em>name</em>” intact. However, if you want to retrieve a vector using the <em>column index</em>, you need to provide two indices: one for the row that you want to select, followed by a comma, and one for the column. Since we want to select all rows, but only column No. 4, we need leave the row No. blank:</p>
+<p><strong>Note:</strong> While the first command gives you the names as a vector, the
+second one gives you the name as a data frame object with only one
+column. This keeps the column header “<em>name</em>” intact. However, if you
+want to retrieve a vector using the <em>column index</em>, you need to provide
+two indices: one for the row that you want to select, followed by a
+comma, and one for the column. Since we want to select all rows, but
+only column No. 4, we need leave the row No. blank:</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="tutorial-working-with-data-files.html#cb54-1" aria-hidden="true" tabindex="-1"></a>survey[,<span class="dv">4</span>] <span class="co"># column index = 4</span></span></code></pre></div>
-<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;    &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;        &quot;Alex&quot;      
-## [12] &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Alexandra&quot;  &quot;Alex&quot;       &quot;Maximilian&quot; &quot;Moritz&quot;     &quot;Vanessa&quot;   
+##  [6] &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Magdalena&quot;  &quot;Tim&quot;       
+## [11] &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Michael&quot;    &quot;Sabrina&quot;    &quot;Valentin&quot;  
+## [16] &quot;Tristan&quot;    &quot;Martin&quot;     &quot;Anna&quot;       &quot;Andreas&quot;    &quot;Florian&quot;</code></pre>
 </div>
 <div id="subsetting-observations-rows-in-data-frames" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Subsetting observations / rows in data frames<a href="tutorial-working-with-data-files.html#subsetting-observations-rows-in-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Using the same indexing technique, you can also select an entire row by providing a <em>row index</em> and leaving the column index blank:</p>
+<p>Using the same indexing technique, you can also select an entire row by
+providing a <em>row index</em> and leaving the column index blank:</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="tutorial-working-with-data-files.html#cb56-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">1</span>,] <span class="co"># row index = 1</span></span></code></pre></div>
 <pre><code>##   X.2 X.1 X      name age       date outlet outlet_use outlet_trust
 ## 1   1   1 1 Alexandra  20 2021-09-09     TV          2            5</code></pre>
 </div>
 <div id="subsetting-values-cells-in-data-frames" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Subsetting values / cells in data frames<a href="tutorial-working-with-data-files.html#subsetting-values-cells-in-data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You can subset values of a data set by calling a variable by its name. You just have to specify the data frame, the variable name <em>AND</em> the row index. For example, let’s look only at the first name in the data, which is <em>Alexandra</em>.</p>
+<p>You can subset values of a data set by calling a variable by its name.
+You just have to specify the data frame, the variable name <em>AND</em> the row
+index. For example, let’s look only at the first name in the data, which
+is <em>Alexandra</em>.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="tutorial-working-with-data-files.html#cb58-1" aria-hidden="true" tabindex="-1"></a>survey<span class="sc">$</span>name[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;Alexandra&quot;</code></pre>
-<p>Any educated guesses on how to access the exact same value using the column index instead of the column name?</p>
-<p>Yeah, we enter the row index first, followed by a comma, and finish with the column index:</p>
+<p>Any educated guesses on how to access the exact same value using the
+column index instead of the column name?</p>
+<p>Yeah, we enter the row index first, followed by a comma, and finish with
+the column index:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="tutorial-working-with-data-files.html#cb60-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">1</span>,<span class="dv">4</span>] <span class="co"># row index = 1, column index = 4</span></span></code></pre></div>
 <pre><code>## [1] &quot;Alexandra&quot;</code></pre>
-<p>Of course, you can use complex indexing on data frames. Let’s look at the first ten rows of the fourth (<em>name</em>) and fifth (<em>age</em>) column:</p>
+<p>Of course, you can use complex indexing on data frames. Let’s look at
+the first ten rows of the fourth (<em>name</em>) and fifth (<em>age</em>) column:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="tutorial-working-with-data-files.html#cb62-1" aria-hidden="true" tabindex="-1"></a>survey[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>##          name age
 ## 1   Alexandra  20
@@ -614,12 +695,16 @@ You may need to add a “/” at the beginning like so:</p>
 </div>
 <div id="subsetting-data-with-conditions" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Subsetting data with conditions<a href="tutorial-working-with-data-files.html#subsetting-data-with-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let’s say we want to select all names of students who are older than 25. This time, we’ll need to use a <em>condition</em> to select our rows:</p>
+<p>Let’s say we want to select all names of students who are older than 25.
+This time, we’ll need to use a <em>condition</em> to select our rows:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="tutorial-working-with-data-files.html#cb64-1" aria-hidden="true" tabindex="-1"></a>survey[survey<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">25</span>,<span class="dv">4</span>] </span></code></pre></div>
-<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;        &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;    &quot;Florian&quot;</code></pre>
+<pre><code>##  [1] &quot;Maximilian&quot; &quot;Andrea&quot;     &quot;Fabienne&quot;   &quot;Fabio&quot;      &quot;Tim&quot;       
+##  [6] &quot;Alex&quot;       &quot;Tobias&quot;     &quot;Sabrina&quot;    &quot;Valentin&quot;   &quot;Tristan&quot;   
+## [11] &quot;Florian&quot;</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="tutorial-working-with-data-files.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read: I want to select column 4 (name) from the survey data frame</span></span>
 <span id="cb66-2"><a href="tutorial-working-with-data-files.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and display all rows in which the age column of the survey data frame has a value &gt; 25</span></span></code></pre></div>
-<p>Alternatively, if you want to show <em>all</em> columns that belong to students who are older than 25, you would do it like that:</p>
+<p>Alternatively, if you want to show <em>all</em> columns that belong to students
+who are older than 25, you would do it like that:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="tutorial-working-with-data-files.html#cb67-1" aria-hidden="true" tabindex="-1"></a>survey[survey<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">25</span>,]</span></code></pre></div>
 <pre><code>##    X.2 X.1  X       name age       date  outlet outlet_use outlet_trust
 ## 3    3   3  3 Maximilian  29 2021-09-09 Zeitung          4            1
@@ -662,20 +747,30 @@ You may need to add a “/” at the beginning like so:</p>
 <div id="take-aways-2" class="section level2 hasAnchor" number="3.7">
 <h2><span class="header-section-number">3.7</span> Take-Aways<a href="tutorial-working-with-data-files.html#take-aways-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><strong>Setting the working directory:</strong> tells R where your folder with the data is located on your drive, <code>setwd(your_filepath)</code></li>
-<li><strong>Import data</strong>: after setting the working directory, with <code>read.csv()</code> (comma-separated) or <code>read.csv2()</code> (semicolon-separated)</li>
-<li><strong>Access variables</strong>: either by the access operator $ (<code>dataframe&amp;variablename</code>) or by the column index <code>[,columnNo.]</code></li>
-<li><strong>Access values</strong>: by indexing, i.e. using <code>[ ]</code> and row + column indices</li>
-<li><strong>Conditions</strong>: you can select rows based on conditions, e.g.: greater <code>&gt;</code>, greater or equal <code>&gt;=</code>, equal <code>==</code>, and not equal <code>!=</code></li>
+<li><strong>Setting the working directory:</strong> tells R where your folder with
+the data is located on your drive, <code>setwd(your_filepath)</code></li>
+<li><strong>Import data</strong>: after setting the working directory, with
+<code>read.csv()</code> (comma-separated) or <code>read.csv2()</code>
+(semicolon-separated)</li>
+<li><strong>Access variables</strong>: either by the access operator $
+(<code>dataframe&amp;variablename</code>) or by the column index <code>[,columnNo.]</code></li>
+<li><strong>Access values</strong>: by indexing, i.e. using <code>[ ]</code> and row + column
+indices</li>
+<li><strong>Conditions</strong>: you can select rows based on conditions, e.g.:
+greater <code>&gt;</code>, greater or equal <code>&gt;=</code>, equal <code>==</code>, and not equal <code>!=</code></li>
 </ul>
 </div>
 <div id="additional-tutorials-2" class="section level2 hasAnchor" number="3.8">
 <h2><span class="header-section-number">3.8</span> Additional tutorials<a href="tutorial-working-with-data-files.html#additional-tutorials-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>You still have questions? The following online guides can help you with that:</p>
+<p>You still have questions? The following online guides can help you with
+that:</p>
 <ul>
-<li><a href="https://www.r-bloggers.com/2021/12/import-csv-files-into-r-step-by-step-guide/">Import CSV Files into R Step-by-Step Guide</a></li>
-<li><a href="https://stats.oarc.ucla.edu/r/modules/subsetting-data/">Subsetting data</a></li>
-<li><a href="http://www.cookbook-r.com/Basics/Indexing_into_a_data_structure/">Indexing into a data structure</a></li>
+<li><a href="https://www.r-bloggers.com/2021/12/import-csv-files-into-r-step-by-step-guide/">Import CSV Files into R Step-by-Step
+Guide</a></li>
+<li><a href="https://stats.oarc.ucla.edu/r/modules/subsetting-data/">Subsetting
+data</a></li>
+<li><a href="http://www.cookbook-r.com/Basics/Indexing_into_a_data_structure/">Indexing into a data
+structure</a></li>
 </ul>
 <p>Now it’s your time to get into coding: Try <a href="exercise-1.html#exercise-1">Exercise 1</a>.</p>
 </div>

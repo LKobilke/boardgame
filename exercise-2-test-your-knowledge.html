@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,13 +311,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
 <li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -375,7 +377,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-tokenization"><i class="fa fa-check"></i>Task 1: Tokenization</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
-<li class="chapter" data-level="7.7.1" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i><b>7.7.1</b> Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -403,12 +407,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>After working through Exercise 2, you’ll…</strong></p>
 <ul>
 <li>have assessed how well you know <code>dplyr</code></li>
-<li>know what <code>dplyr</code> functions and concepts you might want to repeat again</li>
+<li>know what <code>dplyr</code> functions and concepts you might want to repeat
+again</li>
 <li>have managed to apply the <code>dplyr</code> concepts to data</li>
 </ul>
 <div id="task-1-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 1<a href="exercise-2-test-your-knowledge.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
+<p>Below you will see multiple choice questions. Please try to identify the
+correct answers. 1, 2, 3 and 4 correct answers are possible for each
+question.</p>
 <p><strong>1. What are the main characteristics of tidy data?</strong></p>
 <ul>
 <li>Every cell contains values.</li>
@@ -423,21 +430,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>mutate()</code></li>
 <li><code>manage()</code></li>
 </ul>
-<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to A?</strong></p>
+<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to
+A?</strong></p>
 <ul>
 <li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
 <li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
 <li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
 <li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
 </ul>
-<p><strong>4. Imagine you want to recode the height of the these characters. You want to have three categories from small and medium to tall. What is a valid approach?</strong></p>
+<p><strong>4. Imagine you want to recode the height of the these characters. You
+want to have three categories from small and medium to tall. What is a
+valid approach?</strong></p>
 <ul>
 <li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
 <li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
 <li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
 <li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
 </ul>
-<p><strong>5. Imagine you want to provide a systematic overview over all hair colors and what species wear these hair colors frequently (not accounting for the skewed sampling of species)? What is a valid approach?</strong></p>
+<p><strong>5. Imagine you want to provide a systematic overview over all hair
+colors and what species wear these hair colors frequently (not
+accounting for the skewed sampling of species)? What is a valid
+approach?</strong></p>
 <ul>
 <li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
 <li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
@@ -450,7 +463,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It’s you turn now. Load the starwars data like this:</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="exercise-2-test-your-knowledge.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
 <span id="cb143-2"><a href="exercise-2-test-your-knowledge.html#cb143-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
-<p>How many humans are contained in the starwars data overall? (Hint: use <code>summarize(count = n())</code> or <code>count()</code>)</p>
+<p>How many humans are contained in the starwars data overall? (Hint: use
+<code>summarize(count = n())</code> or <code>count()</code>)</p>
 </div>
 <div id="task-3-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-2-test-your-knowledge.html#task-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -458,21 +472,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="task-4-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 4<a href="exercise-2-test-your-knowledge.html#task-4-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the most common eye_color among Star Wars characters? (Hint: use <code>arrange()</code>)</p>
+<p>What is the most common eye_color among Star Wars characters? (Hint: use
+<code>arrange()</code>)</p>
 </div>
 <div id="task-5-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 5<a href="exercise-2-test-your-knowledge.html#task-5-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is the average mass of Star Wars characters that are not human and have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
+<p>What is the average mass of Star Wars characters that are not human and
+have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
 </div>
 <div id="task-6-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 6<a href="exercise-2-test-your-knowledge.html#task-6-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Compare the mean, median, and standard deviation of mass for all humans and droids. (Hint: remove all <code>NAs</code>)</p>
+<p>Compare the mean, median, and standard deviation of mass for all humans
+and droids. (Hint: remove all <code>NAs</code>)</p>
 </div>
 <div id="task-7" class="section level2 unnumbered hasAnchor">
 <h2>Task 7<a href="exercise-2-test-your-knowledge.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a new variable in which you store the mass in gram (gr_mass). Add it to the data frame. Test whether your solution works by printing your data to the console, but only show the name, species, mass, and your new variable gr_mass.</p>
-<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
-<p>Are you ready for some beautiful graphs? Then check out the next <a href="tutorial-data-visualization-with-ggplot.html#tutorial-data-visualization-with-ggplot">Tutorial: Data visualization with ggplot</a>.</p>
+<p>Create a new variable in which you store the mass in gram (gr_mass). Add
+it to the data frame. Test whether your solution works by printing your
+data to the console, but only show the name, species, mass, and your new
+variable gr_mass.</p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
+<p>Are you ready for some beautiful graphs? Then check out the next
+<a href="tutorial-data-visualization-with-ggplot.html#tutorial-data-visualization-with-ggplot">Tutorial: Data visualization with ggplot</a>.</p>
 </div>
 </div>
             </section>

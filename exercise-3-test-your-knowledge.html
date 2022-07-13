@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,13 +311,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
 <li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -375,7 +377,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-tokenization"><i class="fa fa-check"></i>Task 1: Tokenization</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
-<li class="chapter" data-level="7.7.1" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i><b>7.7.1</b> Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -403,12 +407,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>After working through Exercise 3, you’ll…</strong></p>
 <ul>
 <li>be able to see a graph and recreate it with <code>ggplot2</code></li>
-<li>be able to see a problem and customize a plot with <code>ggplot2</code> to solve it</li>
+<li>be able to see a problem and customize a plot with <code>ggplot2</code> to
+solve it</li>
 </ul>
 <div id="task-1-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 1<a href="exercise-3-test-your-knowledge.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The data set <em>glbwarm</em> comes pre-installed with the <code>processR</code> package that we will be working with soon. The data comprises 815 US individuals (417 females, 398 males) who agreed to engage in online questionnaires. They roughly represent the population of the United States.</p>
-<p>Let’s install / activate the <code>processR</code> package first and assign the glbwarm data to a source object.</p>
+<p>The data set <em>glbwarm</em> comes pre-installed with the <code>processR</code> package
+that we will be working with soon. The data comprises 815 US individuals
+(417 females, 398 males) who agreed to engage in online questionnaires.
+They roughly represent the population of the United States.</p>
+<p>Let’s install / activate the <code>processR</code> package first and assign the
+glbwarm data to a source object.</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="exercise-3-test-your-knowledge.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
 <span id="cb169-2"><a href="exercise-3-test-your-knowledge.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(processR)) {</span>
 <span id="cb169-3"><a href="exercise-3-test-your-knowledge.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;processR&quot;</span>); </span>
@@ -416,22 +425,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb169-5"><a href="exercise-3-test-your-knowledge.html#cb169-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load processR</span></span>
 <span id="cb169-6"><a href="exercise-3-test-your-knowledge.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb169-7"><a href="exercise-3-test-your-knowledge.html#cb169-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> processR<span class="sc">::</span>glbwarm</span></code></pre></div>
-<p>If you can’t install <code>processR</code> (it can be a bit buggy with newer versions of <code>R</code>) then just download the <em>glbwarm.csv</em> from Moodle and don’t use the code above (material folders). Load the data into R by following our tutorial: <a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory">Import data from your working directory</a>, but remember the difference between <code>read_csv2</code> (simcolon-separated) and <code>read_csv</code> (comma-separated) and use the appropriate command.</p>
-<p>Familiarize yourself with the data set (<strong>Hint:</strong> use the <code>help()</code> / <code>?</code> function or visit this <a href="https://rdrr.io/cran/processR/man/glbwarm.html">Google page of the help function</a>) and then try to reproduce this plot with <code>dplyr</code> and <code>ggplot2</code>. (<strong>Hint:</strong> You can hide the legend by adding <code>theme(legend.position = "none")</code> to your plot.)</p>
-<p>You will need to do some data management with <code>dplyr</code> to create the correct labels for your <code>ggplot2</code> graph.</p>
+<p>If you can’t install <code>processR</code> (it can be a bit buggy with newer
+versions of <code>R</code>) then just download the <em>glbwarm.csv</em> from Moodle and
+don’t use the code above (material folders). Load the data into R by
+following our tutorial: <a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory">Import data from your working directory</a>, but
+remember the difference between <code>read_csv2</code> (simcolon-separated) and
+<code>read_csv</code> (comma-separated) and use the appropriate command.</p>
+<p>Familiarize yourself with the data set (<strong>Hint:</strong> use the <code>help()</code> / <code>?</code>
+function or visit this <a href="https://rdrr.io/cran/processR/man/glbwarm.html">Google page of the help
+function</a>) and then try
+to reproduce this plot with <code>dplyr</code> and <code>ggplot2</code>. (<strong>Hint:</strong> You can
+hide the legend by adding <code>theme(legend.position = "none")</code> to your
+plot.)</p>
+<p>You will need to do some data management with <code>dplyr</code> to create the
+correct labels for your <code>ggplot2</code> graph.</p>
 <p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-99-1.png" width="60%" /></p>
-<p><span style="color: darkred;"><strong>Are you stuck and don’t know where to start? Watch this video to help you get started:</strong> <a href="https://cast.itunes.uni-muenchen.de/clips/8WHWs6ao3u/vod/online.html">Click here.</a></span></p>
+<p><span style="color: darkred;"><strong>Are you stuck and don’t know where to start? Watch this video to help
+you get started:</strong> <a href="https://cast.itunes.uni-muenchen.de/clips/8WHWs6ao3u/vod/online.html">Click
+here.</a></span></p>
 </div>
 <div id="task-2-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 2<a href="exercise-3-test-your-knowledge.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, try to reproduce this graph. (<strong>Hint:</strong> You will need to recode the <em>ideology</em> variable in a way that higher values represent stronger attitudes, <em>independent of partisanship</em>.)</p>
+<p>Now, try to reproduce this graph. (<strong>Hint:</strong> You will need to recode the
+<em>ideology</em> variable in a way that higher values represent stronger
+attitudes, <em>independent of partisanship</em>.)</p>
 <p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-101-1.png" width="60%" /></p>
 </div>
 <div id="task-3-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-3-test-your-knowledge.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Can you make a chart that breaks down the relationship between <em>age</em>, <em>negative emotions about climate change</em>, and <em>ideological extremity</em> for the different <em>sexes</em> AND <em>parties</em>?</p>
-<p><span style="font-size:70%"><strong>Hint:</strong> You can play around with which variables that you want to use as <em>x</em>, <em>y</em>, and as <em>color / size</em> variables. But if you want to have a recommendation to get you started: x = age, y = negative emotions about climate change, size = ideological extremity. But other combinations are valid, too! For instance, you could decide to map x = ideological extremity and size = age.</span></p>
-<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
+<p>Can you make a chart that breaks down the relationship between <em>age</em>,
+<em>negative emotions about climate change</em>, and <em>ideological extremity</em>
+for the different <em>sexes</em> AND <em>parties</em>?</p>
+<p><span style="font-size:70%"><strong>Hint:</strong> You can play around with which variables that you want to use
+as <em>x</em>, <em>y</em>, and as <em>color / size</em> variables. But if you want to have a
+recommendation to get you started: x = age, y = negative emotions about
+climate change, size = ideological extremity. But other combinations are
+valid, too! For instance, you could decide to map x = ideological
+extremity and size = age.</span></p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
 </div>
 </div>
             </section>

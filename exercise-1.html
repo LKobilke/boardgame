@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,13 +311,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
-<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
 <li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -375,7 +377,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-1-tokenization"><i class="fa fa-check"></i>Task 1: Tokenization</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
-<li class="chapter" data-level="7.7.1" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i><b>7.7.1</b> Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -408,7 +412,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="task-1" class="section level2 unnumbered hasAnchor">
 <h2>Task 1<a href="exercise-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the correct answers. 1, 2, 3 and 4 correct answers are possible for each question.</p>
+<p>Below you will see multiple choice questions. Please try to identify the
+correct answers. 1, 2, 3 and 4 correct answers are possible for each
+question.</p>
 <p><strong>1. What panels are part of RStudio?</strong></p>
 <ul>
 <li>source</li>
@@ -430,42 +436,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>c(1,2,3)</li>
 <li>cmb(1,2,3)</li>
 </ul>
-<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements. How do you retrieve the 8th element?</strong></p>
+<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements.
+How do you retrieve the 8th element?</strong></p>
 <ul>
 <li>vector[-2]</li>
-<li>vector[„-2“]</li>
+<li>vector[„-2”]</li>
 <li>vector[8]</li>
-<li>vector[„8“]</li>
+<li>vector[„8”]</li>
 </ul>
-<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown, black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
+<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown,
+black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
 <ul>
 <li>hair[4]</li>
-<li>hair[„4“]</li>
+<li>hair[„4”]</li>
 <li>hair[blond]</li>
-<li>hair[„blond“]</li>
+<li>hair[„blond”]</li>
 </ul>
 </div>
 <div id="task-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 2<a href="exercise-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the vector. First, display all elements of the vector. Then print only the 5th element. After that, display all elements except the 5th. Finally, display the elements at the positions 6 to 8.</p>
+<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the
+vector. First, display all elements of the vector. Then print only the
+5th element. After that, display all elements except the 5th. Finally,
+display the elements at the positions 6 to 8.</p>
 </div>
 <div id="task-3" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a non-numeric, i.e. character, vector with 4 elements and assign the name <em>eye_color</em> to the vector. First, print all elements of this vector to the console. Then have only the value in the 2nd element displayed, then all values except the 2nd element. At the end, display the elements at the positions 2 to 4.</p>
+<p>Create a non-numeric, i.e. character, vector with 4 elements and assign
+the name <em>eye_color</em> to the vector. First, print all elements of this
+vector to the console. Then have only the value in the 2nd element
+displayed, then all values except the 2nd element. At the end, display
+the elements at the positions 2 to 4.</p>
 </div>
 <div id="task-4" class="section level2 unnumbered hasAnchor">
 <h2>Task 4<a href="exercise-1.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Get the <em>“data_tutorial2.csv”</em> from Moodle ( <em>4. Mai material folder</em> ) and put it into the folder that you want to use as working directory.</p>
-<p>Set your working directory and load the data into R by saving it into a source object called <em>data</em>. <strong>Note:</strong> This time, it’s a csv that is actually separated by commas, not by semicolons.</p>
+<p>Get the <em>“data_tutorial2.csv”</em> from Moodle ( <em>4. Mai material folder</em> )
+and put it into the folder that you want to use as working directory.</p>
+<p>Set your working directory and load the data into R by saving it into a
+source object called <em>data</em>. <strong>Note:</strong> This time, it’s a csv that is
+actually separated by commas, not by semicolons.</p>
 </div>
 <div id="task-5" class="section level2 unnumbered hasAnchor">
 <h2>Task 5<a href="exercise-1.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Now, print only the age column to the console. Use the <code>$</code> operator first. Then try to achieve the same result using the subsetting operators, i.e. <code>[]</code>.</p>
+<p>Now, print only the age column to the console. Use the <code>$</code> operator
+first. Then try to achieve the same result using the subsetting
+operators, i.e. <code>[]</code>.</p>
 </div>
 <div id="task-6" class="section level2 unnumbered hasAnchor">
 <h2>Task 6<a href="exercise-1.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Print only the first 6 age numbers to the console. Use the <code>$</code> operator first. Then try to achieve the same result using the subsetting operators, i.e. <code>[]</code>.</p>
-<p>When you’re ready to look at the solutions, you can find them here: <a href="solutions.html#solutions-for-exercise-1">Solutions for Exercise 1</a>.</p>
+<p>Print only the first 6 age numbers to the console. Use the <code>$</code> operator
+first. Then try to achieve the same result using the subsetting
+operators, i.e. <code>[]</code>.</p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-1">Solutions for Exercise 1</a>.</p>
 </div>
 </div>
             </section>
