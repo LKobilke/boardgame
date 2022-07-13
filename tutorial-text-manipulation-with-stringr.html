@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-08" />
+<meta name="date" content="2022-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,15 +311,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i>Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
 <li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
-<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
-<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-sentiment-over-time-using-dictionaries"><i class="fa fa-check"></i>Practice: Sentiment over time using dictionaries</a></li>
+<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-using-rule-based-analysis"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time using rule-based analysis</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.4</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -425,8 +427,7 @@ vector to the console!</p>
 <div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="tutorial-text-manipulation-with-stringr.html#cb172-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;apple&quot;</span>, <span class="st">&quot;pear&quot;</span>, <span class="st">&quot;strawberry&quot;</span>, <span class="st">&quot;raspberry&quot;</span>, <span class="st">&quot;kiwi&quot;</span>, <span class="st">&quot;rhubarb&quot;</span>)</span>
 <span id="cb172-2"><a href="tutorial-text-manipulation-with-stringr.html#cb172-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb172-3"><a href="tutorial-text-manipulation-with-stringr.html#cb172-3" aria-hidden="true" tabindex="-1"></a>fruits</span></code></pre></div>
-<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot; 
-## [6] &quot;kiwi&quot;       &quot;rhubarb&quot;</code></pre>
+<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot;  &quot;kiwi&quot;       &quot;rhubarb&quot;</code></pre>
 <p>First, we want to know how long each of these strings is, i.e., how many
 characters the elements of the fruits vector contain. We will use the
 <code>str_length()</code> function.</p>
@@ -439,9 +440,8 @@ string. We will use the <code>str_c</code> function.</p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="tutorial-text-manipulation-with-stringr.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If collapse is not NULL, it will be inserted between elements of the result, here: and</span></span></code></pre></div>
 <p>You can also change the order of the <code>str_c</code> function:</p>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="tutorial-text-manipulation-with-stringr.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">&quot;My favourite fruit is: &quot;</span>, fruits, <span class="at">collapse =</span> <span class="cn">NULL</span>) </span></code></pre></div>
-<pre><code>## [1] &quot;My favourite fruit is: banana&quot;     &quot;My favourite fruit is: apple&quot;     
-## [3] &quot;My favourite fruit is: pear&quot;       &quot;My favourite fruit is: strawberry&quot;
-## [5] &quot;My favourite fruit is: raspberry&quot;  &quot;My favourite fruit is: kiwi&quot;      
+<pre><code>## [1] &quot;My favourite fruit is: banana&quot;     &quot;My favourite fruit is: apple&quot;      &quot;My favourite fruit is: pear&quot;      
+## [4] &quot;My favourite fruit is: strawberry&quot; &quot;My favourite fruit is: raspberry&quot;  &quot;My favourite fruit is: kiwi&quot;      
 ## [7] &quot;My favourite fruit is: rhubarb&quot;</code></pre>
 <p>Let’s say, we want to extract substrings from a character vector. For
 example, we only want to keep the second to fourth letter of each
@@ -477,8 +477,7 @@ the number of patterns in each string.</p>
 <div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="tutorial-text-manipulation-with-stringr.html#cb190-1" aria-hidden="true" tabindex="-1"></a>misspelled_fruits <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(misspelled_fruits, <span class="st">&quot;anan&quot;</span>, <span class="st">&quot;nana&quot;</span>)</span>
 <span id="cb190-2"><a href="tutorial-text-manipulation-with-stringr.html#cb190-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb190-3"><a href="tutorial-text-manipulation-with-stringr.html#cb190-3" aria-hidden="true" tabindex="-1"></a>misspelled_fruits</span></code></pre></div>
-<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot; 
-## [6] &quot;kiwi&quot;       &quot;rhubarb&quot;</code></pre>
+<pre><code>## [1] &quot;banana&quot;     &quot;apple&quot;      &quot;pear&quot;       &quot;strawberry&quot; &quot;raspberry&quot;  &quot;kiwi&quot;       &quot;rhubarb&quot;</code></pre>
 <p>Perfect! We have fixed our misspelled fruits. However, keep in mind that
 pattern correction can mess up your string pretty badly if you are not
 cautious. Therefore, you should always explore your strings very
@@ -496,8 +495,7 @@ based on certain string patterns using the <code>str_split()</code>function:</p>
 <div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="tutorial-text-manipulation-with-stringr.html#cb194-1" aria-hidden="true" tabindex="-1"></a>cs_fruits <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;banana, apple, pear, strawberry, raspberry, kiwi, rhubarb, orange&quot;</span>)</span>
 <span id="cb194-2"><a href="tutorial-text-manipulation-with-stringr.html#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(cs_fruits, <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
 <pre><code>## [[1]]
-## [1] &quot;banana&quot;      &quot; apple&quot;      &quot; pear&quot;       &quot; strawberry&quot; &quot; raspberry&quot; 
-## [6] &quot; kiwi&quot;       &quot; rhubarb&quot;    &quot; orange&quot;</code></pre>
+## [1] &quot;banana&quot;      &quot; apple&quot;      &quot; pear&quot;       &quot; strawberry&quot; &quot; raspberry&quot;  &quot; kiwi&quot;       &quot; rhubarb&quot;    &quot; orange&quot;</code></pre>
 </div>
 <div id="working-with-regular-expressions" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Working with regular expressions<a href="tutorial-text-manipulation-with-stringr.html#working-with-regular-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h2>

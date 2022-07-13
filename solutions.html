@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-08" />
+<meta name="date" content="2022-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,15 +311,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.4.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps"><i class="fa fa-check"></i><b>7.4.1</b> First steps</a></li>
 <li class="chapter" data-level="7.4.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>7.4.2</b> Model estimation: Number of topics</a></li>
-<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i><b>7.4.3</b> Practice: Model estimation</a></li>
-<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.4</b> Inspect the topics</a></li>
-<li class="chapter" data-level="7.4.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.5</b> STMs</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i>Practice: Model estimation</a></li>
+<li class="chapter" data-level="7.4.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>7.4.3</b> Inspect the topics</a></li>
+<li class="chapter" data-level="7.4.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#stms"><i class="fa fa-check"></i><b>7.4.4</b> STMs</a></li>
 </ul></li>
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
 <li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
-<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
-<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-sentiment-over-time-using-dictionaries"><i class="fa fa-check"></i>Practice: Sentiment over time using dictionaries</a></li>
+<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-using-rule-based-analysis"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time using rule-based analysis</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.4</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -572,7 +574,7 @@ approach?</strong></p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="solutions.html#cb329-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
 <span id="cb329-2"><a href="solutions.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb329-3"><a href="solutions.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
+<pre><code>## # A tibble: 1 x 1
 ##   count
 ##   &lt;int&gt;
 ## 1    35</code></pre>
@@ -580,7 +582,7 @@ approach?</strong></p>
 <div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="solutions.html#cb331-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
 <span id="cb331-2"><a href="solutions.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb331-3"><a href="solutions.html#cb331-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 2
+<pre><code>## # A tibble: 1 x 2
 ##   species     n
 ##   &lt;chr&gt;   &lt;int&gt;
 ## 1 Human      35</code></pre>
@@ -594,7 +596,7 @@ approach?</strong></p>
 <span id="cb333-2"><a href="solutions.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb333-3"><a href="solutions.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, gender) <span class="sc">%&gt;%</span> </span>
 <span id="cb333-4"><a href="solutions.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
+<pre><code>## # A tibble: 2 x 3
 ## # Groups:   species [1]
 ##   species gender    count
 ##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
@@ -604,7 +606,7 @@ approach?</strong></p>
 <div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="solutions.html#cb335-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
 <span id="cb335-2"><a href="solutions.html#cb335-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb335-3"><a href="solutions.html#cb335-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, gender)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 3
+<pre><code>## # A tibble: 2 x 3
 ##   species gender        n
 ##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
 ## 1 Human   feminine      9
@@ -619,7 +621,7 @@ approach?</strong></p>
 <span id="cb337-2"><a href="solutions.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(eye_color) <span class="sc">%&gt;%</span> </span>
 <span id="cb337-3"><a href="solutions.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb337-4"><a href="solutions.html#cb337-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
-<pre><code>## # A tibble: 15 × 2
+<pre><code>## # A tibble: 15 x 2
 ##    eye_color     count
 ##    &lt;chr&gt;         &lt;int&gt;
 ##  1 brown            21
@@ -646,7 +648,7 @@ have yellow eyes? (Hint: remove all <code>NAs</code>)__</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="solutions.html#cb339-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
 <span id="cb339-2"><a href="solutions.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;yellow&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb339-3"><a href="solutions.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 1
+<pre><code>## # A tibble: 1 x 1
 ##   mean_mass
 ##       &lt;dbl&gt;
 ## 1      74.1</code></pre>
@@ -663,7 +665,7 @@ and droids. (Hint: remove all <code>NAs</code>)__</p>
 <span id="cb341-5"><a href="solutions.html#cb341-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Med =</span> <span class="fu">median</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb341-6"><a href="solutions.html#cb341-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb341-7"><a href="solutions.html#cb341-7" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 4
+<pre><code>## # A tibble: 2 x 4
 ##   species     M   Med    SD
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Droid    69.8  53.5  51.0
@@ -679,7 +681,7 @@ data frame.</p>
 <span id="cb343-3"><a href="solutions.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb343-4"><a href="solutions.html#cb343-4" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span> </span>
 <span id="cb343-5"><a href="solutions.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, mass, gr_mass)</span></code></pre></div>
-<pre><code>## # A tibble: 87 × 4
+<pre><code>## # A tibble: 87 x 4
 ##    name               species  mass gr_mass
 ##    &lt;chr&gt;              &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
 ##  1 Luke Skywalker     Human      77   77000
@@ -692,7 +694,7 @@ data frame.</p>
 ##  8 R5-D4              Droid      32   32000
 ##  9 Biggs Darklighter  Human      84   84000
 ## 10 Obi-Wan Kenobi     Human      77   77000
-## # … with 77 more rows</code></pre>
+## # ... with 77 more rows</code></pre>
 </div>
 </div>
 <div id="solutions-for-exercise-3" class="section level2 unnumbered hasAnchor">
@@ -873,7 +875,7 @@ divides the cars in three groups: light, medium, and heavy cars.</p>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="solutions.html#cb359-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
 <span id="cb359-2"><a href="solutions.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
 <span id="cb359-3"><a href="solutions.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
+<pre><code>## # A tibble: 3 x 2
 ##   wt_cat     count
 ##   &lt;chr&gt;      &lt;int&gt;
 ## 1 heavy car      9
@@ -896,7 +898,7 @@ divides the cars in three groups: light, medium, and heavy cars.</p>
 <span id="cb363-2"><a href="solutions.html#cb363-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
 <span id="cb363-3"><a href="solutions.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
 <span id="cb363-4"><a href="solutions.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 2
+<pre><code>## # A tibble: 3 x 2
 ##   wt_cat     count
 ##   &lt;chr&gt;      &lt;int&gt;
 ## 1 medium car    13
@@ -1048,14 +1050,10 @@ Motoren Werke.</p>
 <span id="cb374-2"><a href="solutions.html#cb374-2" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;BMW&quot;</span>, <span class="st">&quot;Bayerische Motoren Werke&quot;</span>)</span>
 <span id="cb374-3"><a href="solutions.html#cb374-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb374-4"><a href="solutions.html#cb374-4" aria-hidden="true" tabindex="-1"></a>cars</span></code></pre></div>
-<pre><code>##  [1] &quot;Volkswagen&quot;               &quot;Mercedes-Benz&quot;           
-##  [3] &quot;Bayerische Motoren Werke&quot; &quot;Audi&quot;                    
-##  [5] &quot;Opel&quot;                     &quot;Skoda&quot;                   
-##  [7] &quot;Ford&quot;                     &quot;Seat&quot;                    
-##  [9] &quot;Cupra&quot;                    &quot;Hyundai&quot;                 
-## [11] &quot;Renault&quot;                  &quot;Fiat&quot;                    
-## [13] &quot;Toyota&quot;                   &quot;Peugeot&quot;                 
-## [15] &quot;Volvo&quot;</code></pre>
+<pre><code>##  [1] &quot;Volkswagen&quot;               &quot;Mercedes-Benz&quot;            &quot;Bayerische Motoren Werke&quot; &quot;Audi&quot;                    
+##  [5] &quot;Opel&quot;                     &quot;Skoda&quot;                    &quot;Ford&quot;                     &quot;Seat&quot;                    
+##  [9] &quot;Cupra&quot;                    &quot;Hyundai&quot;                  &quot;Renault&quot;                  &quot;Fiat&quot;                    
+## [13] &quot;Toyota&quot;                   &quot;Peugeot&quot;                  &quot;Volvo&quot;</code></pre>
 </div>
 <div id="task-3-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1068,13 +1066,10 @@ names. Find all car brands that use cacophonic sounds despite these
 warnings.</p>
 <p><em>Solution:</em></p>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="solutions.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(cars,<span class="st">&quot;[fvszhFVSZH]&quot;</span>)</span></code></pre></div>
-<pre><code>##  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
-## [13] FALSE FALSE  TRUE</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="solutions.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(cars,<span class="st">&quot;[fvszhFVSZH]&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Volkswagen&quot;               &quot;Mercedes-Benz&quot;           
-## [3] &quot;Bayerische Motoren Werke&quot; &quot;Skoda&quot;                   
-## [5] &quot;Ford&quot;                     &quot;Seat&quot;                    
-## [7] &quot;Hyundai&quot;                  &quot;Fiat&quot;                    
+<pre><code>## [1] &quot;Volkswagen&quot;               &quot;Mercedes-Benz&quot;            &quot;Bayerische Motoren Werke&quot; &quot;Skoda&quot;                   
+## [5] &quot;Ford&quot;                     &quot;Seat&quot;                     &quot;Hyundai&quot;                  &quot;Fiat&quot;                    
 ## [9] &quot;Volvo&quot;</code></pre>
 <p>Six car brands do not use cacophonic sounds, whereas nine do. It would
 appear that cacophonic sounds are not exactly being avoided.</p>
@@ -1094,11 +1089,9 @@ Volvo use two cacophonic sounds.</p>
 <p>Which brand names begin with a cacophonic sound?</p>
 <p><em>Solution:</em></p>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="solutions.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(cars, <span class="st">&quot;^[FVSZH]&quot;</span>)</span></code></pre></div>
-<pre><code>##  [1]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
-## [13] FALSE FALSE  TRUE</code></pre>
+<pre><code>##  [1]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE</code></pre>
 <div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="solutions.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(cars, <span class="st">&quot;^[FVSZH]&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Volkswagen&quot; &quot;Skoda&quot;      &quot;Ford&quot;       &quot;Seat&quot;       &quot;Hyundai&quot;   
-## [6] &quot;Fiat&quot;       &quot;Volvo&quot;</code></pre>
+<pre><code>## [1] &quot;Volkswagen&quot; &quot;Skoda&quot;      &quot;Ford&quot;       &quot;Seat&quot;       &quot;Hyundai&quot;    &quot;Fiat&quot;       &quot;Volvo&quot;</code></pre>
 <p>Seven car brands start with a cacophonic sound: Volkswagen, Skoda, Ford,
 Seat, Hyundai, Fiat, and Volvo.</p>
 </div>
@@ -1107,8 +1100,7 @@ Seat, Hyundai, Fiat, and Volvo.</p>
 <p>Which brand names end with a cacophonic sound?</p>
 <p><em>Solution:</em></p>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="solutions.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(cars, <span class="st">&quot;[fvszh]$&quot;</span>)</span></code></pre></div>
-<pre><code>##  [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [13] FALSE FALSE FALSE</code></pre>
+<pre><code>##  [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="solutions.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(cars, <span class="st">&quot;[fvszh]$&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Mercedes-Benz&quot;</code></pre>
 <p>Only one car brand ends with a cacophonic sound: Mercedes-Benz.</p>
@@ -1126,14 +1118,10 @@ cacophonic sounds 2 times.</p>
 <span id="cb390-3"><a href="solutions.html#cb390-3" aria-hidden="true" tabindex="-1"></a>cars <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(cars, <span class="st">&quot;[FVSZH]+&quot;</span>, <span class="st">&quot;R&quot;</span>)</span>
 <span id="cb390-4"><a href="solutions.html#cb390-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-5"><a href="solutions.html#cb390-5" aria-hidden="true" tabindex="-1"></a>cars</span></code></pre></div>
-<pre><code>##  [1] &quot;Rolklwagen&quot;               &quot;Mercedel-Benl&quot;           
-##  [3] &quot;Bayerilcle Motoren Werke&quot; &quot;Audi&quot;                    
-##  [5] &quot;Opel&quot;                     &quot;Rkoda&quot;                   
-##  [7] &quot;Rord&quot;                     &quot;Reat&quot;                    
-##  [9] &quot;Cupra&quot;                    &quot;Ryundai&quot;                 
-## [11] &quot;Renault&quot;                  &quot;Riat&quot;                    
-## [13] &quot;Toyota&quot;                   &quot;Peugeot&quot;                 
-## [15] &quot;Rollo&quot;</code></pre>
+<pre><code>##  [1] &quot;Rolklwagen&quot;               &quot;Mercedel-Benl&quot;            &quot;Bayerilcle Motoren Werke&quot; &quot;Audi&quot;                    
+##  [5] &quot;Opel&quot;                     &quot;Rkoda&quot;                    &quot;Rord&quot;                     &quot;Reat&quot;                    
+##  [9] &quot;Cupra&quot;                    &quot;Ryundai&quot;                  &quot;Renault&quot;                  &quot;Riat&quot;                    
+## [13] &quot;Toyota&quot;                   &quot;Peugeot&quot;                  &quot;Rollo&quot;</code></pre>
 <p>That worked! Mercedel-Benl and Rollo are definitely my personal
 favorites.</p>
 </div>
@@ -1376,20 +1364,20 @@ interpretation of the topics?</p>
 <span id="cb400-5"><a href="solutions.html#cb400-5" aria-hidden="true" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
 <span id="cb400-6"><a href="solutions.html#cb400-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb400-7"><a href="solutions.html#cb400-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
-<pre><code>## # A tibble: 15,094 × 3
+<pre><code>## # A tibble: 15,094 x 3
 ##    document topic gamma
 ##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
-##  1 7311         1 0.368
-##  2 15603        1 0.363
-##  3 9080         1 0.361
-##  4 12830        1 0.358
-##  5 4943         1 0.358
+##  1 7311         1 0.370
+##  2 15603        1 0.365
+##  3 2189         1 0.359
+##  4 14259        1 0.359
+##  5 4943         1 0.357
 ##  6 5316         1 0.357
-##  7 2189         1 0.357
-##  8 339          1 0.356
-##  9 14259        1 0.356
-## 10 10009        1 0.355
-## # … with 15,084 more rows</code></pre>
+##  7 339          1 0.357
+##  8 2599         1 0.356
+##  9 9080         1 0.356
+## 10 890          1 0.356
+## # ... with 15,084 more rows</code></pre>
 <div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="solutions.html#cb402-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb402-2"><a href="solutions.html#cb402-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text) <span class="sc">%&gt;%</span> </span>
 <span id="cb402-3"><a href="solutions.html#cb402-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">10277</span>) <span class="sc">%&gt;%</span> </span>
@@ -1412,20 +1400,20 @@ interpretation of the topics?</p>
 <span id="cb408-2"><a href="solutions.html#cb408-2" aria-hidden="true" tabindex="-1"></a>tidy_lda2 <span class="sc">%&gt;%</span></span>
 <span id="cb408-3"><a href="solutions.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb408-4"><a href="solutions.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gamma))</span></code></pre></div>
-<pre><code>## # A tibble: 15,094 × 3
+<pre><code>## # A tibble: 15,094 x 3
 ##    document topic gamma
 ##    &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;
-##  1 15016        3 0.363
-##  2 8575         3 0.359
-##  3 1839         3 0.358
-##  4 7928         3 0.358
-##  5 13698        3 0.357
-##  6 8327         3 0.356
-##  7 4053         3 0.355
-##  8 12762        3 0.355
-##  9 8023         3 0.355
-## 10 3069         3 0.355
-## # … with 15,084 more rows</code></pre>
+##  1 15016        3 0.364
+##  2 1839         3 0.360
+##  3 8575         3 0.360
+##  4 7928         3 0.359
+##  5 13698        3 0.359
+##  6 4510         3 0.358
+##  7 8327         3 0.358
+##  8 1164         3 0.358
+##  9 12762        3 0.357
+## 10 4053         3 0.357
+## # ... with 15,084 more rows</code></pre>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="solutions.html#cb410-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb410-2"><a href="solutions.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text) <span class="sc">%&gt;%</span> </span>
 <span id="cb410-3"><a href="solutions.html#cb410-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tweet <span class="sc">==</span> <span class="dv">7002</span>) <span class="sc">%&gt;%</span> </span>
@@ -1447,17 +1435,20 @@ interpretation of the topics?</p>
 </div>
 <div id="task-8-sentiment-over-time" class="section level4 hasAnchor" number="7.7.0.2">
 <h4><span class="header-section-number">7.7.0.2</span> Task 8: Sentiment over time<a href="solutions.html#task-8-sentiment-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Alright, we are ready to perform a sentiment analysis for the Kliemann data. Again, we cannot use the <code>tidytext</code> dictionaries because they were developed only for the English language. However, I’ve prepared a German dictionary for you that is based on <a href="https://www.tandfonline.com/doi/full/10.1080/19331681.2018.1485608">this article by Christian Rauh</a>. You can find the dictionary as a .csv on Moodle. Use it to analyze the sentiment of the Kliemann data over time. <strong>Hint:</strong> You will need to follow the sum(value) approach that I used on the <code>afinn</code> dictionary.</p>
+<p>Alright, we are ready to perform a sentiment analysis for the Kliemann data. Again, we cannot use the <code>tidytext</code> dictionaries because they were developed only for the English language. However, I’ve prepared a German dictionary for you that is based on <a href="https://www.tandfonline.com/doi/full/10.1080/19331681.2018.1485608">this article by Christian Rauh</a>. You can find the dictionary as a .csv on Moodle. Use it to analyze the sentiment of the Kliemann data over time. <strong>Hint:</strong> You will need to follow the sum(value) approach that I used on the <code>afinn</code> dictionary because the dictionary comes with a <code>value</code> column (metric variable) instead of a <code>sentiment</code> column (nominal variable).</p>
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="solutions.html#cb416-1" aria-hidden="true" tabindex="-1"></a>sentiWS <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;SentiWS_Rauh_dictionary.csv&quot;</span>)</span>
 <span id="cb416-2"><a href="solutions.html#cb416-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb416-3"><a href="solutions.html#cb416-3" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="sc">%&gt;%</span></span>
 <span id="cb416-4"><a href="solutions.html#cb416-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(sentiWS) <span class="sc">%&gt;%</span></span>
 <span id="cb416-5"><a href="solutions.html#cb416-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
-<span id="cb416-6"><a href="solutions.html#cb416-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb416-7"><a href="solutions.html#cb416-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;SentiWS (Rauh) dictionary&quot;</span>) <span class="sc">+</span></span>
-<span id="cb416-8"><a href="solutions.html#cb416-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb416-9"><a href="solutions.html#cb416-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb416-6"><a href="solutions.html#cb416-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">sentiment =</span> <span class="fu">sum</span>(value)) <span class="sc">%&gt;%</span></span>
+<span id="cb416-7"><a href="solutions.html#cb416-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb416-8"><a href="solutions.html#cb416-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb416-9"><a href="solutions.html#cb416-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;SentiWS (Rauh) dictionary&quot;</span>) <span class="sc">+</span></span>
+<span id="cb416-10"><a href="solutions.html#cb416-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb416-11"><a href="solutions.html#cb416-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="PR-Erfolgskontrolle_files/figure-html/unnamed-chunk-235-1.png" width="672" /></p>
+<p>This graph looks as if the debate around Kliemann was polarized, i.e., that negative buzz also produced positive counterarguing (at least most of the time).</p>
 
 </div>
 </div>
