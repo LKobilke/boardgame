@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2022-07-13" />
+<meta name="date" content="2022-07-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,10 +318,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-analysis"><i class="fa fa-check"></i><b>7.5</b> Sentiment analysis</a>
 <ul>
 <li class="chapter" data-level="7.5.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time"><i class="fa fa-check"></i><b>7.5.1</b> Sentiment over time</a></li>
-<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-sentiment-over-time-using-dictionaries"><i class="fa fa-check"></i>Practice: Sentiment over time using dictionaries</a></li>
-<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-using-rule-based-analysis"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time using rule-based analysis</a></li>
-<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment over time periods</a></li>
-<li class="chapter" data-level="7.5.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.4</b> Sentiment of individual users</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-sentiment-over-time"><i class="fa fa-check"></i>Practice: Sentiment over time</a></li>
+<li class="chapter" data-level="7.5.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-over-time-periods"><i class="fa fa-check"></i><b>7.5.2</b> Sentiment over time periods</a></li>
+<li class="chapter" data-level="7.5.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#sentiment-of-individual-users"><i class="fa fa-check"></i><b>7.5.3</b> Sentiment of individual users</a></li>
 </ul></li>
 <li class="chapter" data-level="7.6" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#take-aways-6"><i class="fa fa-check"></i><b>7.6</b> Take-Aways</a></li>
 <li class="chapter" data-level="7.7" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#additional-tutorials-6"><i class="fa fa-check"></i><b>7.7</b> Additional tutorials</a></li>
@@ -382,6 +381,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-word-topic-probabilities"><i class="fa fa-check"></i>Task 6: Word-topic probabilities</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-7-document-topic-probabilities"><i class="fa fa-check"></i>Task 7: Document-topic probabilities</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-8-sentiment-over-time"><i class="fa fa-check"></i>Task 8: Sentiment over time</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-9-sentiment-over-time-periods"><i class="fa fa-check"></i>Task 9: Sentiment over time periods</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -480,7 +482,7 @@ own way.</p>
 <p><strong>Take a look at the table below. It shows a Starwars data set that
 comes pre-installed with the dplyr package. Do you feel the tabled data
 is messy? Why (not)?</strong></p>
-<pre><code>## # A tibble: 10 x 3
+<pre><code>## # A tibble: 10 × 3
 ##    name                  body_feature value
 ##    &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt;
 ##  1 Anakin Skywalker      height         188
@@ -508,7 +510,7 @@ weight of the Star Wars characters since the height values are also
 stored there.</li>
 </ol>
 <p><strong>What do you think of this table? Is it messy?</strong></p>
-<pre><code>## # A tibble: 5 x 3
+<pre><code>## # A tibble: 5 × 3
 ##   name                  height  mass
 ##   &lt;chr&gt;                  &lt;int&gt; &lt;dbl&gt;
 ## 1 Anakin Skywalker         188    84
@@ -645,26 +647,27 @@ frame:</p>
 <span id="cb81-2"><a href="tutorial-data-management-with-tidyverse.html#cb81-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars <span class="co"># assign the pre-installed starwars data from dplyr to a source object / variable</span></span>
 <span id="cb81-3"><a href="tutorial-data-management-with-tidyverse.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-4"><a href="tutorial-data-management-with-tidyverse.html#cb81-4" aria-hidden="true" tabindex="-1"></a>starwars_data             <span class="co"># print the content of the data frame to the console</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 14
-##    name        height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species films vehicles
-##    &lt;chr&gt;        &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;lis&gt; &lt;list&gt;  
-##  1 Luke Skywa~    172    77 blond      fair       blue            19   male  mascu~ Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   
-##  2 C-3PO          167    75 &lt;NA&gt;       gold       yellow         112   none  mascu~ Tatooine  Droid   &lt;chr&gt; &lt;chr&gt;   
-##  3 R2-D2           96    32 &lt;NA&gt;       white, bl~ red             33   none  mascu~ Naboo     Droid   &lt;chr&gt; &lt;chr&gt;   
-##  4 Darth Vader    202   136 none       white      yellow          41.9 male  mascu~ Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   
-##  5 Leia Organa    150    49 brown      light      brown           19   fema~ femin~ Alderaan  Human   &lt;chr&gt; &lt;chr&gt;   
-##  6 Owen Lars      178   120 brown, gr~ light      blue            52   male  mascu~ Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   
-##  7 Beru White~    165    75 brown      light      blue            47   fema~ femin~ Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   
-##  8 R5-D4           97    32 &lt;NA&gt;       white, red red             NA   none  mascu~ Tatooine  Droid   &lt;chr&gt; &lt;chr&gt;   
-##  9 Biggs Dark~    183    84 black      light      brown           24   male  mascu~ Tatooine  Human   &lt;chr&gt; &lt;chr&gt;   
-## 10 Obi-Wan Ke~    182    77 auburn, w~ fair       blue-gray       57   male  mascu~ Stewjon   Human   &lt;chr&gt; &lt;chr&gt;   
-## # ... with 77 more rows, and 1 more variable: starships &lt;list&gt;</code></pre>
+<pre><code>## # A tibble: 87 × 14
+##    name     height  mass hair_color skin_color eye_color birth_year sex   gender
+##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; 
+##  1 Luke Sk…    172    77 blond      fair       blue            19   male  mascu…
+##  2 C-3PO       167    75 &lt;NA&gt;       gold       yellow         112   none  mascu…
+##  3 R2-D2        96    32 &lt;NA&gt;       white, bl… red             33   none  mascu…
+##  4 Darth V…    202   136 none       white      yellow          41.9 male  mascu…
+##  5 Leia Or…    150    49 brown      light      brown           19   fema… femin…
+##  6 Owen La…    178   120 brown, gr… light      blue            52   male  mascu…
+##  7 Beru Wh…    165    75 brown      light      blue            47   fema… femin…
+##  8 R5-D4        97    32 &lt;NA&gt;       white, red red             NA   none  mascu…
+##  9 Biggs D…    183    84 black      light      brown           24   male  mascu…
+## 10 Obi-Wan…    182    77 auburn, w… fair       blue-gray       57   male  mascu…
+## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;,
+## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;</code></pre>
 <p>For the sake of practice, let’s say we only want to analyze the
 <em>species</em>, <em>birth_year</em>, <em>mass</em>, and <em>height</em> of these characters. To
 simplify data handling, we want to keep only the respective columns.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="tutorial-data-management-with-tidyverse.html#cb83-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span>                                 <span class="co"># define the source object</span></span>
 <span id="cb83-2"><a href="tutorial-data-management-with-tidyverse.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, birth_year, mass, height) <span class="co"># keep only the name, species, birth_year, mass and height column</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 5
+<pre><code>## # A tibble: 87 × 5
 ##    name               species birth_year  mass height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Luke Skywalker     Human         19      77    172
@@ -677,7 +680,7 @@ simplify data handling, we want to keep only the respective columns.</p>
 ##  8 R5-D4              Droid         NA      32     97
 ##  9 Biggs Darklighter  Human         24      84    183
 ## 10 Obi-Wan Kenobi     Human         57      77    182
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>At the moment you have only printed the transformed data to the console.
 However, most of the time we want to keep the transformed data ready for
 further calculations. In this case we should assign the transformed data
@@ -686,7 +689,7 @@ into a new source object, which we can access later.</p>
 <span id="cb85-2"><a href="tutorial-data-management-with-tidyverse.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, birth_year, mass, height)     <span class="co"># keep only the name, species, birth_year, mass and height column</span></span></code></pre></div>
 <p>Let’s print the new source object, <em>starwars_short</em>, to the console.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="tutorial-data-management-with-tidyverse.html#cb86-1" aria-hidden="true" tabindex="-1"></a>starwars_short</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 5
+<pre><code>## # A tibble: 87 × 5
 ##    name               species birth_year  mass height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Luke Skywalker     Human         19      77    172
@@ -699,13 +702,13 @@ into a new source object, which we can access later.</p>
 ##  8 R5-D4              Droid         NA      32     97
 ##  9 Biggs Darklighter  Human         24      84    183
 ## 10 Obi-Wan Kenobi     Human         57      77    182
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>You can also delete columns by making a reverse selection with the <em>-
 symbol</em>. This means that you select all columns except the one whose
 name you specify.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="tutorial-data-management-with-tidyverse.html#cb88-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span>                     </span>
 <span id="cb88-2"><a href="tutorial-data-management-with-tidyverse.html#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name)                      <span class="co"># keep all columns except the name column (i.e. delete name column)</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 4
+<pre><code>## # A tibble: 87 × 4
 ##    species birth_year  mass height
 ##    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Human         19      77    172
@@ -718,11 +721,11 @@ name you specify.</p>
 ##  8 Droid         NA      32     97
 ##  9 Human         24      84    183
 ## 10 Human         57      77    182
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>You can delete more than one column in one go:</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="tutorial-data-management-with-tidyverse.html#cb90-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span>                     </span>
 <span id="cb90-2"><a href="tutorial-data-management-with-tidyverse.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(name,species))           <span class="co"># keep all columns except the name &amp; species column (i.e. delete these columns)</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 3
+<pre><code>## # A tibble: 87 × 3
 ##    birth_year  mass height
 ##         &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1       19      77    172
@@ -735,12 +738,12 @@ name you specify.</p>
 ##  8       NA      32     97
 ##  9       24      84    183
 ## 10       57      77    182
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p><strong>Tip for advanced users:</strong> You can select columns and rename them at
 the same time.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="tutorial-data-management-with-tidyverse.html#cb92-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span>                     </span>
 <span id="cb92-2"><a href="tutorial-data-management-with-tidyverse.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&quot;character&quot;</span><span class="ot">=</span>name, <span class="st">&quot;age&quot;</span><span class="ot">=</span>birth_year)      <span class="co"># select columns that you want to keep &amp; rename them</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 2
+<pre><code>## # A tibble: 87 × 2
 ##    character            age
 ##    &lt;chr&gt;              &lt;dbl&gt;
 ##  1 Luke Skywalker      19  
@@ -753,7 +756,7 @@ the same time.</p>
 ##  8 R5-D4               NA  
 ##  9 Biggs Darklighter   24  
 ## 10 Obi-Wan Kenobi      57  
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 </div>
 <div id="filter" class="section level3 hasAnchor" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> filter()<a href="tutorial-data-management-with-tidyverse.html#filter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -764,7 +767,7 @@ The name of the data frame is the source object, followed by the pipe
 <em>starwars_short</em>:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="tutorial-data-management-with-tidyverse.html#cb94-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb94-2"><a href="tutorial-data-management-with-tidyverse.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 35 x 5
+<pre><code>## # A tibble: 35 × 5
 ##    name               species birth_year  mass height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Luke Skywalker     Human         19      77    172
@@ -777,12 +780,12 @@ The name of the data frame is the source object, followed by the pipe
 ##  8 Anakin Skywalker   Human         41.9    84    188
 ##  9 Wilhuff Tarkin     Human         64      NA    180
 ## 10 Han Solo           Human         29      80    180
-## # ... with 25 more rows</code></pre>
+## # … with 25 more rows</code></pre>
 <p>And now let’s only select Star Wars character who are younger than 24 or
 exactly 24 years old.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="tutorial-data-management-with-tidyverse.html#cb96-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb96-2"><a href="tutorial-data-management-with-tidyverse.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(birth_year<span class="sc">&lt;=</span><span class="dv">24</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 7 x 5
+<pre><code>## # A tibble: 7 × 5
 ##   name                  species birth_year  mass height
 ##   &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ## 1 Luke Skywalker        Human           19    77    172
@@ -796,7 +799,7 @@ exactly 24 years old.</p>
 <em>Droid</em> and older than 24.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="tutorial-data-management-with-tidyverse.html#cb98-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb98-2"><a href="tutorial-data-management-with-tidyverse.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span> <span class="sc">&amp;</span> birth_year <span class="sc">&gt;</span> <span class="dv">24</span>)   <span class="co"># &amp; --&gt; filter all observations to which both logical statements apply</span></span></code></pre></div>
-<pre><code>## # A tibble: 2 x 5
+<pre><code>## # A tibble: 2 × 5
 ##   name  species birth_year  mass height
 ##   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ## 1 C-3PO Droid          112    75    167
@@ -805,7 +808,7 @@ exactly 24 years old.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="tutorial-data-management-with-tidyverse.html#cb100-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb100-2"><a href="tutorial-data-management-with-tidyverse.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb100-3"><a href="tutorial-data-management-with-tidyverse.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(birth_year <span class="sc">&gt;</span> <span class="dv">24</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 5
+<pre><code>## # A tibble: 2 × 5
 ##   name  species birth_year  mass height
 ##   &lt;chr&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ## 1 C-3PO Droid          112    75    167
@@ -831,7 +834,7 @@ the <em>!=</em> operator (read <em>!=</em> as: <em>is not</em> or <em>is unequal
 example, you can choose to include only non-human Star Wars characters.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="tutorial-data-management-with-tidyverse.html#cb102-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb102-2"><a href="tutorial-data-management-with-tidyverse.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">!=</span><span class="st">&quot;Human&quot;</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 48 x 5
+<pre><code>## # A tibble: 48 × 5
 ##    name                  species        birth_year  mass height
 ##    &lt;chr&gt;                 &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 C-3PO                 Droid                 112    75    167
@@ -844,12 +847,12 @@ example, you can choose to include only non-human Star Wars characters.</p>
 ##  8 IG-88                 Droid                  15   140    200
 ##  9 Bossk                 Trandoshan             53   113    190
 ## 10 Ackbar                Mon Calamari           41    83    180
-## # ... with 38 more rows</code></pre>
+## # … with 38 more rows</code></pre>
 <p>Alternatively, you achieve the same goal by negating the entire function
 call. Negating the entire function call can be handy at times.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="tutorial-data-management-with-tidyverse.html#cb104-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb104-2"><a href="tutorial-data-management-with-tidyverse.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(species<span class="sc">==</span><span class="st">&quot;Human&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 48 x 5
+<pre><code>## # A tibble: 48 × 5
 ##    name                  species        birth_year  mass height
 ##    &lt;chr&gt;                 &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 C-3PO                 Droid                 112    75    167
@@ -862,12 +865,12 @@ call. Negating the entire function call can be handy at times.</p>
 ##  8 IG-88                 Droid                  15   140    200
 ##  9 Bossk                 Trandoshan             53   113    190
 ## 10 Ackbar                Mon Calamari           41    83    180
-## # ... with 38 more rows</code></pre>
+## # … with 38 more rows</code></pre>
 <p><strong>Tip for advanced users 2:</strong> You can filter for missing values (NAs)
 with the <code>is.na()</code> function.</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="tutorial-data-management-with-tidyverse.html#cb106-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb106-2"><a href="tutorial-data-management-with-tidyverse.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(birth_year))</span></code></pre></div>
-<pre><code>## # A tibble: 44 x 5
+<pre><code>## # A tibble: 44 × 5
 ##    name             species   birth_year  mass height
 ##    &lt;chr&gt;            &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 R5-D4            Droid             NA    32     97
@@ -880,12 +883,12 @@ with the <code>is.na()</code> function.</p>
 ##  8 Ric Olié         &lt;NA&gt;              NA    NA    183
 ##  9 Watto            Toydarian         NA    NA    137
 ## 10 Sebulba          Dug               NA    40    112
-## # ... with 34 more rows</code></pre>
+## # … with 34 more rows</code></pre>
 <p>And you can negate that filter to get rid of all observation that have
 missing values (NAs).</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="tutorial-data-management-with-tidyverse.html#cb108-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb108-2"><a href="tutorial-data-management-with-tidyverse.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(birth_year))</span></code></pre></div>
-<pre><code>## # A tibble: 43 x 5
+<pre><code>## # A tibble: 43 × 5
 ##    name               species birth_year  mass height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Luke Skywalker     Human         19      77    172
@@ -898,7 +901,7 @@ missing values (NAs).</p>
 ##  8 Biggs Darklighter  Human         24      84    183
 ##  9 Obi-Wan Kenobi     Human         57      77    182
 ## 10 Anakin Skywalker   Human         41.9    84    188
-## # ... with 33 more rows</code></pre>
+## # … with 33 more rows</code></pre>
 <p><strong>Tip for advanced users 3:</strong> Watch out for the <em>| operator</em> (read:
 <em>or</em>). This one can be tricky to negate!</p>
 <p>For example, with this code you get all characters that are NEITHER
@@ -906,7 +909,7 @@ human NOR older than 33 years. I.e. you get all non-human characters who
 are younger than 33 or exactly 33 years old.</p>
 <div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="tutorial-data-management-with-tidyverse.html#cb110-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb110-2"><a href="tutorial-data-management-with-tidyverse.html#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>((species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">|</span> (birth_year <span class="sc">&gt;</span> <span class="dv">33</span>)))</span></code></pre></div>
-<pre><code>## # A tibble: 4 x 5
+<pre><code>## # A tibble: 4 × 5
 ##   name                  species birth_year  mass height
 ##   &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ## 1 R2-D2                 Droid           33    32     96
@@ -918,7 +921,7 @@ non-human (regardless of their age) OR humans who are older than 33
 years old.</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="tutorial-data-management-with-tidyverse.html#cb112-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb112-2"><a href="tutorial-data-management-with-tidyverse.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">|</span> (birth_year <span class="sc">&gt;</span> <span class="dv">33</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 67 x 5
+<pre><code>## # A tibble: 67 × 5
 ##    name               species birth_year  mass height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 C-3PO              Droid        112      75    167
@@ -931,7 +934,7 @@ years old.</p>
 ##  8 Anakin Skywalker   Human         41.9    84    188
 ##  9 Wilhuff Tarkin     Human         64      NA    180
 ## 10 Chewbacca          Wookiee      200     112    228
-## # ... with 57 more rows</code></pre>
+## # … with 57 more rows</code></pre>
 </div>
 <div id="arrange" class="section level3 hasAnchor" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> arrange()<a href="tutorial-data-management-with-tidyverse.html#arrange" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -944,7 +947,7 @@ from 1:100 (numeric vector) and from A:Z (character vector). <code>arrange()</co
 must always be applied to at least one column that is to be sorted.</p>
 <div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="tutorial-data-management-with-tidyverse.html#cb114-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb114-2"><a href="tutorial-data-management-with-tidyverse.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(birth_year)</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 5
+<pre><code>## # A tibble: 87 × 5
 ##    name                  species birth_year  mass height
 ##    &lt;chr&gt;                 &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Wicket Systri Warrick Ewok           8    20       88
@@ -957,11 +960,11 @@ must always be applied to at least one column that is to be sorted.</p>
 ##  8 Han Solo              Human         29    80      180
 ##  9 Lando Calrissian      Human         31    79      177
 ## 10 Boba Fett             Human         31.5  78.2    183
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>To get a descending order:</p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="tutorial-data-management-with-tidyverse.html#cb116-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb116-2"><a href="tutorial-data-management-with-tidyverse.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(birth_year))</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 5
+<pre><code>## # A tibble: 87 × 5
 ##    name                  species        birth_year  mass height
 ##    &lt;chr&gt;                 &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Yoda                  Yoda&#39;s species        896    17     66
@@ -974,12 +977,12 @@ must always be applied to at least one column that is to be sorted.</p>
 ##  8 Finis Valorum         Human                  91    NA    170
 ##  9 Palpatine             Human                  82    75    170
 ## 10 Cliegg Lars           Human                  82    NA    183
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>If you specify more than one column, then subsequent columns are used to
 break ties. Also note that missing values are always displayed last:</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="tutorial-data-management-with-tidyverse.html#cb118-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb118-2"><a href="tutorial-data-management-with-tidyverse.html#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(species, birth_year)</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 5
+<pre><code>## # A tibble: 87 × 5
 ##    name            species  birth_year  mass height
 ##    &lt;chr&gt;           &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;
 ##  1 Ratts Tyerell   Aleena           NA    15     79
@@ -992,7 +995,7 @@ break ties. Also note that missing values are always displayed last:</p>
 ##  8 C-3PO           Droid           112    75    167
 ##  9 R5-D4           Droid            NA    32     97
 ## 10 R4-P17          Droid            NA    NA     96
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 </div>
 <div id="mutate" class="section level3 hasAnchor" number="4.5.4">
 <h3><span class="header-section-number">4.5.4</span> mutate()<a href="tutorial-data-management-with-tidyverse.html#mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1009,7 +1012,7 @@ future (and not just print it to the console).</p>
 <span id="cb120-2"><a href="tutorial-data-management-with-tidyverse.html#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m_height=</span>height<span class="sc">/</span><span class="dv">100</span>)            <span class="co"># creates the new variable &quot;m_height&quot; and adds it to the end of the data frame</span></span>
 <span id="cb120-3"><a href="tutorial-data-management-with-tidyverse.html#cb120-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb120-4"><a href="tutorial-data-management-with-tidyverse.html#cb120-4" aria-hidden="true" tabindex="-1"></a>starwars_short                           <span class="co"># print the data to your console to inspect the new column</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 6
+<pre><code>## # A tibble: 87 × 6
 ##    name               species birth_year  mass height m_height
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt;
 ##  1 Luke Skywalker     Human         19      77    172     1.72
@@ -1022,7 +1025,7 @@ future (and not just print it to the console).</p>
 ##  8 R5-D4              Droid         NA      32     97     0.97
 ##  9 Biggs Darklighter  Human         24      84    183     1.83
 ## 10 Obi-Wan Kenobi     Human         57      77    182     1.82
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>Let’s calculate the BMI of the Star Wars characters with the BMI formula
 and the newly created <em>m_height</em> variable. Save the changes to your data
 frame by assigning the source object back to itself.</p>
@@ -1030,7 +1033,7 @@ frame by assigning the source object back to itself.</p>
 <span id="cb122-2"><a href="tutorial-data-management-with-tidyverse.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">BMI=</span> mass<span class="sc">/</span>m_height<span class="sc">^</span><span class="dv">2</span>)           <span class="co"># creates the new variable &quot;BMI&quot; and adds it to the end of the data frame</span></span>
 <span id="cb122-3"><a href="tutorial-data-management-with-tidyverse.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb122-4"><a href="tutorial-data-management-with-tidyverse.html#cb122-4" aria-hidden="true" tabindex="-1"></a>starwars_short                           <span class="co"># print the data to your console to inspect the new column</span></span></code></pre></div>
-<pre><code>## # A tibble: 87 x 7
+<pre><code>## # A tibble: 87 × 7
 ##    name               species birth_year  mass height m_height   BMI
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;
 ##  1 Luke Skywalker     Human         19      77    172     1.72  26.0
@@ -1043,7 +1046,7 @@ frame by assigning the source object back to itself.</p>
 ##  8 R5-D4              Droid         NA      32     97     0.97  34.0
 ##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1
 ## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p><code>mutate()</code> does not merely work with mathematical operators. You can
 also categorize numeric variables with the <code>case_when</code> function, which
 is part of the <code>mutate()</code> function.</p>
@@ -1057,7 +1060,7 @@ is part of the <code>mutate()</code> function.</p>
 <span id="cb124-8"><a href="tutorial-data-management-with-tidyverse.html#cb124-8" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb124-9"><a href="tutorial-data-management-with-tidyverse.html#cb124-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb124-10"><a href="tutorial-data-management-with-tidyverse.html#cb124-10" aria-hidden="true" tabindex="-1"></a>starwars_short</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 8
+<pre><code>## # A tibble: 87 × 8
 ##    name               species birth_year  mass height m_height   BMI age_cat   
 ##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
 ##  1 Luke Skywalker     Human         19      77    172     1.72  26.0 very young
@@ -1070,7 +1073,7 @@ is part of the <code>mutate()</code> function.</p>
 ##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;      
 ##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young     
 ## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged  
-## # ... with 77 more rows</code></pre>
+## # … with 77 more rows</code></pre>
 <p>Finally, you can recode variables by using the <code>recode()</code> function,
 which is part of the <code>mutate()</code> function. Let’s be crazy and recode all
 droids as robots<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> and save the result in a new variable called
@@ -1083,20 +1086,20 @@ retired in the future (use <code>case_when</code> instead).</p>
 <span id="cb126-3"><a href="tutorial-data-management-with-tidyverse.html#cb126-3" aria-hidden="true" tabindex="-1"></a>    species, <span class="st">&quot;Droid&quot;</span><span class="ot">=</span><span class="st">&quot;Robot&quot;</span>))</span>
 <span id="cb126-4"><a href="tutorial-data-management-with-tidyverse.html#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb126-5"><a href="tutorial-data-management-with-tidyverse.html#cb126-5" aria-hidden="true" tabindex="-1"></a>starwars_short</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 9
-##    name               species birth_year  mass height m_height   BMI age_cat    crazy_species
-##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        
-##  1 Luke Skywalker     Human         19      77    172     1.72  26.0 very young Human        
-##  2 C-3PO              Droid        112      75    167     1.67  26.9 very old   Robot        
-##  3 R2-D2              Droid         33      32     96     0.96  34.7 young      Robot        
-##  4 Darth Vader        Human         41.9   136    202     2.02  33.3 mid-aged   Human        
-##  5 Leia Organa        Human         19      49    150     1.5   21.8 very young Human        
-##  6 Owen Lars          Human         52     120    178     1.78  37.9 mid-aged   Human        
-##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5 mid-aged   Human        
-##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;       Robot        
-##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young      Human        
-## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged   Human        
-## # ... with 77 more rows</code></pre>
+<pre><code>## # A tibble: 87 × 9
+##    name     species birth_year  mass height m_height   BMI age_cat crazy_species
+##    &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        
+##  1 Luke Sk… Human         19      77    172     1.72  26.0 very y… Human        
+##  2 C-3PO    Droid        112      75    167     1.67  26.9 very o… Robot        
+##  3 R2-D2    Droid         33      32     96     0.96  34.7 young   Robot        
+##  4 Darth V… Human         41.9   136    202     2.02  33.3 mid-ag… Human        
+##  5 Leia Or… Human         19      49    150     1.5   21.8 very y… Human        
+##  6 Owen La… Human         52     120    178     1.78  37.9 mid-ag… Human        
+##  7 Beru Wh… Human         47      75    165     1.65  27.5 mid-ag… Human        
+##  8 R5-D4    Droid         NA      32     97     0.97  34.0 &lt;NA&gt;    Robot        
+##  9 Biggs D… Human         24      84    183     1.83  25.1 young   Human        
+## 10 Obi-Wan… Human         57      77    182     1.82  23.2 mid-ag… Human        
+## # … with 77 more rows</code></pre>
 <p><strong>Tip for advanced users 1:</strong> There is a special case of recoding:
 Sometimes you will receive data (e.g. through an import from SPSS) in
 which missings are not marked as NA, but with -9 (or any other number).
@@ -1110,20 +1113,20 @@ reassigning the source object back to itself) since this transformation
 does not make a lot of sense.</p>
 <div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="tutorial-data-management-with-tidyverse.html#cb128-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb128-2"><a href="tutorial-data-management-with-tidyverse.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height=</span> <span class="fu">na_if</span>(height, <span class="dv">172</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 87 x 9
-##    name               species birth_year  mass height m_height   BMI age_cat    crazy_species
-##    &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        
-##  1 Luke Skywalker     Human         19      77     NA     1.72  26.0 very young Human        
-##  2 C-3PO              Droid        112      75    167     1.67  26.9 very old   Robot        
-##  3 R2-D2              Droid         33      32     96     0.96  34.7 young      Robot        
-##  4 Darth Vader        Human         41.9   136    202     2.02  33.3 mid-aged   Human        
-##  5 Leia Organa        Human         19      49    150     1.5   21.8 very young Human        
-##  6 Owen Lars          Human         52     120    178     1.78  37.9 mid-aged   Human        
-##  7 Beru Whitesun lars Human         47      75    165     1.65  27.5 mid-aged   Human        
-##  8 R5-D4              Droid         NA      32     97     0.97  34.0 &lt;NA&gt;       Robot        
-##  9 Biggs Darklighter  Human         24      84    183     1.83  25.1 young      Human        
-## 10 Obi-Wan Kenobi     Human         57      77    182     1.82  23.2 mid-aged   Human        
-## # ... with 77 more rows</code></pre>
+<pre><code>## # A tibble: 87 × 9
+##    name     species birth_year  mass height m_height   BMI age_cat crazy_species
+##    &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;        
+##  1 Luke Sk… Human         19      77     NA     1.72  26.0 very y… Human        
+##  2 C-3PO    Droid        112      75    167     1.67  26.9 very o… Robot        
+##  3 R2-D2    Droid         33      32     96     0.96  34.7 young   Robot        
+##  4 Darth V… Human         41.9   136    202     2.02  33.3 mid-ag… Human        
+##  5 Leia Or… Human         19      49    150     1.5   21.8 very y… Human        
+##  6 Owen La… Human         52     120    178     1.78  37.9 mid-ag… Human        
+##  7 Beru Wh… Human         47      75    165     1.65  27.5 mid-ag… Human        
+##  8 R5-D4    Droid         NA      32     97     0.97  34.0 &lt;NA&gt;    Robot        
+##  9 Biggs D… Human         24      84    183     1.83  25.1 young   Human        
+## 10 Obi-Wan… Human         57      77    182     1.82  23.2 mid-ag… Human        
+## # … with 77 more rows</code></pre>
 </div>
 <div id="summarize-group_by" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> summarize() [+ group_by()]<a href="tutorial-data-management-with-tidyverse.html#summarize-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1135,7 +1138,7 @@ do not reassign the source object to itself when you use <code>summarize()</code
 (unless you have a really good reason to do so).</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="tutorial-data-management-with-tidyverse.html#cb130-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb130-2"><a href="tutorial-data-management-with-tidyverse.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>))  <span class="co"># collapses the data frame into one variable called &quot;mean_height&quot;</span></span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 1 × 1
 ##   mean_height
 ##         &lt;dbl&gt;
 ## 1        174.</code></pre>
@@ -1148,7 +1151,7 @@ do not reassign the source object to itself when you use <code>summarize()</code
 <span id="cb133-3"><a href="tutorial-data-management-with-tidyverse.html#cb133-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="co"># collapses the data frame into one row with one variable called &quot;mean_height&quot;...</span></span>
 <span id="cb133-4"><a href="tutorial-data-management-with-tidyverse.html#cb133-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>()                         <span class="co"># and a second variable that shows the group size (i.e. count)</span></span>
 <span id="cb133-5"><a href="tutorial-data-management-with-tidyverse.html#cb133-5" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
-<pre><code>## # A tibble: 38 x 3
+<pre><code>## # A tibble: 38 × 3
 ##    species   mean_height count
 ##    &lt;chr&gt;           &lt;dbl&gt; &lt;int&gt;
 ##  1 Aleena            79      1
@@ -1161,7 +1164,7 @@ do not reassign the source object to itself when you use <code>summarize()</code
 ##  8 Ewok              88      1
 ##  9 Geonosian        183      1
 ## 10 Gungan           209.     3
-## # ... with 28 more rows</code></pre>
+## # … with 28 more rows</code></pre>
 <p>We learn from the 6 droids in our data set that droids are small, 131cm
 on average. But Ewoks are even smaller (88cm on average). <em>Pro tip:</em> you
 can even group by two groups at the same time with the method
@@ -1179,7 +1182,7 @@ classic <a href="https://www.simplypsychology.org/boxplots.html">box plot</a>:</
 <span id="cb135-9"><a href="tutorial-data-management-with-tidyverse.html#cb135-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">MIN =</span> <span class="fu">min</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb135-10"><a href="tutorial-data-management-with-tidyverse.html#cb135-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">count =</span> <span class="fu">n</span>()                                    <span class="co"># shows the group_size (i.e. count)</span></span>
 <span id="cb135-11"><a href="tutorial-data-management-with-tidyverse.html#cb135-11" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
-<pre><code>## # A tibble: 38 x 8
+<pre><code>## # A tibble: 38 × 8
 ##    species     MAX    UQ   Med     M    LQ   MIN count
 ##    &lt;chr&gt;     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
 ##  1 Aleena       79    79    79   79     79    79     1
@@ -1192,14 +1195,14 @@ classic <a href="https://www.simplypsychology.org/boxplots.html">box plot</a>:</
 ##  8 Ewok         88    88    88   88     88    88     1
 ##  9 Geonosian   183   183   183  183    183   183     1
 ## 10 Gungan      224   215   206  209.   201   196     3
-## # ... with 28 more rows</code></pre>
+## # … with 28 more rows</code></pre>
 <p><strong>Tip for advances users 2:</strong> If you want to count the unique values of
 variables, then <code>data %&gt;% group_by(a, b) %&gt;% summarize(n = n())</code> might
 not be the best solution (it’s a lot of code, isn’t it?).</p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="tutorial-data-management-with-tidyverse.html#cb137-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb137-2"><a href="tutorial-data-management-with-tidyverse.html#cb137-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, age_cat) <span class="sc">%&gt;%</span></span>
 <span id="cb137-3"><a href="tutorial-data-management-with-tidyverse.html#cb137-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
-<pre><code>## # A tibble: 51 x 3
+<pre><code>## # A tibble: 51 × 3
 ## # Groups:   species [38]
 ##    species  age_cat    count
 ##    &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;
@@ -1213,12 +1216,12 @@ not be the best solution (it’s a lot of code, isn’t it?).</p>
 ##  8 Droid    young          1
 ##  9 Droid    &lt;NA&gt;           3
 ## 10 Dug      &lt;NA&gt;           1
-## # ... with 41 more rows</code></pre>
+## # … with 41 more rows</code></pre>
 <p>For more efficient code, you can use the <code>count()</code> function instead:
 <code>data %&gt;% count(a, b)</code>.</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="tutorial-data-management-with-tidyverse.html#cb139-1" aria-hidden="true" tabindex="-1"></a>starwars_short <span class="sc">%&gt;%</span></span>
 <span id="cb139-2"><a href="tutorial-data-management-with-tidyverse.html#cb139-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, age_cat)</span></code></pre></div>
-<pre><code>## # A tibble: 51 x 3
+<pre><code>## # A tibble: 51 × 3
 ##    species  age_cat        n
 ##    &lt;chr&gt;    &lt;chr&gt;      &lt;int&gt;
 ##  1 Aleena   &lt;NA&gt;           1
@@ -1231,7 +1234,7 @@ not be the best solution (it’s a lot of code, isn’t it?).</p>
 ##  8 Droid    young          1
 ##  9 Droid    &lt;NA&gt;           3
 ## 10 Dug      &lt;NA&gt;           1
-## # ... with 41 more rows</code></pre>
+## # … with 41 more rows</code></pre>
 </div>
 <div id="chaining-functions-in-a-pipe" class="section level3 hasAnchor" number="4.5.6">
 <h3><span class="header-section-number">4.5.6</span> Chaining functions in a pipe<a href="tutorial-data-management-with-tidyverse.html#chaining-functions-in-a-pipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1247,7 +1250,7 @@ group them by their species (<code>group_by()</code>) and summarize the average 
 <span id="cb141-4"><a href="tutorial-data-management-with-tidyverse.html#cb141-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>                     </span>
 <span id="cb141-5"><a href="tutorial-data-management-with-tidyverse.html#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_BMI =</span> <span class="fu">mean</span>(BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb141-6"><a href="tutorial-data-management-with-tidyverse.html#cb141-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_BMI)</span></code></pre></div>
-<pre><code>## # A tibble: 14 x 2
+<pre><code>## # A tibble: 14 × 2
 ##    species        mean_BMI
 ##    &lt;chr&gt;             &lt;dbl&gt;
 ##  1 Gungan             17.2
