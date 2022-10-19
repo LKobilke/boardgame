@@ -21,3 +21,9 @@ activating-packages
 getting-information-about-packages
 take-aways
 additional-tutorials
+tutorial-using-r-as-a-calculator
+using-variables-for-calculation
+using-vectors-for-calculation
+selecting-values-from-a-vector
+take-aways-1
+additional-tutorials-1
