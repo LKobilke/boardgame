@@ -51,3 +51,16 @@ summarize-group_by
 chaining-functions-in-a-pipe
 take-aways-3
 additional-tutorials-3
+tutorial-data-visualization-with-ggplot
+why-not-stick-with-base-r-1
+components-of-a-ggplot-graph
+installing-activating-ggplot
+building-your-first-plot
+data
+aesthetics
+geometrics
+scales
+themes
+labs
+facets
+saving-graphs
