@@ -64,3 +64,8 @@ themes
 labs
 facets
 saving-graphs
+other-common-plot-types
+bar-plots
+box-plots
+take-aways-4
+additional-tutorials-4

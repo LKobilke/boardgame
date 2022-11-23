@@ -4,20 +4,20 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Data journalism</title>
-  <meta name="description" content="Page not found | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
+  <title>Exercise 3: Test your knowledge | Data journalism</title>
+  <meta name="description" content="Exercise 3: Test your knowledge | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Data journalism" />
+  <meta property="og:title" content="Exercise 3: Test your knowledge | Data journalism" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Page not found | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
+  <meta property="og:description" content="Exercise 3: Test your knowledge | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Data journalism" />
+  <meta name="twitter:title" content="Exercise 3: Test your knowledge | Data journalism" />
   
-  <meta name="twitter:description" content="Page not found | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
+  <meta name="twitter:description" content="Exercise 3: Test your knowledge | Data journalism - M.A. Seminar at the IfKW, WS 2022/23" />
   
 
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="tutorial-data-visualization-with-ggplot.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -306,19 +306,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="exercise-3-test-your-knowledge" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 3: Test your knowledge<a href="exercise-3-test-your-knowledge.html#exercise-3-test-your-knowledge" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 3, you’ll…</strong></p>
+<ul>
+<li>be able to see a graph and recreate it with <code>ggplot2</code></li>
+<li>be able to see a problem and customize a plot with <code>ggplot2</code> to
+solve it</li>
+</ul>
+<div id="task-1-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-3-test-your-knowledge.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The data set <em>glbwarm</em> comes pre-installed with the <code>processR</code> package
+that we will be working with soon. The data comprises 815 US individuals
+(417 females, 398 males) who agreed to engage in online questionnaires.
+They roughly represent the population of the United States.</p>
+<p>Let’s install / activate the <code>processR</code> package first and assign the
+glbwarm data to a source object.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="exercise-3-test-your-knowledge.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
+<span id="cb169-2"><a href="exercise-3-test-your-knowledge.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(processR)) {</span>
+<span id="cb169-3"><a href="exercise-3-test-your-knowledge.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;processR&quot;</span>); </span>
+<span id="cb169-4"><a href="exercise-3-test-your-knowledge.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(processR)</span>
+<span id="cb169-5"><a href="exercise-3-test-your-knowledge.html#cb169-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load processR</span></span>
+<span id="cb169-6"><a href="exercise-3-test-your-knowledge.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-7"><a href="exercise-3-test-your-knowledge.html#cb169-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> processR<span class="sc">::</span>glbwarm</span></code></pre></div>
+<p>If you can’t install <code>processR</code> (it can be a bit buggy with newer
+versions of <code>R</code>) then just download the <em>glbwarm.csv</em> from Moodle and
+don’t use the code above (material folders). Load the data into R by
+following our tutorial: <a href="tutorial-working-with-data-files.html#import-data-from-your-working-directory">Import data from your working directory</a>, but
+remember the difference between <code>read_csv2</code> (simcolon-separated) and
+<code>read_csv</code> (comma-separated) and use the appropriate command.</p>
+<p>Familiarize yourself with the data set (<strong>Hint:</strong> use the <code>help()</code> / <code>?</code>
+function or visit this <a href="https://rdrr.io/cran/processR/man/glbwarm.html">Google page of the help
+function</a>) and then try
+to reproduce this plot with <code>dplyr</code> and <code>ggplot2</code>. (<strong>Hint:</strong> You can
+hide the legend by adding <code>theme(legend.position = "none")</code> to your
+plot.)</p>
+<p>You will need to do some data management with <code>dplyr</code> to create the
+correct labels for your <code>ggplot2</code> graph.</p>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-97-1.png" width="60%" /></p>
+<p><span style="color: darkred;"><strong>Are you stuck and don’t know where to start? Watch this video to help
+you get started:</strong> <a href="https://cast.itunes.uni-muenchen.de/clips/8WHWs6ao3u/vod/online.html">Click
+here.</a></span></p>
+</div>
+<div id="task-2-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-3-test-your-knowledge.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now, try to reproduce this graph. (<strong>Hint:</strong> You will need to recode the
+<em>ideology</em> variable in a way that higher values represent stronger
+attitudes, <em>independent of partisanship</em>.)</p>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-99-1.png" width="60%" /></p>
+</div>
+<div id="task-3-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-3-test-your-knowledge.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Can you make a chart that breaks down the relationship between <em>age</em>,
+<em>negative emotions about climate change</em>, and <em>ideological extremity</em>
+for the different <em>sexes</em> AND <em>parties</em>?</p>
+<p><span style="font-size:70%"><strong>Hint:</strong> You can play around with which variables that you want to use
+as <em>x</em>, <em>y</em>, and as <em>color / size</em> variables. But if you want to have a
+recommendation to get you started: x = age, y = negative emotions about
+climate change, size = ideological extremity. But other combinations are
+valid, too! For instance, you could decide to map x = ideological
+extremity and size = age.</span></p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="tutorial-data-visualization-with-ggplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -349,7 +407,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/LKobilke/data-journalism/edit/main/%s",
+"link": "https://github.com/LKobilke/data-journalism/edit/main/index.Rmd",
 "text": "Edit"
 },
 "history": {
