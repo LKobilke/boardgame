@@ -344,13 +344,13 @@ that we will be working with soon. The data comprises 815 US individuals
 They roughly represent the population of the United States.</p>
 <p>Let’s install / activate the <code>processR</code> package first and assign the
 glbwarm data to a source object.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="exercise-3-test-your-knowledge.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
-<span id="cb169-2"><a href="exercise-3-test-your-knowledge.html#cb169-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(processR)) {</span>
-<span id="cb169-3"><a href="exercise-3-test-your-knowledge.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;processR&quot;</span>); </span>
-<span id="cb169-4"><a href="exercise-3-test-your-knowledge.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(processR)</span>
-<span id="cb169-5"><a href="exercise-3-test-your-knowledge.html#cb169-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load processR</span></span>
-<span id="cb169-6"><a href="exercise-3-test-your-knowledge.html#cb169-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb169-7"><a href="exercise-3-test-your-knowledge.html#cb169-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> processR<span class="sc">::</span>glbwarm</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="exercise-3-test-your-knowledge.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># installing/loading the package:</span></span>
+<span id="cb170-2"><a href="exercise-3-test-your-knowledge.html#cb170-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(processR)) {</span>
+<span id="cb170-3"><a href="exercise-3-test-your-knowledge.html#cb170-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;processR&quot;</span>); </span>
+<span id="cb170-4"><a href="exercise-3-test-your-knowledge.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(processR)</span>
+<span id="cb170-5"><a href="exercise-3-test-your-knowledge.html#cb170-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load processR</span></span>
+<span id="cb170-6"><a href="exercise-3-test-your-knowledge.html#cb170-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-7"><a href="exercise-3-test-your-knowledge.html#cb170-7" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> processR<span class="sc">::</span>glbwarm</span></code></pre></div>
 <p>If you can’t install <code>processR</code> (it can be a bit buggy with newer
 versions of <code>R</code>) then just download the <em>glbwarm.csv</em> from Moodle and
 don’t use the code above (material folders). Load the data into R by
@@ -365,7 +365,7 @@ hide the legend by adding <code>theme(legend.position = "none")</code> to your
 plot.)</p>
 <p>You will need to do some data management with <code>dplyr</code> to create the
 correct labels for your <code>ggplot2</code> graph.</p>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-97-1.png" width="60%" /></p>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-98-1.png" width="60%" /></p>
 <p><span style="color: darkred;"><strong>Are you stuck and don’t know where to start? Watch this video to help
 you get started:</strong> <a href="https://cast.itunes.uni-muenchen.de/clips/8WHWs6ao3u/vod/online.html">Click
 here.</a></span></p>
@@ -375,7 +375,7 @@ here.</a></span></p>
 <p>Now, try to reproduce this graph. (<strong>Hint:</strong> You will need to recode the
 <em>ideology</em> variable in a way that higher values represent stronger
 attitudes, <em>independent of partisanship</em>.)</p>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-99-1.png" width="60%" /></p>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-100-1.png" width="60%" /></p>
 </div>
 <div id="task-3-2" class="section level2 unnumbered hasAnchor">
 <h2>Task 3<a href="exercise-3-test-your-knowledge.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>

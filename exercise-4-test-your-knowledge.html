@@ -335,17 +335,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>have repeated the most important functions of <code>dplyr</code> and <code>ggplot2</code></li>
 </ul>
 <p>This exercise was created to prepare you for your graded coding assignment. You don’t have to work through it completely, but it can certainly help you with the graded assignment. In this exercise, we will work with the <code>mtcars</code> data that comes pre-installed with <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="exercise-4-test-your-knowledge.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb170-2"><a href="exercise-4-test-your-knowledge.html#cb170-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-3"><a href="exercise-4-test-your-knowledge.html#cb170-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span>
-<span id="cb170-4"><a href="exercise-4-test-your-knowledge.html#cb170-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-5"><a href="exercise-4-test-your-knowledge.html#cb170-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To make the data somewhat more interesting, let&#39;s set a few values to missing values (you don&#39;t need to know this code):</span></span>
-<span id="cb170-6"><a href="exercise-4-test-your-knowledge.html#cb170-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>wt <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>wt, <span class="fl">4.070</span>)</span>
-<span id="cb170-7"><a href="exercise-4-test-your-knowledge.html#cb170-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mpg <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>mpg, <span class="fl">22.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="exercise-4-test-your-knowledge.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb171-2"><a href="exercise-4-test-your-knowledge.html#cb171-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-3"><a href="exercise-4-test-your-knowledge.html#cb171-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb171-4"><a href="exercise-4-test-your-knowledge.html#cb171-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-5"><a href="exercise-4-test-your-knowledge.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To make the data somewhat more interesting, let&#39;s set a few values to missing values (you don&#39;t need to know this code):</span></span>
+<span id="cb171-6"><a href="exercise-4-test-your-knowledge.html#cb171-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>wt <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>wt, <span class="fl">4.070</span>)</span>
+<span id="cb171-7"><a href="exercise-4-test-your-knowledge.html#cb171-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mpg <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>mpg, <span class="fl">22.8</span>)</span></code></pre></div>
 <p>Let’s first get to know this data. We can get some information about the
 variables that are included in the dataset by using <code>R</code>s <code>help()</code>
 function:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="exercise-4-test-your-knowledge.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mtcars)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="exercise-4-test-your-knowledge.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mtcars)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="100%" />
