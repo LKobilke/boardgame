@@ -69,3 +69,17 @@ bar-plots
 box-plots
 take-aways-4
 additional-tutorials-4
+tutorial-text-manipulation-with-stringr
+whats-stringr
+working-with-strings
+working-with-string-patterns
+working-with-regular-expressions
+anchors-alternates-and-quantifiers
+look-arounds-and-groups
+match-specific-types-of-characters
+take-aways-5
+additional-tutorials-5
+exercise-5-test-your-knowledge
+task-1-4
+task-2-4
+task-3-4
