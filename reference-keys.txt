@@ -91,3 +91,9 @@ tokenization
 stop-word-removal
 lemmatizing-stemming
 pruning
+topic-modeling
+first-steps-create-a-sparse-matrix
+first-steps-create-a-date-covariate
+model-estimation-number-of-topics
+inspect-the-topics
+find-the-best-value-for-k

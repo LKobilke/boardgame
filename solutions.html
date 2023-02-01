@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#pruning"><i class="fa fa-check"></i><b>8.2.4</b> Pruning</a></li>
 <li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-pruning"><i class="fa fa-check"></i>Practice: Pruning</a></li>
 </ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#topic-modeling"><i class="fa fa-check"></i><b>8.3</b> Topic modeling</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-create-a-sparse-matrix"><i class="fa fa-check"></i><b>8.3.1</b> First steps: Create a sparse matrix</a></li>
+<li class="chapter" data-level="8.3.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-create-a-date-covariate"><i class="fa fa-check"></i><b>8.3.2</b> First steps: Create a date covariate</a></li>
+<li class="chapter" data-level="8.3.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>8.3.3</b> Model estimation: Number of topics</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i>Practice: Model estimation</a></li>
+<li class="chapter" data-level="8.3.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>8.3.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-inspect-models"><i class="fa fa-check"></i>Practice: Inspect models</a></li>
+<li class="chapter" data-level="8.3.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#find-the-best-value-for-k"><i class="fa fa-check"></i><b>8.3.5</b> Find the best value for K</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -356,6 +366,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-inspect-models"><i class="fa fa-check"></i>Task 6: Inspect models</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -425,14 +437,14 @@ vector. First, display all elements of the vector. Then print only the
 5th element. After that, display all elements except the 5th. Finally,
 display the elements at the positions 6 to 8.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="solutions.html#cb261-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">73</span>,<span class="dv">71</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">68</span>,<span class="dv">87</span>)</span>
-<span id="cb261-2"><a href="solutions.html#cb261-2" aria-hidden="true" tabindex="-1"></a>age</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="solutions.html#cb271-1" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">73</span>,<span class="dv">71</span>,<span class="dv">80</span>,<span class="dv">62</span>,<span class="dv">68</span>,<span class="dv">87</span>)</span>
+<span id="cb271-2"><a href="solutions.html#cb271-2" aria-hidden="true" tabindex="-1"></a>age</span></code></pre></div>
 <pre><code>## [1] 65 52 73 71 80 62 68 87</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="solutions.html#cb263-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="solutions.html#cb273-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## [1] 80</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="solutions.html#cb265-1" aria-hidden="true" tabindex="-1"></a>age[<span class="sc">-</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="solutions.html#cb275-1" aria-hidden="true" tabindex="-1"></a>age[<span class="sc">-</span><span class="dv">5</span>]</span></code></pre></div>
 <pre><code>## [1] 65 52 73 71 62 68 87</code></pre>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="solutions.html#cb267-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="solutions.html#cb277-1" aria-hidden="true" tabindex="-1"></a>age[<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>]</span></code></pre></div>
 <pre><code>## [1] 62 68 87</code></pre>
 </div>
 <div id="task-3-5" class="section level3 unnumbered hasAnchor">
@@ -443,14 +455,14 @@ vector to the console. Then have only the value in the 2nd element
 displayed, then all values except the 2nd element. At the end, display
 the elements at the positions 2 to 4.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="solutions.html#cb269-1" aria-hidden="true" tabindex="-1"></a>eye_color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;other&quot;</span>)</span>
-<span id="cb269-2"><a href="solutions.html#cb269-2" aria-hidden="true" tabindex="-1"></a>eye_color</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="solutions.html#cb279-1" aria-hidden="true" tabindex="-1"></a>eye_color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;brown&quot;</span>, <span class="st">&quot;other&quot;</span>)</span>
+<span id="cb279-2"><a href="solutions.html#cb279-2" aria-hidden="true" tabindex="-1"></a>eye_color</span></code></pre></div>
 <pre><code>## [1] &quot;blue&quot;  &quot;green&quot; &quot;brown&quot; &quot;other&quot;</code></pre>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="solutions.html#cb271-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="solutions.html#cb281-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;green&quot;</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="solutions.html#cb273-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="sc">-</span><span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="solutions.html#cb283-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="sc">-</span><span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;blue&quot;  &quot;brown&quot; &quot;other&quot;</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="solutions.html#cb275-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="solutions.html#cb285-1" aria-hidden="true" tabindex="-1"></a>eye_color[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;green&quot; &quot;brown&quot; &quot;other&quot;</code></pre>
 </div>
 <div id="task-4-4" class="section level3 unnumbered hasAnchor">
@@ -461,8 +473,8 @@ and put it into the folder that you want to use as working directory.</p>
 source object called <em>data</em>. <strong>Note:</strong> This time, it’s a csv that is
 actually separated by commas, not by semicolons.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="solutions.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/LaraK/Documents/IPR/&quot;</span>)</span>
-<span id="cb277-2"><a href="solutions.html#cb277-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_tutorial2.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="solutions.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;C:/Users/LaraK/Documents/IPR/&quot;</span>)</span>
+<span id="cb287-2"><a href="solutions.html#cb287-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data_tutorial2.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="task-5-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -470,9 +482,9 @@ actually separated by commas, not by semicolons.</p>
 first. Then try to achieve the same result using the subsetting
 operators, i.e. <code>[]</code>.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="solutions.html#cb278-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>age <span class="co"># first version</span></span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="solutions.html#cb288-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>age <span class="co"># first version</span></span></code></pre></div>
 <pre><code>##  [1] 20 25 29 22 25 26 26 27  8 26 27 26 25 27 29 26 21 23 24 26</code></pre>
-<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="solutions.html#cb280-1" aria-hidden="true" tabindex="-1"></a>data[,<span class="dv">2</span>] <span class="co"># second version</span></span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="solutions.html#cb290-1" aria-hidden="true" tabindex="-1"></a>data[,<span class="dv">2</span>] <span class="co"># second version</span></span></code></pre></div>
 <pre><code>##  [1] 20 25 29 22 25 26 26 27  8 26 27 26 25 27 29 26 21 23 24 26</code></pre>
 </div>
 <div id="task-6-3" class="section level3 unnumbered hasAnchor">
@@ -481,9 +493,9 @@ operators, i.e. <code>[]</code>.</p>
 first. Then try to achieve the same result using the subsetting
 operators, i.e. <code>[]</code>.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="solutions.html#cb282-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>age[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>] <span class="co"># first version</span></span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="solutions.html#cb292-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>age[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>] <span class="co"># first version</span></span></code></pre></div>
 <pre><code>## [1] 20 25 29 22 25 26</code></pre>
-<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="solutions.html#cb284-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">2</span>] <span class="co"># second version</span></span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="solutions.html#cb294-1" aria-hidden="true" tabindex="-1"></a>data[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">2</span>] <span class="co"># second version</span></span></code></pre></div>
 <pre><code>## [1] 20 25 29 22 25 26</code></pre>
 </div>
 </div>
@@ -539,23 +551,23 @@ approach?</strong></p>
 <div id="task-2-6" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now it’s you turn. Load the starwars data like this:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="solutions.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
-<span id="cb286-2"><a href="solutions.html#cb286-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="solutions.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
+<span id="cb296-2"><a href="solutions.html#cb296-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
 <p>How many humans are contained in the starwars data overall? (Hint: use
 <code>summarize(count = n())</code> or <code>count()</code>)?</p>
 <p><em>Solution:</em></p>
 <p>You can use <code>summarize(count = n())</code>:</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="solutions.html#cb287-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb287-2"><a href="solutions.html#cb287-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb287-3"><a href="solutions.html#cb287-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="solutions.html#cb297-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb297-2"><a href="solutions.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb297-3"><a href="solutions.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   count
 ##   &lt;int&gt;
 ## 1    35</code></pre>
 <p>Alternatively, you can use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="solutions.html#cb289-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb289-2"><a href="solutions.html#cb289-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb289-3"><a href="solutions.html#cb289-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="solutions.html#cb299-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb299-2"><a href="solutions.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb299-3"><a href="solutions.html#cb299-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 2
 ##   species     n
 ##   &lt;chr&gt;   &lt;int&gt;
@@ -566,10 +578,10 @@ approach?</strong></p>
 <p>How many humans are contained in starwars by gender?</p>
 <p><em>Solution:</em></p>
 <p>You can use <code>summarize(count = n())</code>:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="solutions.html#cb291-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb291-2"><a href="solutions.html#cb291-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb291-3"><a href="solutions.html#cb291-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, gender) <span class="sc">%&gt;%</span> </span>
-<span id="cb291-4"><a href="solutions.html#cb291-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="solutions.html#cb301-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb301-2"><a href="solutions.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb301-3"><a href="solutions.html#cb301-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species, gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb301-4"><a href="solutions.html#cb301-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ## # Groups:   species [1]
 ##   species gender    count
@@ -577,9 +589,9 @@ approach?</strong></p>
 ## 1 Human   feminine      9
 ## 2 Human   masculine    26</code></pre>
 <p>Alternatively, you can use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="solutions.html#cb293-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb293-2"><a href="solutions.html#cb293-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb293-3"><a href="solutions.html#cb293-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, gender)</span></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="solutions.html#cb303-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb303-2"><a href="solutions.html#cb303-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">==</span> <span class="st">&quot;Human&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb303-3"><a href="solutions.html#cb303-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(species, gender)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   species gender        n
 ##   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;
@@ -591,10 +603,10 @@ approach?</strong></p>
 <p>What is the most common eye_color among Star Wars characters? (Hint: use
 <code>arrange()</code>)__</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="solutions.html#cb295-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb295-2"><a href="solutions.html#cb295-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(eye_color) <span class="sc">%&gt;%</span> </span>
-<span id="cb295-3"><a href="solutions.html#cb295-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb295-4"><a href="solutions.html#cb295-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="solutions.html#cb305-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb305-2"><a href="solutions.html#cb305-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(eye_color) <span class="sc">%&gt;%</span> </span>
+<span id="cb305-3"><a href="solutions.html#cb305-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb305-4"><a href="solutions.html#cb305-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
 <pre><code>## # A tibble: 15 × 2
 ##    eye_color     count
 ##    &lt;chr&gt;         &lt;int&gt;
@@ -619,9 +631,9 @@ approach?</strong></p>
 <p>What is the average mass of Star Wars characters that are not human and
 have yellow eyes? (Hint: remove all <code>NAs</code>)__</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="solutions.html#cb297-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb297-2"><a href="solutions.html#cb297-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;yellow&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb297-3"><a href="solutions.html#cb297-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="solutions.html#cb307-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb307-2"><a href="solutions.html#cb307-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species <span class="sc">!=</span> <span class="st">&quot;Human&quot;</span> <span class="sc">&amp;</span> eye_color<span class="sc">==</span><span class="st">&quot;yellow&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb307-3"><a href="solutions.html#cb307-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   mean_mass
 ##       &lt;dbl&gt;
@@ -632,13 +644,13 @@ have yellow eyes? (Hint: remove all <code>NAs</code>)__</p>
 <p>Compare the mean, median, and standard deviation of mass for all humans
 and droids. (Hint: remove all <code>NAs</code>)__</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="solutions.html#cb299-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb299-2"><a href="solutions.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">&quot;Human&quot;</span> <span class="sc">|</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb299-3"><a href="solutions.html#cb299-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>                                </span>
-<span id="cb299-4"><a href="solutions.html#cb299-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">M =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb299-5"><a href="solutions.html#cb299-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Med =</span> <span class="fu">median</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb299-6"><a href="solutions.html#cb299-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb299-7"><a href="solutions.html#cb299-7" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="solutions.html#cb309-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb309-2"><a href="solutions.html#cb309-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(species<span class="sc">==</span><span class="st">&quot;Human&quot;</span> <span class="sc">|</span> species<span class="sc">==</span><span class="st">&quot;Droid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb309-3"><a href="solutions.html#cb309-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span>                                </span>
+<span id="cb309-4"><a href="solutions.html#cb309-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">M =</span> <span class="fu">mean</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb309-5"><a href="solutions.html#cb309-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Med =</span> <span class="fu">median</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb309-6"><a href="solutions.html#cb309-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">SD =</span> <span class="fu">sd</span>(mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb309-7"><a href="solutions.html#cb309-7" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   species     M   Med    SD
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -650,11 +662,11 @@ and droids. (Hint: remove all <code>NAs</code>)__</p>
 <p>Create a new variable in which you store the mass in gram. Add it to the
 data frame.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="solutions.html#cb301-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars_data <span class="sc">%&gt;%</span></span>
-<span id="cb301-2"><a href="solutions.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gr_mass =</span> mass<span class="sc">*</span><span class="dv">1000</span>)</span>
-<span id="cb301-3"><a href="solutions.html#cb301-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb301-4"><a href="solutions.html#cb301-4" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span> </span>
-<span id="cb301-5"><a href="solutions.html#cb301-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, mass, gr_mass)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="solutions.html#cb311-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars_data <span class="sc">%&gt;%</span></span>
+<span id="cb311-2"><a href="solutions.html#cb311-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gr_mass =</span> mass<span class="sc">*</span><span class="dv">1000</span>)</span>
+<span id="cb311-3"><a href="solutions.html#cb311-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb311-4"><a href="solutions.html#cb311-4" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span> </span>
+<span id="cb311-5"><a href="solutions.html#cb311-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, species, mass, gr_mass)</span></code></pre></div>
 <pre><code>## # A tibble: 87 × 4
 ##    name               species  mass gr_mass
 ##    &lt;chr&gt;              &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -679,21 +691,21 @@ data frame.</p>
 can hide the legend by adding <code>theme(legend.position = "none")</code> to your
 plot.)</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="solutions.html#cb303-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb303-2"><a href="solutions.html#cb303-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>(</span>
-<span id="cb303-3"><a href="solutions.html#cb303-3" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Female&quot;</span>,</span>
-<span id="cb303-4"><a href="solutions.html#cb303-4" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Male&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb303-5"><a href="solutions.html#cb303-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Party =</span> <span class="fu">case_when</span>(</span>
-<span id="cb303-6"><a href="solutions.html#cb303-6" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Democrat&quot;</span>,</span>
-<span id="cb303-7"><a href="solutions.html#cb303-7" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Independent&quot;</span>,</span>
-<span id="cb303-8"><a href="solutions.html#cb303-8" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Republican&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb303-9"><a href="solutions.html#cb303-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Party,<span class="at">y=</span>negemot, <span class="at">fill=</span>Party)) <span class="sc">+</span></span>
-<span id="cb303-10"><a href="solutions.html#cb303-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>) <span class="sc">+</span></span>
-<span id="cb303-11"><a href="solutions.html#cb303-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb303-12"><a href="solutions.html#cb303-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb303-13"><a href="solutions.html#cb303-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Climate change attitudes of U.S. partisans by gender&quot;</span>,</span>
-<span id="cb303-14"><a href="solutions.html#cb303-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
-<span id="cb303-15"><a href="solutions.html#cb303-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="solutions.html#cb313-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb313-2"><a href="solutions.html#cb313-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>(</span>
+<span id="cb313-3"><a href="solutions.html#cb313-3" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb313-4"><a href="solutions.html#cb313-4" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Male&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb313-5"><a href="solutions.html#cb313-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Party =</span> <span class="fu">case_when</span>(</span>
+<span id="cb313-6"><a href="solutions.html#cb313-6" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Democrat&quot;</span>,</span>
+<span id="cb313-7"><a href="solutions.html#cb313-7" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Independent&quot;</span>,</span>
+<span id="cb313-8"><a href="solutions.html#cb313-8" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Republican&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb313-9"><a href="solutions.html#cb313-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Party,<span class="at">y=</span>negemot, <span class="at">fill=</span>Party)) <span class="sc">+</span></span>
+<span id="cb313-10"><a href="solutions.html#cb313-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>) <span class="sc">+</span></span>
+<span id="cb313-11"><a href="solutions.html#cb313-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb313-12"><a href="solutions.html#cb313-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb313-13"><a href="solutions.html#cb313-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Climate change attitudes of U.S. partisans by gender&quot;</span>,</span>
+<span id="cb313-14"><a href="solutions.html#cb313-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
+<span id="cb313-15"><a href="solutions.html#cb313-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
 </div>
 <div id="task-2-7" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -701,30 +713,30 @@ plot.)</p>
 <em>ideology</em> variable in a way that higher values represent stronger
 attitudes, <em>independent of partisanship</em>.)</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="solutions.html#cb304-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb304-2"><a href="solutions.html#cb304-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ideology_ext =</span> <span class="fu">case_when</span>(</span>
-<span id="cb304-3"><a href="solutions.html#cb304-3" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb304-4"><a href="solutions.html#cb304-4" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb304-5"><a href="solutions.html#cb304-5" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb304-6"><a href="solutions.html#cb304-6" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb304-7"><a href="solutions.html#cb304-7" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb304-8"><a href="solutions.html#cb304-8" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb304-9"><a href="solutions.html#cb304-9" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb304-10"><a href="solutions.html#cb304-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>(</span>
-<span id="cb304-11"><a href="solutions.html#cb304-11" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Female&quot;</span>,</span>
-<span id="cb304-12"><a href="solutions.html#cb304-12" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Male&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb304-13"><a href="solutions.html#cb304-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Party =</span> <span class="fu">case_when</span>(</span>
-<span id="cb304-14"><a href="solutions.html#cb304-14" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Democrat&quot;</span>,</span>
-<span id="cb304-15"><a href="solutions.html#cb304-15" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Independent&quot;</span>,</span>
-<span id="cb304-16"><a href="solutions.html#cb304-16" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Republican&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="solutions.html#cb305-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb305-2"><a href="solutions.html#cb305-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Party,<span class="at">y=</span>ideology_ext, <span class="at">fill=</span>Party)) <span class="sc">+</span></span>
-<span id="cb305-3"><a href="solutions.html#cb305-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb305-4"><a href="solutions.html#cb305-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb305-5"><a href="solutions.html#cb305-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb305-6"><a href="solutions.html#cb305-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Ideological extremity of U.S. partisans by gender&quot;</span>,</span>
-<span id="cb305-7"><a href="solutions.html#cb305-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb305-8"><a href="solutions.html#cb305-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="solutions.html#cb314-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb314-2"><a href="solutions.html#cb314-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ideology_ext =</span> <span class="fu">case_when</span>(</span>
+<span id="cb314-3"><a href="solutions.html#cb314-3" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb314-4"><a href="solutions.html#cb314-4" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb314-5"><a href="solutions.html#cb314-5" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb314-6"><a href="solutions.html#cb314-6" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb314-7"><a href="solutions.html#cb314-7" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb314-8"><a href="solutions.html#cb314-8" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb314-9"><a href="solutions.html#cb314-9" aria-hidden="true" tabindex="-1"></a>    ideology <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb314-10"><a href="solutions.html#cb314-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">case_when</span>(</span>
+<span id="cb314-11"><a href="solutions.html#cb314-11" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Female&quot;</span>,</span>
+<span id="cb314-12"><a href="solutions.html#cb314-12" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Male&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb314-13"><a href="solutions.html#cb314-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Party =</span> <span class="fu">case_when</span>(</span>
+<span id="cb314-14"><a href="solutions.html#cb314-14" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Democrat&quot;</span>,</span>
+<span id="cb314-15"><a href="solutions.html#cb314-15" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Independent&quot;</span>,</span>
+<span id="cb314-16"><a href="solutions.html#cb314-16" aria-hidden="true" tabindex="-1"></a>    partyid <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Republican&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="solutions.html#cb315-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb315-2"><a href="solutions.html#cb315-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Party,<span class="at">y=</span>ideology_ext, <span class="at">fill=</span>Party)) <span class="sc">+</span></span>
+<span id="cb315-3"><a href="solutions.html#cb315-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb315-4"><a href="solutions.html#cb315-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb315-5"><a href="solutions.html#cb315-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb315-6"><a href="solutions.html#cb315-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Ideological extremity of U.S. partisans by gender&quot;</span>,</span>
+<span id="cb315-7"><a href="solutions.html#cb315-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb315-8"><a href="solutions.html#cb315-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex)</span></code></pre></div>
 </div>
 <div id="task-3-7" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -732,38 +744,38 @@ attitudes, <em>independent of partisanship</em>.)</p>
 <em>negative emotions about climate change</em>, and <em>ideological extremity</em>
 for the different <em>sexes</em> AND <em>parties</em>?</p>
 <p><em>Solution 1:</em></p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="solutions.html#cb306-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb306-2"><a href="solutions.html#cb306-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
-<span id="cb306-3"><a href="solutions.html#cb306-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb306-4"><a href="solutions.html#cb306-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span>  <span class="co"># You can&#39;t guess the exact value that I&#39;ve used here. Just use whatever looks good for you and comes close to the solution.</span></span>
-<span id="cb306-5"><a href="solutions.html#cb306-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb306-6"><a href="solutions.html#cb306-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, </span><span class="sc">\n</span><span class="st"> and ideological extremity&quot;</span>,</span>
-<span id="cb306-7"><a href="solutions.html#cb306-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
-<span id="cb306-8"><a href="solutions.html#cb306-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="solutions.html#cb316-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb316-2"><a href="solutions.html#cb316-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
+<span id="cb316-3"><a href="solutions.html#cb316-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb316-4"><a href="solutions.html#cb316-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span>  <span class="co"># You can&#39;t guess the exact value that I&#39;ve used here. Just use whatever looks good for you and comes close to the solution.</span></span>
+<span id="cb316-5"><a href="solutions.html#cb316-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb316-6"><a href="solutions.html#cb316-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, </span><span class="sc">\n</span><span class="st"> and ideological extremity&quot;</span>,</span>
+<span id="cb316-7"><a href="solutions.html#cb316-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
+<span id="cb316-8"><a href="solutions.html#cb316-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p><em>Solution 2:</em></p>
 <p>Alternatively, you might enjoy this look that you can create with
 <code>facet_grid()</code>:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="solutions.html#cb307-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb307-2"><a href="solutions.html#cb307-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
-<span id="cb307-3"><a href="solutions.html#cb307-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb307-4"><a href="solutions.html#cb307-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb307-5"><a href="solutions.html#cb307-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb307-6"><a href="solutions.html#cb307-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
-<span id="cb307-7"><a href="solutions.html#cb307-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
-<span id="cb307-8"><a href="solutions.html#cb307-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(sex), <span class="fu">vars</span>(Party))</span></code></pre></div>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="solutions.html#cb317-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb317-2"><a href="solutions.html#cb317-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
+<span id="cb317-3"><a href="solutions.html#cb317-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb317-4"><a href="solutions.html#cb317-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb317-5"><a href="solutions.html#cb317-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb317-6"><a href="solutions.html#cb317-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
+<span id="cb317-7"><a href="solutions.html#cb317-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
+<span id="cb317-8"><a href="solutions.html#cb317-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(sex), <span class="fu">vars</span>(Party))</span></code></pre></div>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
 <p><em>Solution 3:</em></p>
 <p>Or even this look, also done with <code>facet_grid()</code>:</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="solutions.html#cb308-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb308-2"><a href="solutions.html#cb308-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
-<span id="cb308-3"><a href="solutions.html#cb308-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb308-4"><a href="solutions.html#cb308-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb308-5"><a href="solutions.html#cb308-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb308-6"><a href="solutions.html#cb308-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
-<span id="cb308-7"><a href="solutions.html#cb308-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
-<span id="cb308-8"><a href="solutions.html#cb308-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex <span class="sc">+</span> Party)</span></code></pre></div>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="solutions.html#cb318-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb318-2"><a href="solutions.html#cb318-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age,<span class="at">y=</span>negemot, <span class="at">size=</span>ideology_ext, <span class="at">color =</span> Party)) <span class="sc">+</span></span>
+<span id="cb318-3"><a href="solutions.html#cb318-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb318-4"><a href="solutions.html#cb318-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="dv">3</span>), <span class="at">name =</span> <span class="st">&quot;Ideological extremity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb318-5"><a href="solutions.html#cb318-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb318-6"><a href="solutions.html#cb318-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between age, climate change attitudes, and ideological extremity&quot;</span>,</span>
+<span id="cb318-7"><a href="solutions.html#cb318-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Negative emotions about climate change&quot;</span>) <span class="sc">+</span></span>
+<span id="cb318-8"><a href="solutions.html#cb318-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>sex <span class="sc">+</span> Party)</span></code></pre></div>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 </div>
 </div>
 <div id="solutions-for-exercise-4" class="section level2 unnumbered hasAnchor">
@@ -772,27 +784,27 @@ for the different <em>sexes</em> AND <em>parties</em>?</p>
 practice. You don’t have to work through it, but it can certainly help
 you with the graded assignment. In this exercise, we will work with the
 <code>mtcars</code> data that comes pre-installed with <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="solutions.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb309-2"><a href="solutions.html#cb309-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb309-3"><a href="solutions.html#cb309-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span>
-<span id="cb309-4"><a href="solutions.html#cb309-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb309-5"><a href="solutions.html#cb309-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To make the data somewhat more interesting, let&#39;s set a few values to missing values:</span></span>
-<span id="cb309-6"><a href="solutions.html#cb309-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>wt <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>wt, <span class="fl">4.070</span>)</span>
-<span id="cb309-7"><a href="solutions.html#cb309-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mpg <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>mpg, <span class="fl">22.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="solutions.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb319-2"><a href="solutions.html#cb319-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-3"><a href="solutions.html#cb319-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span>
+<span id="cb319-4"><a href="solutions.html#cb319-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-5"><a href="solutions.html#cb319-5" aria-hidden="true" tabindex="-1"></a><span class="co"># To make the data somewhat more interesting, let&#39;s set a few values to missing values:</span></span>
+<span id="cb319-6"><a href="solutions.html#cb319-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>wt <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>wt, <span class="fl">4.070</span>)</span>
+<span id="cb319-7"><a href="solutions.html#cb319-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>mpg <span class="ot">&lt;-</span> <span class="fu">na_if</span>(data<span class="sc">$</span>mpg, <span class="fl">22.8</span>)</span></code></pre></div>
 <div id="task-1-8" class="section level3 unnumbered hasAnchor">
 <h3>Task 1<a href="solutions.html#task-1-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Check the data set for missing values (<em>NA</em>s) and delete all
 observations that have missing values.</p>
 <p><em>Solution:</em></p>
 <p>You can solve this by excluding NAs in every single column:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="solutions.html#cb310-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb310-2"><a href="solutions.html#cb310-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we&#39;ll now only keep observations that are NOT NAs in the following variables (remember that &amp; = AND):</span></span>
-<span id="cb310-3"><a href="solutions.html#cb310-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(mpg) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(cyl) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(disp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(drat) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(wt) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(qsec)</span>
-<span id="cb310-4"><a href="solutions.html#cb310-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(vs) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(am) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(gear) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(carb))</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="solutions.html#cb320-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb320-2"><a href="solutions.html#cb320-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># we&#39;ll now only keep observations that are NOT NAs in the following variables (remember that &amp; = AND):</span></span>
+<span id="cb320-3"><a href="solutions.html#cb320-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(mpg) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(cyl) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(disp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(hp) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(drat) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(wt) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(qsec)</span>
+<span id="cb320-4"><a href="solutions.html#cb320-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(vs) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(am) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(gear) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(carb))</span></code></pre></div>
 <p>Alternatively, excluding NAs from the entire data set works, too, but
 you have not learned the <code>na_omit()</code>function in the tutorials:</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="solutions.html#cb311-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb311-2"><a href="solutions.html#cb311-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="solutions.html#cb321-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb321-2"><a href="solutions.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span></code></pre></div>
 </div>
 <div id="task-2-8" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -804,10 +816,10 @@ need to divide by 2.20.</p>
 per gallon</em> of the <em>mpg</em> variable. Let’s transform it into <em>Kilometer
 per liter</em>. 1 m/g = 0.425144 km/l, so again divide by 2.20.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="solutions.html#cb312-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb312-2"><a href="solutions.html#cb312-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt =</span> wt<span class="sc">/</span><span class="fl">2.20</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="solutions.html#cb313-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb313-2"><a href="solutions.html#cb313-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mpg =</span> mpg<span class="sc">/</span><span class="fl">2.20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="solutions.html#cb322-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb322-2"><a href="solutions.html#cb322-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt =</span> wt<span class="sc">/</span><span class="fl">2.20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="solutions.html#cb323-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb323-2"><a href="solutions.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mpg =</span> mpg<span class="sc">/</span><span class="fl">2.20</span>)</span></code></pre></div>
 </div>
 <div id="task-3-8" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -822,9 +834,9 @@ below the quantile value. The rest of the values are equal or above it.</p>
 two values that divide the weight of the cars in three groups. What are
 these values?</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="solutions.html#cb314-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb314-2"><a href="solutions.html#cb314-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">UQ_wt=</span> <span class="fu">quantile</span>(wt, <span class="fl">0.75</span>),</span>
-<span id="cb314-3"><a href="solutions.html#cb314-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">LQ_wt=</span> <span class="fu">quantile</span>(wt, <span class="fl">0.25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="solutions.html#cb324-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb324-2"><a href="solutions.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">UQ_wt=</span> <span class="fu">quantile</span>(wt, <span class="fl">0.75</span>),</span>
+<span id="cb324-3"><a href="solutions.html#cb324-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">LQ_wt=</span> <span class="fu">quantile</span>(wt, <span class="fl">0.25</span>))</span></code></pre></div>
 <pre><code>##      UQ_wt    LQ_wt
 ## 1 1.622727 1.190909</code></pre>
 <p>75% of all cars weigh 1.622727* 1000kg or less and 25% of all cars
@@ -835,20 +847,20 @@ weigh 1.190909* 1000kg or less.</p>
 <p>Use the values from Task 3 to create a new variable <em>wt_cat</em> that
 divides the cars in three groups: light, medium, and heavy cars.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="solutions.html#cb316-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb316-2"><a href="solutions.html#cb316-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">case_when</span>(</span>
-<span id="cb316-3"><a href="solutions.html#cb316-3" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&lt;=</span> <span class="fl">1.190909</span> <span class="sc">~</span> <span class="st">&quot;light car&quot;</span>,</span>
-<span id="cb316-4"><a href="solutions.html#cb316-4" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&lt;</span> <span class="fl">1.622727</span> <span class="sc">~</span> <span class="st">&quot;medium car&quot;</span>,</span>
-<span id="cb316-5"><a href="solutions.html#cb316-5" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&gt;=</span> <span class="fl">1.622727</span> <span class="sc">~</span> <span class="st">&quot;heavy car&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="solutions.html#cb326-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb326-2"><a href="solutions.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb326-3"><a href="solutions.html#cb326-3" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&lt;=</span> <span class="fl">1.190909</span> <span class="sc">~</span> <span class="st">&quot;light car&quot;</span>,</span>
+<span id="cb326-4"><a href="solutions.html#cb326-4" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&lt;</span> <span class="fl">1.622727</span> <span class="sc">~</span> <span class="st">&quot;medium car&quot;</span>,</span>
+<span id="cb326-5"><a href="solutions.html#cb326-5" aria-hidden="true" tabindex="-1"></a>    wt <span class="sc">&gt;=</span> <span class="fl">1.622727</span> <span class="sc">~</span> <span class="st">&quot;heavy car&quot;</span>))</span></code></pre></div>
 </div>
 <div id="task-5-5" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>How many light, medium, and heavy cars are part of the data?</p>
 <p><em>Solution:</em></p>
 <p>You can solve this with the <code>summarize(count = n()</code> function:</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="solutions.html#cb317-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb317-2"><a href="solutions.html#cb317-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
-<span id="cb317-3"><a href="solutions.html#cb317-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="solutions.html#cb327-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb327-2"><a href="solutions.html#cb327-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
+<span id="cb327-3"><a href="solutions.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   wt_cat     count
 ##   &lt;chr&gt;      &lt;int&gt;
@@ -857,8 +869,8 @@ divides the cars in three groups: light, medium, and heavy cars.</p>
 ## 3 medium car    13</code></pre>
 <p>9 heavy cars, 13 medium cars, and 7 light cars.</p>
 <p>Alternatively, you can also use the <code>count()</code> function:</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="solutions.html#cb319-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb319-2"><a href="solutions.html#cb319-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(wt_cat)</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="solutions.html#cb329-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb329-2"><a href="solutions.html#cb329-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(wt_cat)</span></code></pre></div>
 <pre><code>##       wt_cat  n
 ## 1  heavy car  9
 ## 2  light car  7
@@ -868,10 +880,10 @@ divides the cars in three groups: light, medium, and heavy cars.</p>
 <h3>Task 6<a href="solutions.html#task-6-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now sort this count of the car weight classes from highest to lowest.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="solutions.html#cb321-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb321-2"><a href="solutions.html#cb321-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
-<span id="cb321-3"><a href="solutions.html#cb321-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb321-4"><a href="solutions.html#cb321-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="solutions.html#cb331-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb331-2"><a href="solutions.html#cb331-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(wt_cat) <span class="sc">%&gt;%</span> </span>
+<span id="cb331-3"><a href="solutions.html#cb331-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb331-4"><a href="solutions.html#cb331-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count))</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   wt_cat     count
 ##   &lt;chr&gt;      &lt;int&gt;
@@ -885,40 +897,40 @@ divides the cars in three groups: light, medium, and heavy cars.</p>
 drive depending on its weight (<em>wt</em>). Facet the plot by weight class
 (<em>wt_cat</em>). Try to hide the plot legend (you have learned that in
 another exercise).</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="solutions.html#cb323-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb323-2"><a href="solutions.html#cb323-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">factor</span>(wt_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;light car&quot;</span>, <span class="st">&quot;medium car&quot;</span>, <span class="st">&quot;heavy car&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb323-3"><a href="solutions.html#cb323-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
-<span id="cb323-4"><a href="solutions.html#cb323-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb323-5"><a href="solutions.html#cb323-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb323-6"><a href="solutions.html#cb323-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span>  <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
-<span id="cb323-7"><a href="solutions.html#cb323-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb323-8"><a href="solutions.html#cb323-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
-<span id="cb323-9"><a href="solutions.html#cb323-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="solutions.html#cb333-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb333-2"><a href="solutions.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">factor</span>(wt_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;light car&quot;</span>, <span class="st">&quot;medium car&quot;</span>, <span class="st">&quot;heavy car&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb333-3"><a href="solutions.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
+<span id="cb333-4"><a href="solutions.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb333-5"><a href="solutions.html#cb333-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb333-6"><a href="solutions.html#cb333-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span>  <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
+<span id="cb333-7"><a href="solutions.html#cb333-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb333-8"><a href="solutions.html#cb333-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb333-9"><a href="solutions.html#cb333-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
 </div>
 <div id="task-8-1" class="section level3 unnumbered hasAnchor">
 <h3>Task 8<a href="solutions.html#task-8-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recreate the diagram from Task 7, but exclude all cars that weigh
 between 1.4613636 and 1.5636364 *1000kg from it.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="solutions.html#cb324-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb324-2"><a href="solutions.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&lt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&gt;</span> <span class="fl">1.5636364</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb324-3"><a href="solutions.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">factor</span>(wt_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;light car&quot;</span>, <span class="st">&quot;medium car&quot;</span>, <span class="st">&quot;heavy car&quot;</span>))) <span class="sc">%&gt;%</span> </span>
-<span id="cb324-4"><a href="solutions.html#cb324-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
-<span id="cb324-5"><a href="solutions.html#cb324-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb324-6"><a href="solutions.html#cb324-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb324-7"><a href="solutions.html#cb324-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span> <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
-<span id="cb324-8"><a href="solutions.html#cb324-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
-<span id="cb324-9"><a href="solutions.html#cb324-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
-<span id="cb324-10"><a href="solutions.html#cb324-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
-<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="solutions.html#cb334-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb334-2"><a href="solutions.html#cb334-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&lt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&gt;</span> <span class="fl">1.5636364</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb334-3"><a href="solutions.html#cb334-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wt_cat =</span> <span class="fu">factor</span>(wt_cat, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;light car&quot;</span>, <span class="st">&quot;medium car&quot;</span>, <span class="st">&quot;heavy car&quot;</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb334-4"><a href="solutions.html#cb334-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>wt, <span class="at">y=</span>mpg, <span class="at">color=</span>wt_cat)) <span class="sc">+</span></span>
+<span id="cb334-5"><a href="solutions.html#cb334-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb334-6"><a href="solutions.html#cb334-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb334-7"><a href="solutions.html#cb334-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#7b3294&quot;</span>, <span class="st">&quot;#84798a&quot;</span>, <span class="st">&quot;#008837&quot;</span>)) <span class="sc">+</span> <span class="co"># optional command, choose your own beautiful colors for the graph</span></span>
+<span id="cb334-8"><a href="solutions.html#cb334-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb334-9"><a href="solutions.html#cb334-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Relationship between car weight and achieved kilometers per liter&quot;</span>, <span class="at">x=</span><span class="st">&quot;Weight in 1000kg&quot;</span>, <span class="at">y=</span><span class="st">&quot;km/l&quot;</span>) <span class="sc">+</span></span>
+<span id="cb334-10"><a href="solutions.html#cb334-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>wt_cat)</span></code></pre></div>
+<p><img src="Data-Journalism_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
 <p><strong>Why would we use <code>data %&gt;% filter(wt &lt; 1.4613636 | wt &gt; 1.5636364)</code>
 instead of <code>data %&gt;% filter(wt &gt; 1.4613636 | wt &lt; 1.5636364)</code>?</strong></p>
 <p>Let’s look at the resulting data sets when you apply those filters to
 compare them:</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="solutions.html#cb325-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb325-2"><a href="solutions.html#cb325-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
-<span id="cb325-3"><a href="solutions.html#cb325-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&lt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&gt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="solutions.html#cb335-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb335-2"><a href="solutions.html#cb335-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb335-3"><a href="solutions.html#cb335-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&lt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&gt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
 <pre><code>##                            wt
 ## Mazda RX4           1.1909091
 ## Mazda RX4 Wag       1.3068182
@@ -947,9 +959,9 @@ compare them:</p>
 <p>The resulting table does not include any cars that weigh between
 1.4613636 and 1.5636364. But if you use
 <code>data %&gt;% filter(wt &gt; 1.4613636 | wt &lt; 1.5636364)</code>…</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="solutions.html#cb327-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb327-2"><a href="solutions.html#cb327-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
-<span id="cb327-3"><a href="solutions.html#cb327-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&gt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&lt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="solutions.html#cb337-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb337-2"><a href="solutions.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(wt) <span class="sc">%&gt;%</span> </span>
+<span id="cb337-3"><a href="solutions.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wt <span class="sc">&gt;</span> <span class="fl">1.4613636</span> <span class="sc">|</span> wt <span class="sc">&lt;</span> <span class="fl">1.5636364</span>)</span></code></pre></div>
 <pre><code>##                            wt
 ## Mazda RX4           1.1909091
 ## Mazda RX4 Wag       1.3068182
@@ -998,51 +1010,51 @@ are not excluding any cars.</p>
 <div id="solutions-for-exercise-5" class="section level2 unnumbered hasAnchor">
 <h2>Solutions for Exercise 5<a href="solutions.html#solutions-for-exercise-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>First, load the library <code>stringr</code> (or the entire <code>tidyverse</code>).</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="solutions.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="solutions.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <p>We will work on real data in this exercise. But before that, we will test our regex on a simple “test” vector that contains hyperlinks of media outlets and webpages. So run this code and create a vector called “seitenURL” in your environment:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="solutions.html#cb330-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.bild.de&quot;</span>, <span class="st">&quot;https://www.kicker.at/sport&quot;</span>, <span class="st">&quot;http://www.mycoffee.net/fresh&quot;</span>, <span class="st">&quot;http://www1.neuegedanken.blog&quot;</span>, <span class="st">&quot;https://home.1und1.info/magazine/unterhaltung&quot;</span>, <span class="st">&quot;https://de.sputniknews.com/technik&quot;</span>, <span class="st">&quot;https://rp-online.de/nrw/staedte/geldern&quot;</span>, <span class="st">&quot;https://www.bzbasel.ch/limmattal/region-limmattal&quot;</span>, <span class="st">&quot;http://sportdeutschland.tv/wm-maenner-2019&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="solutions.html#cb340-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;https://www.bild.de&quot;</span>, <span class="st">&quot;https://www.kicker.at/sport&quot;</span>, <span class="st">&quot;http://www.mycoffee.net/fresh&quot;</span>, <span class="st">&quot;http://www1.neuegedanken.blog&quot;</span>, <span class="st">&quot;https://home.1und1.info/magazine/unterhaltung&quot;</span>, <span class="st">&quot;https://de.sputniknews.com/technik&quot;</span>, <span class="st">&quot;https://rp-online.de/nrw/staedte/geldern&quot;</span>, <span class="st">&quot;https://www.bzbasel.ch/limmattal/region-limmattal&quot;</span>, <span class="st">&quot;http://sportdeutschland.tv/wm-maenner-2019&quot;</span>)</span></code></pre></div>
 <div id="task-1-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 1<a href="solutions.html#task-1-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s get rid of the first part of the URL strings in our “seitenURL” vector, i.e., everything that comes before the name of the outlet (You will need to work with <code>str_replace</code>). Usually, this is some kind of version of “<a href="https://www" class="uri">https://www</a>.” or “<a href="http://www" class="uri">http://www</a>.” Try to make your pattern as versatile as possible! In a big data set, there will always be exceptions to the rule (e.g., “<a href="http://sportdeutschland.tv" class="uri">http://sportdeutschland.tv</a>”), so try to match regex–i.e., types of characters instead of real characters–as often as you can!</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="solutions.html#cb331-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span><span class="fu">str_replace</span>(seitenURL, <span class="st">&quot;^(http)(s?)[:punct:]{3}(www[:punct:]|www1[:punct:]|w?)&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb331-2"><a href="solutions.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that start with http: &#39;^(http)&#39;</span></span>
-<span id="cb331-3"><a href="solutions.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that are either http or https: (s?) -&gt; because &#39;?&#39; means &quot;zero or more&quot;</span></span>
-<span id="cb331-4"><a href="solutions.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="co"># followed by exactly one dot and two forwardslashes: &#39;[:punct:]{3}&#39;</span></span>
-<span id="cb331-5"><a href="solutions.html#cb331-5" aria-hidden="true" tabindex="-1"></a><span class="co"># followed by either a www.: &#39;(www[:punct:]&#39;</span></span>
-<span id="cb331-6"><a href="solutions.html#cb331-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or followed by a www1.: &#39;|www1[:punct:])&#39;</span></span>
-<span id="cb331-7"><a href="solutions.html#cb331-7" aria-hidden="true" tabindex="-1"></a><span class="co"># or not followed by any kind of www (this is necessary for the rp-online-URL): &#39;w?&#39;</span></span>
-<span id="cb331-8"><a href="solutions.html#cb331-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and replaces the match with nothing, i.e., an empty string: &#39;, &quot;&quot;&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="solutions.html#cb341-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span><span class="fu">str_replace</span>(seitenURL, <span class="st">&quot;^(http)(s?)[:punct:]{3}(www[:punct:]|www1[:punct:]|w?)&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb341-2"><a href="solutions.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that start with http: &#39;^(http)&#39;</span></span>
+<span id="cb341-3"><a href="solutions.html#cb341-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that are either http or https: (s?) -&gt; because &#39;?&#39; means &quot;zero or more&quot;</span></span>
+<span id="cb341-4"><a href="solutions.html#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="co"># followed by exactly one dot and two forwardslashes: &#39;[:punct:]{3}&#39;</span></span>
+<span id="cb341-5"><a href="solutions.html#cb341-5" aria-hidden="true" tabindex="-1"></a><span class="co"># followed by either a www.: &#39;(www[:punct:]&#39;</span></span>
+<span id="cb341-6"><a href="solutions.html#cb341-6" aria-hidden="true" tabindex="-1"></a><span class="co"># or followed by a www1.: &#39;|www1[:punct:])&#39;</span></span>
+<span id="cb341-7"><a href="solutions.html#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="co"># or not followed by any kind of www (this is necessary for the rp-online-URL): &#39;w?&#39;</span></span>
+<span id="cb341-8"><a href="solutions.html#cb341-8" aria-hidden="true" tabindex="-1"></a><span class="co"># and replaces the match with nothing, i.e., an empty string: &#39;, &quot;&quot;&#39;</span></span></code></pre></div>
 </div>
 <div id="task-2-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Using the seitenURL vector, try to get rid of the characters that follow the media outlet (e.g., “.de” or “.com”).</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="solutions.html#cb332-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(seitenURL, <span class="st">&quot;[:punct:]{1}(com|de|blog|net|tv|at|ch|info).*&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb332-2"><a href="solutions.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that have exactly one dot: &quot;[:punct:]{1}&quot;</span></span>
-<span id="cb332-3"><a href="solutions.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches either com, de, blog and many more: &quot;(com|de|blog|net|tv|at|ch)&quot;</span></span>
-<span id="cb332-4"><a href="solutions.html#cb332-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches any character zero or multiple times: &quot;.*&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="solutions.html#cb342-1" aria-hidden="true" tabindex="-1"></a>seitenURL <span class="ot">&lt;-</span> <span class="fu">str_replace</span>(seitenURL, <span class="st">&quot;[:punct:]{1}(com|de|blog|net|tv|at|ch|info).*&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb342-2"><a href="solutions.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches all strings that have exactly one dot: &quot;[:punct:]{1}&quot;</span></span>
+<span id="cb342-3"><a href="solutions.html#cb342-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches either com, de, blog and many more: &quot;(com|de|blog|net|tv|at|ch)&quot;</span></span>
+<span id="cb342-4"><a href="solutions.html#cb342-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this matches any character zero or multiple times: &quot;.*&quot;</span></span></code></pre></div>
 </div>
 <div id="task-3-9" class="section level3 unnumbered hasAnchor">
 <h3>Task 3<a href="solutions.html#task-3-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now download our newest data set on Moodle and load it into <code>R</code> as an object called “data”. It is a very reduced version of the original data set that I’ve worked with for a project. The data set investigates what kind of outlets and webpages are most often shared and engaged with on Twitter and Facebook. We have tracked every webpage, from big players like <em>BILD</em> to small, private blogs. However, this is a reduced version of my <strong>raw data</strong>. The outlets are still hidden in the URLs, so we need to extract them first using the regex patterns that you’ve just created.</p>
 <p>Use this command and adapt it with your patterns (it uses str_replace in combination with mutate):</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="solutions.html#cb333-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb333-2"><a href="solutions.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seitenURL =</span> <span class="fu">str_replace_all</span>(seitenURL, <span class="st">&quot;^(http)(s?)[:punct:]{3}(www[:punct:]|www1[:punct:]|w?)&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb333-3"><a href="solutions.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seitenURL =</span> <span class="fu">str_replace_all</span>(seitenURL, <span class="st">&quot;[:punct:]{1}(com|de|blog|net|tv|at|ch|info).*&quot;</span>, <span class="st">&quot;&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="solutions.html#cb343-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb343-2"><a href="solutions.html#cb343-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seitenURL =</span> <span class="fu">str_replace_all</span>(seitenURL, <span class="st">&quot;^(http)(s?)[:punct:]{3}(www[:punct:]|www1[:punct:]|w?)&quot;</span>, <span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb343-3"><a href="solutions.html#cb343-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">seitenURL =</span> <span class="fu">str_replace_all</span>(seitenURL, <span class="st">&quot;[:punct:]{1}(com|de|blog|net|tv|at|ch|info).*&quot;</span>, <span class="st">&quot;&quot;</span>))</span></code></pre></div>
 </div>
 <div id="task-4-7" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="solutions.html#task-4-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The data set provides two additional, highly informative columns: “SeitenAnzahlTwitter” and “SeitenAnzahlFacebook”. These columns show the number of reactions (shares, likes, comments) for each URL. Having extracted the media outlets, let us examine which media outlet got the most engagement on Twitter and Facebook from all their URLs. Utilize your <code>dplyr</code> abilities to create an R object named “overview” that stores the summary statistic (remember <em>group_by</em> and <em>summarize</em>!) of the engagement on Twitter and Facebook per media outlet.</p>
 <p>Next, arrange your “overview” data to reveal which media outlet creates the most engagement on Twitter. Do the same for Facebook.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="solutions.html#cb334-1" aria-hidden="true" tabindex="-1"></a>overview <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span></span>
-<span id="cb334-2"><a href="solutions.html#cb334-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(seitenURL) <span class="sc">%&gt;%</span></span>
-<span id="cb334-3"><a href="solutions.html#cb334-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">twitter =</span> <span class="fu">sum</span>(seitenAnzahlTwitter),</span>
-<span id="cb334-4"><a href="solutions.html#cb334-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">facebook =</span> <span class="fu">sum</span>(seitenAnzahlFacebook))</span>
-<span id="cb334-5"><a href="solutions.html#cb334-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-6"><a href="solutions.html#cb334-6" aria-hidden="true" tabindex="-1"></a>overview <span class="sc">%&gt;%</span></span>
-<span id="cb334-7"><a href="solutions.html#cb334-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(twitter))</span>
-<span id="cb334-8"><a href="solutions.html#cb334-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-9"><a href="solutions.html#cb334-9" aria-hidden="true" tabindex="-1"></a>overview <span class="sc">%&gt;%</span></span>
-<span id="cb334-10"><a href="solutions.html#cb334-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(facebook))</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="solutions.html#cb344-1" aria-hidden="true" tabindex="-1"></a>overview <span class="ot">&lt;-</span> data2 <span class="sc">%&gt;%</span></span>
+<span id="cb344-2"><a href="solutions.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(seitenURL) <span class="sc">%&gt;%</span></span>
+<span id="cb344-3"><a href="solutions.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">twitter =</span> <span class="fu">sum</span>(seitenAnzahlTwitter),</span>
+<span id="cb344-4"><a href="solutions.html#cb344-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">facebook =</span> <span class="fu">sum</span>(seitenAnzahlFacebook))</span>
+<span id="cb344-5"><a href="solutions.html#cb344-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-6"><a href="solutions.html#cb344-6" aria-hidden="true" tabindex="-1"></a>overview <span class="sc">%&gt;%</span></span>
+<span id="cb344-7"><a href="solutions.html#cb344-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(twitter))</span>
+<span id="cb344-8"><a href="solutions.html#cb344-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb344-9"><a href="solutions.html#cb344-9" aria-hidden="true" tabindex="-1"></a>overview <span class="sc">%&gt;%</span></span>
+<span id="cb344-10"><a href="solutions.html#cb344-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(facebook))</span></code></pre></div>
 </div>
 </div>
 <div id="solutions-for-exercise-6" class="section level2 unnumbered hasAnchor">
@@ -1054,30 +1066,30 @@ the encoding and to convert the date column to a standardized date format. After
 <em>user</em>, and <em>full_text</em> column.</p>
 <p>Next, try to tokenize the data.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="solutions.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: Load and shorten data</span></span>
-<span id="cb335-2"><a href="solutions.html#cb335-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Kliemann-full-tweets.csv&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
-<span id="cb335-3"><a href="solutions.html#cb335-3" aria-hidden="true" tabindex="-1"></a>data_short <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb335-4"><a href="solutions.html#cb335-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time, user, full_text)</span>
-<span id="cb335-5"><a href="solutions.html#cb335-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb335-6"><a href="solutions.html#cb335-6" aria-hidden="true" tabindex="-1"></a>data_short <span class="ot">&lt;-</span> data_short <span class="sc">%&gt;%</span> </span>
-<span id="cb335-7"><a href="solutions.html#cb335-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(time)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-8"><a href="solutions.html#cb335-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>()</span>
-<span id="cb335-9"><a href="solutions.html#cb335-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb335-10"><a href="solutions.html#cb335-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: Tokenize</span></span>
-<span id="cb335-11"><a href="solutions.html#cb335-11" aria-hidden="true" tabindex="-1"></a>remove_reg <span class="ot">&lt;-</span> <span class="st">&quot;&amp;amp;|&amp;lt;|&amp;gt;&quot;</span></span>
-<span id="cb335-12"><a href="solutions.html#cb335-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb335-13"><a href="solutions.html#cb335-13" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_short <span class="sc">%&gt;%</span></span>
-<span id="cb335-14"><a href="solutions.html#cb335-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweet =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb335-15"><a href="solutions.html#cb335-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(full_text, <span class="st">&quot;^RT&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-16"><a href="solutions.html#cb335-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(full_text, remove_reg)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-17"><a href="solutions.html#cb335-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, full_text, <span class="at">token =</span> <span class="st">&quot;tweets&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb335-18"><a href="solutions.html#cb335-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^[:digit:]+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-19"><a href="solutions.html#cb335-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^http&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-20"><a href="solutions.html#cb335-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">+)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-21"><a href="solutions.html#cb335-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">+)+(.)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-22"><a href="solutions.html#cb335-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">-)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-23"><a href="solutions.html#cb335-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">-)+(.)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb335-24"><a href="solutions.html#cb335-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(.)+(</span><span class="sc">\\</span><span class="st">+)+$&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="solutions.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: Load and shorten data</span></span>
+<span id="cb345-2"><a href="solutions.html#cb345-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;Kliemann-full-tweets.csv&quot;</span>, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span>
+<span id="cb345-3"><a href="solutions.html#cb345-3" aria-hidden="true" tabindex="-1"></a>data_short <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb345-4"><a href="solutions.html#cb345-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time, user, full_text)</span>
+<span id="cb345-5"><a href="solutions.html#cb345-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-6"><a href="solutions.html#cb345-6" aria-hidden="true" tabindex="-1"></a>data_short <span class="ot">&lt;-</span> data_short <span class="sc">%&gt;%</span> </span>
+<span id="cb345-7"><a href="solutions.html#cb345-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(time)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-8"><a href="solutions.html#cb345-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>()</span>
+<span id="cb345-9"><a href="solutions.html#cb345-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-10"><a href="solutions.html#cb345-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: Tokenize</span></span>
+<span id="cb345-11"><a href="solutions.html#cb345-11" aria-hidden="true" tabindex="-1"></a>remove_reg <span class="ot">&lt;-</span> <span class="st">&quot;&amp;amp;|&amp;lt;|&amp;gt;&quot;</span></span>
+<span id="cb345-12"><a href="solutions.html#cb345-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb345-13"><a href="solutions.html#cb345-13" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_short <span class="sc">%&gt;%</span></span>
+<span id="cb345-14"><a href="solutions.html#cb345-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tweet =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb345-15"><a href="solutions.html#cb345-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(full_text, <span class="st">&quot;^RT&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-16"><a href="solutions.html#cb345-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(full_text, remove_reg)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-17"><a href="solutions.html#cb345-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, full_text, <span class="at">token =</span> <span class="st">&quot;tweets&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb345-18"><a href="solutions.html#cb345-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^[:digit:]+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-19"><a href="solutions.html#cb345-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^http&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-20"><a href="solutions.html#cb345-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">+)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-21"><a href="solutions.html#cb345-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">+)+(.)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-22"><a href="solutions.html#cb345-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">-)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-23"><a href="solutions.html#cb345-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(</span><span class="sc">\\</span><span class="st">-)+(.)+$&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb345-24"><a href="solutions.html#cb345-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(word, <span class="st">&quot;^(.)+(</span><span class="sc">\\</span><span class="st">+)+$&quot;</span>))</span></code></pre></div>
 </div>
 <div id="task-2-stop-word-removal" class="section level3 unnumbered hasAnchor">
 <h3>Task 2: Stop word removal<a href="solutions.html#task-2-stop-word-removal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1089,83 +1101,83 @@ dataframe that contains German stop words by using this command:
 Create your German stop word list and use it to remove stop words from
 your tokens.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="solutions.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: install and load the stopwords package</span></span>
-<span id="cb336-2"><a href="solutions.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stopwords)) {</span>
-<span id="cb336-3"><a href="solutions.html#cb336-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stopwords&quot;</span>); </span>
-<span id="cb336-4"><a href="solutions.html#cb336-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stopwords)</span>
-<span id="cb336-5"><a href="solutions.html#cb336-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stopwords</span></span>
-<span id="cb336-6"><a href="solutions.html#cb336-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-7"><a href="solutions.html#cb336-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: create a stop word list</span></span>
-<span id="cb336-8"><a href="solutions.html#cb336-8" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">&quot;de&quot;</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb336-9"><a href="solutions.html#cb336-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-10"><a href="solutions.html#cb336-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Third: remove German stop words from tokens</span></span>
-<span id="cb336-11"><a href="solutions.html#cb336-11" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
-<span id="cb336-12"><a href="solutions.html#cb336-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_word_german<span class="sc">$</span>word)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="solutions.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: install and load the stopwords package</span></span>
+<span id="cb346-2"><a href="solutions.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stopwords)) {</span>
+<span id="cb346-3"><a href="solutions.html#cb346-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stopwords&quot;</span>); </span>
+<span id="cb346-4"><a href="solutions.html#cb346-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stopwords)</span>
+<span id="cb346-5"><a href="solutions.html#cb346-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stopwords</span></span>
+<span id="cb346-6"><a href="solutions.html#cb346-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-7"><a href="solutions.html#cb346-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: create a stop word list</span></span>
+<span id="cb346-8"><a href="solutions.html#cb346-8" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">&quot;de&quot;</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb346-9"><a href="solutions.html#cb346-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-10"><a href="solutions.html#cb346-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Third: remove German stop words from tokens</span></span>
+<span id="cb346-11"><a href="solutions.html#cb346-11" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb346-12"><a href="solutions.html#cb346-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_word_german<span class="sc">$</span>word)</span></code></pre></div>
 <p><em>Optional solution:</em></p>
 <p>If you want to add additional stop words to your stop word list, you can
 use this solution instead. I would recommend using it, because German
 stop word lists are often not as advanced as English stop word lists. In
 addition, they need to be tailored for specific text types, such as
 colloquial German:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="solutions.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: install and load the stopwords package</span></span>
-<span id="cb337-2"><a href="solutions.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stopwords)) {</span>
-<span id="cb337-3"><a href="solutions.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stopwords&quot;</span>); </span>
-<span id="cb337-4"><a href="solutions.html#cb337-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stopwords)</span>
-<span id="cb337-5"><a href="solutions.html#cb337-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stopwords</span></span>
-<span id="cb337-6"><a href="solutions.html#cb337-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-7"><a href="solutions.html#cb337-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: create a stop word list</span></span>
-<span id="cb337-8"><a href="solutions.html#cb337-8" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">&quot;de&quot;</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb337-9"><a href="solutions.html#cb337-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-10"><a href="solutions.html#cb337-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Here you can insert your own stop words, if the German list seems too short for you (231 words against 1149 in English)</span></span>
-<span id="cb337-11"><a href="solutions.html#cb337-11" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> stop_word_german <span class="sc">%&gt;%</span></span>
-<span id="cb337-12"><a href="solutions.html#cb337-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;beim&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb337-13"><a href="solutions.html#cb337-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;and&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-14"><a href="solutions.html#cb337-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;mehr&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-15"><a href="solutions.html#cb337-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganz&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-16"><a href="solutions.html#cb337-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;fast&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-17"><a href="solutions.html#cb337-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;klar&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-18"><a href="solutions.html#cb337-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;mal&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-19"><a href="solutions.html#cb337-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dat&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-20"><a href="solutions.html#cb337-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;biste&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-21"><a href="solutions.html#cb337-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;schon&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-22"><a href="solutions.html#cb337-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gell&quot;</span>)  <span class="sc">%&gt;%</span></span>
-<span id="cb337-23"><a href="solutions.html#cb337-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dass&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-24"><a href="solutions.html#cb337-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;seit&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-25"><a href="solutions.html#cb337-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ja&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-26"><a href="solutions.html#cb337-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wohl&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-27"><a href="solutions.html#cb337-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gar&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-28"><a href="solutions.html#cb337-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ne&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-29"><a href="solutions.html#cb337-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;sone&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-30"><a href="solutions.html#cb337-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dar&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-31"><a href="solutions.html#cb337-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ahja&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-32"><a href="solutions.html#cb337-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;eher&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-33"><a href="solutions.html#cb337-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;naja&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-34"><a href="solutions.html#cb337-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;yes&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-35"><a href="solutions.html#cb337-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;pls&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-36"><a href="solutions.html#cb337-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;halt&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-37"><a href="solutions.html#cb337-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hast&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-38"><a href="solutions.html#cb337-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hat&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-39"><a href="solutions.html#cb337-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurde&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-40"><a href="solutions.html#cb337-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurden&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-41"><a href="solutions.html#cb337-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurdest&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-42"><a href="solutions.html#cb337-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;war&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-43"><a href="solutions.html#cb337-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;warst&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-44"><a href="solutions.html#cb337-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gib&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-45"><a href="solutions.html#cb337-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gibst&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-46"><a href="solutions.html#cb337-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gibt&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-47"><a href="solutions.html#cb337-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;entweder&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-48"><a href="solutions.html#cb337-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;beinahe&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-49"><a href="solutions.html#cb337-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganz&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-50"><a href="solutions.html#cb337-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganze&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-51"><a href="solutions.html#cb337-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganzen&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb337-52"><a href="solutions.html#cb337-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hey&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-53"><a href="solutions.html#cb337-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;eigentlich&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-54"><a href="solutions.html#cb337-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gerade&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb337-55"><a href="solutions.html#cb337-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;irgendwie&quot;</span>)</span>
-<span id="cb337-56"><a href="solutions.html#cb337-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-57"><a href="solutions.html#cb337-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Third: remove German stop words from tokens</span></span>
-<span id="cb337-58"><a href="solutions.html#cb337-58" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
-<span id="cb337-59"><a href="solutions.html#cb337-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_word_german<span class="sc">$</span>word)</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="solutions.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: install and load the stopwords package</span></span>
+<span id="cb347-2"><a href="solutions.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stopwords)) {</span>
+<span id="cb347-3"><a href="solutions.html#cb347-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stopwords&quot;</span>); </span>
+<span id="cb347-4"><a href="solutions.html#cb347-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stopwords)</span>
+<span id="cb347-5"><a href="solutions.html#cb347-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stopwords</span></span>
+<span id="cb347-6"><a href="solutions.html#cb347-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-7"><a href="solutions.html#cb347-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: create a stop word list</span></span>
+<span id="cb347-8"><a href="solutions.html#cb347-8" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">word =</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">&quot;de&quot;</span>), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb347-9"><a href="solutions.html#cb347-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-10"><a href="solutions.html#cb347-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Here you can insert your own stop words, if the German list seems too short for you (231 words against 1149 in English)</span></span>
+<span id="cb347-11"><a href="solutions.html#cb347-11" aria-hidden="true" tabindex="-1"></a>stop_word_german <span class="ot">&lt;-</span> stop_word_german <span class="sc">%&gt;%</span></span>
+<span id="cb347-12"><a href="solutions.html#cb347-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;beim&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb347-13"><a href="solutions.html#cb347-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;and&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-14"><a href="solutions.html#cb347-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;mehr&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-15"><a href="solutions.html#cb347-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-16"><a href="solutions.html#cb347-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;fast&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-17"><a href="solutions.html#cb347-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;klar&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-18"><a href="solutions.html#cb347-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;mal&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-19"><a href="solutions.html#cb347-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dat&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-20"><a href="solutions.html#cb347-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;biste&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-21"><a href="solutions.html#cb347-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;schon&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-22"><a href="solutions.html#cb347-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gell&quot;</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb347-23"><a href="solutions.html#cb347-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dass&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-24"><a href="solutions.html#cb347-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;seit&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-25"><a href="solutions.html#cb347-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ja&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-26"><a href="solutions.html#cb347-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wohl&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-27"><a href="solutions.html#cb347-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gar&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-28"><a href="solutions.html#cb347-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ne&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-29"><a href="solutions.html#cb347-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;sone&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-30"><a href="solutions.html#cb347-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;dar&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-31"><a href="solutions.html#cb347-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ahja&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-32"><a href="solutions.html#cb347-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;eher&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-33"><a href="solutions.html#cb347-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;naja&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-34"><a href="solutions.html#cb347-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;yes&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-35"><a href="solutions.html#cb347-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;pls&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-36"><a href="solutions.html#cb347-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;halt&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-37"><a href="solutions.html#cb347-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hast&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-38"><a href="solutions.html#cb347-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hat&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-39"><a href="solutions.html#cb347-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurde&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-40"><a href="solutions.html#cb347-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurden&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-41"><a href="solutions.html#cb347-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;wurdest&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-42"><a href="solutions.html#cb347-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;war&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-43"><a href="solutions.html#cb347-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;warst&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-44"><a href="solutions.html#cb347-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gib&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-45"><a href="solutions.html#cb347-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gibst&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-46"><a href="solutions.html#cb347-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gibt&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-47"><a href="solutions.html#cb347-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;entweder&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-48"><a href="solutions.html#cb347-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;beinahe&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-49"><a href="solutions.html#cb347-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganz&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-50"><a href="solutions.html#cb347-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganze&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-51"><a href="solutions.html#cb347-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;ganzen&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb347-52"><a href="solutions.html#cb347-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;hey&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-53"><a href="solutions.html#cb347-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;eigentlich&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-54"><a href="solutions.html#cb347-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;gerade&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb347-55"><a href="solutions.html#cb347-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">word =</span> <span class="st">&quot;irgendwie&quot;</span>)</span>
+<span id="cb347-56"><a href="solutions.html#cb347-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb347-57"><a href="solutions.html#cb347-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Third: remove German stop words from tokens</span></span>
+<span id="cb347-58"><a href="solutions.html#cb347-58" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb347-59"><a href="solutions.html#cb347-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_word_german<span class="sc">$</span>word)</span></code></pre></div>
 </div>
 <div id="task-3-lemmatizing-stemming" class="section level3 unnumbered hasAnchor">
 <h3>Task 3: Lemmatizing &amp; stemming<a href="solutions.html#task-3-lemmatizing-stemming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1173,12 +1185,12 @@ colloquial German:</p>
 working with German data, you’ll have to add the option
 <code>language = "german"</code> to the <code>wordStem()</code> function.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="solutions.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: import the Porter stemmer</span></span>
-<span id="cb338-2"><a href="solutions.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SnowballC)</span>
-<span id="cb338-3"><a href="solutions.html#cb338-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb338-4"><a href="solutions.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: apply the PorterStemmer to your tokens</span></span>
-<span id="cb338-5"><a href="solutions.html#cb338-5" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
-<span id="cb338-6"><a href="solutions.html#cb338-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">wordStem</span>(word, <span class="at">language =</span> <span class="st">&quot;german&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="solutions.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First: import the Porter stemmer</span></span>
+<span id="cb348-2"><a href="solutions.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SnowballC)</span>
+<span id="cb348-3"><a href="solutions.html#cb348-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb348-4"><a href="solutions.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Second: apply the PorterStemmer to your tokens</span></span>
+<span id="cb348-5"><a href="solutions.html#cb348-5" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb348-6"><a href="solutions.html#cb348-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">wordStem</span>(word, <span class="at">language =</span> <span class="st">&quot;german&quot;</span>))</span></code></pre></div>
 </div>
 <div id="task-4-pruning" class="section level3 unnumbered hasAnchor">
 <h3>Task 4: Pruning<a href="solutions.html#task-4-pruning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1186,7 +1198,76 @@ working with German data, you’ll have to add the option
 and remove 1) words that occur in less than 0.03% of all tweets and 2)
 words that occur in more than 95% of all tweets.</p>
 <p><em>Solution:</em></p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="solutions.html#cb339-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> <span class="fu">prune</span>(data_tknzd, tweet, word, text, user, <span class="fl">0.003</span>, <span class="fl">0.95</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="solutions.html#cb349-1" aria-hidden="true" tabindex="-1"></a>data_tknzd <span class="ot">&lt;-</span> <span class="fu">prune</span>(data_tknzd, tweet, word, text, user, <span class="fl">0.003</span>, <span class="fl">0.95</span>)</span></code></pre></div>
+</div>
+<div id="task-5-model-estimation" class="section level3 unnumbered hasAnchor">
+<h3>Task 5: Model estimation<a href="solutions.html#task-5-model-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>(Install +) Load the <code>tidytext</code> and <code>stm</code> package. Next, cast the tidy text
+data <em>data_tknzd</em> into a <em>sparse matrix</em> that the <code>stm</code> can use to
+calculate topic models. Create a date covariate. Finally, estimate an LDA-based topic model with 3 (!!!) topics and extract the topics and the effect of time on the distribution of those 3 (!!!) topics.</p>
+<p><em>Hints:</em> The Kliemann scandal started on May 6th 2022, so that’s your <em>min()</em> date.
+In addition, the data set covers several months, so you want to use full days for topic model visualization.</p>
+<p><em>Solution:</em></p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="solutions.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, load the packages</span></span>
+<span id="cb350-2"><a href="solutions.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb350-3"><a href="solutions.html#cb350-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stm)</span>
+<span id="cb350-4"><a href="solutions.html#cb350-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-5"><a href="solutions.html#cb350-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Second, cast the tidy data set into a sparse matrix</span></span>
+<span id="cb350-6"><a href="solutions.html#cb350-6" aria-hidden="true" tabindex="-1"></a>data_sparse <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb350-7"><a href="solutions.html#cb350-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb350-8"><a href="solutions.html#cb350-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb350-9"><a href="solutions.html#cb350-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_sparse</span>(tweet, word, n)</span>
+<span id="cb350-10"><a href="solutions.html#cb350-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-11"><a href="solutions.html#cb350-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Third, create a time covariate:</span></span>
+<span id="cb350-12"><a href="solutions.html#cb350-12" aria-hidden="true" tabindex="-1"></a>date_covariate <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb350-13"><a href="solutions.html#cb350-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, time) <span class="sc">%&gt;%</span></span>
+<span id="cb350-14"><a href="solutions.html#cb350-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(tweet, time, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb350-15"><a href="solutions.html#cb350-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">days =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="at">time1 =</span> time, <span class="at">time2 =</span> <span class="fu">min</span>(<span class="st">&quot;2022-05-06&quot;</span>), <span class="at">units =</span> <span class="st">&quot;days&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb350-16"><a href="solutions.html#cb350-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, days)</span>
+<span id="cb350-17"><a href="solutions.html#cb350-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-18"><a href="solutions.html#cb350-18" aria-hidden="true" tabindex="-1"></a>date_covariate <span class="ot">&lt;-</span> date_covariate <span class="sc">%&gt;%</span></span>
+<span id="cb350-19"><a href="solutions.html#cb350-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">days =</span> <span class="fu">as.integer</span>(<span class="fu">substr</span>(days, <span class="dv">1</span>, <span class="dv">3</span>)))</span>
+<span id="cb350-20"><a href="solutions.html#cb350-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-21"><a href="solutions.html#cb350-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Forth, estimate the LDA models with 3 topics</span></span>
+<span id="cb350-22"><a href="solutions.html#cb350-22" aria-hidden="true" tabindex="-1"></a>k_models <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">K =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb350-23"><a href="solutions.html#cb350-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">map</span>(K, <span class="sc">~</span> <span class="fu">stm</span>(data_sparse,</span>
+<span id="cb350-24"><a href="solutions.html#cb350-24" aria-hidden="true" tabindex="-1"></a>                              <span class="at">K =</span> .,</span>
+<span id="cb350-25"><a href="solutions.html#cb350-25" aria-hidden="true" tabindex="-1"></a>                              <span class="at">prevalence =</span> <span class="sc">~</span> <span class="fu">s</span>(days),</span>
+<span id="cb350-26"><a href="solutions.html#cb350-26" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> date_covariate,</span>
+<span id="cb350-27"><a href="solutions.html#cb350-27" aria-hidden="true" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb350-28"><a href="solutions.html#cb350-28" aria-hidden="true" tabindex="-1"></a>                              <span class="at">init.type =</span> <span class="st">&quot;LDA&quot;</span>)))</span>
+<span id="cb350-29"><a href="solutions.html#cb350-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-30"><a href="solutions.html#cb350-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Fifth, extract the topics and the effect of time on topic distribution</span></span>
+<span id="cb350-31"><a href="solutions.html#cb350-31" aria-hidden="true" tabindex="-1"></a>lda <span class="ot">&lt;-</span> k_models <span class="sc">%&gt;%</span> </span>
+<span id="cb350-32"><a href="solutions.html#cb350-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(K <span class="sc">==</span> <span class="dv">3</span>)</span>
+<span id="cb350-33"><a href="solutions.html#cb350-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(model) <span class="sc">%&gt;%</span> </span>
+<span id="cb350-34"><a href="solutions.html#cb350-34" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">1</span>]]</span>
+<span id="cb350-35"><a href="solutions.html#cb350-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb350-36"><a href="solutions.html#cb350-36" aria-hidden="true" tabindex="-1"></a>shiny_model <span class="ot">&lt;-</span> <span class="fu">estimateEffect</span>(<span class="at">formula=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span><span class="sc">~</span><span class="fu">s</span>(days), <span class="at">stmobj=</span>lda, <span class="at">metadata=</span>date_covariate)</span></code></pre></div>
+</div>
+<div id="task-6-inspect-models" class="section level3 unnumbered hasAnchor">
+<h3>Task 6: Inspect models<a href="solutions.html#task-6-inspect-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Install + load the <code>stminsights</code> package. Create all the save files you need, clear your R environment and reload the important R objects. Create an image of your R environment. Finally, start the <code>stminsights</code> app and upload your shiny_model via the browse-button.</p>
+<p><em>Solution:</em></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="solutions.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, save all files for the stminisghts app</span></span>
+<span id="cb351-2"><a href="solutions.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shiny_model, <span class="at">file =</span> <span class="st">&quot;shiny_model.rds&quot;</span>)</span>
+<span id="cb351-3"><a href="solutions.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lda, <span class="at">file =</span> <span class="st">&quot;lda.rds&quot;</span>)</span>
+<span id="cb351-4"><a href="solutions.html#cb351-4" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">as.dfm</span>(data_sparse) <span class="co"># this reshapes our sparse matrix in a format that the stminsights app can read</span></span>
+<span id="cb351-5"><a href="solutions.html#cb351-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(out, <span class="at">file =</span> <span class="st">&quot;out.rds&quot;</span>)</span>
+<span id="cb351-6"><a href="solutions.html#cb351-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-7"><a href="solutions.html#cb351-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Second, clear your entire environment</span></span>
+<span id="cb351-8"><a href="solutions.html#cb351-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb351-9"><a href="solutions.html#cb351-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-10"><a href="solutions.html#cb351-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Third, load only the important files for stminisghts into your R environment</span></span>
+<span id="cb351-11"><a href="solutions.html#cb351-11" aria-hidden="true" tabindex="-1"></a>shiny_model <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;shiny_model.rds&quot;</span>)</span>
+<span id="cb351-12"><a href="solutions.html#cb351-12" aria-hidden="true" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;lda.rds&quot;</span>)</span>
+<span id="cb351-13"><a href="solutions.html#cb351-13" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;out.rds&quot;</span>)</span>
+<span id="cb351-14"><a href="solutions.html#cb351-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-15"><a href="solutions.html#cb351-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fourth, create an image (or save file) of your R environment in your working directory</span></span>
+<span id="cb351-16"><a href="solutions.html#cb351-16" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&#39;shiny_model.RData&#39;</span>)</span>
+<span id="cb351-17"><a href="solutions.html#cb351-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-18"><a href="solutions.html#cb351-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Fifth, start the stminisghts() app</span></span>
+<span id="cb351-19"><a href="solutions.html#cb351-19" aria-hidden="true" tabindex="-1"></a><span class="fu">run_stminsights</span>()</span></code></pre></div>
 
 </div>
 </div>

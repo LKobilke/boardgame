@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-02-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#pruning"><i class="fa fa-check"></i><b>8.2.4</b> Pruning</a></li>
 <li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-pruning"><i class="fa fa-check"></i>Practice: Pruning</a></li>
 </ul></li>
+<li class="chapter" data-level="8.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#topic-modeling"><i class="fa fa-check"></i><b>8.3</b> Topic modeling</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-create-a-sparse-matrix"><i class="fa fa-check"></i><b>8.3.1</b> First steps: Create a sparse matrix</a></li>
+<li class="chapter" data-level="8.3.2" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#first-steps-create-a-date-covariate"><i class="fa fa-check"></i><b>8.3.2</b> First steps: Create a date covariate</a></li>
+<li class="chapter" data-level="8.3.3" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#model-estimation-number-of-topics"><i class="fa fa-check"></i><b>8.3.3</b> Model estimation: Number of topics</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-model-estimation"><i class="fa fa-check"></i>Practice: Model estimation</a></li>
+<li class="chapter" data-level="8.3.4" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#inspect-the-topics"><i class="fa fa-check"></i><b>8.3.4</b> Inspect the topics</a></li>
+<li class="chapter" data-level="" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#practice-inspect-models"><i class="fa fa-check"></i>Practice: Inspect models</a></li>
+<li class="chapter" data-level="8.3.5" data-path="tidy-text-analysis.html"><a href="tidy-text-analysis.html#find-the-best-value-for-k"><i class="fa fa-check"></i><b>8.3.5</b> Find the best value for K</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i>Solutions</a>
 <ul>
@@ -356,6 +366,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-2-stop-word-removal"><i class="fa fa-check"></i>Task 2: Stop word removal</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-3-lemmatizing-stemming"><i class="fa fa-check"></i>Task 3: Lemmatizing &amp; stemming</a></li>
 <li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-4-pruning"><i class="fa fa-check"></i>Task 4: Pruning</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-5-model-estimation"><i class="fa fa-check"></i>Task 5: Model estimation</a></li>
+<li class="chapter" data-level="" data-path="solutions.html"><a href="solutions.html#task-6-inspect-models"><i class="fa fa-check"></i>Task 6: Inspect models</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -786,6 +798,553 @@ words that occur in more than 95% of all tweets. <strong>Beware:</strong> Prunin
 a demanding task, therefore your machine might need a while to complete
 the computations. Wait until the red stop sign in your console vanishes.</p>
 <p>For solutions see: <a href="solutions.html#solutions-for-exercise-6">Solutions for Exercise 6</a></p>
+</div>
+</div>
+<div id="topic-modeling" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Topic modeling<a href="tidy-text-analysis.html#topic-modeling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that we have finished our text normalization process, let’s get some results!</p>
+<p>In this section, we’ll use a combination of the <code>tidytext</code> package and the <code>stm</code> package to create topic models with <em>Latent Dirichlet allocation</em> (<em>LDA</em>), one of the most prevalent
+topic modeling algorithms. LDA creates <em>mixed-membership models</em>, i.e.,
+LDA assumes that every text contains a mix of different topics, e.g. a
+tweet can be 60% about TopicA (War crimes) and 40% about TopicB (Housing
+of refugees). Topics are defined by the mix of words that are associated
+with them. For example, the most common words in TopicA (War crimes) can
+be “massacre”, “soldiers”, and “brutal”. The most common words in TopicB
+(Housing of refugees) can be “volunteers”, “shelter”, and “children”.
+However, both topics can be mentioned in one single text, e.g., tweets
+about the brutal war crimes of Russian soldiers that force Ukrainian
+refugees to take their children and seek shelter in neighboring
+countries. LDA estimates the most common words in a topic and the most
+common topics in a text simultaneously.</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><em>Image: Assigning topics to a document (<a href="https://sicss.io/2019/materials/day3-text-analysis/topic-modeling/rmarkdown/Topic_Modeling.html">Screenshot from: Chris Bail)</a>:</em></td>
+</tr>
+<tr class="even">
+<td><img src="images/Tut_topic_modeling.JPG" /></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important hint:</strong> The <code>stm</code> package uses machine learning lingo. That is, words are called <em>features</em> and texts/tweets are called <em>documents</em>. The total sum of all documents is
+called a <em>corpus</em>. In the long run, you should get used to this lingo, so we will keep using it in this tutorial, too.</p>
+<div id="first-steps-create-a-sparse-matrix" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> First steps: Create a sparse matrix<a href="tidy-text-analysis.html#first-steps-create-a-sparse-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If you haven’t already, please install <code>stm</code> and <code>tidytext</code> packages:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="tidy-text-analysis.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the stm package for topic modeling</span></span>
+<span id="cb261-2"><a href="tidy-text-analysis.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stm)) {</span>
+<span id="cb261-3"><a href="tidy-text-analysis.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stm&quot;</span>); </span>
+<span id="cb261-4"><a href="tidy-text-analysis.html#cb261-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stm)</span>
+<span id="cb261-5"><a href="tidy-text-analysis.html#cb261-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stm</span></span>
+<span id="cb261-6"><a href="tidy-text-analysis.html#cb261-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb261-7"><a href="tidy-text-analysis.html#cb261-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the tidytext package for topic modeling</span></span>
+<span id="cb261-8"><a href="tidy-text-analysis.html#cb261-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(tidytext)) {</span>
+<span id="cb261-9"><a href="tidy-text-analysis.html#cb261-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;tidytext&quot;</span>); </span>
+<span id="cb261-10"><a href="tidy-text-analysis.html#cb261-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(tidytext)</span>
+<span id="cb261-11"><a href="tidy-text-analysis.html#cb261-11" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load tidytext</span></span></code></pre></div>
+<p>First, using the <code>tidytext</code> package, we will convert our tidy text data
+into a sparse matrix that the <code>stm</code> package can understand for its LDA algorithm and do calculations with. For this we reshape our tokenized data into a new format called sparse matrix. In a sparse matrix…</p>
+<ol style="list-style-type: decimal">
+<li>…rows represent the documents (= texts),</li>
+<li>…columns represent features (= unique words),</li>
+<li>…the cells represent whether this word is present (<em>1</em>) or not present (<em>.</em>) in this document.</li>
+</ol>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="tidy-text-analysis.html#cb262-1" aria-hidden="true" tabindex="-1"></a>data_sparse <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span></span>
+<span id="cb262-2"><a href="tidy-text-analysis.html#cb262-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, text, word) <span class="sc">%&gt;%</span></span>
+<span id="cb262-3"><a href="tidy-text-analysis.html#cb262-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tweet, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb262-4"><a href="tidy-text-analysis.html#cb262-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_sparse</span>(tweet, word, n)</span>
+<span id="cb262-5"><a href="tidy-text-analysis.html#cb262-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-6"><a href="tidy-text-analysis.html#cb262-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_sparse)</span></code></pre></div>
+<pre><code>## 6 x 1762 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                                               
+## 1  1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . 1 . . . 1 1 1 1 . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . 1 . . . . . . . 1 1 . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . 1 1 . . . . . . . . . 1 1 1 1 . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . 1 . . . . . . 1 . . . . 1 . 1 1 1 1 1 1 1 1 1
+## 31 . . . . . . . . . . . . . . . 1 . . . . . 1 1 . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . 1 1 1 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                                                                               
+## 1  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##                               
+## 1  . . . . . . . . . . . . . .
+## 11 . . . . . . . . . . . . . .
+## 12 . . . . . . . . . . . . . .
+## 17 . . . . . . . . . . . . . .
+## 24 . . . . . . . . . . . . . .
+## 31 . . . . . . . . . . . . . .</code></pre>
+<p>As you can infer from the concole output, the first feature / word in the sparse matrix is
+“against”. This word is present in the first document / tweet because we can see a <em>1</em> and not a <em>.</em>! The features / words “and” and “ar” are also present in this document / tweet.</p>
+</div>
+<div id="first-steps-create-a-date-covariate" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> First steps: Create a date covariate<a href="tidy-text-analysis.html#first-steps-create-a-date-covariate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When we analyze topic models, we usually want to know how the identified topics develop over time. To do this, we have to give the <code>stm</code>-package a time span within which it should model the topics. The following code calculates the time span that you can give to <code>stm</code>later on. Be careful to always adjust the time span to fit your data. You need to change the <code>min()</code> function to the earliest time point that you have in your data.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="tidy-text-analysis.html#cb264-1" aria-hidden="true" tabindex="-1"></a>date_covariate <span class="ot">&lt;-</span> data_tknzd <span class="sc">%&gt;%</span> </span>
+<span id="cb264-2"><a href="tidy-text-analysis.html#cb264-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, time) <span class="sc">%&gt;%</span>  <span class="co"># select only the tweet and time column</span></span>
+<span id="cb264-3"><a href="tidy-text-analysis.html#cb264-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(tweet, time, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="co"># check for duplicate tweets and remove them</span></span>
+<span id="cb264-4"><a href="tidy-text-analysis.html#cb264-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">days =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="at">time1 =</span> time, <span class="at">time2 =</span> <span class="fu">min</span>(<span class="st">&quot;2022-02-25&quot;</span>), <span class="at">units =</span> <span class="st">&quot;days&quot;</span>))) <span class="sc">%&gt;%</span> <span class="co"># calculate the time span between the tweet&#39;s creation date and the least recent time point in our data and save this difference to a variable called &quot;days&quot;. Make it a numeric format, not a date format any more</span></span>
+<span id="cb264-5"><a href="tidy-text-analysis.html#cb264-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(tweet, days)</span>
+<span id="cb264-6"><a href="tidy-text-analysis.html#cb264-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-7"><a href="tidy-text-analysis.html#cb264-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If you want to investigate only full days, you can also run this code,</span></span>
+<span id="cb264-8"><a href="tidy-text-analysis.html#cb264-8" aria-hidden="true" tabindex="-1"></a><span class="co"># but since our data only covers one day, we want to investigate hours, minutes and seconds:</span></span>
+<span id="cb264-9"><a href="tidy-text-analysis.html#cb264-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  date_covariate &lt;- date_covariate %&gt;%</span></span>
+<span id="cb264-10"><a href="tidy-text-analysis.html#cb264-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  mutate(days = as.integer(substr(days, 1, 3))) # drop all hours, minutes and seconds. Just keep days</span></span></code></pre></div>
+</div>
+<div id="model-estimation-number-of-topics" class="section level3 hasAnchor" number="8.3.3">
+<h3><span class="header-section-number">8.3.3</span> Model estimation: Number of topics<a href="tidy-text-analysis.html#model-estimation-number-of-topics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using our sparse matrix (<em>data_sparse</em>) and our time span (<em>date_covariate</em>), we can now calculate our topic models.</p>
+<p>As an investigator, you must first estimate the number of topics you
+anticipate to encounter across all documents (= the number of topics <em>K</em>
+in a corpus) before fitting an LDA model. If you estimate there are
+approximately 20 topics that your Twitter data cover, for example, you’ll set
+<em>K</em> = 20 to extract 20 separate topics. The 20 topics are then extracted
+from the corpus based on the distribution of co-occurring words in each
+document. Choosing a good value for <em>K</em> is extremely important and
+consequential, since it will impact your results. Usually, small <em>K</em>s
+produce very distinct, but generalizable topics, while high <em>K</em>s produce
+overlapping themes, but are also more event- and issue-specific.</p>
+<p>Let’s create a topic model. More specifically, let’s create a six-topic
+LDA model using <code>stm</code>. In practice, you would often use a higher
+<em>K</em>, but for our use case, six should suffice. You copy this code and set
+K = 6 in the tibble() function.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="tidy-text-analysis.html#cb265-1" aria-hidden="true" tabindex="-1"></a>k_models <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">K =</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb265-2"><a href="tidy-text-analysis.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># provides stm with our sparse matrix (i.e., our data):</span></span>
+<span id="cb265-3"><a href="tidy-text-analysis.html#cb265-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">map</span>(K, <span class="sc">~</span> <span class="fu">stm</span>(data_sparse,</span>
+<span id="cb265-4"><a href="tidy-text-analysis.html#cb265-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tells stm to use the value for K that was specified in the tibble() function:</span></span>
+<span id="cb265-5"><a href="tidy-text-analysis.html#cb265-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">K =</span> .,</span>
+<span id="cb265-6"><a href="tidy-text-analysis.html#cb265-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># models topics over days:</span></span>
+<span id="cb265-7"><a href="tidy-text-analysis.html#cb265-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">prevalence =</span> <span class="sc">~</span> <span class="fu">s</span>(days),</span>
+<span id="cb265-8"><a href="tidy-text-analysis.html#cb265-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tells stm where to draw the time span from:</span></span>
+<span id="cb265-9"><a href="tidy-text-analysis.html#cb265-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> date_covariate,</span>
+<span id="cb265-10"><a href="tidy-text-analysis.html#cb265-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># tells stm to print an output to the console so that you can keep track of its progress:</span></span>
+<span id="cb265-11"><a href="tidy-text-analysis.html#cb265-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb265-12"><a href="tidy-text-analysis.html#cb265-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># initializes the LDA algorithm (you could use others, e.g. &quot;spectral&quot;):</span></span>
+<span id="cb265-13"><a href="tidy-text-analysis.html#cb265-13" aria-hidden="true" tabindex="-1"></a>                              <span class="at">init.type =</span> <span class="st">&quot;LDA&quot;</span>)))</span></code></pre></div>
+<p>Depending on your machine, this code might run a while! So grab a coffee and come back later. :)</p>
+<p>When your topic models are done (i.e., red stop sign in the R condole is no longer showing), you can extract your topics from the object that <code>stm</code> created and the effect that time has on your topic distribution. This is an important step for topic visualization!</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="tidy-text-analysis.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the topics</span></span>
+<span id="cb266-2"><a href="tidy-text-analysis.html#cb266-2" aria-hidden="true" tabindex="-1"></a>lda <span class="ot">&lt;-</span> k_models <span class="sc">%&gt;%</span> </span>
+<span id="cb266-3"><a href="tidy-text-analysis.html#cb266-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(K <span class="sc">==</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span> <span class="co"># 6 to grab the model with ALL 6 topics</span></span>
+<span id="cb266-4"><a href="tidy-text-analysis.html#cb266-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(model) <span class="sc">%&gt;%</span> </span>
+<span id="cb266-5"><a href="tidy-text-analysis.html#cb266-5" aria-hidden="true" tabindex="-1"></a>  .[[<span class="dv">1</span>]]</span>
+<span id="cb266-6"><a href="tidy-text-analysis.html#cb266-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-7"><a href="tidy-text-analysis.html#cb266-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the effect of time on topic distribution</span></span>
+<span id="cb266-8"><a href="tidy-text-analysis.html#cb266-8" aria-hidden="true" tabindex="-1"></a>shiny_model <span class="ot">&lt;-</span> <span class="fu">estimateEffect</span>(<span class="at">formula=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span><span class="sc">~</span><span class="fu">s</span>(days), <span class="at">stmobj=</span>lda, <span class="at">metadata=</span>date_covariate) <span class="co"># formula needs to be set from 1:6 to calculate the effect of time on all 6 topics</span></span></code></pre></div>
+</div>
+<div id="practice-model-estimation" class="section level3 unnumbered hasAnchor">
+<h3>Practice: Model estimation<a href="tidy-text-analysis.html#practice-model-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>(Install +) Load the <code>tidytext</code> and <code>stm</code> package. Next, cast the tidy text
+data <em>data_tknzd</em> into a <em>sparse matrix</em> that the <code>stm</code> can use to
+calculate topic models. Create a date covariate. Finally, estimate an LDA-based topic model with 3 (!!!) topics and extract the topics and the effect of time on the distribution of those 3 (!!!) topics.</p>
+<p><em>Hints:</em> The Kliemann scandal started on May 6th 2022, so that’s your <em>min()</em> date.
+In addition, the data sets covers several months, so you want to use full days for topic model visualization.</p>
+</div>
+<div id="inspect-the-topics" class="section level3 hasAnchor" number="8.3.4">
+<h3><span class="header-section-number">8.3.4</span> Inspect the topics<a href="tidy-text-analysis.html#inspect-the-topics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now it’s time to inspect our topics! A convenient way is to use the `<code>stminsights</code> package
+that creates an app in which you can inspect the topic models interactively.</p>
+<p>Let’s install and load <code>stminsights</code>.</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="tidy-text-analysis.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install / load the stminsights package for topic modeling</span></span>
+<span id="cb267-2"><a href="tidy-text-analysis.html#cb267-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(stminsights)) {</span>
+<span id="cb267-3"><a href="tidy-text-analysis.html#cb267-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">&quot;stminsights&quot;</span>); </span>
+<span id="cb267-4"><a href="tidy-text-analysis.html#cb267-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(stminsights)</span>
+<span id="cb267-5"><a href="tidy-text-analysis.html#cb267-5" aria-hidden="true" tabindex="-1"></a>} <span class="co">#load / install+load stminsights</span></span></code></pre></div>
+<p>Once you start <code>stminsights</code>, the app needs an R environment that contains only three objects (shiny_model, lda, and out) that include important information for visualizing your topic models. Therefore, we need to save these three objects to our working directory, then clear our R environment, reload only these three objects and then create an image (our save file) of our R environemt.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="tidy-text-analysis.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save all files for the stminisghts app</span></span>
+<span id="cb268-2"><a href="tidy-text-analysis.html#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shiny_model, <span class="at">file =</span> <span class="st">&quot;shiny_model.rds&quot;</span>)</span>
+<span id="cb268-3"><a href="tidy-text-analysis.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(lda, <span class="at">file =</span> <span class="st">&quot;lda.rds&quot;</span>)</span>
+<span id="cb268-4"><a href="tidy-text-analysis.html#cb268-4" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">as.dfm</span>(data_sparse) <span class="co"># this reshapes our sparse matrix in a format that the stminsights app can read</span></span>
+<span id="cb268-5"><a href="tidy-text-analysis.html#cb268-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(out, <span class="at">file =</span> <span class="st">&quot;out.rds&quot;</span>)</span>
+<span id="cb268-6"><a href="tidy-text-analysis.html#cb268-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-7"><a href="tidy-text-analysis.html#cb268-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Clear your entire environment</span></span>
+<span id="cb268-8"><a href="tidy-text-analysis.html#cb268-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb268-9"><a href="tidy-text-analysis.html#cb268-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-10"><a href="tidy-text-analysis.html#cb268-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load only the important files for stminisghts into your R environment</span></span>
+<span id="cb268-11"><a href="tidy-text-analysis.html#cb268-11" aria-hidden="true" tabindex="-1"></a>shiny_model <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;shiny_model.rds&quot;</span>)</span>
+<span id="cb268-12"><a href="tidy-text-analysis.html#cb268-12" aria-hidden="true" tabindex="-1"></a>lda <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;lda.rds&quot;</span>)</span>
+<span id="cb268-13"><a href="tidy-text-analysis.html#cb268-13" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">&quot;out.rds&quot;</span>)</span>
+<span id="cb268-14"><a href="tidy-text-analysis.html#cb268-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb268-15"><a href="tidy-text-analysis.html#cb268-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an image (or save file) of your R environment in your working directory</span></span>
+<span id="cb268-16"><a href="tidy-text-analysis.html#cb268-16" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="st">&#39;shiny_model.RData&#39;</span>)</span></code></pre></div>
+<p>We’ve made it through the tutorial! Now it’s time to start our app with this code, click on “browse” and upload the saved file called “shiny_model” from our working directory.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="tidy-text-analysis.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">run_stminsights</span>()</span></code></pre></div>
+</div>
+<div id="practice-inspect-models" class="section level3 unnumbered hasAnchor">
+<h3>Practice: Inspect models<a href="tidy-text-analysis.html#practice-inspect-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Install + load the <code>stminsights</code> package. Create all the save files you need, clear your R environment and reload the important R objects. Create an image of your R environment. Finally, start the <code>stminsights</code> app and upload your shiny_model via the browse-button.</p>
+</div>
+<div id="find-the-best-value-for-k" class="section level3 hasAnchor" number="8.3.5">
+<h3><span class="header-section-number">8.3.5</span> Find the best value for K<a href="tidy-text-analysis.html#find-the-best-value-for-k" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>While the quality of our six topics may appear satisfactory to you (but most likely not), we must remember that our choice of <em>K</em> was purely arbitrary. Post-hoc rationalization of this choice is inherently problematic. If possible, you should base your choice of <em>K</em> on previous literature and what researchers have said about a suitable <em>K</em> for your corpus / your research question. If no such information is available, the below code allows you to create two plots to investigate the best value for <em>K</em>. The code takes a range of <em>K</em> values, calculates topic models for each value of <em>K</em>, and then plots goodness-of-fit measurements that indicate what value for <em>K</em> fits the data best. !! Depending on your range of <em>K</em> and data size, this code can take a while to run !!</p>
+<p>Please keep in mind that this graphical assessment must always be accompanied by critical re-reading and examination of the topics and documents (e.g., with regard to human-inferred <em>semantic coherence</em> and <em>exclusivity</em> of topics).</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="tidy-text-analysis.html#cb270-1" aria-hidden="true" tabindex="-1"></a>k_models <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">K =</span> <span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb270-2"><a href="tidy-text-analysis.html#cb270-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">model =</span> <span class="fu">map</span>(K, <span class="sc">~</span> <span class="fu">stm</span>(data_sparse,</span>
+<span id="cb270-3"><a href="tidy-text-analysis.html#cb270-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">K =</span> .,</span>
+<span id="cb270-4"><a href="tidy-text-analysis.html#cb270-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">prevalence =</span> <span class="sc">~</span> <span class="fu">s</span>(days),</span>
+<span id="cb270-5"><a href="tidy-text-analysis.html#cb270-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">data =</span> date_covariate,</span>
+<span id="cb270-6"><a href="tidy-text-analysis.html#cb270-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb270-7"><a href="tidy-text-analysis.html#cb270-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">init.type =</span> <span class="st">&quot;LDA&quot;</span>)))</span>
+<span id="cb270-8"><a href="tidy-text-analysis.html#cb270-8" aria-hidden="true" tabindex="-1"></a>heldout <span class="ot">&lt;-</span> <span class="fu">make.heldout</span>(data_sparse)</span>
+<span id="cb270-9"><a href="tidy-text-analysis.html#cb270-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-10"><a href="tidy-text-analysis.html#cb270-10" aria-hidden="true" tabindex="-1"></a>model_scores <span class="ot">&lt;-</span> k_models <span class="sc">%&gt;%</span> </span>
+<span id="cb270-11"><a href="tidy-text-analysis.html#cb270-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">exclusivity =</span> <span class="fu">map</span>(model, exclusivity),</span>
+<span id="cb270-12"><a href="tidy-text-analysis.html#cb270-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">semantic_coherence =</span> <span class="fu">map</span>(model, semanticCoherence, data_sparse),</span>
+<span id="cb270-13"><a href="tidy-text-analysis.html#cb270-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">eval_heldout =</span> <span class="fu">map</span>(model, eval.heldout, heldout<span class="sc">$</span>missing),</span>
+<span id="cb270-14"><a href="tidy-text-analysis.html#cb270-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">residual =</span> <span class="fu">map</span>(model, checkResiduals, data_sparse),</span>
+<span id="cb270-15"><a href="tidy-text-analysis.html#cb270-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">bound =</span>  <span class="fu">map_dbl</span>(model, <span class="cf">function</span>(x) <span class="fu">max</span>(x<span class="sc">$</span>convergence<span class="sc">$</span>bound)),</span>
+<span id="cb270-16"><a href="tidy-text-analysis.html#cb270-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">lfact =</span> <span class="fu">map_dbl</span>(model, <span class="cf">function</span>(x) <span class="fu">lfactorial</span>(x<span class="sc">$</span>settings<span class="sc">$</span>dim<span class="sc">$</span>K)),</span>
+<span id="cb270-17"><a href="tidy-text-analysis.html#cb270-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">lbound =</span> bound <span class="sc">+</span> lfact,</span>
+<span id="cb270-18"><a href="tidy-text-analysis.html#cb270-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">iterations =</span> <span class="fu">map_dbl</span>(model, <span class="cf">function</span>(x) <span class="fu">length</span>(x<span class="sc">$</span>convergence<span class="sc">$</span>bound)))</span>
+<span id="cb270-19"><a href="tidy-text-analysis.html#cb270-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-20"><a href="tidy-text-analysis.html#cb270-20" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> model_scores <span class="sc">%&gt;%</span></span>
+<span id="cb270-21"><a href="tidy-text-analysis.html#cb270-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(K, exclusivity, semantic_coherence) <span class="sc">%&gt;%</span> </span>
+<span id="cb270-22"><a href="tidy-text-analysis.html#cb270-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="fu">c</span>(exclusivity, semantic_coherence)) <span class="sc">%&gt;%</span> </span>
+<span id="cb270-23"><a href="tidy-text-analysis.html#cb270-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(K) <span class="sc">%&gt;%</span> </span>
+<span id="cb270-24"><a href="tidy-text-analysis.html#cb270-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">exclusivity =</span> <span class="fu">mean</span>(exclusivity),</span>
+<span id="cb270-25"><a href="tidy-text-analysis.html#cb270-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">semantic_coherence =</span> <span class="fu">mean</span>(semantic_coherence)) <span class="sc">%&gt;%</span> </span>
+<span id="cb270-26"><a href="tidy-text-analysis.html#cb270-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> semantic_coherence, <span class="at">y =</span> exclusivity, <span class="at">color =</span> K, <span class="at">label =</span> K)) <span class="sc">+</span></span>
+<span id="cb270-27"><a href="tidy-text-analysis.html#cb270-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb270-28"><a href="tidy-text-analysis.html#cb270-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">nudge_y =</span> <span class="fl">0.001</span>) <span class="sc">+</span></span>
+<span id="cb270-29"><a href="tidy-text-analysis.html#cb270-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb270-30"><a href="tidy-text-analysis.html#cb270-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Semantic coherence&quot;</span>,</span>
+<span id="cb270-31"><a href="tidy-text-analysis.html#cb270-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Exclusivity&quot;</span>,</span>
+<span id="cb270-32"><a href="tidy-text-analysis.html#cb270-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Comparing exclusivity and semantic coherence&quot;</span>,</span>
+<span id="cb270-33"><a href="tidy-text-analysis.html#cb270-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Models with fewer topics have higher semantic coherence,</span><span class="sc">\n</span><span class="st">but lower exclusivity&quot;</span>)</span>
+<span id="cb270-34"><a href="tidy-text-analysis.html#cb270-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-35"><a href="tidy-text-analysis.html#cb270-35" aria-hidden="true" tabindex="-1"></a>plot1</span>
+<span id="cb270-36"><a href="tidy-text-analysis.html#cb270-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-37"><a href="tidy-text-analysis.html#cb270-37" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> model_scores <span class="sc">%&gt;%</span></span>
+<span id="cb270-38"><a href="tidy-text-analysis.html#cb270-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(K,</span>
+<span id="cb270-39"><a href="tidy-text-analysis.html#cb270-39" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Lower bound</span><span class="st">`</span> <span class="ot">=</span> lbound,</span>
+<span id="cb270-40"><a href="tidy-text-analysis.html#cb270-40" aria-hidden="true" tabindex="-1"></a>            <span class="at">Residuals =</span> <span class="fu">map_dbl</span>(residual, <span class="st">&quot;dispersion&quot;</span>),</span>
+<span id="cb270-41"><a href="tidy-text-analysis.html#cb270-41" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Semantic coherence</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(semantic_coherence, mean),</span>
+<span id="cb270-42"><a href="tidy-text-analysis.html#cb270-42" aria-hidden="true" tabindex="-1"></a>            <span class="st">`</span><span class="at">Held-out likelihood</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">map_dbl</span>(eval_heldout, <span class="st">&quot;expected.heldout&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb270-43"><a href="tidy-text-analysis.html#cb270-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(Metric, Value, <span class="sc">-</span>K) <span class="sc">%&gt;%</span></span>
+<span id="cb270-44"><a href="tidy-text-analysis.html#cb270-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(K, Value, <span class="at">fill =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb270-45"><a href="tidy-text-analysis.html#cb270-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.0</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb270-46"><a href="tidy-text-analysis.html#cb270-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Metric, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb270-47"><a href="tidy-text-analysis.html#cb270-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;K (number of topics)&quot;</span>,</span>
+<span id="cb270-48"><a href="tidy-text-analysis.html#cb270-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb270-49"><a href="tidy-text-analysis.html#cb270-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Model diagnostics&quot;</span>,</span>
+<span id="cb270-50"><a href="tidy-text-analysis.html#cb270-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Held-out likelihood &amp; coherence should be maximized,</span><span class="sc">\n</span><span class="st">residuals &amp; lower bound should be minimized&quot;</span>)</span>
+<span id="cb270-51"><a href="tidy-text-analysis.html#cb270-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-52"><a href="tidy-text-analysis.html#cb270-52" aria-hidden="true" tabindex="-1"></a>plot2</span></code></pre></div>
+<p><strong>Hands-on learning for data journalists:</strong> As you can see, topic modeling can turn into “reading tea leaves” (<a href="https://proceedings.neurips.cc/paper/2009/file/f92586a25bb3145facd64ab20fd554ff-Paper.pdf">Chang et al., 2009</a>). Depending on how many topics are extracted (number <em>K</em>) and how the data preprocessing was done, one can get very different results. Therefore, you should carefully review topic reports (e.g., the Meltwater’s Key Messages report). Please do not trust such automated analyses blindly.</p>
 </div>
 </div>
 </div>
