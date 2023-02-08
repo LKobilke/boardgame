@@ -97,3 +97,9 @@ first-steps-create-a-date-covariate
 model-estimation-number-of-topics
 inspect-the-topics
 find-the-best-value-for-k
+sentiment-analysis
+sentiment-over-time
+sentiment-over-time-periods
+sentiment-of-individual-users
+take-aways-6
+additional-tutorials-6
