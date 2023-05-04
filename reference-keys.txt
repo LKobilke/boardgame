@@ -103,3 +103,5 @@ sentiment-over-time-periods
 sentiment-of-individual-users
 take-aways-6
 additional-tutorials-6
+what-is-r
+why-arent-we-using-a-gui-for-point-and-click-analyses
