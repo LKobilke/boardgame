@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry</title>
+  <title>Exercise 2 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry</title>
   <meta name="description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
+  <meta property="og:title" content="Exercise 2 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
+  <meta name="twitter:title" content="Exercise 2 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
   
   <meta name="twitter:description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-using-r-as-a-calculator.html"/>
-<link rel="next" href="tutorial-working-with-data-files.html"/>
+<link rel="prev" href="tutorial-working-with-data-files.html"/>
+<link rel="next" href="tutorial-data-management-with-tidyverse.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -287,72 +287,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-1" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 1<a href="exercise-1.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 1, you’ll…</strong></p>
+<div id="exercise-2" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 2<a href="exercise-2.html#exercise-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 2, you’ll…</strong></p>
 <ul>
-<li>have assessed how well you know R and RStudio</li>
-<li>know what chapters and concepts you might want to repeat again</li>
-<li>have managed to apply the basic concepts of R to data</li>
+<li>have double-checked whether you understand how to import data</li>
+<li>have learned to subset variables in data frames</li>
+<li>have learned to subset observations and values in data frames</li>
 </ul>
-<div id="task-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Below you will see multiple choice questions. Please try to identify the
-correct answers. 1, 2, 3 and 4 correct answers are possible for each
-question.</p>
-<p><strong>1. What panels are part of RStudio?</strong></p>
-<ul>
-<li>source</li>
-<li>console</li>
-<li>input</li>
-<li>packages, files &amp; plots</li>
-</ul>
-<p><strong>2. How do you activate R packages after you have installed them?</strong></p>
-<ul>
-<li>import.packages()</li>
-<li>install.packages()</li>
-<li>package()</li>
-<li>library()</li>
-</ul>
-<p><strong>3. How do you create a vector in R with elements 1, 2, 3?</strong></p>
-<ul>
-<li>cbind(1,2,3)</li>
-<li>cb(1,2,3)</li>
-<li>c(1,2,3)</li>
-<li>cmb(1,2,3)</li>
-</ul>
-<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements.
-How do you retrieve the 8th element?</strong></p>
-<ul>
-<li>vector[-2]</li>
-<li>vector[„-2”]</li>
-<li>vector[8]</li>
-<li>vector[„8”]</li>
-</ul>
-<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown,
-black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
-<ul>
-<li>hair[4]</li>
-<li>hair[„4”]</li>
-<li>hair[blond]</li>
-<li>hair[„blond”]</li>
-</ul>
+<div id="task-1-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-2.html#task-1-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Download the <em>“WoJ_names.csv”</em> from LRZ Sync &amp; Share (<a href="https://syncandshare.lrz.de/getlink/fiVXUkKnZzQLJZJwiznMVF/">click
+here</a>) and
+put it into the folder that you want to use as working directory.</p>
+<p>Set your working directory and load the data into R by saving it into a
+source object called <em>data</em>.</p>
+<p><strong>Note:</strong> This time, it’s a csv that is separated by semicolons, not by
+commas.</p>
 </div>
-<div id="task-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the
-vector. First, display all elements of the vector. Then print only the
-5th element. After that, display all elements except the 5th. Finally,
-display the elements at the positions 6 to 8.</p>
+<div id="task-2-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-2.html#task-2-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now, print only the column to the console that shows the <em>trust in the
+government</em>. Use the <code>$</code> operator first. Then try to achieve the same
+result using the subsetting operators, i.e. <code>[]</code>.</p>
 </div>
-<div id="task-3" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a non-numeric, i.e. character, vector with 4 elements and assign
-the name <em>eye_color</em> to the vector. First, print all elements of this
-vector to the console. Then have only the value in the 2nd element
-displayed, then all values except the 2nd element. At the end, display
-the elements at the positions 2 to 4.</p>
-<p>When you’re ready to look at the solutions, you can find them here:<a href="solutions.html#solutions-for-exercise-1">Solutions for Exercise 1</a>.</p>
+<div id="task-3-1" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-2.html#task-3-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Print only the first 6 <em>trust in the government</em> numbers to the console.
+Use the <code>$</code> operator first. Then try to achieve the same result using
+the subsetting operators, i.e. <code>[]</code>.</p>
+<p>When you’re ready to look at the solutions, you can find them
+here:<a href="solutions.html#solutions-for-exercise-2">Solutions for Exercise 2</a>.</p>
 </div>
 </div>
             </section>
@@ -360,8 +325,8 @@ the elements at the positions 2 to 4.</p>
           </div>
         </div>
       </div>
-<a href="tutorial-using-r-as-a-calculator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-working-with-data-files.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-working-with-data-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tutorial-data-management-with-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry</title>
+  <title>Exercise 3: Test your knowledge | Automated procedures for analyzing business communication strategies: Focusing on the board game industry</title>
   <meta name="description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
+  <meta property="og:title" content="Exercise 3: Test your knowledge | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Exercise 1 | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
+  <meta name="twitter:title" content="Exercise 3: Test your knowledge | Automated procedures for analyzing business communication strategies: Focusing on the board game industry" />
   
   <meta name="twitter:description" content="Automated Analysis - B.A. Seminar at the IfKW, SS 2023" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="tutorial-using-r-as-a-calculator.html"/>
-<link rel="next" href="tutorial-working-with-data-files.html"/>
+<link rel="prev" href="tutorial-data-management-with-tidyverse.html"/>
+<link rel="next" href="solutions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -287,72 +287,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercise-1" class="section level1 unnumbered hasAnchor">
-<h1>Exercise 1<a href="exercise-1.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><strong>After working through Exercise 1, you’ll…</strong></p>
+<div id="exercise-3-test-your-knowledge" class="section level1 unnumbered hasAnchor">
+<h1>Exercise 3: Test your knowledge<a href="exercise-3-test-your-knowledge.html#exercise-3-test-your-knowledge" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>After working through Exercise 3, you’ll…</strong></p>
 <ul>
-<li>have assessed how well you know R and RStudio</li>
-<li>know what chapters and concepts you might want to repeat again</li>
-<li>have managed to apply the basic concepts of R to data</li>
+<li>have assessed how well you know <code>dplyr</code></li>
+<li>know what <code>dplyr</code> functions and concepts you might want to repeat
+again</li>
+<li>have managed to apply the <code>dplyr</code> concepts to data</li>
 </ul>
-<div id="task-1" class="section level2 unnumbered hasAnchor">
-<h2>Task 1<a href="exercise-1.html#task-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="task-1-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 1<a href="exercise-3-test-your-knowledge.html#task-1-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below you will see multiple choice questions. Please try to identify the
 correct answers. 1, 2, 3 and 4 correct answers are possible for each
 question.</p>
-<p><strong>1. What panels are part of RStudio?</strong></p>
+<p><strong>1. What are the main characteristics of tidy data?</strong></p>
 <ul>
-<li>source</li>
-<li>console</li>
-<li>input</li>
-<li>packages, files &amp; plots</li>
+<li>Every cell contains values.</li>
+<li>Every cell contains a variable.</li>
+<li>Every observation is a column.</li>
+<li>Every observation is a row.</li>
 </ul>
-<p><strong>2. How do you activate R packages after you have installed them?</strong></p>
+<p><strong>2. What are <code>dplyr</code> functions?</strong></p>
 <ul>
-<li>import.packages()</li>
-<li>install.packages()</li>
-<li>package()</li>
-<li>library()</li>
+<li><code>summary()</code></li>
+<li><code>describe()</code></li>
+<li><code>mutate()</code></li>
+<li><code>manage()</code></li>
 </ul>
-<p><strong>3. How do you create a vector in R with elements 1, 2, 3?</strong></p>
+<p><strong>3. How can you sort the eye_color of Star Wars characters from Z to
+A?</strong></p>
 <ul>
-<li>cbind(1,2,3)</li>
-<li>cb(1,2,3)</li>
-<li>c(1,2,3)</li>
-<li>cmb(1,2,3)</li>
+<li><code>starwars_data %&gt;% arrange(desc(eye_color))</code></li>
+<li><code>starwars_data %&gt;% arrange(eye_color)</code></li>
+<li><code>starwars_data %&gt;% select(arrange(eye_color))</code></li>
+<li><code>starwars_data %&gt;% select(eye_color) %&gt;% arrange(desc(eye_color))</code></li>
 </ul>
-<p><strong>4. Imagine you have a vector called ‘vector’ with 10 numeric elements.
-How do you retrieve the 8th element?</strong></p>
+<p><strong>4. Imagine you want to recode the height of these characters. You want
+to have three categories from small and medium to tall. What is a valid
+approach?</strong></p>
 <ul>
-<li>vector[-2]</li>
-<li>vector[„-2”]</li>
-<li>vector[8]</li>
-<li>vector[„8”]</li>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% mutate(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~"small",height&lt;=190~"medium",height&gt;190~"tall"))</code></li>
+<li><code>starwars_data %&gt;% recode(height = case_when(height&lt;=150~small,height&lt;=190~medium,height&gt;190~tall))</code></li>
 </ul>
-<p><strong>5. Imagine you have a vector called ‘hair’ with 5 elements: brown,
-black, red, blond, other. How do you retrieve the color ‘blond’?</strong></p>
+<p><strong>5. Imagine you want to provide a systematic overview over all hair
+colors and what species wear these hair colors frequently (not
+accounting for the skewed sampling of species)? What is a valid
+approach?</strong></p>
 <ul>
-<li>hair[4]</li>
-<li>hair[„4”]</li>
-<li>hair[blond]</li>
-<li>hair[„blond”]</li>
+<li><code>starwars_data %&gt;% group_by(hair_color) %&gt;% group_by(species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color, species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color &amp; species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
+<li><code>starwars_data %&gt;% group_by(hair_color + species) %&gt;% summarize(count = n()) %&gt;% arrange(hair_color)</code></li>
 </ul>
 </div>
-<div id="task-2" class="section level2 unnumbered hasAnchor">
-<h2>Task 2<a href="exercise-1.html#task-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a numeric vector with 8 values and assign the name <em>age</em> to the
-vector. First, display all elements of the vector. Then print only the
-5th element. After that, display all elements except the 5th. Finally,
-display the elements at the positions 6 to 8.</p>
+<div id="task-2-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 2<a href="exercise-3-test-your-knowledge.html#task-2-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It’s you turn now. Load the starwars data like this:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="exercise-3-test-your-knowledge.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)              <span class="co"># to activate the dplyr package</span></span>
+<span id="cb157-2"><a href="exercise-3-test-your-knowledge.html#cb157-2" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="ot">&lt;-</span> starwars   <span class="co"># to assign the pre-installed starwars data set (dplyr) into a source object in our environment</span></span></code></pre></div>
+<p>How many humans are contained in the starwars data overall? (Hint: use
+<code>summarize(count = n())</code> or <code>count()</code>)</p>
 </div>
-<div id="task-3" class="section level2 unnumbered hasAnchor">
-<h2>Task 3<a href="exercise-1.html#task-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Create a non-numeric, i.e. character, vector with 4 elements and assign
-the name <em>eye_color</em> to the vector. First, print all elements of this
-vector to the console. Then have only the value in the 2nd element
-displayed, then all values except the 2nd element. At the end, display
-the elements at the positions 2 to 4.</p>
-<p>When you’re ready to look at the solutions, you can find them here:<a href="solutions.html#solutions-for-exercise-1">Solutions for Exercise 1</a>.</p>
+<div id="task-3-2" class="section level2 unnumbered hasAnchor">
+<h2>Task 3<a href="exercise-3-test-your-knowledge.html#task-3-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>How many humans are contained in starwars by gender?</p>
+</div>
+<div id="task-4" class="section level2 unnumbered hasAnchor">
+<h2>Task 4<a href="exercise-3-test-your-knowledge.html#task-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the most common eye_color among Star Wars characters? (Hint: use
+<code>arrange()</code>)</p>
+</div>
+<div id="task-5" class="section level2 unnumbered hasAnchor">
+<h2>Task 5<a href="exercise-3-test-your-knowledge.html#task-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>What is the average mass of Star Wars characters that are not human and
+have yellow eyes? (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-6" class="section level2 unnumbered hasAnchor">
+<h2>Task 6<a href="exercise-3-test-your-knowledge.html#task-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Compare the mean, median, and standard deviation of mass for all humans
+and droids. (Hint: remove all <code>NAs</code>)</p>
+</div>
+<div id="task-7" class="section level2 unnumbered hasAnchor">
+<h2>Task 7<a href="exercise-3-test-your-knowledge.html#task-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Create a new variable in which you store the mass in gram (gr_mass). Add
+it to the data frame. Test whether your solution works by printing your
+data to the console, but only show the name, species, mass, and your new
+variable gr_mass.</p>
+<p>When you’re ready to look at the solutions, you can find them here:
+<a href="solutions.html#solutions-for-exercise-3">Solutions for Exercise 3</a>.</p>
 </div>
 </div>
             </section>
@@ -360,8 +385,8 @@ the elements at the positions 2 to 4.</p>
           </div>
         </div>
       </div>
-<a href="tutorial-using-r-as-a-calculator.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tutorial-working-with-data-files.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tutorial-data-management-with-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -105,3 +105,7 @@ take-aways-6
 additional-tutorials-6
 what-is-r
 why-arent-we-using-a-gui-for-point-and-click-analyses
+optional-import-data-from-various-file-formats
+importing-data-from-excel
+importing-data-from-json
+importing-data-from-spss
