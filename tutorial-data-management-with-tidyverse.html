@@ -23,7 +23,7 @@
 <meta name="author" content="Lara Kobilke, IfKW, Ludwig-Maximilians-Universität München" />
 
 
-<meta name="date" content="2023-05-23" />
+<meta name="date" content="2023-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -462,11 +462,11 @@ operator. Let’s illustrate this concept with an example. We’ll use the
 Starwars data set that you are already familiar with.</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="tutorial-data-management-with-tidyverse.html#cb90-1" aria-hidden="true" tabindex="-1"></a>starwars_data <span class="sc">%&gt;%</span>    <span class="co"># First, we define the source object, i.e. the data frame that we want to transform, followed by the pipe operator </span></span>
 <span id="cb90-2"><a href="tutorial-data-management-with-tidyverse.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()             <span class="co"># Second, we specify which function should be performed on the source object, here: scatterplot</span></span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Now, that’s not very impressive. We could do the same in <code>Base R</code> like
 this:</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="tutorial-data-management-with-tidyverse.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(starwars_data)</span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>However, <code>dplyr</code> gets really impressive when you chain functions
 sequentially. You can apply certain selection criteria to your data and
 plot it in one go. For example, we might exclude the variable <em>name</em>
@@ -477,10 +477,10 @@ cm. Let’s try it in a single run!</p>
 <span id="cb92-2"><a href="tutorial-data-management-with-tidyverse.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(height, mass) <span class="sc">%&gt;%</span>     <span class="co"># Keep only the height and mass column</span></span>
 <span id="cb92-3"><a href="tutorial-data-management-with-tidyverse.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;</span> <span class="dv">170</span>) <span class="sc">%&gt;%</span>     <span class="co"># Filter all observations that are taller than 170cm  </span></span>
 <span id="cb92-4"><a href="tutorial-data-management-with-tidyverse.html#cb92-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()                       <span class="co"># Plot!</span></span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>Now try to do the same in <code>Base R</code>:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="tutorial-data-management-with-tidyverse.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(starwars_data[starwars_data<span class="sc">$</span>height<span class="sc">&gt;</span><span class="dv">170</span>,]<span class="sc">$</span>mass<span class="sc">~</span>starwars_data[starwars_data<span class="sc">$</span>height<span class="sc">&gt;</span><span class="dv">170</span>,]<span class="sc">$</span>height, <span class="at">xlab=</span><span class="st">&quot;height&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;mass&quot;</span>)</span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>The <code>Base R</code> code is longer, more nested, and not as readable as the
 code written in <code>dplyr</code>. And the more selection criteria and functions
 you need to implement, the worse it gets. For example, imagine you would
@@ -491,7 +491,7 @@ also want to exclude Star Wars characters with a mass bigger than
 <span id="cb94-3"><a href="tutorial-data-management-with-tidyverse.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;</span> <span class="dv">170</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb94-4"><a href="tutorial-data-management-with-tidyverse.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">&lt;</span> <span class="dv">1200</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb94-5"><a href="tutorial-data-management-with-tidyverse.html#cb94-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()                       </span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="data-transformation-with-dplyr" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Data transformation with dplyr<a href="tutorial-data-management-with-tidyverse.html#data-transformation-with-dplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -506,6 +506,8 @@ by their values</li>
 <li><code>summarize()</code>: summarize variables (e.g. mean, standard deviation,
 etc.), best combined with <code>group_by()</code></li>
 </ol>
+<iframe src="https://www.youtube.com/embed/qj7poscNpis" width="672" height="400px" data-external="1">
+</iframe>
 <div id="select" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> select()<a href="tutorial-data-management-with-tidyverse.html#select" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You will frequently encounter large data sets including hundreds of
