@@ -109,3 +109,12 @@ optional-import-data-from-various-file-formats
 importing-data-from-excel
 importing-data-from-json
 importing-data-from-spss
+task-1-3
+task-2-3
+task-3-3
+task-4-1
+task-5-1
+task-6-1
+task-3-7
+task-5-3
+task-6-3
