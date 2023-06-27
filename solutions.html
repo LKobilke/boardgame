@@ -663,7 +663,7 @@ data frame.</p>
 <h3>Task 1<a href="solutions.html#task-1-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Show how journalists’ work experience (<code>work_experience</code>) is associated with their trust in politicians (<code>trust_politicians</code>). To do this, create a very basic scatter plot using <code>ggplot2</code> and the respective <code>ggplot()</code> function. Use the <code>aes()</code> function inside <code>ggplot()</code> to map variables to the visual properties. Use <code>geom_point()</code> to add points to the plot.</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 </div>
 <div id="task-2-7" class="section level3 unnumbered hasAnchor">
 <h3>Task 2<a href="solutions.html#task-2-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -671,7 +671,7 @@ data frame.</p>
 <code>+ geom_smooth(method = lm, se = FALSE)</code>.</p>
 <p>What can you conclude from the regression line?</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>The regression line shows us that there is no relationship between work experience and trust in politicians. In other words, more experienced journalists <strong>do not</strong> become less trusting in politicians.</p>
 </div>
 <div id="task-3-7" class="section level3 unnumbered hasAnchor">
@@ -679,7 +679,7 @@ data frame.</p>
 <p>Does the relationship between work experience and trust in politicians remain stable across different countries? Alternatively, does work experience influence trust in politicians differently depending on the specific country context?</p>
 <p>Try to create a visualization to answer this question using <code>facet_wrap()</code>.</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 </div>
 <div id="task-4-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 4<a href="solutions.html#task-4-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -687,22 +687,22 @@ data frame.</p>
 <p>Remove the <code>facet_wrap()</code> and the <code>geom_point()</code> code line. This leaves you with this graph:</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="solutions.html#cb238-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>work_experience, <span class="at">y=</span>trust_politicians)) <span class="sc">+</span></span>
 <span id="cb238-2"><a href="solutions.html#cb238-2" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <p>Now, display every country in a separate color by using the <code>color</code> argument inside the <code>aes()</code> function.</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
 </div>
 <div id="task-5-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 5<a href="solutions.html#task-5-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Add fitting labels to your plot. For example, set the main title to display: “Impact of Work Experience on Trust in Politicians”. The x-axis label should read “Years of Work Experience in Journalism”, and the y-axis label should read “Trust in Politicians on a 5-point Likert Scale”. The label for the color legend should be “Country”.</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
 </div>
 <div id="task-6-3" class="section level3 unnumbered hasAnchor">
 <h3>Task 6<a href="solutions.html#task-6-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Add a nice theme that you like, e.g. <code>theme_minimal()</code>, <code>theme_classic()</code> or <code>theme_bw()</code>.</p>
 <p><em>Solution:</em></p>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 
 </div>
 </div>

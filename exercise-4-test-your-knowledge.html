@@ -339,6 +339,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>First, load the WoJ (World of Journalism) dataset from the <code>tidycomm</code> package. Install <code>tidycomm</code> if you haven’t already and then assign the WoJ dataset in its own R object:</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="exercise-4-test-your-knowledge.html#cb184-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidycomm&quot;</span>) <span class="co"># run only the first time</span></span></code></pre></div>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="exercise-4-test-your-knowledge.html#cb185-1" tabindex="-1"></a>WoJ <span class="ot">&lt;-</span> tidycomm<span class="sc">::</span>WoJ</span></code></pre></div>
+<p>If you want help to solve this exercise, here’s a step-by-step tutorial that I’ve created for you:</p>
+<iframe src="https://www.youtube.com/embed/VgNimnC4syE" width="672" height="400px" data-external="1">
+</iframe>
 <div id="task-1-3" class="section level2 unnumbered hasAnchor">
 <h2>Task 1<a href="exercise-4-test-your-knowledge.html#task-1-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Try creating your own scatter plot. First, load <code>tidyverse</code> to access <code>ggplot2</code> for data visualization:</p>
@@ -362,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Remove the <code>facet_wrap()</code> and the <code>geom_point()</code> code line. This leaves you with this graph:</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="exercise-4-test-your-knowledge.html#cb187-1" tabindex="-1"></a>WoJ <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>work_experience, <span class="at">y=</span>trust_politicians)) <span class="sc">+</span></span>
 <span id="cb187-2"><a href="exercise-4-test-your-knowledge.html#cb187-2" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
+<p><img src="Automated-Analysis_files/figure-html/unnamed-chunk-118-1.png" width="672" /></p>
 <p>Now, display every country in a separate color by using the <code>color</code> argument inside the <code>aes()</code> function.</p>
 </div>
 <div id="task-5-1" class="section level2 unnumbered hasAnchor">
