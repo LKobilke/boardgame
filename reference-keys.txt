@@ -118,3 +118,9 @@ task-6-1
 task-3-7
 task-5-3
 task-6-3
+tutorial-data-collection-with-bardeen.ai
+sign-up
+choose-a-playbook
+run-the-playbook
+tutorial-analyze-data-with-stminsights
+task-4-2
